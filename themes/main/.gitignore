@@ -1,0 +1,8 @@
+node_modules/
+yarn-error.log
+
+# don't include public/ if we are just a theme, we'll build before deploy
+dist/
+
+# don't include maps, if we DO include public
+# public/**/*.map

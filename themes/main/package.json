@@ -1,0 +1,62 @@
+{
+  "name": "wearebvhm.com",
+  "description": "BVHM PTA Theme",
+  "private": true,
+  "license": "UNLICENSED",
+  "author": "Quinn Interactive, Inc. <support@quinn.com> (https://quinn.com)",
+  "version": "0.0.0",
+  "repository": "",
+  "sasslintConfig": "sass-lint.yml",
+  "scripts": {
+    "dev": "mix",
+    "watch": "mix watch",
+    "hot": "mix watch --hot",
+    "production": "mix --production",
+    "prod": "yarn production",
+    "lint": "yarn lint-js ; yarn lint-css",
+    "lint-js": "eslint src/js/**",
+    "lint-js-watch": "watch 'clrscr && yarn lint-js' src/js",
+    "fix-js-dry-run": "eslint src/js/** --fix-dry-run",
+    "fix-js": "eslint src/js/** --fix",
+    "lint-css": "stylelint 'src/scss/**/*.scss' --syntax scss",
+    "lint-css-watch": "watch 'clrscr && yarn lint-css' src/scss",
+    "fix-css": "stylelint 'src/scss/**/*.scss' --fix --syntax scss",
+    "lint-watch": "watch 'clrscr && yarn lint-js ; yarn lint-css' src"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not dead",
+    "> 0.2%",
+    "IE 11"
+  ],
+  "dependencies": {
+    "core-js": "^3.8.1",
+    "html-to-element": "^1.0.0",
+    "laravel-mix-polyfill": "^2.0.0"
+  },
+  "devDependencies": {
+    "@popperjs/core": "^2.9.2",
+    "animate.css": "^4.1.1",
+    "babel-eslint": "8",
+    "babel-plugin-dynamic-import-polyfill": "^1.0.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "bootstrap": "^5.3",
+    "browser-sync": "^2.29.1",
+    "browser-sync-webpack-plugin": "^2.3.0",
+    "clrscr": "^1.0.4",
+    "cross-env": "^5.1.1",
+    "dotenv": "^4.0.0",
+    "eslint": "^7.16.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-watch": "^7.0.0",
+    "laravel-mix": "^6.0.0",
+    "postcss": "^8.1",
+    "sass": "^1.30.0",
+    "sass-loader": "8.*",
+    "stylelint": "^13.8.0",
+    "stylelint-config-sass-guidelines": "^7.1.0",
+    "stylelint-webpack-plugin": "^2.1.1",
+    "watch": "^1.0.2"
+  }
+}

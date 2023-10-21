@@ -1,0 +1,65 @@
+{
+    "name": "qi/bvhm",
+    "description": "BVHM PTA Website",
+    "type": "silverstripe-project",
+    "license": "proprietary",
+    "autoload": {
+        "classmap": [
+            "app/src/Page.php",
+            "app/src/PageController.php"
+        ],
+        "psr-4": {
+            "QI\\Tiltify\\": "app/src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.1.0",
+        "silverstripe/recipe-cms": "^5.0",
+        "dnadesign/silverstripe-elemental": "^5.0",
+        "jonom/focuspoint": "^5.0",
+        "jonom/silverstripe-betternavigator": "^6.0",
+        "silverstripe/display-logic": "^3.0",
+        "silverstripe/login-forms": "^5.0",
+        "silverstripe/lumberjack": "^3.0",
+        "symbiote/silverstripe-gridfieldextensions": "^4.0"
+    },
+    "require-dev": {
+        "oddnoc/silverstripe-artefactcleaner": "^4.0",
+        "silverleague/ideannotator": "^3.1",
+        "deployer/deployer": "^7",
+        "vlucas/phpdotenv": "^5.4",
+        "friendsofphp/php-cs-fixer": "*"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "silverstripe/recipe-plugin": true,
+            "silverstripe/vendor-plugin": true
+        }
+    },
+    "extra": {
+        "resources-dir": "_resources",
+        "expose": [
+            "app/javascript",
+            "app/images",
+            "themes/main/dist",
+            "themes/main/images"
+        ],
+        "project-files-installed": [
+            ".htaccess",
+            "app/.htaccess",
+            "app/_config.php",
+            "app/_config/mimevalidator.yml",
+            "app/_config/mysite.yml",
+            "app/src/Page.php",
+            "app/src/PageController.php"
+        ],
+        "public-files-installed": [
+            ".htaccess",
+            "index.php",
+            "web.config"
+        ]
+    }
+}

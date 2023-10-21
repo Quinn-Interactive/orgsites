@@ -1,0 +1,7 @@
+/.env
+/.php-cs-fixer.cache
+/.vscode/
+/*.sql
+/*.sspak
+/silverstripe-cache/
+/vendor/

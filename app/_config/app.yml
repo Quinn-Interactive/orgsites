@@ -1,0 +1,15 @@
+---
+Name: app
+---
+SilverStripe\Core\Manifest\ModuleManifest:
+  project: app
+SilverStripe\Assets\File:
+  allowed_extensions:
+    - svg
+    - csv
+    - zip
+SilverStripe\Control\Email\Email:
+  admin_email:
+    no-reply+wearebvhm@quinn.com: 'BVHM PTA'
+  support_email:
+    support+wearebvhm@quinn.com: 'BVHM PTA Support'

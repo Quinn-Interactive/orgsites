@@ -1,0 +1,6 @@
+/_resources/
+/assets/*
+/assets.tar
+/_graphql/
+/service-worker*
+/workbox-*
