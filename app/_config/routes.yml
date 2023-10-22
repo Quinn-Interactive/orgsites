@@ -1,0 +1,10 @@
+# ---
+# Name: approutes
+# After: 
+#   - '#coreroutes'
+#   - '#rootroutes'
+#   - '#security-limited'
+# ---
+# SilverStripe\Control\Director:
+#   rules:
+#     'search//$Action/$ID/$OtherID': 'QI\App\Controller\SearchController'

@@ -1,0 +1,6 @@
+---
+Name: sitesearch
+---
+SilverStripe\CMS\Model\SiteTree:
+  create_table_options: 
+    MySQLDatabase: ENGINE=MyISAM

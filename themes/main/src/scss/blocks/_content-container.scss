@@ -1,0 +1,40 @@
+@use "sass:math";
+
+.content-container {
+    $mobile-container-padding: math.div($container-padding-x, 2);
+    margin-bottom: 1rem;
+    padding-left: $container-padding-x;
+    padding-left: unquote("max(#{$container-padding-x}, env(safe-area-inset-left))");
+    padding-right: $container-padding-x;
+    padding-right: unquote("max(#{$container-padding-x}, env(safe-area-inset-right))");
+    width: 100%;
+
+    @include media-breakpoint-down(sm) {
+        padding-left: $mobile-container-padding;
+        padding-left: unquote("max(#{$mobile-container-padding}, env(safe-area-inset-left))");
+        padding-right: $mobile-container-padding;
+        padding-right: unquote("max(#{$mobile-container-padding}, env(safe-area-inset-right))");
+    }
+
+    @include media-breakpoint-up(xl) {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1200px;
+    }
+
+    &.-small {
+        @include media-breakpoint-up(lg) {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 992px !important;
+        }
+    }
+
+    .navbar > & {
+        display: flex;
+        flex-wrap: inherit;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0;
+    }
+}
