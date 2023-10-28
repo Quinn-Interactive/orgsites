@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
     <div class="content-container">
-        <a class="navbar-brand" href="/">$SiteConfig.Title</a>
+        <a class="navbar-brand" href="/$CurrentLocaleObject.URLSegment">$SiteConfig.Title</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -38,7 +38,55 @@
                         <% end_if %>
                     <% end_loop %>
                 </ul>
-                <div class="search-form">$SearchForm</div>
+                <%-- <% if $Locales %>
+                    <div class="left">Locale <span class="arrow">&rarr;</span>
+                        <nav class="primary">
+                            <ul>
+                                <% loop $Locales %>
+                                    <li class="$LinkingMode">
+                                        <a href="$Link.ATT" <% if $LinkingMode != 'invalid' %>rel="alternate"
+                                        hreflang="$HrefLang"<% end_if %>>$Title.XML</a>
+                                    </li>
+                                <% end_loop %>
+                            </ul>
+                        </nav>
+                    </div>
+                <% end_if %> --%>
+                <ul class="navbar-nav">
+                    <% if $Locales.Count > 1 %>
+                        <% if $Locales.Count > 3 %>
+                        <li class="nav-item dropdown me-3">
+                            <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <%t TractorCow\Fluent\Model\Locale.LOCALE "Locale" %>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <% loop $Locales %>
+                                <li class="$LinkingMode">
+                                    <a class="dropdown-item $LinkingMode" 
+                                        href="$Link.ATT"
+                                        <% if $LinkingMode != 'invalid' %>rel="alternate" hreflang="$HrefLang"<% end_if %>
+                                    >
+                                        $Title
+                                    </a>
+                                </li>
+                                <% end_loop %>
+                            </ul>
+                        </li>
+                        <% else %>
+                            <% loop $Locales %>
+                            <li class="nav-item $LinkingMode me-3">
+                                <a class="$LinkingMode nav-link" 
+                                    href="$Link.ATT"
+                                    <% if $LinkingMode != 'invalid' %>rel="alternate" hreflang="$HrefLang"<% end_if %>
+                                >
+                                    $Title
+                                </a>
+                            </li>
+                            <% end_loop %>
+                        <% end_if %>
+                    <% end_if %>
+                    <li class="nav-item search-form mt-1">$SearchForm</li>
+                </ul>
             </div>
         </div>
     </div>
