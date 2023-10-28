@@ -46,6 +46,7 @@
             "app/javascript",
             "app/images",
             "themes/main/dist",
+            "themes/main/fonts",
             "themes/main/images"
         ],
         "project-files-installed": [

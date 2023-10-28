@@ -49,6 +49,7 @@ if (process.env.MIX_HOST_DOMAIN && process.env.MIX_PROXY_URL) {
             "src/js/**/*.js",
             "templates/",
             "images/",
+            "fonts/",
         ],
     });
 }

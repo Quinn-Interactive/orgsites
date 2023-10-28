@@ -13,3 +13,6 @@ SilverStripe\Control\Email\Email:
     no-reply+wearebvhm@quinn.com: 'BVHM PTA'
   support_email:
     support+wearebvhm@quinn.com: 'BVHM PTA Support'
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - QI\App\Extension\SiteConfigExtension
