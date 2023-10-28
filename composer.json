@@ -23,7 +23,8 @@
         "silverstripe/display-logic": "^3.0",
         "silverstripe/login-forms": "^5.0",
         "silverstripe/lumberjack": "^3.0",
-        "symbiote/silverstripe-gridfieldextensions": "^4.0"
+        "symbiote/silverstripe-gridfieldextensions": "^4.0",
+        "tractorcow/silverstripe-fluent": "^7.0"
     },
     "require-dev": {
         "oddnoc/silverstripe-artefactcleaner": "^4.0",
