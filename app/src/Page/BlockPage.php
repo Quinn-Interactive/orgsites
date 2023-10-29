@@ -20,6 +20,7 @@ class BlockPage extends Page
         ElementalPageExtension::class,
         BlockPageFluentExtension::class,
     ];
+    private static $table_name = 'BlockPage';
     private static $field_include = [
         'ElementalAreaID',
     ];
