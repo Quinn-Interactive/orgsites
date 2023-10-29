@@ -1,2 +1,5 @@
 TractorCow\Fluent\Extension\FluentDirectorExtension:
   detect_locale: true
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\CMS\Search\SearchForm:
+    class: TractorCow\Fluent\Search\FluentSearchForm
