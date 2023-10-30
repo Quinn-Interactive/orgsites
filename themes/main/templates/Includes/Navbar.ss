@@ -79,14 +79,14 @@
                             <% end_loop %>
                         <% end_if %>
                     <% end_if %>
-                        <%-- <li class="nav-item dropdown">
-                            <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-search" title="<%t SilverStripe\CMS\Search.SEARCH "Search" %>"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <div class="nav-link search-form">$SearchForm</div>
-                            </div>
-                        </li> --%>
+                    <%-- <li class="nav-item dropdown">
+                        <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-search" title="<%t SilverStripe\CMS\Search.SEARCH "Search" %>"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <div class="nav-link search-form">$SearchForm</div>
+                        </div>
+                    </li> --%>
                 </ul>
             </div>
         </div>
