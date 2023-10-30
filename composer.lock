@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "83bb66a4f8c7963221c2e3de4a289772",
+    "content-hash": "a29e36936542be91cef7e2e4136f6b17",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -226,81 +226,6 @@
                 }
             ],
             "time": "2022-08-20T06:45:11+00:00"
-        },
-        {
-            "name": "dnadesign/silverstripe-elemental",
-            "version": "5.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/silverstripe/silverstripe-elemental.git",
-                "reference": "2a0ba7896f5f2b39ed13d43f4b97e178c37ec818"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/silverstripe-elemental/zipball/2a0ba7896f5f2b39ed13d43f4b97e178c37ec818",
-                "reference": "2a0ba7896f5f2b39ed13d43f4b97e178c37ec818",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.1",
-                "silverstripe/admin": "^2.0.1",
-                "silverstripe/cms": "^5",
-                "silverstripe/framework": "^5",
-                "silverstripe/graphql": "^5",
-                "silverstripe/vendor-plugin": "^2",
-                "silverstripe/versioned": "^2",
-                "silverstripe/versioned-admin": "^2",
-                "symbiote/silverstripe-gridfieldextensions": "^4"
-            },
-            "require-dev": {
-                "silverstripe/frameworktest": "^1",
-                "silverstripe/recipe-testing": "^3"
-            },
-            "suggest": {
-                "dnadesign/silverstripe-elemental-subsites": "Adds subsite support to elemental",
-                "dnadesign/silverstripe-elemental-userforms": "Adds userform support to elemental",
-                "dnadesign/silverstripe-elemental-virtual": "Adds support to share blocks between pages",
-                "silverstripe/elemental-blocks": "Adds a set of common SilverStripe content block types",
-                "silverstripe/fulltextsearch": "Adds fulltext search capability for elements using Solr"
-            },
-            "type": "silverstripe-vendormodule",
-            "extra": {
-                "expose": [
-                    "client/dist",
-                    "client/lang"
-                ]
-            },
-            "autoload": {
-                "psr-4": {
-                    "DNADesign\\Elemental\\": [
-                        "src/",
-                        "_legacy/"
-                    ],
-                    "DNADesign\\Elemental\\Tests\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Alexandre Saelens",
-                    "email": "alexandre.saelens@dna.co.nz"
-                }
-            ],
-            "description": "Elemental pagetype and collection of Elements",
-            "keywords": [
-                "Content Blocks",
-                "element",
-                "elemental",
-                "silverstripe"
-            ],
-            "support": {
-                "issues": "https://github.com/silverstripe/silverstripe-elemental/issues",
-                "source": "https://github.com/silverstripe/silverstripe-elemental/tree/5.1.0"
-            },
-            "time": "2023-10-15T12:27:54+00:00"
         },
         {
             "name": "doctrine/lexer",

@@ -76,166 +76,6 @@ class Q66c1b4c7f3dc385b68a9fa903ccd016d extends ObjectType{
                                         ]; // field
                                                         $resolverInst =     ComposedResolver::create([
             call_user_func_array(['SilverStripe\GraphQL\Schema\DataObject\ReadCreator', 'resolve'], [array (
-  'dataClass' => 'DNADesign\\Elemental\\Models\\BaseElement',
-)]),
-            ['SilverStripe\Versioned\GraphQL\Resolvers\VersionedResolver', 'resolveVersionedRead'],
-            call_user_func_array(['SilverStripe\GraphQL\Schema\DataObject\Plugin\QueryFilter\QueryFilter', 'filter'], [array (
-  'fieldName' => 'filter',
-  'rootType' => 'Block',
-)]),
-            call_user_func_array(['SilverStripe\GraphQL\Schema\DataObject\Plugin\QuerySort', 'sort'], [array (
-  'fieldName' => 'sort',
-  'rootType' => 'Block',
-)]),
-            ['SilverStripe\GraphQL\Schema\DataObject\Plugin\FirstResult', 'firstResult'],
-            ['SilverStripe\GraphQL\Schema\DataObject\Plugin\CanViewPermission', 'permissionCheck'],
-        ])
-;
-                    $fields[] = [
-                        'name' => 'readOneBlock',
-                        'type' => Types::Block(),
-                        'resolve' => $resolverInst->toClosure(),
-                        'resolverComposition' => [
-                                                            [
-                                    ['SilverStripe\GraphQL\Schema\DataObject\ReadCreator', 'resolve'],
-                                ],
-                                                            [
-                                    ['SilverStripe\Versioned\GraphQL\Resolvers\VersionedResolver', 'resolveVersionedRead'],
-                                ],
-                                                            [
-                                    ['SilverStripe\GraphQL\Schema\DataObject\Plugin\QueryFilter\QueryFilter', 'filter'],
-                                ],
-                                                            [
-                                    ['SilverStripe\GraphQL\Schema\DataObject\Plugin\QuerySort', 'sort'],
-                                ],
-                                                            [
-                                    ['SilverStripe\GraphQL\Schema\DataObject\Plugin\FirstResult', 'firstResult'],
-                                ],
-                                                            [
-                                    ['SilverStripe\GraphQL\Schema\DataObject\Plugin\CanViewPermission', 'permissionCheck'],
-                                ],
-                                                    ],
-                                                                'args' => [
-                                                    [
-                                'name' => 'versioning',
-                                'type' => Types::VersionedInputType(),
-                                                        ], // arg
-                                                    [
-                                'name' => 'filter',
-                                'type' => Types::BlockFilterFields(),
-                                                        ], // arg
-                                                    [
-                                'name' => 'sort',
-                                'type' => Types::BlockSortFields(),
-                                                        ], // arg
-                                                ], // args
-                                        ]; // field
-                                                        $resolverInst =     ComposedResolver::create([
-            call_user_func_array(['SilverStripe\GraphQL\Schema\DataObject\ReadCreator', 'resolve'], [array (
-  'dataClass' => 'DNADesign\\Elemental\\Models\\ElementalArea',
-)]),
-            ['SilverStripe\Versioned\GraphQL\Resolvers\VersionedResolver', 'resolveVersionedRead'],
-            call_user_func_array(['SilverStripe\GraphQL\Schema\DataObject\Plugin\QueryFilter\QueryFilter', 'filter'], [array (
-  'fieldName' => 'filter',
-  'rootType' => 'ElementalArea',
-)]),
-            call_user_func_array(['SilverStripe\GraphQL\Schema\DataObject\Plugin\QuerySort', 'sort'], [array (
-  'fieldName' => 'sort',
-  'rootType' => 'ElementalArea',
-)]),
-            ['SilverStripe\GraphQL\Schema\DataObject\Plugin\FirstResult', 'firstResult'],
-            ['SilverStripe\GraphQL\Schema\DataObject\Plugin\CanViewPermission', 'permissionCheck'],
-        ])
-;
-                    $fields[] = [
-                        'name' => 'readOneElementalArea',
-                        'type' => Types::ElementalArea(),
-                        'resolve' => $resolverInst->toClosure(),
-                        'resolverComposition' => [
-                                                            [
-                                    ['SilverStripe\GraphQL\Schema\DataObject\ReadCreator', 'resolve'],
-                                ],
-                                                            [
-                                    ['SilverStripe\Versioned\GraphQL\Resolvers\VersionedResolver', 'resolveVersionedRead'],
-                                ],
-                                                            [
-                                    ['SilverStripe\GraphQL\Schema\DataObject\Plugin\QueryFilter\QueryFilter', 'filter'],
-                                ],
-                                                            [
-                                    ['SilverStripe\GraphQL\Schema\DataObject\Plugin\QuerySort', 'sort'],
-                                ],
-                                                            [
-                                    ['SilverStripe\GraphQL\Schema\DataObject\Plugin\FirstResult', 'firstResult'],
-                                ],
-                                                            [
-                                    ['SilverStripe\GraphQL\Schema\DataObject\Plugin\CanViewPermission', 'permissionCheck'],
-                                ],
-                                                    ],
-                                                                'args' => [
-                                                    [
-                                'name' => 'versioning',
-                                'type' => Types::VersionedInputType(),
-                                                        ], // arg
-                                                    [
-                                'name' => 'filter',
-                                'type' => Types::ElementalAreaFilterFields(),
-                                                        ], // arg
-                                                    [
-                                'name' => 'sort',
-                                'type' => Types::ElementalAreaSortFields(),
-                                                        ], // arg
-                                                ], // args
-                                        ]; // field
-                                                        $resolverInst =     ComposedResolver::create([
-            call_user_func_array(['SilverStripe\GraphQL\Schema\DataObject\ReadCreator', 'resolve'], [array (
-  'dataClass' => 'SilverStripe\\Security\\Member',
-)]),
-            call_user_func_array(['SilverStripe\GraphQL\Schema\DataObject\Plugin\QueryFilter\QueryFilter', 'filter'], [array (
-  'fieldName' => 'filter',
-  'rootType' => 'Member',
-)]),
-            call_user_func_array(['SilverStripe\GraphQL\Schema\DataObject\Plugin\QuerySort', 'sort'], [array (
-  'fieldName' => 'sort',
-  'rootType' => 'Member',
-)]),
-            ['SilverStripe\GraphQL\Schema\DataObject\Plugin\FirstResult', 'firstResult'],
-            ['SilverStripe\GraphQL\Schema\DataObject\Plugin\CanViewPermission', 'permissionCheck'],
-        ])
-;
-                    $fields[] = [
-                        'name' => 'readOneMember',
-                        'type' => Types::Member(),
-                        'resolve' => $resolverInst->toClosure(),
-                        'resolverComposition' => [
-                                                            [
-                                    ['SilverStripe\GraphQL\Schema\DataObject\ReadCreator', 'resolve'],
-                                ],
-                                                            [
-                                    ['SilverStripe\GraphQL\Schema\DataObject\Plugin\QueryFilter\QueryFilter', 'filter'],
-                                ],
-                                                            [
-                                    ['SilverStripe\GraphQL\Schema\DataObject\Plugin\QuerySort', 'sort'],
-                                ],
-                                                            [
-                                    ['SilverStripe\GraphQL\Schema\DataObject\Plugin\FirstResult', 'firstResult'],
-                                ],
-                                                            [
-                                    ['SilverStripe\GraphQL\Schema\DataObject\Plugin\CanViewPermission', 'permissionCheck'],
-                                ],
-                                                    ],
-                                                                'args' => [
-                                                    [
-                                'name' => 'filter',
-                                'type' => Types::MemberFilterFields(),
-                                                        ], // arg
-                                                    [
-                                'name' => 'sort',
-                                'type' => Types::MemberSortFields(),
-                                                        ], // arg
-                                                ], // args
-                                        ]; // field
-                                                        $resolverInst =     ComposedResolver::create([
-            call_user_func_array(['SilverStripe\GraphQL\Schema\DataObject\ReadCreator', 'resolve'], [array (
   'dataClass' => 'Page',
 )]),
             ['SilverStripe\Versioned\GraphQL\Resolvers\VersionedResolver', 'resolveVersionedRead'],
@@ -295,6 +135,54 @@ class Q66c1b4c7f3dc385b68a9fa903ccd016d extends ObjectType{
                                                     [
                                 'name' => 'sort',
                                 'type' => Types::PageSortFields(),
+                                                        ], // arg
+                                                ], // args
+                                        ]; // field
+                                                        $resolverInst =     ComposedResolver::create([
+            call_user_func_array(['SilverStripe\GraphQL\Schema\DataObject\ReadCreator', 'resolve'], [array (
+  'dataClass' => 'SilverStripe\\Security\\Member',
+)]),
+            call_user_func_array(['SilverStripe\GraphQL\Schema\DataObject\Plugin\QueryFilter\QueryFilter', 'filter'], [array (
+  'fieldName' => 'filter',
+  'rootType' => 'Member',
+)]),
+            call_user_func_array(['SilverStripe\GraphQL\Schema\DataObject\Plugin\QuerySort', 'sort'], [array (
+  'fieldName' => 'sort',
+  'rootType' => 'Member',
+)]),
+            ['SilverStripe\GraphQL\Schema\DataObject\Plugin\FirstResult', 'firstResult'],
+            ['SilverStripe\GraphQL\Schema\DataObject\Plugin\CanViewPermission', 'permissionCheck'],
+        ])
+;
+                    $fields[] = [
+                        'name' => 'readOneMember',
+                        'type' => Types::Member(),
+                        'resolve' => $resolverInst->toClosure(),
+                        'resolverComposition' => [
+                                                            [
+                                    ['SilverStripe\GraphQL\Schema\DataObject\ReadCreator', 'resolve'],
+                                ],
+                                                            [
+                                    ['SilverStripe\GraphQL\Schema\DataObject\Plugin\QueryFilter\QueryFilter', 'filter'],
+                                ],
+                                                            [
+                                    ['SilverStripe\GraphQL\Schema\DataObject\Plugin\QuerySort', 'sort'],
+                                ],
+                                                            [
+                                    ['SilverStripe\GraphQL\Schema\DataObject\Plugin\FirstResult', 'firstResult'],
+                                ],
+                                                            [
+                                    ['SilverStripe\GraphQL\Schema\DataObject\Plugin\CanViewPermission', 'permissionCheck'],
+                                ],
+                                                    ],
+                                                                'args' => [
+                                                    [
+                                'name' => 'filter',
+                                'type' => Types::MemberFilterFields(),
+                                                        ], // arg
+                                                    [
+                                'name' => 'sort',
+                                'type' => Types::MemberSortFields(),
                                                         ], // arg
                                                 ], // args
                                         ]; // field

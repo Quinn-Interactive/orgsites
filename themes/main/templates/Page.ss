@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="$ContentLocale">
+<html class="no-js" lang="$SourceLocale.Locale">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
