@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
     <div class="content-container">
-        <a class="navbar-brand d-block position-relative" href="/$CurrentLocaleObject.URLSegment">
+        <a class="navbar-brand d-block position-relative" href="/$CurrentLocaleObject.URLSegment" title="$SiteConfig.Title.ATT">
             <% if $SiteConfig.Logo && $SiteConfig.Logo.IsImage %>
                 <img src="$SiteConfig.Logo.ScaleHeight(80).URL" class="mh-100 w-auto" alt="$SiteConfig.Title.ATT" height="40" width="40">
             <% else_if $SiteConfig.Logo && $SiteConfig.Logo.Extension == 'svg'  %>
@@ -21,7 +21,7 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <% loop $Menu(1) %>
-                        <% if $Link == '/' %>
+                        <% if $IsHomePage %>
                             <%-- don't show home --%>
                         <% else_if $Children %>
                             <li class="nav-item dropdown">

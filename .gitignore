@@ -1,4 +1,5 @@
 /.env
+/.graphql-generated/
 /.php-cs-fixer.cache
 /.vscode/
 /*.sql

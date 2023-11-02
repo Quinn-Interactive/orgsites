@@ -1,0 +1,7 @@
+DNADesign\Elemental\Models\BaseElement:
+  extensions:
+    topPageDataExtension: DNADesign\Elemental\TopPage\FluentExtension
+
+DNADesign\Elemental\Models\ElementalArea:
+  extensions:
+    topPageDataExtension: DNADesign\Elemental\TopPage\FluentExtension

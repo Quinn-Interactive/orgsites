@@ -31,7 +31,9 @@ class SiteConfigExtension extends FluentExtension
     {
         // Logo
         $logoField = UploadField::create('Logo', 'Logo');
-        $logoField->setAllowedExtensions(['png', 'jpg', 'gif', 'svg']);
+        $logoField->setAllowedExtensions(['png', 'jpg', 'gif', 'svg'])
+            ->setDescription('Small PNG, JPEG, GIF, or SVG file. This logo is shared across all locales.')
+            ->setFolderName('SiteLogo');
         $fields->addFieldToTab('Root.Main', $logoField);
 
         parent::updateCMSFields($fields);
