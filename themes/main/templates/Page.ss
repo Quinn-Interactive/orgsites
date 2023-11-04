@@ -26,7 +26,6 @@
     </script>
     <%-- CSS --%>
     <% require themedCSS('dist/css/styles') %>
-
 </head>
 <body class="body d-flex flex-column d-flex flex-column">
     <% include Navbar %>
@@ -34,5 +33,6 @@
         $Layout
     </main>
     <script src="$resourceURL('themes/main/dist/js/index.js')"></script>
+    <% include ThemeColors %>    
 </body>
 </html>

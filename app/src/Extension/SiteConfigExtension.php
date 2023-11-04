@@ -2,18 +2,25 @@
 
 namespace QI\App\Extension;
 
+use RyanPotter\SilverStripeColorField\Forms\ColorField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\File;
-use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HeaderField;
+use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\View\ArrayData;
 use TractorCow\Colorpicker\Color;
-use TractorCow\Colorpicker\Forms\ColorField;
+// use TractorCow\Colorpicker\Forms\ColorField;
 use TractorCow\Fluent\Extension\FluentExtension;
 
 /**
  * Class \QI\App\Extension\SiteConfigExtension
+ *
+ * uses:
+ * - data type: https://github.com/tractorcow/silverstripe-colorpicker
+ * - edit field: https://github.com/Rhym/silverstripe-color-field
  *
  * @property \SilverStripe\SiteConfig\SiteConfig|\QI\App\Extension\SiteConfigExtension $owner
  * @property string $PrimaryColor
@@ -29,25 +36,26 @@ use TractorCow\Fluent\Extension\FluentExtension;
  */
 class SiteConfigExtension extends FluentExtension
 {
-    private static $colors = [
-        'PrimaryColor'   => ['default' => '#0d6efd', 'title' => 'Primary Color', 'description' => 'Main theme color, used for hyperlinks, focus styles, and component and form active states.'],
-        'SecondaryColor' => ['default' => '#6c757d', 'title' => 'Secondary Color', 'description' => 'Use the color option for lighter text. Use the bg option for dividers and to indicate disabled component states.'],
-        'SuccessColor'   => ['default' => '#198754', 'title' => 'Success Color', 'description' => 'Theme color used for positive or successful actions and information.'],
-        'DangerColor'    => ['default' => '#dc3545', 'title' => 'Danger Color', 'description' => 'Theme color used for errors and dangerous actions.'],
-        'WarningColor'   => ['default' => '#ffc107', 'title' => 'Warning Color', 'description' => 'Theme color used for non-destructive warning messages.'],
-        'InfoColor'      => ['default' => '#0dcaf0', 'title' => 'Info Color', 'description' => 'Theme color used for neutral and informative content.'],
-        'LightColor'     => ['default' => '#f8f9fa', 'title' => 'Light Color', 'description' => 'Additional theme option for less contrasting colors.'],
-        'DarkColor'      => ['default' => '#212529', 'title' => 'Dark Color', 'description' => 'Additional theme option for higher contrasting colors.'],
-    ];
     private static $db = [
-        'PrimaryColor'   => Color::class,
-        'SecondaryColor' => Color::class,
-        'SuccessColor'   => Color::class,
-        'DangerColor'    => Color::class,
-        'WarningColor'   => Color::class,
-        'InfoColor'      => Color::class,
-        'LightColor'     => Color::class,
-        'DarkColor'      => Color::class,
+        'PrimaryColor'   => 'Varchar(7)',
+        'SecondaryColor' => 'Varchar(7)',
+        'SuccessColor'   => 'Varchar(7)',
+        'DangerColor'    => 'Varchar(7)',
+        'WarningColor'   => 'Varchar(7)',
+        'InfoColor'      => 'Varchar(7)',
+        'LightColor'     => 'Varchar(7)',
+        'DarkColor'      => 'Varchar(7)',
+    ];
+
+    private static $defaults = [
+        'PrimaryColor'   => '#0d6efd',
+        'SecondaryColor' => '#6c757d',
+        'SuccessColor'   => '#198754',
+        'DangerColor'    => '#dc3545',
+        'WarningColor'   => '#ffc107',
+        'InfoColor'      => '#0dcaf0',
+        'LightColor'     => '#f8f9fa',
+        'DarkColor'      => '#212529',
     ];
 
     private static $has_one = [
@@ -60,6 +68,17 @@ class SiteConfigExtension extends FluentExtension
         'Title',
         'Tagline',
     ];
+
+    public function onBeforeWrite(): void
+    {
+        $colors = $this->owner->config()->get('colors');
+        foreach ($colors as $field => $value) {
+            $test = ltrim($this->owner->$field, '#');
+            if(!ctype_xdigit(strtoupper($test)) || strlen($test) != 6) {
+                $this->owner->$field = $value['default'];
+            }
+        }
+    }
 
     public function updateCMSFields(FieldList $fields): void
     {
@@ -75,10 +94,18 @@ class SiteConfigExtension extends FluentExtension
         $colors = $this->owner->config()->get('colors');
         foreach ($colors as $key => $color) {
             $colorField = ColorField::create($key, $color['title'])
-                ->setDescription($color['description']);
+                ->setDescription($color['description'])
+                ->setRightTitle("Default: {$color['default']}");
             $fields->addFieldToTab('Root.Main', $colorField);
         }
 
         parent::updateCMSFields($fields);
+    }
+
+    public function Color($name) {
+        $fieldName = $name . 'Color';
+        if ($this->owner->hasField($fieldName)) {
+            return DBField::create_field('Color', ltrim($this->owner->$fieldName, '#'));
+        }
     }
 }
