@@ -32,6 +32,7 @@
   "dependencies": {
     "core-js": "^3.8.1",
     "html-to-element": "^1.0.0",
+    "image-focus": "^1.2.1",
     "laravel-mix-polyfill": "^2.0.0"
   },
   "devDependencies": {

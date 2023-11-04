@@ -4244,6 +4244,11 @@ ignore@^5.1.1, ignore@^5.1.8, ignore@^5.2.0:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.2.4.tgz#a291c0c6178ff1b960befe47fcdec301674a6324"
   integrity sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==
 
+image-focus@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/image-focus/-/image-focus-1.2.1.tgz#c9e9e5bee0f33212e5b09d68c8c17e798c035ccb"
+  integrity sha512-yJCVH/Vk6PPyJQDiCcWWSzkGSQx9MYHJ5qQcb5Zw8tNUQgL5ajSGDCaox2QPvj1YJQWqJTCC3kBjM6QUchZckA==
+
 imagemin@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/imagemin/-/imagemin-7.0.1.tgz#f6441ca647197632e23db7d971fffbd530c87dbf"

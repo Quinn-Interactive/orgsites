@@ -30,6 +30,7 @@ class BlockPage extends Page
     {
         $fields = parent::getCMSFields();
 
+        $fields->dataFieldByName('Title')->setDescription(_t(self::class . '.TITLE_DESCRIPTION', 'Becasue this is a Block Page, the title will not display on the page. Make sure to set and display the title in your first block.'));
         // Localization Note
         return $fields;
     }
