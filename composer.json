@@ -25,7 +25,8 @@
         "symbiote/silverstripe-gridfieldextensions": "^4.0",
         "tractorcow/silverstripe-fluent": "^7.0",
         "dnadesign/silverstripe-elemental": "^5.1",
-        "jawira/case-converter": "^3.5"
+        "jawira/case-converter": "^3.5",
+        "tractorcow/silverstripe-colorpicker": "^4.2"
     },
     "require-dev": {
         "oddnoc/silverstripe-artefactcleaner": "^4.0",
