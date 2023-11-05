@@ -33,6 +33,6 @@
         $Layout
     </main>
     <script src="$resourceURL('themes/main/dist/js/index.js')"></script>
-    <% include ThemeColors %>    
+    <% include ThemeVars %>    
 </body>
 </html>
