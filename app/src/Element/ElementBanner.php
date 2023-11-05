@@ -11,6 +11,7 @@ use SilverStripe\Dev\Debug;
  * Class \QI\App\Element\ElementBanner
  *
  * @property string $TextPosition
+ * @property string $TextColor
  * @property int $ImageID
  * @method \SilverStripe\Assets\Image Image()
  */
@@ -18,6 +19,7 @@ class ElementBanner extends ElementContent
 {
     private static $db = [
         'TextPosition' => "Enum('top,bottom,right,left,center', 'bottom')",
+        'TextColor' => "Enum('white,black', 'white')",
     ];
     private static $has_one = [
         'Image' => Image::class,
@@ -52,4 +54,19 @@ class ElementBanner extends ElementContent
     {
         return _t(__CLASS__ . '.BlockType', 'Banner');
     }
+
+    /**
+     * override default style variant
+     *
+     * @return string
+     */
+    public function getStyleVariant()
+    {
+        $color = $this->TextColor;
+        if ($color == 'white') {
+            return 'text-bg-dark';
+        }
+        return 'text-bg-light';
+    }
+
 }

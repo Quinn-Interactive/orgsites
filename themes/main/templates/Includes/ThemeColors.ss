@@ -4,53 +4,53 @@
 <style>
 :root,
 [data-bs-theme=light] {
---bs-primary: #$Color(Primary);
---bs-secondary: #$Color(Secondary);
---bs-success: #$Color(Success);
---bs-info: #$Color(Info);
---bs-warning: #$Color(Warning);
---bs-danger: #$Color(Danger);
---bs-light: #$Color(Light);
---bs-dark: #$Color(Dark);
+--bs-primary: $ColorHex(Primary);
+--bs-secondary: $ColorHex(Secondary);
+--bs-success: $ColorHex(Success);
+--bs-info: $ColorHex(Info);
+--bs-warning: $ColorHex(Warning);
+--bs-danger: $ColorHex(Danger);
+--bs-light: $ColorHex(Light);
+--bs-dark: $ColorHex(Dark);
 
---bs-primary-rgb: $Color(Primary).Red, $Color(Primary).Green, $Color(Primary).Blue;
---bs-secondary-rgb: $Color(Secondary).Red, $Color(Secondary).Green, $Color(Secondary).Blue;
---bs-success-rgb: $Color(Success).Red, $Color(Success).Green, $Color(Success).Blue;
---bs-info-rgb: $Color(Info).Red, $Color(Info).Green, $Color(Info).Blue;
---bs-warning-rgb: $Color(Warning).Red, $Color(Warning).Green, $Color(Warning).Blue;
---bs-danger-rgb: $Color(Danger).Red, $Color(Danger).Green, $Color(Danger).Blue;
---bs-light-rgb: $Color(Light).Red, $Color(Light).Green, $Color(Light).Blue;
---bs-dark-rgb: $Color(Dark).Red, $Color(Dark).Green, $Color(Dark).Blue;
+--bs-primary-rgb: $ColorRGBVals(Primary);
+--bs-secondary-rgb: $ColorRGBVals(Secondary);
+--bs-success-rgb: $ColorRGBVals(Success);
+--bs-info-rgb: $ColorRGBVals(Info);
+--bs-warning-rgb: $ColorRGBVals(Warning);
+--bs-danger-rgb: $ColorRGBVals(Danger);
+--bs-light-rgb: $ColorRGBVals(Light);
+--bs-dark-rgb: $ColorRGBVals(Dark);
 
---bs-primary-text-emphasis: #$Color(Primary).Blend(0.6, '#000000');
---bs-secondary-text-emphasis: #$Color(Secondary).Blend(0.6, '#000000');
---bs-success-text-emphasis: #$Color(Success).Blend(0.6, '#000000');
---bs-info-text-emphasis: #$Color(Info).Blend(0.6, '#000000');
---bs-warning-text-emphasis: #$Color(Warning).Blend(0.6, '#000000');
---bs-danger-text-emphasis: #$Color(Danger).Blend(0.6, '#000000');
---bs-light-text-emphasis: #$Color(Dark).Blend(0.6, '#000000');
---bs-dark-text-emphasis: #$Color(Dark).Blend(0.6, '#000000');
+--bs-primary-text-emphasis: $ColorHex(PrimaryTextEmphasis);
+--bs-secondary-text-emphasis: $ColorHex(SecondaryTextEmphasis);
+--bs-success-text-emphasis: $ColorHex(SuccessTextEmphasis);
+--bs-info-text-emphasis: $ColorHex(InfoTextEmphasis);
+--bs-warning-text-emphasis: $ColorHex(WarningTextEmphasis);
+--bs-danger-text-emphasis: $ColorHex(DangerTextEmphasis);
+--bs-light-text-emphasis: $ColorHex(DarkTextEmphasis);
+--bs-dark-text-emphasis: $ColorHex(DarkTextEmphasis);
 
---bs-primary-bg-subtle: #$Color(Primary).Blend(0.8, '#ffffff');
---bs-secondary-bg-subtle: #$Color(Secondary).Blend(0.8, '#ffffff');
---bs-success-bg-subtle: #$Color(Success).Blend(0.8, '#ffffff');
---bs-info-bg-subtle: #$Color(Info).Blend(0.8, '#ffffff');
---bs-warning-bg-subtle: #$Color(Warning).Blend(0.8, '#ffffff');
---bs-danger-bg-subtle: #$Color(Danger).Blend(0.8, '#ffffff');
---bs-light-bg-subtle: #fcfcfd;
---bs-dark-bg-subtle: #ced4da;
+--bs-primary-bg-subtle: $ColorHex(PrimaryBgSubtle);
+--bs-secondary-bg-subtle: $ColorHex(SecondaryBgSubtle);
+--bs-success-bg-subtle: $ColorHex(SuccessBgSubtle);
+--bs-info-bg-subtle: $ColorHex(InfoBgSubtle);
+--bs-warning-bg-subtle: $ColorHex(WarningBgSubtle);
+--bs-danger-bg-subtle: $ColorHex(DangerBgSubtle);
+--bs-light-bg-subtle: $ColorHex(LightBgSubtle);
+--bs-dark-bg-subtle: $ColorHex(DarkBgSubtle);
 
---bs-primary-border-subtle:  #$Color(Primary).Blend(0.6, '#ffffff');
---bs-secondary-border-subtle:  #$Color(Secondary).Blend(0.6, '#ffffff');
---bs-success-border-subtle:  #$Color(Success).Blend(0.6, '#ffffff');
---bs-info-border-subtle:  #$Color(Info).Blend(0.6, '#ffffff');
---bs-warning-border-subtle:  #$Color(Warning).Blend(0.6, '#ffffff');
---bs-danger-border-subtle:  #$Color(Danger).Blend(0.6, '#ffffff');
---bs-light-border-subtle: #e9ecef;
---bs-dark-border-subtle: #adb5bd;
+--bs-primary-border-subtle:  $ColorHex(PrimaryBorderSubtle);
+--bs-secondary-border-subtle:  $ColorHex(SecondaryBorderSubtle);
+--bs-success-border-subtle:  $ColorHex(SuccessBorderSubtle);
+--bs-info-border-subtle:  $ColorHex(InfoBorderSubtle);
+--bs-warning-border-subtle:  $ColorHex(WarningBorderSubtle);
+--bs-danger-border-subtle:  $ColorHex(DangerBorderSubtle);
+--bs-light-border-subtle: $ColorHex(LightBorderSubtle);
+--bs-dark-border-subtle: $ColorHex(DarkBorderSubtle);
 
---bs-white-rgb: 255, 255, 255;
---bs-black-rgb: 0, 0, 0;
+--bs-white-rgb: $ColorHex(White);
+--bs-black-rgb: $ColorHex(Black);
 
 <%-- --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -61,31 +61,31 @@
 --bs-body-font-weight: 400;
 --bs-body-line-height: 1.5; --%>
 
---bs-body-color: #$Color(Dark);
---bs-body-color-rgb: $Color(Dark).Red, $Color(Dark).Green, $Color(Dark).Blue;
+--bs-body-color: $ColorHex(BodyColor);
+--bs-body-color-rgb: $ColorRGBVals(BodyColor);
 
 <%-- --bs-body-bg: #fff;
 --bs-body-bg-rgb: 255, 255, 255;
 --bs-emphasis-color: #000;
 --bs-emphasis-color-rgb: 0, 0, 0;
  --%>
---bs-secondary-color: #$Color(Dark).CSSColor(0.75);
---bs-secondary-color-rgb: $Color(Dark).Red, $Color(Dark).Green, $Color(Dark).Blue;
+--bs-secondary-color: $ColorHex(SecondaryColor);
+--bs-secondary-color-rgb: $ColorRGBVals(SecondaryColor);
 
---bs-secondary-bg: #e9ecef;
---bs-secondary-bg-rgb: 233, 236, 239;
+--bs-secondary-bg: $ColorHex(SecondaryColor);
+--bs-secondary-bg-rgb: $ColorRGBVals(SecondaryColor);
 
---bs-tertiary-color: #$Color(Dark).CSSColor(0.5);
---bs-tertiary-color-rgb: $Color(Dark).Red, $Color(Dark).Green, $Color(Dark).Blue;
+--bs-tertiary-color: $ColorHex(TertiaryColor);
+--bs-tertiary-color-rgb: $ColorRGBVals(TertiaryColor);
 
 --bs-tertiary-bg: #f8f9fa;
 --bs-tertiary-bg-rgb: 248, 249, 250;
---bs-heading-color: inherit;
---bs-link-color: #$Color(Primary);
---bs-link-color-rgb: $Color(Primary).Red, $Color(Primary).Green, $Color(Primary).Blue;
+<%-- --bs-heading-color: inherit;
+--bs-link-color: $ColorHex(Primary);
+--bs-link-color-rgb: $ColorRGBVals(Primary);
 --bs-link-decoration: underline;
---bs-link-hover-color: #$Color(Primary).Blend(0.2, '#000000');
---bs-link-hover-color-rgb: $Color(Primary).Blend(0.2, '#000000').Red, $Color(Primary).Blend(0.2, '#000000').Green, $Color(Primary).Blend(0.2, '#000000').Blue;
+--bs-link-hover-color: $ColorHex(Primary).Blend(0.2, '#000000');
+--bs-link-hover-color-rgb: $ColorRGBVals(Primary).Blend(0.2, '#000000'); --%>
 
 <%-- --bs-code-color: #d63384;
 --bs-highlight-color: #212529;

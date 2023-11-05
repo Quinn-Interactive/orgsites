@@ -1,5 +1,15 @@
 SilverStripe\SiteConfig\SiteConfig:
   colors:
+    DarkColor:
+      default: '#212529'
+      cssVar: dark
+      title: Dark Color
+      description: Dark text.
+    LightColor:
+      default: '#f8f9fa'
+      cssVar: light
+      title: Light Color
+      description: Light text.
     PrimaryColor:
       default: '#0d6efd'
       cssVar: primary
@@ -30,16 +40,6 @@ SilverStripe\SiteConfig\SiteConfig:
       cssVar: info
       title: Info Color
       description: Theme color used for neutral and informative content.
-    LightColor:
-      default: '#f8f9fa'
-      cssVar: light
-      title: Light Color
-      description: Additional theme option for less contrasting colors.
-    DarkColor:
-      default: '#212529'
-      cssVar: dark
-      title: Dark Color
-      description: Additional theme option for higher contrasting colors.
 
 # Add Default Colors to ColorField
 RyanPotter\SilverStripeColorField\Forms\ColorField:

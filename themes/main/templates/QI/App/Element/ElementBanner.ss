@@ -1,4 +1,4 @@
-<div class="banner">
+<div class="banner <% if $ShowTitle || $HTML %>-text-$TextColor<% end_if %>">
     <% if $Image %>
         <% with $Image %>
             <img class="focused-image banner__image"

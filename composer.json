@@ -27,7 +27,8 @@
         "dnadesign/silverstripe-elemental": "^5.1",
         "jawira/case-converter": "^3.5",
         "tractorcow/silverstripe-colorpicker": "^4.2",
-        "ryanpotter/silverstripe-color-field": "^1.0"
+        "ryanpotter/silverstripe-color-field": "^1.0",
+        "davidgorges/color-contrast": "^1.0"
     },
     "require-dev": {
         "oddnoc/silverstripe-artefactcleaner": "^4.0",

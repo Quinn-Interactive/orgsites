@@ -90,22 +90,114 @@ class SiteConfigExtension extends FluentExtension
         $fields->addFieldToTab('Root.Main', $logoField);
 
         // Colors
-        $fields->addFieldToTab('Root.Main', HeaderField::create('ColorsHeader', 'Colors'));
+        $fields->addFieldToTab('Root.Theme', HeaderField::create('ColorsHeader', 'Colors'));
         $colors = $this->owner->config()->get('colors');
         foreach ($colors as $key => $color) {
             $colorField = ColorField::create($key, $color['title'])
                 ->setDescription($color['description'])
                 ->setRightTitle("Default: {$color['default']}");
-            $fields->addFieldToTab('Root.Main', $colorField);
+            $fields->addFieldToTab('Root.Theme', $colorField);
         }
 
         parent::updateCMSFields($fields);
     }
 
-    public function Color($name) {
+    public function ColorHex($name): ?string
+    {
+        $color = $this->owner->Color($name);
+        if ($color) {
+            return '#' . $color->__toString();
+        }
+        return null;
+    }
+    public function ColorRGBVals($name): ?string
+    {
+        $color = $this->owner->Color($name);
+        if ($color) {
+            return "{$color->Red()}, {$color->Green()}, {$color->Blue()}";
+        }
+        return null;
+    }
+
+    public function Color($name): ?Color
+    {
         $fieldName = $name . 'Color';
         if ($this->owner->hasField($fieldName)) {
             return DBField::create_field('Color', ltrim($this->owner->$fieldName, '#'));
+        } else {
+            switch ($name) {
+                // *-text-emphasis
+                case 'PrimaryTextEmphasis': 
+                    return $this->owner->Color('Primary')->Blend(0.6, '#000000');
+                case 'SecondaryTextEmphasis': 
+                    return $this->owner->Color('Secondary')->Blend(0.6, '#000000');
+                case 'SuccessTextEmphasis': 
+                    return $this->owner->Color('Success')->Blend(0.6, '#000000');
+                case 'InfoTextEmphasis': 
+                    return $this->owner->Color('Info')->Blend(0.6, '#000000');
+                case 'WarningTextEmphasis': 
+                    return $this->owner->Color('Warning')->Blend(0.6, '#000000');
+                case 'DangerTextEmphasis': 
+                    return $this->owner->Color('Danger')->Blend(0.6, '#000000');
+                case 'LightTextEmphasis': 
+                    return $this->owner->Color('Dark')->Blend(0.6, '#000000');
+                case 'DarkTextEmphasis': 
+                    return $this->owner->Color('Dark')->Blend(0.6, '#000000');
+
+                // *-bg-subtle
+                case 'PrimaryBgSubtle': 
+                    return $this->owner->Color('Primary')->Blend(0.8, '#ffffff');
+                case 'SecondaryBgSubtle': 
+                    return $this->owner->Color('Secondary')->Blend(0.8, '#ffffff');
+                case 'SuccessBgSubtle': 
+                    return $this->owner->Color('Success')->Blend(0.8, '#ffffff');
+                case 'InfoBgSubtle': 
+                    return $this->owner->Color('Info')->Blend(0.8, '#ffffff');
+                case 'WarningBgSubtle': 
+                    return $this->owner->Color('Warning')->Blend(0.8, '#ffffff');
+                case 'DangerBgSubtle': 
+                    return $this->owner->Color('Danger')->Blend(0.8, '#ffffff');
+                case 'LightBgSubtle': 
+                    return DBField::create_field('Color', 'cfcfd');
+                case 'DarkBgSubtle': 
+                    return DBField::create_field('Color', 'ed4da');
+                
+                // *-border-subtle
+                case 'PrimaryBorderSubtle': 
+                    return $this->owner->Color('Primary')->Blend(0.6, '#ffffff');
+                case 'SecondaryBorderSubtle': 
+                    return $this->owner->Color('Secondary')->Blend(0.6, '#ffffff');
+                case 'SuccessBorderSubtle': 
+                    return $this->owner->Color('Success')->Blend(0.6, '#ffffff');
+                case 'InfoBorderSubtle': 
+                    return $this->owner->Color('Info')->Blend(0.6, '#ffffff');
+                case 'WarningBorderSubtle': 
+                    return $this->owner->Color('Warning')->Blend(0.6, '#ffffff');
+                case 'DangerBorderSubtle': 
+                    return $this->owner->Color('Danger')->Blend(0.6, '#ffffff');
+                case 'LightBorderSubtle': 
+                    return DBField::create_field('Color', 'e9ecef');
+                case 'DarkBorderSubtle': 
+                    return DBField::create_field('Color', 'db5bd');
+
+                // other
+                case 'SecondaryColor':
+                    return $this->owner->Color('Dark')->Blend(0.25, '#ffffff');
+                case 'SecondaryBg':
+                    return DBField::create_field('Color', 'e9ecef');
+                case 'TertiaryColor':
+                    return $this->owner->Color('Dark')->Blend(0.5, '#ffffff');
+                case 'TertiaryBg':
+                    return DBField::create_field('Color', 'f8f9fa');
+                case 'BodyColor':
+                    return $this->owner->Color('Dark');
+
+                case 'White':
+                    return DBField::create_field('Color', 'ffffff');
+                case 'Black':
+                    return DBField::create_field('Color', '000000');
+            }
         }
+        return null;
     }
 }
