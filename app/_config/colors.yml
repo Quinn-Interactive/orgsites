@@ -1,0 +1,54 @@
+SilverStripe\SiteConfig\SiteConfig:
+  colors:
+    DarkColor:
+      default: '#212529'
+      cssVar: dark
+      title: Dark Color
+      description: Dark text.
+    LightColor:
+      default: '#f8f9fa'
+      cssVar: light
+      title: Light Color
+      description: Light text.
+    PrimaryColor:
+      default: '#0d6efd'
+      cssVar: primary
+      title: Primary Color
+      description: Main theme color, used for hyperlinks, focus styles, and component and form active states.
+    SecondaryColor:
+      default: '#6c757d'
+      cssVar: secondary
+      title: Secondary Color
+      description: Use the color option for lighter text. Use the bg option for dividers and to indicate disabled component states.
+    SuccessColor:
+      default: '#198754'
+      cssVar: success
+      title: Success Color
+      description: Theme color used for positive or successful actions and information.
+    DangerColor:
+      default: '#dc3545'
+      cssVar: danger
+      title: Danger Color
+      description: Theme color used for errors and dangerous actions.
+    WarningColor:
+      default: '#ffc107'
+      cssVar: warning
+      title: Warning Color
+      description: Theme color used for non-destructive warning messages.
+    InfoColor:
+      default: '#0dcaf0'
+      cssVar: info
+      title: Info Color
+      description: Theme color used for neutral and informative content.
+
+# Add Default Colors to ColorField
+RyanPotter\SilverStripeColorField\Forms\ColorField:
+  colors:
+    - '#0d6efd'
+    - '#6c757d'
+    - '#198754'
+    - '#dc3545'
+    - '#ffc107'
+    - '#0dcaf0'
+    - '#f8f9fa'
+    - '#212529'

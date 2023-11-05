@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a29e36936542be91cef7e2e4136f6b17",
+    "content-hash": "3b17c9a6353fb3172b7f2c1a264235b5",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -226,6 +226,129 @@
                 }
             ],
             "time": "2022-08-20T06:45:11+00:00"
+        },
+        {
+            "name": "davidgorges/color-contrast",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/davidgorges/color-contrast-php.git",
+                "reference": "92513baf33753cc75a76b3f9ad2f5c1fd694d81a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/davidgorges/color-contrast-php/zipball/92513baf33753cc75a76b3f9ad2f5c1fd694d81a",
+                "reference": "92513baf33753cc75a76b3f9ad2f5c1fd694d81a",
+                "shasum": ""
+            },
+            "require": {
+                "mischiefcollective/colorjizz": "^1.0",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.15",
+                "phpstan/phpstan": "^0.11.8",
+                "phpunit/phpunit": "^8.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ColorContrast\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A tiny library to find color combinations with a contrast threshold",
+            "homepage": "http://www.davidgorges.de",
+            "keywords": [
+                "WCAG 2.0",
+                "color",
+                "contrast",
+                "library",
+                "usability"
+            ],
+            "support": {
+                "issues": "https://github.com/davidgorges/color-contrast-php/issues",
+                "source": "https://github.com/davidgorges/color-contrast-php/tree/v1.0.0"
+            },
+            "time": "2019-06-28T13:49:45+00:00"
+        },
+        {
+            "name": "dnadesign/silverstripe-elemental",
+            "version": "5.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silverstripe/silverstripe-elemental.git",
+                "reference": "2a0ba7896f5f2b39ed13d43f4b97e178c37ec818"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silverstripe/silverstripe-elemental/zipball/2a0ba7896f5f2b39ed13d43f4b97e178c37ec818",
+                "reference": "2a0ba7896f5f2b39ed13d43f4b97e178c37ec818",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "silverstripe/admin": "^2.0.1",
+                "silverstripe/cms": "^5",
+                "silverstripe/framework": "^5",
+                "silverstripe/graphql": "^5",
+                "silverstripe/vendor-plugin": "^2",
+                "silverstripe/versioned": "^2",
+                "silverstripe/versioned-admin": "^2",
+                "symbiote/silverstripe-gridfieldextensions": "^4"
+            },
+            "require-dev": {
+                "silverstripe/frameworktest": "^1",
+                "silverstripe/recipe-testing": "^3"
+            },
+            "suggest": {
+                "dnadesign/silverstripe-elemental-subsites": "Adds subsite support to elemental",
+                "dnadesign/silverstripe-elemental-userforms": "Adds userform support to elemental",
+                "dnadesign/silverstripe-elemental-virtual": "Adds support to share blocks between pages",
+                "silverstripe/elemental-blocks": "Adds a set of common SilverStripe content block types",
+                "silverstripe/fulltextsearch": "Adds fulltext search capability for elements using Solr"
+            },
+            "type": "silverstripe-vendormodule",
+            "extra": {
+                "expose": [
+                    "client/dist",
+                    "client/lang"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "DNADesign\\Elemental\\": [
+                        "src/",
+                        "_legacy/"
+                    ],
+                    "DNADesign\\Elemental\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexandre Saelens",
+                    "email": "alexandre.saelens@dna.co.nz"
+                }
+            ],
+            "description": "Elemental pagetype and collection of Elements",
+            "keywords": [
+                "Content Blocks",
+                "element",
+                "elemental",
+                "silverstripe"
+            ],
+            "support": {
+                "issues": "https://github.com/silverstripe/silverstripe-elemental/issues",
+                "source": "https://github.com/silverstripe/silverstripe-elemental/tree/5.1.0"
+            },
+            "time": "2023-10-15T12:27:54+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -870,6 +993,73 @@
             "time": "2022-05-21T17:30:32+00:00"
         },
         {
+            "name": "jawira/case-converter",
+            "version": "v3.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jawira/case-converter.git",
+                "reference": "2be05b98dcb743bef60ab6f849145bd3434ed003"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jawira/case-converter/zipball/2be05b98dcb743bef60ab6f849145bd3434ed003",
+                "reference": "2be05b98dcb743bef60ab6f849145bd3434ed003",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "behat/behat": "^3.0",
+                "phpstan/phpstan": "^1.0",
+                "phpunit/phpunit": "^9.0",
+                "vimeo/psalm": "^4.0"
+            },
+            "suggest": {
+                "pds/skeleton": "PHP Package Development Standards",
+                "phing/phing": "PHP Build Tool"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jawira\\CaseConverter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jawira Portugal",
+                    "email": "dev@tugal.be"
+                }
+            ],
+            "description": "Convert strings between 13 naming conventions: Snake case, Camel case, Pascal case, Kebab case, Ada case, Train case, Cobol case, Macro case, Upper case, Lower case, Sentence case, Title case and Dot notation.",
+            "homepage": "https://jawira.github.io/case-converter/",
+            "keywords": [
+                "Ada case",
+                "Cobol case",
+                "Macro case",
+                "Train case",
+                "camel case",
+                "dot notation",
+                "kebab case",
+                "lower case",
+                "pascal case",
+                "sentence case",
+                "snake case",
+                "title case",
+                "upper case"
+            ],
+            "support": {
+                "issues": "https://github.com/jawira/case-converter/issues",
+                "source": "https://github.com/jawira/case-converter/tree/v3.5.1"
+            },
+            "time": "2022-08-14T11:40:18+00:00"
+        },
+        {
             "name": "jonom/focuspoint",
             "version": "5.0.0",
             "source": {
@@ -1487,6 +1677,37 @@
                 "source": "https://github.com/Masterminds/html5-php/tree/2.8.1"
             },
             "time": "2023-05-10T11:58:31+00:00"
+        },
+        {
+            "name": "mischiefcollective/colorjizz",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:mikeemoo/ColorJizz-PHP.git",
+                "reference": "361b8a8727d13b67cb593a936a715ad2204ececb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mikeemoo/ColorJizz-PHP/zipball/361b8a8727d13b67cb593a936a715ad2204ececb",
+                "reference": "361b8a8727d13b67cb593a936a715ad2204ececb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "MischiefCollective": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Classes for manipulating colors, converting to different formats and finding color harmonies",
+            "homepage": "http://mikeefranklin.co.uk:8080/job/ColorJizz-PHP/",
+            "time": "2016-11-14T16:58:48+00:00"
         },
         {
             "name": "ml/iri",
@@ -2258,6 +2479,51 @@
                 "source": "https://github.com/ralouphie/getallheaders/tree/develop"
             },
             "time": "2019-03-08T08:55:37+00:00"
+        },
+        {
+            "name": "ryanpotter/silverstripe-color-field",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Rhym/silverstripe-color-field.git",
+                "reference": "a9e7a21af0812909f3c1209b684bb1645f2acc0f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Rhym/silverstripe-color-field/zipball/a9e7a21af0812909f3c1209b684bb1645f2acc0f",
+                "reference": "a9e7a21af0812909f3c1209b684bb1645f2acc0f",
+                "shasum": ""
+            },
+            "require": {
+                "silverstripe/framework": "^4.0 || ^5.0"
+            },
+            "type": "silverstripe-vendormodule",
+            "extra": {
+                "installer-name": "silverstripe-color-field",
+                "expose": [
+                    "client"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Potter",
+                    "homepage": "http://ryanpotter.co.nz/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Silverstripe Color Field",
+            "keywords": [
+                "silverstripe"
+            ],
+            "support": {
+                "issues": "https://github.com/Rhym/silverstripe-color-field/issues",
+                "source": "https://github.com/Rhym/silverstripe-color-field/tree/1.0.2"
+            },
+            "time": "2023-08-17T03:47:53+00:00"
         },
         {
             "name": "sebastian/diff",
@@ -5493,6 +5759,58 @@
                 }
             ],
             "time": "2023-07-31T07:08:24+00:00"
+        },
+        {
+            "name": "tractorcow/silverstripe-colorpicker",
+            "version": "4.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tractorcow/silverstripe-colorpicker.git",
+                "reference": "b8d59e52ecb8bc1da049ffa804cac15a7f1d2fb2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tractorcow/silverstripe-colorpicker/zipball/b8d59e52ecb8bc1da049ffa804cac15a7f1d2fb2",
+                "reference": "b8d59e52ecb8bc1da049ffa804cac15a7f1d2fb2",
+                "shasum": ""
+            },
+            "require": {
+                "silverstripe/framework": "^4.0 || ^5.0"
+            },
+            "type": "silverstripe-vendormodule",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0.x-dev"
+                },
+                "expose": [
+                    "client"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "TractorCow\\Colorpicker\\": "src/",
+                    "TractorCow\\Colorpicker\\Tests\\": "tests/php/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Damian Mooyman",
+                    "email": "damian.mooyman@gmail.com"
+                }
+            ],
+            "description": "Color picker field for Silverstripe CMS using the ColorPicker jQuery plugin",
+            "keywords": [
+                "color",
+                "colorpicker",
+                "colour",
+                "silverstripe"
+            ],
+            "support": {
+                "issues": "https://github.com/tractorcow/silverstripe-colorpicker/issues",
+                "source": "https://github.com/tractorcow/silverstripe-colorpicker/tree/4.2.0"
+            },
+            "time": "2023-05-14T23:22:51+00:00"
         },
         {
             "name": "tractorcow/silverstripe-fluent",
