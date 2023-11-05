@@ -14,7 +14,7 @@ SilverStripe\SiteConfig\SiteConfig:
       default: '#0d6efd'
       cssVar: primary
       title: Primary Color
-      description: Main theme color, used for hyperlinks, focus styles, and component and form active states.
+      description: Main theme color, used for hyperlinks, focus styles, and component and form active states. Should be dark.
     SecondaryColor:
       default: '#6c757d'
       cssVar: secondary

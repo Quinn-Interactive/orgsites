@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+<nav class="navbar navbar-expand-lg bg-$SiteConfig.NavbarBg $SiteConfig.NavbarTextColor.CssClass fixed-top">
     <div class="content-container">
-        <a class="navbar-brand d-block position-relative" href="/$CurrentLocaleObject.URLSegment" title="$SiteConfig.Title.ATT">
+        <a class="navbar-brand d-block $SiteConfig.NavbarTextColor.CssClass position-relative" href="/$CurrentLocaleObject.URLSegment" title="$SiteConfig.Title.ATT">
             <% if $SiteConfig.Logo && $SiteConfig.Logo.IsImage %>
                 <img src="$SiteConfig.Logo.ScaleHeight(80).URL" class="mh-100 w-auto" alt="$SiteConfig.Title.ATT" height="40" width="40">
             <% else_if $SiteConfig.Logo && $SiteConfig.Logo.Extension == 'svg'  %>
@@ -9,7 +9,7 @@
                 $SiteConfig.Title
             <% end_if %>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarSupportedContent"
+        <button class="navbar-toggler $SiteConfig.NavbarTextColor.CssClass" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -19,13 +19,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 $SiteConfig.NavbarTextColor.CssClass">
                     <% loop $Menu(1) %>
                         <% if $IsHomePage %>
                             <%-- don't show home --%>
                         <% else_if $Children %>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle <% if $IsSection %>active<% end_if %>" <% if $IsCurrent %>aria-current="page"<% end_if %> href="#" role="button" data-bs-toggle="dropdown"
+                                <a class="nav-link $SiteConfig.NavbarTextColor.CssClass dropdown-toggle <% if $IsSection %>active<% end_if %>" <% if $IsCurrent %>aria-current="page"<% end_if %> href="#" role="button" data-bs-toggle="dropdown"
                                     aria-expanded="false">
                                     $MenuTitle
                                 </a>
@@ -41,16 +41,16 @@
                             </li>
                         <% else %>
                             <li class="nav-item">
-                                <a class="nav-link <% if $IsSection %>active<% end_if %>" <% if $IsCurrent %>aria-current="page"<% end_if %>href="$Link">$MenuTitle</a>
+                                <a class="nav-link $SiteConfig.NavbarTextColor.CssClass <% if $IsSection %>active<% end_if %>" <% if $IsCurrent %>aria-current="page"<% end_if %>href="$Link">$MenuTitle</a>
                             </li>
                         <% end_if %>
                     <% end_loop %>
                 </ul>
-                <ul class="navbar-nav">
+                <ul class="navbar-nav $SiteConfig.NavbarTextColor.CssClass">
                     <% if $Locales.Count > 1 %>
                         <% if $Locales.Count > 3 %>
                         <li class="nav-item dropdown me-3">
-                            <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="nav-link $SiteConfig.NavbarTextColor.CssClass dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <%t TractorCow\Fluent\Model\Locale.LOCALE "Locale" %>
                             </button>
                             <ul class="dropdown-menu">
@@ -69,7 +69,7 @@
                         <% else %>
                             <% loop $Locales %>
                             <li class="nav-item $LinkingMode me-3">
-                                <a class="$LinkingMode nav-link" 
+                                <a class="$LinkingMode nav-link $SiteConfig.NavbarTextColor.CssClass" 
                                     href="$Link.ATT"
                                     <% if $LinkingMode != 'invalid' %>rel="alternate" hreflang="$HrefLang"<% end_if %>
                                 >
@@ -80,11 +80,11 @@
                         <% end_if %>
                     <% end_if %>
                     <%-- <li class="nav-item dropdown">
-                        <button class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="nav-link $SiteConfig.NavbarTextColor.CssClass dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-search" title="<%t SilverStripe\CMS\Search.SEARCH "Search" %>"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <div class="nav-link search-form">$SearchForm</div>
+                            <div class="nav-link $SiteConfig.NavbarTextColor.CssClass search-form">$SearchForm</div>
                         </div>
                     </li> --%>
                 </ul>

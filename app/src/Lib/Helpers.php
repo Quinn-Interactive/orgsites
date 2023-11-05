@@ -36,4 +36,24 @@ class Helpers
         }
         $field->setSource($newSource);
     }
+
+    /**
+     * WCAG Contrast Ratings.
+     */
+    public static function wcag_contrast_rating(float $ratio): string
+    {
+        $ratings = [
+            'aaa' => 7,
+            'aa' => 4.5,
+            'aa-large' => 3,
+            'fail' => 0
+        ];
+        foreach ($ratings as $rating => $threshold) {
+            if ($ratio >= $threshold) {
+                return $rating;
+            }
+        }
+        return 'error';
+    }
+
 }

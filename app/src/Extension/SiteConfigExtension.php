@@ -2,17 +2,20 @@
 
 namespace QI\App\Extension;
 
+use Jawira\CaseConverter\Convert;
+use QI\App\Lib\Helpers;
 use RyanPotter\SilverStripeColorField\Forms\ColorField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\File;
 use SilverStripe\Dev\Debug;
+use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HeaderField;
-use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\View\ArrayData;
+use Spatie\Color\Contrast;
+use Spatie\Color\Hex;
 use TractorCow\Colorpicker\Color;
-// use TractorCow\Colorpicker\Forms\ColorField;
 use TractorCow\Fluent\Extension\FluentExtension;
 
 /**
@@ -31,6 +34,7 @@ use TractorCow\Fluent\Extension\FluentExtension;
  * @property string $InfoColor
  * @property string $LightColor
  * @property string $DarkColor
+ * @property string $NavbarBg
  * @property int $LogoID
  * @method \SilverStripe\Assets\File Logo()
  */
@@ -45,6 +49,7 @@ class SiteConfigExtension extends FluentExtension
         'InfoColor'      => 'Varchar(7)',
         'LightColor'     => 'Varchar(7)',
         'DarkColor'      => 'Varchar(7)',
+        'NavbarBg'      => "Enum('primary, secondary, dark, light, white, black', 'primary')",
     ];
 
     private static $defaults = [
@@ -56,6 +61,7 @@ class SiteConfigExtension extends FluentExtension
         'InfoColor'      => '#0dcaf0',
         'LightColor'     => '#f8f9fa',
         'DarkColor'      => '#212529',
+        'NavbarBg'       => 'primary',
     ];
 
     private static $has_one = [
@@ -68,6 +74,50 @@ class SiteConfigExtension extends FluentExtension
         'Title',
         'Tagline',
     ];
+
+    public function getNavbarTextColor(): ArrayData
+    {
+        $navbarBg = $this->owner->NavbarBg;
+        $convert = new Convert("$navbarBg");
+        $navbarColorField = $convert->fromKebab()->toPascal();
+        $navBarColor = '#' . $this->owner->Color($navbarColorField);
+        $light = '#' . $this->owner->Color('Light');
+        $dark = '#' . $this->owner->Color('Dark');
+        $white = '#ffffff';
+        $black = '#000000';
+        $bgColor = Hex::fromString($navBarColor);
+        $ratings = [];
+        $ratios = [];
+        $options = [
+            'light' => $light, 
+            'dark' => $dark, 
+            'white' => $white, 
+            'black' => $black,
+        ];
+        // find the first, best contrast match
+        foreach ($options as $name => $color) {
+            $textColor = Hex::fromString($color);
+            $ratio = Contrast::ratio($bgColor, $textColor);
+            $ratios[$name] = $ratio;
+            $ratings[$name] = Helpers::wcag_contrast_rating($ratio);
+        }
+        $best = array_search('aaa', $ratings);
+        if (!$best) {
+            $best = array_search('aa', $ratings);
+        }
+        if (!$best) {
+            $best = array_search('aa-large', $ratings);
+        }
+        if (!$best) {
+            arsort($ratios);
+            $best = $ratios[0];
+        }
+        return ArrayData::create([
+            'CssClass' => "text-$best",
+            'Rating' => $ratings[$best],
+            'ContrastRatio' => $ratios[$best],
+        ]);
+    }
 
     public function onBeforeWrite(): void
     {
@@ -98,6 +148,12 @@ class SiteConfigExtension extends FluentExtension
                 ->setRightTitle("Default: {$color['default']}");
             $fields->addFieldToTab('Root.Theme', $colorField);
         }
+
+        // NavbarBg
+        $navColors = $this->owner->dbObject('NavbarBg')->enumValues();
+        $fields->addFieldToTab('Root.Theme', $navbarBg = DropdownField::create('NavbarBg', 'Navigation Background Color', $navColors));
+        $navbarBg->setDescription('Accessibility contrast rating: ' . $this->owner->getNavbarTextColor()->Rating);
+
 
         parent::updateCMSFields($fields);
     }

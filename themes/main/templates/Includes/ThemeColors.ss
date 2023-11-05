@@ -49,8 +49,8 @@
 --bs-light-border-subtle: $ColorHex(LightBorderSubtle);
 --bs-dark-border-subtle: $ColorHex(DarkBorderSubtle);
 
---bs-white-rgb: $ColorHex(White);
---bs-black-rgb: $ColorHex(Black);
+--bs-white-rgb: $ColorRGBVals(White);
+--bs-black-rgb: $ColorRGBVals(Black);
 
 <%-- --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;

@@ -21,6 +21,15 @@
         background-color: rgba(255,255,255,0.5);
     }
 
+    @include media-breakpoint-up(lg) {
+        &.-text-white::after {
+            background-color: rgba(0,0,0,0.25);
+        }
+        &.-text-black::after {
+            background-color: rgba(255,255,255,0.25);
+        }    
+    }
+
     &__image {
         z-index: 10;
     }
@@ -56,12 +65,18 @@
     }
 
     &__text {
+        text-shadow: 0 0 8px #000;
+
         @include media-breakpoint-up(lg) {
             .banner__content.-left &,
             .banner__content.-right &,
             .banner__content.-center & {
                 max-width: 50%;
             }
+        }
+
+        .banner.-text-black & {
+            text-shadow: 0 0 20px #fff;
         }
     
         > * {
