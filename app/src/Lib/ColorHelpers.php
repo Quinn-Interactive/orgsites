@@ -154,6 +154,7 @@ class ColorHelpers
         }
         return ArrayData::create([
             'CssClass'      => "text-{$best}",
+            'CssColor'      => $options[$best],
             'Rating'        => $ratings[$best],
             'ContrastRatio' => $ratios[$best],
         ]);

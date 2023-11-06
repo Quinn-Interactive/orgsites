@@ -93,7 +93,15 @@ class SiteConfigExtension extends FluentExtension
         $navbarBg = $this->owner->NavbarBg;
         $convert = new Convert("{$navbarBg}");
         $navbarColorField = $convert->fromKebab()->toPascal();
-        return ColorHelpers::contrasting_text($navbarColorField);
+        $result = ColorHelpers::contrasting_text($navbarColorField);
+        if (in_array($result->CssClass, ['text-light', 'text-white'])) {
+            $result->NavbarBGClass = 'navbar-dark';
+            $result->BtnCloseClass = 'btn-close-white';
+        } else {
+            $result->NavbarBGClass = 'navbar-light';
+            $result->BtnCloseClass = 'btn-close-black';
+        }
+        return $result;
     }
 
     public function onBeforeWrite(): void

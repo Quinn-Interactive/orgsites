@@ -1,24 +1,18 @@
-<nav data-scroll-hide class="navbar navbar-expand-lg bg-$SiteConfig.NavbarBg $SiteConfig.NavbarTextColor.CssClass fixed-top">
+<nav data-scroll-hide class="navbar navbar-expand-lg bg-$SiteConfig.NavbarBg $SiteConfig.NavbarTextColor.CssClass $SiteConfig.NavbarTextColor.NavbarBGClass fixed-top">
     <div class="content-container">
         <a class="navbar-brand d-block $SiteConfig.NavbarTextColor.CssClass position-relative" href="/$CurrentLocaleObject.URLSegment" title="$SiteConfig.Title.ATT">
-            <% if $SiteConfig.Logo && $SiteConfig.Logo.IsImage %>
-                <img src="$SiteConfig.Logo.ScaleHeight(80).URL" class="mh-100 w-auto" alt="$SiteConfig.Title.ATT" height="40" width="40">
-            <% else_if $SiteConfig.Logo && $SiteConfig.Logo.Extension == 'svg'  %>
-                <img src="$SiteConfig.Logo.URL" class="mh-100 w-auto" alt="$SiteConfig.Title.ATT" height="40" width="40">
-            <% else %>
-                $SiteConfig.Title
-            <% end_if %>
+            <% include Brand %>
         </a>
         <button class="navbar-toggler $SiteConfig.NavbarTextColor.CssClass" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div  id="navbarSupportedContent" class="offcanvas offcanvas-end" tabindex="-1" aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <div class="offcanvas-header $SiteConfig.NavbarTextColor.CssClass bg-$SiteConfig.NavbarBg">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><% include Brand %></h5>
+                <button type="button" class="btn-close $SiteConfig.NavbarTextColor.BtnCloseClass" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body">
+            <div class="offcanvas-body bg-$SiteConfig.NavbarBg">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 $SiteConfig.NavbarTextColor.CssClass">
                     <% loop $Menu(1) %>
                         <% if $IsHomePage %>

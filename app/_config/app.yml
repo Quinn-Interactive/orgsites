@@ -16,3 +16,9 @@ SilverStripe\Control\Email\Email:
 SilverStripe\SiteConfig\SiteConfig:
   extensions:
     - QI\App\Extension\SiteConfigExtension
+JonoM\BetterNavigator:
+  developers:
+    - 'phil@quinn.com'
+    - 'fcondo@quinn.com'
+  translucent: true
+  position: 'right-bottom'
