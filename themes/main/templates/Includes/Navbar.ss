@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-$SiteConfig.NavbarBg $SiteConfig.NavbarTextColor.CssClass fixed-top">
+<nav data-scroll-hide class="navbar navbar-expand-lg bg-$SiteConfig.NavbarBg $SiteConfig.NavbarTextColor.CssClass fixed-top">
     <div class="content-container">
         <a class="navbar-brand d-block $SiteConfig.NavbarTextColor.CssClass position-relative" href="/$CurrentLocaleObject.URLSegment" title="$SiteConfig.Title.ATT">
             <% if $SiteConfig.Logo && $SiteConfig.Logo.IsImage %>
