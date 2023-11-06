@@ -7,17 +7,7 @@ DNADesign\Elemental\Models\BaseElement:
   extensions:
     topPageDataExtension: DNADesign\Elemental\TopPage\FluentExtension
     qiBaseElementExtension: QI\App\Extension\BaseElementExtension
-  styles:
-    text-bg-secondary: Secondary Background
-    text-bg-primary: Primary Background
-    text-bg-success: Green Background
-    text-bg-info: Info Background
-    text-bg-warning: Warning Background
-    text-bg-danger: Danger Background
-    text-bg-light: Light Background
-    text-bg-dark: Dark Background
-    text-bg-white: White Background
-    text-bg-black: Black Background
+    qiBaseElementColorExtension: QI\App\Extension\BaseElementColorsExtension
 DNADesign\Elemental\Models\ElementalArea:
   extensions:
     topPageDataExtension: DNADesign\Elemental\TopPage\FluentExtension

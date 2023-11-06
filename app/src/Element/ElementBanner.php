@@ -5,7 +5,6 @@ namespace QI\App\Element;
 use DNADesign\Elemental\Models\ElementContent;
 use QI\App\Lib\Helpers;
 use SilverStripe\Assets\Image;
-use SilverStripe\Dev\Debug;
 
 /**
  * Class \QI\App\Element\ElementBanner
@@ -19,8 +18,10 @@ class ElementBanner extends ElementContent
 {
     private static $db = [
         'TextPosition' => "Enum('top,bottom,right,left,center', 'bottom')",
-        'TextColor' => "Enum('white,black', 'white')",
+        'TextColor'    => "Enum('white,black', 'white')",
     ];
+    // private static $inline_editable = false;
+    private static $disable_background_color = true;
     private static $has_one = [
         'Image' => Image::class,
     ];
@@ -50,10 +51,6 @@ class ElementBanner extends ElementContent
 
         return $fields;
     }
-    public function getType()
-    {
-        return _t(__CLASS__ . '.BlockType', 'Banner');
-    }
 
     /**
      * override default style variant
@@ -67,6 +64,10 @@ class ElementBanner extends ElementContent
             return 'text-bg-dark';
         }
         return 'text-bg-light';
+    }
+    public function getType()
+    {
+        return _t(__CLASS__ . '.BlockType', 'Banner');
     }
 
 }

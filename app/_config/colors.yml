@@ -40,6 +40,61 @@ SilverStripe\SiteConfig\SiteConfig:
       cssVar: info
       title: Info Color
       description: Theme color used for neutral and informative content.
+  background-colors:
+    Secondary: 
+      title: Secondary Background
+      cssClass: bg-secondary
+    SecondaryBgSubtle: 
+      title: Secondary Background (Subtle)
+      cssClass: bg-secondary-subtle
+    Primary: 
+      title: Primary Background
+      cssClass: bg-primary
+    PrimaryBgSubtle: 
+      title: Primary Background (Subtle)
+      cssClass: bg-primary-subtle
+    Success: 
+      title: Success Background
+      cssClass: bg-success
+    SuccessBgSubtle: 
+      title: Success Background (Subtle)
+      cssClass: bg-success-subtle
+    Info: 
+      title: Info Background
+      cssClass: bg-info
+    InfoBgSubtle: 
+      title: Info Background (Subtle)
+      cssClass: bg-info-subtle
+    Warning: 
+      title: Warning Background
+      cssClass: bg-warning
+    WarningBgSubtle: 
+      title: Warning Background (Subtle)
+      cssClass: bg-warning-subtle
+    Danger: 
+      title: Danger Background
+      cssClass: bg-danger
+    DangerBgSubtle: 
+      title: Danger Background (Subtle)
+      cssClass: bg-danger-subtle
+    Light: 
+      title: Light Background
+      cssClass: bg-light
+    LightBgSubtle: 
+      title: Light Background (Subtle)
+      cssClass: bg-light-subtle
+    Dark: 
+      title: Dark Background
+      cssClass: bg-dark
+    DarkBgSubtle: 
+      title: Dark Background (Subtle)
+      cssClass: bg-dark-subtle
+    White: 
+      title: White Background
+      cssClass: bg-white
+    Black: 
+      title: Black Background
+      cssClass: bg-black
 
 # Add Default Colors to ColorField
 RyanPotter\SilverStripeColorField\Forms\ColorField:
