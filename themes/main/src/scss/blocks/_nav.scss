@@ -29,4 +29,10 @@ nav.navbar {
   &.-scrolled {
     box-shadow: 0 5px 5px transparentize($black, 0.75);
   }
+
+  .offcanvas-body {
+    @include media-breakpoint-up(lg) {
+        background-color: transparent !important;
+    }
+  }
 }
