@@ -9,23 +9,24 @@
   nav.navbar {
     &.-top:has(+ main > .element-banner:first-child) {
       background-color: transparent !important;
-      background-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 1),
-        rgba(0, 0, 0, 0)
-      );
+      @include scrim-gradient(#000000, "to bottom");
+
+      &.text-dark,
+      &.text-black {
+        @include scrim-gradient(#ffffff, "to bottom");
+      }
     }
   }
 }
 
 nav.navbar {
-    transition: all 0.25s ease;
+  transition: all 0.25s ease;
 
-    &.-hidden {
-        transform: translateY(calc(-100% - 30px));
-    }
-    
-    &.-scrolled {
-        box-shadow: 0 5px 5px transparentize($black, 0.75);
-    }
+  &.-hidden {
+    transform: translateY(calc(-100% - 30px));
+  }
+
+  &.-scrolled {
+    box-shadow: 0 5px 5px transparentize($black, 0.75);
+  }
 }
