@@ -202,7 +202,7 @@ class SiteConfigExtension extends FluentExtension
         return ArrayData::create($font);
     }
 
-    public function getFontHeadCode(): string
+    public function FontHeadCode($type = 'link'): string
     {
         $code = [];
         $bodyFont = $this->owner->getFont($this->owner->BodyFont);
@@ -211,10 +211,14 @@ class SiteConfigExtension extends FluentExtension
         foreach ([$bodyFont, $headlineFont, $monospaceFont] as $font) {
             $link = $font['link'] ?? null;
             if ($link) {
-                $code[] = "<link href=\"$link\" rel=\"stylesheet\">";
+                if ($type == 'import') {
+                    $code[] = "@import url('$link');";
+                } else {
+                    $code[] = "<link href=\"$link\" rel=\"stylesheet\">";
+                }
             }
         }
-        if (count($code)) {
+        if (count($code) && $type != 'import') {
             array_unshift($code, '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
             array_unshift($code, '<link rel="preconnect" href="https://fonts.googleapis.com">');
         }
