@@ -4,6 +4,7 @@ namespace QI\App\Extension;
 
 use Jawira\CaseConverter\Convert;
 use QI\App\Lib\ColorHelpers;
+use QI\App\Lib\LiteralFieldWrapper;
 use RyanPotter\SilverStripeColorField\Forms\ColorField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\File;
@@ -11,6 +12,7 @@ use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HeaderField;
+use SilverStripe\Forms\LiteralField;
 use SilverStripe\View\ArrayData;
 use TractorCow\Colorpicker\Color;
 use TractorCow\Fluent\Extension\FluentExtension;
@@ -176,6 +178,9 @@ class SiteConfigExtension extends FluentExtension
         $fields->addFieldToTab('Root.Theme.Type', DropdownField::create('MonospaceFont', 'Monospace Font', $monospaceFonts)
             ->setDescription('Will be used for code samples or when monospaced is required.')
         );
+        // Type Sample
+        $typeSamples = $this->owner->renderWith('TypeSamples');
+        $fields->addFieldToTab('Root.Theme.Type', LiteralFieldWrapper::create('TypeSamples', 'Type Samples', $typeSamples));
 
         parent::updateCMSFields($fields);
     }

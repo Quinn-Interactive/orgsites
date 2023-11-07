@@ -24,6 +24,8 @@
     <script>
         document.documentElement.className +=  (("ontouchstart" in document.documentElement) ? ' touch' : ' no-touch');
     </script>
+    <%-- load any fonts if needed --%>
+    $SiteConfig.FontHeadCode.RAW
     <%-- CSS --%>
     <% require themedCSS('dist/css/styles') %>
 </head>
