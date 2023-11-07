@@ -7,6 +7,7 @@ use QI\App\Lib\ColorHelpers;
 use RyanPotter\SilverStripeColorField\Forms\ColorField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\File;
+use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HeaderField;
@@ -31,7 +32,9 @@ use TractorCow\Fluent\Extension\FluentExtension;
  * @property string $LightColor
  * @property string $DarkColor
  * @property string $NavbarBg
- * @property string $FontFamily
+ * @property string $BodyFont
+ * @property string $HeadlineFont
+ * @property string $MonospaceFont
  * @property int $LogoID
  * @method \SilverStripe\Assets\File Logo()
  */
@@ -47,7 +50,9 @@ class SiteConfigExtension extends FluentExtension
         'LightColor'     => 'Varchar(7)',
         'DarkColor'      => 'Varchar(7)',
         'NavbarBg'       => "Enum('primary, secondary, dark, light, white, black', 'primary')",
-        'FontFamily'     => "Enum('serif, sans-serif', 'sans-serif')",
+        'BodyFont'       => 'Varchar',
+        'HeadlineFont'   => 'Varchar',
+        'MonospaceFont'  => 'Varchar',
     ];
 
     private static $defaults = [
@@ -60,7 +65,9 @@ class SiteConfigExtension extends FluentExtension
         'LightColor'     => '#f8f9fa',
         'DarkColor'      => '#212529',
         'NavbarBg'       => 'primary',
-        'FontFamily'     => 'sans-serif',
+        'BodyFont'       => 'native-sans-serif',
+        'HeadlineFont'   => 'native-sans-serif',
+        'MonospaceFont'  => 'native-monospace',
     ];
 
     private static $has_one = [
@@ -109,7 +116,7 @@ class SiteConfigExtension extends FluentExtension
         $colors = $this->owner->config()->get('colors');
         foreach ($colors as $field => $value) {
             $test = ltrim($this->owner->$field, '#');
-            if(!ctype_xdigit(strtoupper($test)) || strlen($test) != 6) {
+            if (!ctype_xdigit(strtoupper($test)) || strlen($test) != 6) {
                 $this->owner->$field = $value['default'];
             }
         }
@@ -125,26 +132,87 @@ class SiteConfigExtension extends FluentExtension
         $fields->addFieldToTab('Root.Main', $logoField);
 
         // Colors
-        $fields->addFieldToTab('Root.Theme', HeaderField::create('ColorsHeader', 'Colors'));
+        $fields->addFieldToTab('Root.Theme.Colors', HeaderField::create('ColorsHeader', 'Colors'));
         $colors = $this->owner->config()->get('colors');
         foreach ($colors as $key => $color) {
             $colorField = ColorField::create($key, $color['title'])
                 ->setDescription($color['description'])
                 ->setRightTitle("Default: {$color['default']}");
-            $fields->addFieldToTab('Root.Theme', $colorField);
+            $fields->addFieldToTab('Root.Theme.Colors', $colorField);
         }
 
         // NavbarBg
         $navColors = $this->owner->dbObject('NavbarBg')->enumValues();
-        $fields->addFieldToTab('Root.Theme', $navbarBg = DropdownField::create('NavbarBg', 'Navigation Background Color', $navColors));
+        $fields->addFieldToTab('Root.Theme.Colors', $navbarBg = DropdownField::create('NavbarBg', 'Navigation Background Color', $navColors));
         $navbarBg->setDescription('Accessibility contrast rating: ' . $this->owner->getNavbarTextColor()->Rating);
 
         // Type
-        $fields->addFieldToTab('Root.Theme', HeaderField::create('TypeHeader', 'Typography'));
-        // FontFamily
-        $fonts = $this->owner->dbObject('FontFamily')->enumValues();
-        $fields->addFieldToTab('Root.Theme', DropdownField::create('FontFamily', 'Font family', $fonts));
+        $fields->addFieldToTab('Root.Theme.Type', HeaderField::create('TypeHeader', 'Typography'));
+
+        // Fonts
+        $fonts = $this->owner->config()->get('fonts');
+        $bodyFonts = [];
+        $headlineFonts = [];
+        $monospaceFonts = [];
+        foreach ($fonts as $key => $font) {
+            $title = $font['title'];
+            $uses = $font['uses'];
+            if (in_array('body', $uses)) {
+                $bodyFonts[$key] = $title;
+            }
+            if (in_array('headline', $uses)) {
+                $headlineFonts[$key] = $title;
+            }
+            if (in_array('monospace', $uses)) {
+                $monospaceFonts[$key] = $title;
+            }
+        }
+        $fields->addFieldToTab('Root.Theme.Type', DropdownField::create('BodyFont', 'Body Font', $bodyFonts)
+            ->setDescription('Will be used for most text on site.')
+        );
+        $fields->addFieldToTab('Root.Theme.Type', DropdownField::create('HeadlineFont', 'Headline Font', $headlineFonts)
+            ->setDescription('Will be used for large headlines.')
+        );
+        $fields->addFieldToTab('Root.Theme.Type', DropdownField::create('MonospaceFont', 'Monospace Font', $monospaceFonts)
+            ->setDescription('Will be used for code samples or when monospaced is required.')
+        );
 
         parent::updateCMSFields($fields);
+    }
+
+    public function getFont($key): ?array
+    {
+        $fonts = $this->owner->config()->get('fonts');
+        $font = $fonts[$key] ?? null;
+        return $font;
+    }
+
+    public function FontData($name): ?ArrayData
+    {
+        $field = "{$name}Font";
+        $font = $this->owner->getFont($this->owner->$field);
+        if (!$font) {
+            return null;
+        }
+        return ArrayData::create($font);
+    }
+
+    public function getFontHeadCode(): string
+    {
+        $code = [];
+        $bodyFont = $this->owner->getFont($this->owner->BodyFont);
+        $headlineFont = $this->owner->getFont($this->owner->HeadlineFont);
+        $monospaceFont = $this->owner->getFont($this->owner->MonospaceFont);
+        foreach ([$bodyFont, $headlineFont, $monospaceFont] as $font) {
+            $link = $font['link'] ?? null;
+            if ($link) {
+                $code[] = "<link href=\"$link\" rel=\"stylesheet\">";
+            }
+        }
+        if (count($code)) {
+            array_unshift($code, '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
+            array_unshift($code, '<link rel="preconnect" href="https://fonts.googleapis.com">');
+        }
+        return join("\n", $code);
     }
 }

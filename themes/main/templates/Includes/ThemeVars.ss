@@ -52,10 +52,11 @@
 --bs-white-rgb: $ColorRGBVals(White);
 --bs-black-rgb: $ColorRGBVals(Black);
 
-<%-- --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
---bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
---bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0)); --%>
---bs-body-font-family: var(--bs-font-$SiteConfig.FontFamily);
+--bs-font-sans-serif: <% if $FontData(Body).type == 'sans' %>$FontData(Body).family<% else %>system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"<% end_if %>;
+--bs-font-monospace: <% if $FontData(Monospace) %>$FontData(Monospace).family<% else %>SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace<% end_if %>;
+--bs-body-font-family: <% if $FontData(Body) %>$FontData(Body).family<% else %>system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"<% end_if %>;
+--bs-body-headline-family: <% if $FontData(Headline) %>$FontData(Headline).family<% else %>var(--bs-body-font-family)<% end_if %>;
+<%-- --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0)); --%>
 
 <%-- --bs-body-font-size: 1rem;
 --bs-body-font-weight: 400;
