@@ -13,7 +13,7 @@
                 <button type="button" class="btn-close $SiteConfig.NavbarTextColor.BtnCloseClass" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body bg-$SiteConfig.NavbarBg">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 $SiteConfig.NavbarTextColor.CssClass">
+                <ul class="navbar-nav $SiteConfig.NavbarTextColor.CssClass ms-auto">
                     <% loop $Menu(1) %>
                         <% if $IsHomePage %>
                             <%-- don't show home --%>
@@ -39,13 +39,11 @@
                             </li>
                         <% end_if %>
                     <% end_loop %>
-                </ul>
-                <ul class="navbar-nav $SiteConfig.NavbarTextColor.CssClass">
+
                     <% if $Locales.Count > 1 %>
-                        <% if $Locales.Count > 3 %>
                         <li class="nav-item dropdown me-3">
                             <button class="nav-link $SiteConfig.NavbarTextColor.CssClass dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <%t TractorCow\Fluent\Model\Locale.LOCALE "Locale" %>
+                                <i class="bi bi-translate"></i> <%t Page.LANGUAGE "Language" %>
                             </button>
                             <ul class="dropdown-menu">
                                 <% loop $Locales %>
@@ -60,18 +58,6 @@
                                 <% end_loop %>
                             </ul>
                         </li>
-                        <% else %>
-                            <% loop $Locales %>
-                            <li class="nav-item $LinkingMode me-3">
-                                <a class="$LinkingMode nav-link $SiteConfig.NavbarTextColor.CssClass" 
-                                    href="$Link.ATT"
-                                    <% if $LinkingMode != 'invalid' %>rel="alternate" hreflang="$HrefLang"<% end_if %>
-                                >
-                                    $Title
-                                </a>
-                            </li>
-                            <% end_loop %>
-                        <% end_if %>
                     <% end_if %>
                     <%-- <li class="nav-item dropdown">
                         <button class="nav-link $SiteConfig.NavbarTextColor.CssClass dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">

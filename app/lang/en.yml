@@ -1,4 +1,6 @@
 en:
+  Page:
+    LANGUAGE: Language
   QI\App\Page\BlockPage:
     TITLE_DESCRIPTION: Because this is a Block Page, the title will not display on the page. Make sure to set and display the title in your first block.
   QI\App\Element\ElementBanner:
