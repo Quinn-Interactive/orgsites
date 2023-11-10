@@ -4,8 +4,12 @@
             $Breadcrumbs
         </div>
     <% end_if %>
-    <% if $Title %>
-        <h1>$Title</h1>
+    <h1>$Title</h1>
+    <div>$Date.Nice</div>
+    <% if $AuthorMember %>
+    <div>By $AuthorMember.Name</div>
+    <% else_if $AuthorName %>
+    <div>By $AuthorName</div>
     <% end_if %>
     $Content
 </div>

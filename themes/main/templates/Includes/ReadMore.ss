@@ -1,0 +1,1 @@
+<a href="$Link" class="fs-7 d-inline-block ms-1 bi bi-arrow-right-circle" title="<%t SilverStripe\\Blog\\Model\\Blog.ReadMoreAbout "Read more about '{title}'..." title=$Title.ATT %>" aria-hidden></a>
