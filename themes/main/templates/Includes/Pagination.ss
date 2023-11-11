@@ -1,6 +1,6 @@
 <% if $PaginatedList.MoreThanOnePage %>
-    <nav aria-label="Pagination">
-        <ul class="pagination">
+    <nav aria-label="Pagination" class="mt-3">
+        <ul class="pagination justify-content-center">
         <% if $PaginatedList.NotFirstPage %>
             <li class="page-item">
                 <a class="page-link" href="$PaginatedList.PrevLink" aria-label="Previous">

@@ -1,5 +1,5 @@
 <% require css('silverstripe/blog: client/dist/styles/main.css') %>
-<div class="blog-entry content-container">
+<div class="blog-entry content-container py-3">
 	<% include Breadcrumbs %>
 	<article>
 		<h1>$Title</h1>

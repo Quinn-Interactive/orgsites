@@ -1,5 +1,5 @@
 <% require css('silverstripe/blog: client/dist/styles/main.css') %>
-<div class="blog-entry content-container">
+<div class="blog-entry content-container py-3">
 
 	<article>
 		<h1>
@@ -23,12 +23,24 @@
 
 		<div class="content">$Content</div>
 
+		<% include BlogFilters %>
+		
 		<% if $PaginatedList.Exists %>
-			<div class="vstack gap-3">
-			<% loop $PaginatedList %>
-				<% include SilverStripe\\Blog\\PostSummary %>
-			<% end_loop %>
-			</div>
+			<% if $ArticleLayout == 'Grid' %>
+				<div class="row row-gap-4">
+					<% loop $PaginatedList %>
+						<div class="col-sm-6 col-lg-4 col-xl-3">
+							<% include SilverStripe\\Blog\\PostSummaryCard %>
+						</div>
+					<% end_loop %>
+				</div>
+			<% else %>
+				<div class="vstack gap-3">
+					<% loop $PaginatedList %>
+						<% include SilverStripe\\Blog\\PostSummary %>
+					<% end_loop %>
+				</div>
+			<% end_if %>
 
 		<% else %>
 			<p><%t SilverStripe\\Blog\\Model\\Blog.NoPosts 'There are no posts' %></p>
