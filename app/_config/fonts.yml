@@ -1,101 +1,230 @@
 SilverStripe\SiteConfig\SiteConfig:
   fonts:
-    native-sans-serif: 
+    native-sans-serif:
       title: Sans Serif (Native)
-      type: sans-serif
-      family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
-      uses: ["body", "headline"]
-    native-serif: 
+      category: sans-serif
+      family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto
+        Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe
+        UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+      uses:
+        - body
+        - headline
+      source: native
+    native-serif:
       title: Serif (Native)
-      type: serif
-      family: '"Iowan Old Style", "Apple Garamond", Baskerville, "Times New Roman", "Droid Serif", Times, "Source Serif Pro", serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
-      uses: ["body", "headline"]
-    native-monospace: 
+      category: serif
+      family: '"Iowan Old Style", "Apple Garamond", Baskerville, "Times New Roman",
+        "Droid Serif", Times, "Source Serif Pro", serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol"'
+      uses:
+        - body
+        - headline
+      source: native
+    native-monospace:
       title: Monospace (Native)
-      type: monospace
-      family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
-      uses: ["body", "headline", "monospace"]
-    agbalumo:
-      title: Agbalumo
-      type: cursive
-      family: Agbalumo, cursive
-      link: https://fonts.googleapis.com/css2?family=Agbalumo&display=swap
-      uses: ["headline"]
+      category: monospace
+      family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier
+        New", monospace
+      uses:
+        - body
+        - headline
+        - monospace
+      source: native
     alegreya:
+      family: '"Alegreya", serif'
       title: Alegreya
-      type: serif
-      family: Alegreya, serif
-      link: https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap
-      uses: ["body", "headline"]
+      weights:
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+        - 900
+      styles:
+        - italic
+        - normal
+      category: serif
+      uses:
+        - body
+        - headline
+      source: google
     alegreya-sc:
+      family: '"Alegreya SC", serif'
       title: Alegreya SC
-      type: serif
-      family: '"Alegreya SC", sans-serif'
-      link: https://fonts.googleapis.com/css2?family=Alegreya+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&display=swap
-      uses: ["headline"]
+      weights:
+        - 400
+        - 500
+        - 700
+        - 800
+        - 900
+      styles:
+        - italic
+        - normal
+      category: serif
+      uses:
+        - body
+        - headline
+      source: google
     alegreya-sans:
-      title: Alegreya Sans
-      type: sans-serif
       family: '"Alegreya Sans", sans-serif'
-      link: https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&display=swap
-      uses: ["body", "headline"]
+      title: Alegreya Sans
+      weights:
+        - 100
+        - 300
+        - 400
+        - 500
+        - 700
+        - 800
+        - 900
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
     alegreya-sans-sc:
-      title: Alegreya Sans SC
-      type: sans-serif
       family: '"Alegreya Sans SC", sans-serif'
-      link: https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&display=swap
-      uses: ["headline"]
-    alfa-slab-one:
-      title: Alpha Slab One
-      type: serif
-      family: '"Alpha Slab One", serif'
-      link: https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap
-      uses: ["headline"]
+      title: Alegreya Sans SC
+      weights:
+        - 100
+        - 300
+        - 400
+        - 500
+        - 700
+        - 800
+        - 900
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
     eb-garamond:
-      title: EB Garamond
-      type: serif
       family: '"EB Garamond", serif'
-      link: https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap
-      uses: ["body", "headline"]
+      title: EB Garamond
+      weights:
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+      styles:
+        - italic
+        - normal
+      category: serif
+      uses:
+        - body
+        - headline
+      source: google
     lora:
+      family: '"Lora", serif'
       title: Lora
-      type: serif
-      family: Lora, serif
-      link: https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap
-      uses: ["body", "headline"]
+      weights:
+        - 400
+        - 500
+        - 600
+        - 700
+      styles:
+        - italic
+        - normal
+      category: serif
+      uses:
+        - body
+        - headline
+      source: google
     merriweather:
+      family: '"Merriweather", serif'
       title: Merriweather
-      type: serif
-      family: Merriweather, serif
-      link: https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap  
-      uses: ["body", "headline"]
+      weights:
+        - 300
+        - 400
+        - 700
+        - 900
+      styles:
+        - italic
+        - normal
+      category: serif
+      uses:
+        - body
+        - headline
+      source: google
     open-sans:
-      title: Open Sans
-      type: sans-serif
       family: '"Open Sans", sans-serif'
-      link: https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap
-      uses: ["body", "headline"]
+      title: Open Sans
+      weights:
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
     poppins:
+      family: '"Poppins", sans-serif'
       title: Poppins
-      type: serif
-      family: Poppins, serif
-      link: https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap
-      uses: ["body", "headline"]
+      weights:
+        - 100
+        - 200
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+        - 900
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
     roboto:
+      family: '"Roboto", sans-serif'
       title: Roboto
-      type: sans-serif
-      family: Roboto, sans-serif
-      link: https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap
-      uses: ["body", "headline"]
-    roboto-mono:
-      title: Roboto
-      type: monospace
-      family: '"Roboto Monospace", monospace'
-      link: https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap
-      uses: ["body", "headline", "monospace"]
+      weights:
+        - 100
+        - 300
+        - 400
+        - 500
+        - 700
+        - 900
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
     source-code-pro:
-      title: Source Code Pro
-      type: monospace
       family: '"Source Code Pro", monospace'
-      link: https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap
-      uses: ["body", "headline", "monospace"]
+      title: Source Code Pro
+      weights:
+        - 200
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+        - 900
+      styles:
+        - italic
+        - normal
+      category: monospace
+      uses:
+        - monospace
+      source: google

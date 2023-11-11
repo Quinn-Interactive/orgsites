@@ -208,8 +208,38 @@ class SiteConfigExtension extends FluentExtension
         $bodyFont = $this->owner->getFont($this->owner->BodyFont);
         $headlineFont = $this->owner->getFont($this->owner->HeadlineFont);
         $monospaceFont = $this->owner->getFont($this->owner->MonospaceFont);
+        $families = [];
+        $google = false;
         foreach ([$bodyFont, $headlineFont, $monospaceFont] as $font) {
-            $link = $font['link'] ?? null;
+            $source = $font['source'] ?? null;
+            if ($source != 'google') {
+                continue;
+            }
+            $google = true;
+            $string = urlencode($font['title']) . ':';
+            $styles = $font['styles'];
+            $weights = $font['weights'];
+            $hasItalic = in_array('italic', $styles);
+            if ($hasItalic) {
+                $string .= 'ital,';
+            }
+            $weightParts = [];
+            foreach ($weights as $weight) {
+                $weightParts[] = "0,$weight";
+            }
+            if ($hasItalic) {
+                foreach ($weights as $weight) {
+                    $weightParts[] = "1,$weight";
+                }
+            }
+            $string .= 'wght@' . join(';', $weightParts);
+
+            $families[] = "family=$string";
+        }
+        if ($google) {
+            $families = join('&',$families);
+            // https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,500&display=swap
+            $link = "https://fonts.googleapis.com/css2?$families&display=swap";
             if ($link) {
                 if ($type == 'import') {
                     $code[] = "@import url('$link');";
@@ -217,11 +247,12 @@ class SiteConfigExtension extends FluentExtension
                     $code[] = "<link href=\"$link\" rel=\"stylesheet\">";
                 }
             }
+            if ($type != 'import') {
+                array_unshift($code, '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
+                array_unshift($code, '<link rel="preconnect" href="https://fonts.googleapis.com">');
+            }    
         }
-        if (count($code) && $type != 'import') {
-            array_unshift($code, '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
-            array_unshift($code, '<link rel="preconnect" href="https://fonts.googleapis.com">');
-        }
+        // Debug::dump($code); die;
         return join("\n", $code);
     }
 }
