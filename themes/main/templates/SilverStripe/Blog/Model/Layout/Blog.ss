@@ -24,7 +24,7 @@
 		<div class="content">$Content</div>
 
 		<% include BlogFilters %>
-		
+
 		<% if $PaginatedList.Exists %>
 			<% if $ArticleLayout == 'Grid' %>
 				<div class="row row-gap-4">
@@ -35,9 +35,9 @@
 					<% end_loop %>
 				</div>
 			<% else %>
-				<div class="vstack gap-3">
+				<div class="vstack pt-3">
 					<% loop $PaginatedList %>
-						<% include SilverStripe\\Blog\\PostSummary %>
+						<div class="border-top py-3"><% include SilverStripe\\Blog\\PostSummary %></div>
 					<% end_loop %>
 				</div>
 			<% end_if %>

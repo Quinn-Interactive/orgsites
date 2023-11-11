@@ -28,18 +28,18 @@
 		<% end_if %>
         <% if $Tags.exists || $Categories.exists %>
             <% loop $Categories %>
-                <span class="badge rounded-pill text-bg-secondary" href="$Link" title="$Title">$Title</span>
+                <span class="badge rounded-pill text-bg-secondary" title="$Title">$Title</span>
             <% end_loop %>
             <% loop $Tags %>
-                <span class="badge rounded-pill text-bg-secondary opacity-75" href="$Link" title="$Title">$Title</span>
+                <span class="badge rounded-pill text-bg-secondary opacity-75" title="$Title">$Title</span>
             <% end_loop %>
         <% end_if %>
 
         <% if $Comments.exists %>
-            <a href="{$Link}#comments-holder">
+            <span href="{$Link}#comments-holder">
                 <%t SilverStripe\\Blog\\Model\\Blog.Comments "Comments" %>
                 $Comments.count
-            </a>;
+            </span>
         <% end_if %>
         
         </div>
