@@ -48,23 +48,6 @@ SilverStripe\SiteConfig\SiteConfig:
         - body
         - headline
       source: google
-    alegreya-sc:
-      family: '"Alegreya SC", serif'
-      title: Alegreya SC
-      weights:
-        - 400
-        - 500
-        - 700
-        - 800
-        - 900
-      styles:
-        - italic
-        - normal
-      category: serif
-      uses:
-        - body
-        - headline
-      source: google
     alegreya-sans:
       family: '"Alegreya Sans", sans-serif'
       title: Alegreya Sans
@@ -84,6 +67,23 @@ SilverStripe\SiteConfig\SiteConfig:
         - body
         - headline
       source: google
+    alegreya-sc:
+      family: '"Alegreya SC", serif'
+      title: Alegreya SC
+      weights:
+        - 400
+        - 500
+        - 700
+        - 800
+        - 900
+      styles:
+        - italic
+        - normal
+      category: serif
+      uses:
+        - body
+        - headline
+      source: google
     alegreya-sans-sc:
       family: '"Alegreya Sans SC", sans-serif'
       title: Alegreya Sans SC
@@ -92,6 +92,95 @@ SilverStripe\SiteConfig\SiteConfig:
         - 300
         - 400
         - 500
+        - 700
+        - 800
+        - 900
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
+    archivo-narrow:
+      family: '"Archivo Narrow", sans-serif'
+      title: Archivo Narrow
+      weights:
+        - 400
+        - 500
+        - 600
+        - 700
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
+    cardo:
+      family: '"Cardo", serif'
+      title: Cardo
+      weights:
+        - 400
+        - 700
+      styles:
+        - italic
+        - normal
+      category: serif
+      uses:
+        - body
+        - headline
+      source: google
+    chivo:
+      family: '"Chivo", sans-serif'
+      title: Chivo
+      weights:
+        - 100
+        - 200
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+        - 900
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
+    cormorant:
+      family: '"Cormorant", serif'
+      title: Cormorant
+      weights:
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+      styles:
+        - italic
+        - normal
+      category: serif
+      uses:
+        - body
+        - headline
+      source: google
+    dm-sans:
+      family: '"DM Sans", sans-serif'
+      title: DM Sans
+      weights:
+        - 100
+        - 200
+        - 300
+        - 400
+        - 500
+        - 600
         - 700
         - 800
         - 900
@@ -120,6 +209,189 @@ SilverStripe\SiteConfig\SiteConfig:
         - body
         - headline
       source: google
+    eczar:
+      family: '"Eczar", serif'
+      title: Eczar
+      weights:
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+      styles:
+        - normal
+      category: serif
+      uses:
+        - body
+        - headline
+      source: google
+    fira-sans:
+      family: '"Fira Sans", sans-serif'
+      title: Fira Sans
+      weights:
+        - 100
+        - 200
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+        - 900
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
+    ibm-plex-sans:
+      family: '"IBM Plex Sans", sans-serif'
+      title: IBM Plex Sans
+      weights:
+        - 100
+        - 200
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
+    inconsolata:
+      family: '"Inconsolata", monospace'
+      title: Inconsolata
+      weights:
+        - 200
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+        - 900
+      styles:
+        - normal
+      category: monospace
+      uses:
+        - monospace
+      source: google
+    inknut-antiqua:
+      family: '"Inknut Antiqua", serif'
+      title: Inknut Antiqua
+      weights:
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+        - 900
+      styles:
+        - normal
+      category: serif
+      uses:
+        - body
+        - headline
+      source: google
+    inter:
+      family: '"Inter", sans-serif'
+      title: Inter
+      weights:
+        - 100
+        - 200
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+        - 900
+      styles:
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
+    karla:
+      family: '"Karla", sans-serif'
+      title: Karla
+      weights:
+        - 200
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
+    lato:
+      family: '"Lato", sans-serif'
+      title: Lato
+      weights:
+        - 100
+        - 300
+        - 400
+        - 700
+        - 900
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
+    libre-baskerville:
+      family: '"Libre Baskerville", serif'
+      title: Libre Baskerville
+      weights:
+        - 400
+        - 700
+      styles:
+        - italic
+        - normal
+      category: serif
+      uses:
+        - body
+        - headline
+      source: google
+    libre-franklin:
+      family: '"Libre Franklin", sans-serif'
+      title: Libre Franklin
+      weights:
+        - 100
+        - 200
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+        - 900
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
     lora:
       family: '"Lora", serif'
       title: Lora
@@ -136,6 +408,24 @@ SilverStripe\SiteConfig\SiteConfig:
         - body
         - headline
       source: google
+    manrope:
+      family: '"Manrope", sans-serif'
+      title: Manrope
+      weights:
+        - 200
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+      styles:
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
     merriweather:
       family: '"Merriweather", serif'
       title: Merriweather
@@ -144,6 +434,44 @@ SilverStripe\SiteConfig\SiteConfig:
         - 400
         - 700
         - 900
+      styles:
+        - italic
+        - normal
+      category: serif
+      uses:
+        - body
+        - headline
+      source: google
+    montserrat:
+      family: '"Montserrat", sans-serif'
+      title: Montserrat
+      weights:
+        - 100
+        - 200
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+        - 900
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
+    neuton:
+      family: '"Neuton", serif'
+      title: Neuton
+      weights:
+        - 200
+        - 300
+        - 400
+        - 700
+        - 800
       styles:
         - italic
         - normal
@@ -170,6 +498,24 @@ SilverStripe\SiteConfig\SiteConfig:
         - body
         - headline
       source: google
+    playfair-display:
+      family: '"Playfair Display", serif'
+      title: Playfair Display
+      weights:
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+        - 900
+      styles:
+        - italic
+        - normal
+      category: serif
+      uses:
+        - body
+        - headline
+      source: google
     poppins:
       family: '"Poppins", sans-serif'
       title: Poppins
@@ -191,6 +537,92 @@ SilverStripe\SiteConfig\SiteConfig:
         - body
         - headline
       source: google
+    proza-libre:
+      family: '"Proza Libre", sans-serif'
+      title: Proza Libre
+      weights:
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
+    pt-sans:
+      family: '"PT Sans", sans-serif'
+      title: PT Sans
+      weights:
+        - 400
+        - 700
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
+    pt-serif:
+      family: '"PT Serif", serif'
+      title: PT Serif
+      weights:
+        - 400
+        - 700
+      styles:
+        - italic
+        - normal
+      category: serif
+      uses:
+        - body
+        - headline
+      source: google
+    raleway:
+      family: '"Raleway", sans-serif'
+      title: Raleway
+      weights:
+        - 100
+        - 200
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+        - 900
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
+    roboto-slab:
+      family: '"Roboto Slab", serif'
+      title: Roboto Slab
+      weights:
+        - 100
+        - 200
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+        - 900
+      styles:
+        - normal
+      category: serif
+      uses:
+        - body
+        - headline
+      source: google
     roboto:
       family: '"Roboto", sans-serif'
       title: Roboto
@@ -200,6 +632,25 @@ SilverStripe\SiteConfig\SiteConfig:
         - 400
         - 500
         - 700
+        - 900
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
+    rubik:
+      family: '"Rubik", sans-serif'
+      title: Rubik
+      weights:
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
         - 900
       styles:
         - italic
@@ -228,3 +679,89 @@ SilverStripe\SiteConfig\SiteConfig:
       uses:
         - monospace
       source: google
+    space-grotesk:
+      family: '"Space Grotesk", sans-serif'
+      title: Space Grotesk
+      weights:
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+      styles:
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
+    space-mono:
+      family: '"Space Mono", monospace'
+      title: Space Mono
+      weights:
+        - 400
+        - 700
+      styles:
+        - italic
+        - normal
+      category: monospace
+      uses:
+        - monospace
+      source: google
+    spectral:
+      family: '"Spectral", serif'
+      title: Spectral
+      weights:
+        - 200
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+      styles:
+        - italic
+        - normal
+      category: serif
+      uses:
+        - body
+        - headline
+      source: google
+    syne:
+      family: '"Syne", sans-serif'
+      title: Syne
+      weights:
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+      styles:
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
+    work-sans:
+      family: '"Work Sans", sans-serif'
+      title: Work Sans
+      weights:
+        - 100
+        - 200
+        - 300
+        - 400
+        - 500
+        - 600
+        - 700
+        - 800
+        - 900
+      styles:
+        - italic
+        - normal
+      category: sans-serif
+      uses:
+        - body
+        - headline
+      source: google
+

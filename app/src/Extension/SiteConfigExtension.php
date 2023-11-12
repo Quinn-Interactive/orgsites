@@ -13,6 +13,7 @@ use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\LiteralField;
+use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
 use TractorCow\Colorpicker\Color;
 use TractorCow\Fluent\Extension\FluentExtension;
@@ -178,7 +179,7 @@ class SiteConfigExtension extends FluentExtension
         $fields->addFieldToTab('Root.Theme.Type', DropdownField::create('MonospaceFont', 'Monospace Font', $monospaceFonts)
             ->setDescription('Will be used for code samples or when monospaced is required.')
         );
-        // Type Sample
+        // Type Samples
         $typeSamples = $this->owner->renderWith('TypeSamples');
         $fields->addFieldToTab('Root.Theme.Type', LiteralFieldWrapper::create('TypeSamples', 'Type Samples', $typeSamples));
 
@@ -192,6 +193,23 @@ class SiteConfigExtension extends FluentExtension
         return $font;
     }
 
+    public function AvailableFonts(): ArrayList
+    {
+        $fonts = $this->owner->config()->get('fonts');
+        $list = ArrayList::create();
+        foreach ($fonts as $font) {
+            $list->push(ArrayData::create([
+                'Title' => $font['title'],
+                'Family' => $font['family'],
+                'Styles' => join(', ', $font['styles'] ?? []),
+                'Weights' => join(', ', $font['weights'] ?? []),
+                'Category' => $font['category'],
+                'Uses' => join(', ', $font['uses'] ?? []),
+            ]));
+        }
+        return $list;
+    }
+
     public function FontData($name): ?ArrayData
     {
         $field = "{$name}Font";
@@ -202,15 +220,13 @@ class SiteConfigExtension extends FluentExtension
         return ArrayData::create($font);
     }
 
-    public function FontHeadCode($type = 'link'): string
+    public function makeGoogleFontsLink($keys): ?string
     {
-        $code = [];
-        $bodyFont = $this->owner->getFont($this->owner->BodyFont);
-        $headlineFont = $this->owner->getFont($this->owner->HeadlineFont);
-        $monospaceFont = $this->owner->getFont($this->owner->MonospaceFont);
-        $families = [];
+        $link = null;
         $google = false;
-        foreach ([$bodyFont, $headlineFont, $monospaceFont] as $font) {
+        $families = [];
+        foreach ($keys as $key) {
+            $font = $this->owner->getFont($key);
             $source = $font['source'] ?? null;
             if ($source != 'google') {
                 continue;
@@ -225,7 +241,11 @@ class SiteConfigExtension extends FluentExtension
             }
             $weightParts = [];
             foreach ($weights as $weight) {
-                $weightParts[] = "0,$weight";
+                if ($hasItalic) {
+                    $weightParts[] = "0,$weight";
+                } else {
+                    $weightParts[] = $weight;
+                }
             }
             if ($hasItalic) {
                 foreach ($weights as $weight) {
@@ -237,20 +257,43 @@ class SiteConfigExtension extends FluentExtension
             $families[] = "family=$string";
         }
         if ($google) {
-            $families = join('&',$families);
+            $families = join('&', $families);
             // https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,500&display=swap
-            $link = "https://fonts.googleapis.com/css2?$families&display=swap";
-            if ($link) {
-                if ($type == 'import') {
-                    $code[] = "@import url('$link');";
-                } else {
-                    $code[] = "<link href=\"$link\" rel=\"stylesheet\">";
-                }
+            $link = "https://fonts.googleapis.com/css2?{$families}&display=swap";
+        }
+        return $link;
+    }
+
+    public function FontHeadCode($type = 'link'): string
+    {
+        $code = [];
+        $link = $this->owner->makeGoogleFontsLink([$this->owner->BodyFont, $this->owner->HeadlineFont, $this->owner->MonospaceFont]);
+        if ($link) {
+            if ($type == 'import') {
+                $code[] = "@import url('$link');";
+            } else {
+                $code[] = '<link rel="preconnect" href="https://fonts.googleapis.com">';
+                $code[] = '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
+                $code[] = "<link href=\"$link\" rel=\"stylesheet\">";
             }
-            if ($type != 'import') {
-                array_unshift($code, '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>');
-                array_unshift($code, '<link rel="preconnect" href="https://fonts.googleapis.com">');
-            }    
+        }
+        // Debug::dump($code); die;
+        return join("\n", $code);
+    }
+    public function AllFontsHeadCode($type = 'link'): string
+    {
+        $code = [];
+        $fonts = $this->owner->config()->get('fonts');
+        $keys = array_keys($fonts);
+        $link = $this->owner->makeGoogleFontsLink($keys);
+        if ($link) {
+            if ($type == 'import') {
+                $code[] = "@import url('$link');";
+            } else {
+                $code[] = '<link rel="preconnect" href="https://fonts.googleapis.com">';
+                $code[] = '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
+                $code[] = "<link href=\"$link\" rel=\"stylesheet\">";
+            }
         }
         // Debug::dump($code); die;
         return join("\n", $code);

@@ -1,6 +1,6 @@
 <div>
 <style>
-    $SiteConfig.FontHeadCode(import).RAW
+    $SiteConfig.AllFontsHeadCode(import).RAW
     .type-sample-headline {
         font-family: $SiteConfig.FontData('Headline').family.RAW;
         font-size: 24px;
@@ -18,4 +18,18 @@
 <h1 class="type-sample-headline">Headline Sample: $SiteConfig.FontData('Headline').title</h1>
 <p class="type-sample-body">Body Sample: $SiteConfig.FontData('Body').title: Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nulla vitae elit libero, a pharetra augue.</p>
 <pre class="type-sample-monospace">Monospace Sample: $SiteConfig.FontData('Monospace').title</pre>
+<h2>All Available Fonts</h2>
+<ul class="ms-0 ml-0 pl-3 ps-3">
+<% loop $AvailableFonts %>
+    <li>
+        <div>$Title: <span style="font-family: $Family; font-size: 18px;">The quick brown fox jumps over the lazy dog.</span></div>
+        <div>
+            $Category,
+            For: $Uses,
+            <% if $Styles %>Styles: $Styles,<% end_if %>
+            <% if $Weights %>Weights: $Weights,<% end_if %>
+        </div>
+    </li>
+<% end_loop %>
+</ul>
 </div>
