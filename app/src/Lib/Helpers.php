@@ -4,6 +4,7 @@ namespace QI\App\Lib;
 
 use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\SelectField;
+use SilverStripe\View\Parsers\URLSegmentFilter;
 
 class Helpers
 {
@@ -54,6 +55,12 @@ class Helpers
             }
         }
         return 'error';
+    }
+
+    public static function generate_slug($string)
+    {
+        $filter = URLSegmentFilter::create();
+        return $filter->filter($string);
     }
 
 }
