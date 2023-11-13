@@ -10,3 +10,68 @@ $font-sizes: (
 );
 // scss-docs-end font-sizes
 $enable-negative-margins: true;
+
+// responsive sizes:
+$utilities: (
+  "width": (
+    property: width,
+    responsive: true,
+    class: w,
+    values: (
+      25: 25%,
+      50: 50%,
+      75: 75%,
+      100: 100%,
+      auto: auto
+    )
+  ),
+  "max-width": (
+    property: max-width,
+    responsive: true,
+    class: mw,
+    values: (100: 100%)
+  ),
+  "viewport-width": (
+    property: width,
+    responsive: true,
+    class: vw,
+    values: (100: 100vw)
+  ),
+  "min-viewport-width": (
+    property: min-width,
+    responsive: true,
+    class: min-vw,
+    values: (100: 100vw)
+  ),
+  "height": (
+    property: height,
+    class: h,
+    responsive: true,
+    values: (
+      25: 25%,
+      50: 50%,
+      75: 75%,
+      100: 100%,
+      auto: auto
+    )
+  ),
+  "max-height": (
+    property: max-height,
+    responsive: true,
+    class: mh,
+    values: (100: 100%)
+  ),
+  "viewport-height": (
+    property: height,
+    responsive: true,
+    class: vh,
+    values: (100: 100vh)
+  ),
+  "min-viewport-height": (
+    property: min-height,
+    responsive: true,
+    class: min-vh,
+    values: (100: 100vh)
+  ),
+
+);

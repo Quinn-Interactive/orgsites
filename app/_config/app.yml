@@ -16,6 +16,9 @@ SilverStripe\Control\Email\Email:
 SilverStripe\SiteConfig\SiteConfig:
   extensions:
     - QI\App\Extension\SiteConfigExtension
+SilverStripe\Assets\Image:
+  extensions:
+    - QI\App\Extension\QIImageExtension
 JonoM\BetterNavigator:
   developers:
     - 'phil@quinn.com'

@@ -96,7 +96,7 @@ class Event extends DataObject
         $end->setTitle('End (optional)');
         $start->setTitle('Start (required)');
         GroupFields::create(['Start', 'End', 'ShowTimes'], 'Dates', $fields, 'Content');
-        
+
         // Display Date
         $displayDate = $fields->dataFieldByName('DisplayDate')->setDescription('Optional. Will show up instead of set dates, if not empty.');
         $fields->insertAfter('Dates', $displayDate);
@@ -141,13 +141,16 @@ class Event extends DataObject
      *
      * @return string
      */
-    public function Link($action = null)
+    public function Link($action = 'view')
     {
         $base = $this->Calendar()->Link();
-        $action = $action != 'view' ? $action : null;
-        // add ID and slug
         $slug = Helpers::generate_slug($this->Title);
         $url = Controller::join_links($base, $action, $this->ID, $slug);
         return $url;
+    }
+
+    public function Parent()
+    {
+        return $this->Calendar();
     }
 }

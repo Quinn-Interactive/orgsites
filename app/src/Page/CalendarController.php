@@ -1,7 +1,8 @@
 <?php
 
+use QI\App\Model\Event;
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Dev\Debug;
-use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\PaginatedList;
 
@@ -16,26 +17,9 @@ class CalendarController extends PageController
 {
     public bool $ShowPast = false;
 
-    protected function init()
-    {
-        parent::init();
-        $this->ShowPast = $this->getRequest()->getVar('past') ? true : false;
-    }
-
-    public function UpcomingEvents(): DataList
-    {
-        return $this->Events()->filterAny([
-            'Start:GreaterThanOrEqual' => date('Y-m-d'),
-            'End:GreaterThanOrEqual' => date('Y-m-d'),
-        ])->Sort('Start', 'ASC');
-    }
-
-    public function PastEvents(): DataList
-    {
-        return $this->Events()->filterAny([
-            'Start:LessThan' => date('Y-m-d'),
-        ])->Sort('Start', 'DESC');
-    }
+    private static $allowed_actions = [
+        'view',
+    ];
 
     /**
      * Returns a list of paginated blog posts based on the BlogPost dataList.
@@ -61,5 +45,38 @@ class CalendarController extends PageController
         $posts->setPageStart($start);
 
         return $posts;
+    }
+
+    public function PastEvents(): DataList
+    {
+        return $this->Events()->filterAny([
+            'Start:LessThan' => date('Y-m-d'),
+        ])->Sort('Start', 'DESC');
+    }
+
+    public function UpcomingEvents(): DataList
+    {
+        return $this->Events()->filterAny([
+            'Start:GreaterThanOrEqual' => date('Y-m-d'),
+            'End:GreaterThanOrEqual'   => date('Y-m-d'),
+        ])->Sort('Start', 'ASC');
+    }
+
+    public function view(HTTPRequest $r)
+    {
+        $id = $r->param('ID');
+        /** @var Event */
+        $event = $this->Events()->byID($id);
+        if (!$event || !$this->canView()) {
+            $this->redirect($this->Link());
+        }
+        $templates = array_merge($event->getViewerTemplates(), $this->getViewerTemplates());
+        return $this->customise($event)->renderWith($templates);
+    }
+
+    protected function init()
+    {
+        parent::init();
+        $this->ShowPast = $this->getRequest()->getVar('past') ? true : false;
     }
 }
