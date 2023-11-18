@@ -22,21 +22,19 @@ class QIImageExtension extends DataExtension
     # added to make sure thumbnail shows up in UploadField
     private static $summary_fields = [
         'StripThumbnail' => 'Thumbnail',
-        'Name' => 'Name',
-        'Title' => 'Title',
+        'Name'           => 'Name',
+        'Title'          => 'Title',
     ];
 
-    /**
-     * Resizes and crops an image to the top of the image.
-     *
-     * @param $width
-     * @param $height
-     *
-     * @return Image
-     */
-    public function TopCroppedImage($width, $height)
+    public function generateQualityVariantImage(Image_Backend $backend, $quality)
     {
-        return $this->owner->getFormattedImage('TopCroppedImage', $width, $height);
+        if (!$this->owner->Exists()) {
+            return null;
+        }
+        $new = clone $backend;
+        $new->setQuality($quality);
+
+        return $new;
     }
 
     public function generateTopCroppedImage($gd, $width, $height)
@@ -49,21 +47,6 @@ class QIImageExtension extends DataExtension
         $gd = $gd->crop(0, 0, $width, $height);
 
         return $gd;
-    }
-
-    public function Ratio()
-    {
-        if (!$this->owner->Exists()) {
-            return null;
-        }
-        return $this->owner->getWidth() / $this->owner->getHeight();
-    }
-    public function RatioPercent()
-    {
-        if (!$this->owner->Exists()) {
-            return null;
-        }
-        return $this->owner->getWidth() / $this->owner->getHeight() * 100;
     }
     public function InvertedRatio()
     {
@@ -79,12 +62,13 @@ class QIImageExtension extends DataExtension
         }
         return $this->owner->getHeight() / $this->owner->getWidth() * 100;
     }
-    public function RatioLessThan($ratio)
+
+    public function Ratio()
     {
         if (!$this->owner->Exists()) {
             return null;
         }
-        return $this->Ratio() < $ratio;
+        return $this->owner->getWidth() / $this->owner->getHeight();
     }
     public function RatioGreaterThan($ratio)
     {
@@ -93,33 +77,19 @@ class QIImageExtension extends DataExtension
         }
         return $this->Ratio() > $ratio;
     }
-    public function WiderThan($width)
+    public function RatioLessThan($ratio)
     {
         if (!$this->owner->Exists()) {
             return null;
         }
-        return $this->owner->getWidth() > $width;
+        return $this->Ratio() < $ratio;
     }
-    public function WiderThanOrEqual($width)
+    public function RatioPercent()
     {
         if (!$this->owner->Exists()) {
             return null;
         }
-        return $this->owner->getWidth() >= $width;
-    }
-    public function TallerThan($height)
-    {
-        if (!$this->owner->Exists()) {
-            return null;
-        }
-        return $this->owner->getHeight() > $height;
-    }
-    public function TallerThanOrEqual($height)
-    {
-        if (!$this->owner->Exists()) {
-            return null;
-        }
-        return $this->owner->getHeight() >= $height;
+        return $this->owner->getWidth() / $this->owner->getHeight() * 100;
     }
     public function Rotate($degrees)
     {
@@ -135,15 +105,45 @@ class QIImageExtension extends DataExtension
         }
         return $this->owner->getFormattedImage('QualityVariantImage', $quality);
     }
-
-    public function generateQualityVariantImage(Image_Backend $backend, $quality)
+    public function TallerThan($height)
     {
         if (!$this->owner->Exists()) {
             return null;
         }
-        $new = clone $backend;
-        $new->setQuality($quality);
+        return $this->owner->getHeight() > $height;
+    }
+    public function TallerThanOrEqual($height)
+    {
+        if (!$this->owner->Exists()) {
+            return null;
+        }
+        return $this->owner->getHeight() >= $height;
+    }
 
-        return $new;
+    /**
+     * Resizes and crops an image to the top of the image.
+     *
+     * @param $width
+     * @param $height
+     *
+     * @return Image
+     */
+    public function TopCroppedImage($width, $height)
+    {
+        return $this->owner->getFormattedImage('TopCroppedImage', $width, $height);
+    }
+    public function WiderThan($width)
+    {
+        if (!$this->owner->Exists()) {
+            return null;
+        }
+        return $this->owner->getWidth() > $width;
+    }
+    public function WiderThanOrEqual($width)
+    {
+        if (!$this->owner->Exists()) {
+            return null;
+        }
+        return $this->owner->getWidth() >= $width;
     }
 }

@@ -2,8 +2,6 @@
 
 namespace QI\App\Lib;
 
-use SilverStripe\Dev\Debug;
-use SilverStripe\Forms\SelectField;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\View\ArrayData;
@@ -13,7 +11,6 @@ use TractorCow\Colorpicker\Color;
 
 class ColorHelpers
 {
-
     public static function color($name): ?Color
     {
         $fieldName = $name . 'Color';
@@ -22,7 +19,7 @@ class ColorHelpers
             return DBField::create_field('Color', ltrim($siteConfig->$fieldName, '#'));
         } else {
             switch ($name) {
-                // *-text-emphasis
+                    // *-text-emphasis
                 case 'PrimaryTextEmphasis':
                     return self::color('Primary')->Blend(0.4, '#000000');
                 case 'SecondaryTextEmphasis':
@@ -40,7 +37,7 @@ class ColorHelpers
                 case 'DarkTextEmphasis':
                     return self::color('Dark')->Blend(0.4, '#000000');
 
-                // *-bg-subtle
+                    // *-bg-subtle
                 case 'PrimaryBgSubtle':
                     return self::color('Primary')->Blend(0.2, '#ffffff');
                 case 'SecondaryBgSubtle':
@@ -58,7 +55,7 @@ class ColorHelpers
                 case 'DarkBgSubtle':
                     return DBField::create_field('Color', 'ed4da');
 
-                // *-border-subtle
+                    // *-border-subtle
                 case 'PrimaryBorderSubtle':
                     return self::color('Primary')->Blend(0.4, '#ffffff');
                 case 'SecondaryBorderSubtle':
@@ -76,7 +73,7 @@ class ColorHelpers
                 case 'DarkBorderSubtle':
                     return DBField::create_field('Color', 'db5bd');
 
-                // other
+                    // other
                 case 'SecondaryColor':
                     return self::color('Dark')->Blend(0.25, '#ffffff');
                 case 'SecondaryBg':
@@ -158,9 +155,7 @@ class ColorHelpers
             'Rating'        => $ratings[$best],
             'ContrastRatio' => $ratios[$best],
         ]);
-
     }
-
 
     /**
      * WCAG Contrast Ratings.
@@ -168,10 +163,10 @@ class ColorHelpers
     public static function wcag_contrast_rating(float $ratio): string
     {
         $ratings = [
-            'aaa' => 7,
-            'aa' => 4.5,
+            'aaa'      => 7,
+            'aa'       => 4.5,
             'aa-large' => 3,
-            'fail' => 0
+            'fail'     => 0
         ];
         foreach ($ratings as $rating => $threshold) {
             if ($ratio >= $threshold) {
@@ -180,5 +175,4 @@ class ColorHelpers
         }
         return 'error';
     }
-
 }

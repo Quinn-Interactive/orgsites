@@ -28,7 +28,7 @@ class GroupFields
                 $fieldlist->push($field);
                 $fields->removeByName($field->getName(), true);
             }
-        } else if (is_object($list)) {
+        } elseif (is_object($list)) {
             $fieldlist = $list;
         }
         $group = FieldGroup::create($fieldlist);

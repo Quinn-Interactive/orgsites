@@ -6,20 +6,18 @@ namespace {
     use SilverStripe\CMS\Model\SiteTree;
     use SilverStripe\CMS\Search\ContentControllerSearchExtension;
     use SilverStripe\CMS\Search\SearchForm;
-    use SilverStripe\Control\HTTPRequest;
     use SilverStripe\Forms\FieldList;
-    use SilverStripe\Forms\Form;
     use SilverStripe\Forms\FormAction;
     use SilverStripe\Forms\TextField;
 
     /**
- * Class \PageController
- *
- * @property \Page $dataRecord
- * @method \Page data()
- * @mixin \Page
- * @mixin \SilverStripe\CMS\Search\ContentControllerSearchExtension
- */
+     * Class \PageController
+     *
+     * @property \Page $dataRecord
+     * @method \Page data()
+     * @mixin \Page
+     * @mixin \SilverStripe\CMS\Search\ContentControllerSearchExtension
+     */
     class PageController extends ContentController
     {
         private static $extensions = [

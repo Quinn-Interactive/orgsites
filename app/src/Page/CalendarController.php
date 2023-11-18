@@ -2,7 +2,6 @@
 
 use QI\App\Model\Event;
 use SilverStripe\Control\HTTPRequest;
-use SilverStripe\Dev\Debug;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\PaginatedList;
 

@@ -45,7 +45,7 @@ class BlogExtension extends DataExtension
         return $blogPostYears;
     }
 
-        /**
+    /**
      * @return void
      */
     public function updateCMSFields(FieldList $fields)
