@@ -9,7 +9,7 @@ es:
     ALL_TAGS: Todas las etiquetas
   QI\App\Page\BlockPage:
     TITLE_DESCRIPTION: Debido a que esta es una página de bloque, el título no se mostrará en la página.Asegúrese de configurar y mostrar el título en su primer bloque.
-    TEXT_POSITION: Posición de texto
+    BLOCKS_DESCRIPTION: Cada versión localizada de esta página tendrá diferentes bloques, por lo que editar/agregar/reordenar/eliminar un bloque solo lo cambia en esa ubicación.Cuando copie esta página de una ubicación a otra, hará copias de todos los bloques desde la configuración regional original a la otra configuración regional.
   QI\App\Element\ElementBanner:
     OPTIONAL: Opcional
     TextPosition_Title: Posición de texto

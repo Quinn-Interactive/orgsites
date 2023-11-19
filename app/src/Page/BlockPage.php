@@ -5,6 +5,8 @@ namespace QI\App\Page;
 use DNADesign\Elemental\Extensions\ElementalPageExtension;
 use Page;
 use QI\App\Extension\BlockPageFluentExtension;
+use QI\App\Lib\LiteralFieldWrapper;
+use TractorCow\Fluent\Model\Locale;
 
 /**
  * Class \QI\App\Page\BlockPage
@@ -30,8 +32,14 @@ class BlockPage extends Page
     {
         $fields = parent::getCMSFields();
 
-        $fields->dataFieldByName('Title')->setDescription(_t(self::class . '.TITLE_DESCRIPTION', 'Becasue this is a Block Page, the title will not display on the page. Make sure to set and display the title in your first block.'));
+        $fields->dataFieldByName('Title')->setDescription(_t(self::class . '.TITLE_DESCRIPTION', 'Because this is a Block Page, the title will not display on the page. Make sure to set and display the title in your first block.'));
+        
         // Localization Note
+        if (Locale::get()->Count() > 1) {
+            $localizationNote = LiteralFieldWrapper::create('BlocksFLuentNote', false, _t(self::class . '.BLOCKS_DESCRIPTION', 'Each localized version of this page will have different blocks, so editing/adding/reordering/deleting a block only changes it in that locale. When you copy this page from one locale to another, it will make copies of all the blocks from the original locale into the other locale.'));
+            $fields->insertAfter('MenuTitle', $localizationNote);
+        }
+
         return $fields;
     }
 
