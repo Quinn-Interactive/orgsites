@@ -11,13 +11,13 @@ namespace {
     use SilverStripe\Forms\TextField;
 
     /**
-     * Class \PageController
-     *
-     * @property \Page $dataRecord
-     * @method \Page data()
-     * @mixin \Page
-     * @mixin \SilverStripe\CMS\Search\ContentControllerSearchExtension
-     */
+ * Class \PageController
+ *
+ * @property \Page $dataRecord
+ * @method \Page data()
+ * @mixin \Page
+ * @mixin \SilverStripe\CMS\Search\ContentControllerSearchExtension
+ */
     class PageController extends ContentController
     {
         private static $extensions = [
