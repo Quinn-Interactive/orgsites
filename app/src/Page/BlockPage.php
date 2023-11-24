@@ -31,11 +31,6 @@ class BlockPage extends Page
         $fields = parent::getCMSFields();
 
         $fields->dataFieldByName('Title')->setDescription(_t(self::class . '.TITLE_DESCRIPTION', 'Because this is a Block Page, the title will not display on the page. Make sure to set and display the title in your first block.'));
-        
-        /** @var GridField */
-        $elementalArea = $fields->dataFieldByName('ElementalArea');
-        /** @var GridFieldConfig */
-        $config = $elementalArea->getConfig();
 
         return $fields;
     }
