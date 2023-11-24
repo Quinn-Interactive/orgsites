@@ -5,8 +5,9 @@ After:
 ---
 DNADesign\Elemental\Models\BaseElement:
   extensions:
+    versionedFluentExtension: TractorCow\Fluent\Extension\FluentVersionedExtension
     topPageDataExtension: DNADesign\Elemental\TopPage\FluentExtension
-    qiBaseElementExtension: QI\App\Extension\BaseElementExtension
+    qiBaseElementExtension: QI\App\Extension\BaseElementExtension # must be after FluentVersionedExtension
     qiBaseElementColorExtension: QI\App\Extension\BaseElementColorsExtension
 DNADesign\Elemental\Models\ElementalArea:
   extensions:

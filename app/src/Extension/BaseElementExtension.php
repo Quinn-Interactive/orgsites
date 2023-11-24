@@ -12,6 +12,15 @@ use SilverStripe\ORM\DataExtension;
  */
 class BaseElementExtension extends DataExtension
 {
+    // overriden for Fluent
+    public function isPublished() {
+        return $this->owner->isPublishedInLocale();
+    }
+
+    public function isLiveVersion() {
+        return $this->owner->isPublishedInLocale() && !$this->owner->stagesDifferInLocale();
+    }
+        
 
     /*
      * return the short name (ie, not fully qualified) of the class
