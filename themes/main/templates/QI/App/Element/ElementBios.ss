@@ -8,7 +8,7 @@
     <div class="row">
     <% loop $Bios.Sort('BioSort') %>
         <div class="col-sm-6 col-lg-4 col-xl-3 mb-3 mb-sm-0">
-            <div class="card">
+            <div class="card" lang="$SourceLocale.Locale">
                 <% if $Image %>
                     <img src="$Image.FocusFillMax(400,300).URL" width="400" height="300" class="card-img-top img-fluid" alt="Picture of $Up.Title.ATT">
                 <% end_if %>
@@ -27,7 +27,7 @@
         </div>
         <% if $Content %>
             <div class="modal modal-xl fade" id="bio-$ID-$Slug" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-dialog modal-dialog-scrollable" lang="$SourceLocale.Locale">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">$Name</h1>

@@ -7,6 +7,7 @@ use QI\App\Model\Bio;
 use SilverStripe\Forms\GridField\GridFieldConfig;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use TractorCow\Fluent\Forms\VisibleLocalesColumn;
 
 /**
  * Class \QI\App\Element\ElementBanner
@@ -50,6 +51,7 @@ class ElementBios extends ElementContent
             /** @var GridFieldConfig */
             $config = $bios->getConfig();
             $config->addComponent(new GridFieldOrderableRows('BioSort'));
+            $config->addComponent(new VisibleLocalesColumn());
             $fields->addFieldToTab('Root.Main', $bios);
         }
 
