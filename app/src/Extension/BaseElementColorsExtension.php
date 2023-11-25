@@ -3,6 +3,7 @@ namespace QI\App\Extension;
 
 use QI\App\Lib\ColorHelpers;
 use SilverStripe\Core\Config\Config;
+use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
@@ -21,7 +22,7 @@ class BaseElementColorsExtension extends DataExtension
         'BackgroundColor' => 'Varchar',
     ];
 
-    public function getBackgroundColor(): ?ArrayData
+    public function getBackground(): ?ArrayData
     {
         $bgColor = $this->owner->getField('BackgroundColor');
         if (!$this->owner || !$bgColor || $this->owner->config()->get('disable_background_color')) {
@@ -44,7 +45,7 @@ class BaseElementColorsExtension extends DataExtension
             }
             $colorField = DropdownField::create('BackgroundColor', 'Background Color', $colorOptions)
                 ->setEmptyString('Default');
-            $fields->addFieldToTab('Root.Main', $colorField);
+            $fields->addFieldToTab('Root.Settings', $colorField);
         }
 
         parent::updateCMSFields($fields);

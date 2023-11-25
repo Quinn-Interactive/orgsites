@@ -51,9 +51,9 @@ class ColorHelpers
                 case 'DangerBgSubtle':
                     return self::color('Danger')->Blend(0.2, '#ffffff');
                 case 'LightBgSubtle':
-                    return DBField::create_field('Color', 'cfcfd');
+                    return DBField::create_field('Color', 'fcfcfd');
                 case 'DarkBgSubtle':
-                    return DBField::create_field('Color', 'ed4da');
+                    return DBField::create_field('Color', 'ced4da');
 
                     // *-border-subtle
                 case 'PrimaryBorderSubtle':
@@ -69,9 +69,9 @@ class ColorHelpers
                 case 'DangerBorderSubtle':
                     return self::color('Danger')->Blend(0.4, '#ffffff');
                 case 'LightBorderSubtle':
-                    return DBField::create_field('Color', 'e9ecef');
+                    return DBField::create_field('Color', 'ced4da');
                 case 'DarkBorderSubtle':
-                    return DBField::create_field('Color', 'db5bd');
+                    return DBField::create_field('Color', 'adb5bd');
 
                     // other
                 case 'SecondaryColor':
