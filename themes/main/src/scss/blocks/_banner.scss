@@ -1,41 +1,36 @@
 .banner {
-    position: relative;
     min-height: clamp(10rem, 33vw, 40rem);
+    position: relative;
+
+    @include media-breakpoint-up(lg) {
+        &.-text-white::after {
+            background-color: rgba(0, 0, 0, 0.25);
+        }
+
+        &.-text-black::after {
+            background-color: rgba(255, 255, 255, 0.25);
+        }    
+    }
     
     &.-text-white,
     &.-text-black {
         &::after {
             content: '';
+            height: 100%;
+            left: 0;
             position: absolute;
             top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
             z-index: 20;
         }
     }
+
     &.-text-white::after {
-        background-color: rgba(0,0,0,0.5);
+        background-color: rgba(0, 0, 0, 0.5);
     }
+
     &.-text-black::after {
-        background-color: rgba(255,255,255,0.5);
-    }
-
-    @include media-breakpoint-up(lg) {
-        &.-text-white::after {
-            background-color: rgba(0,0,0,0.25);
-        }
-        &.-text-black::after {
-            background-color: rgba(255,255,255,0.25);
-        }    
-    }
-
-    // if we are at the top of the page
-    @supports(selector(:has(p))) {
-        main > .element-banner:first-child > & {
-            padding-top: 66px;
-            margin-top: -66px;
-        }
+        background-color: rgba(255, 255, 255, 0.5);
     }
 
     &__image {
@@ -67,8 +62,8 @@
         }
     
         &.-center {
-            justify-content: center;
             align-items: center;
+            justify-content: center;
         }
     }
 
@@ -89,6 +84,14 @@
     
         > * {
             margin-bottom: 0;
+        }
+    }
+
+    // if we are at the top of the page
+    @supports(selector(:has(p))) {
+        main > .element-banner:first-child > & {
+            margin-top: -66px;
+            padding-top: 66px;
         }
     }
 }

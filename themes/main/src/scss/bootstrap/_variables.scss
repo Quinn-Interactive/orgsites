@@ -1,77 +1,77 @@
 // scss-docs-start font-sizes
 $font-sizes: (
-  1: $h1-font-size,
-  2: $h2-font-size,
-  3: $h3-font-size,
-  4: $h4-font-size,
-  5: $h5-font-size,
-  6: $h6-font-size,
-  7: $font-size-base * .75,
+    1: $h1-font-size,
+    2: $h2-font-size,
+    3: $h3-font-size,
+    4: $h4-font-size,
+    5: $h5-font-size,
+    6: $h6-font-size,
+    7: $font-size-base * 0.75,
 );
 // scss-docs-end font-sizes
 $enable-negative-margins: true;
 
 // responsive sizes:
 $utilities: (
-  "width": (
-    property: width,
-    responsive: true,
-    class: w,
-    values: (
-      25: 25%,
-      50: 50%,
-      75: 75%,
-      100: 100%,
-      auto: auto
-    )
-  ),
-  "max-width": (
-    property: max-width,
-    responsive: true,
-    class: mw,
-    values: (100: 100%)
-  ),
-  "viewport-width": (
-    property: width,
-    responsive: true,
-    class: vw,
-    values: (100: 100vw)
-  ),
-  "min-viewport-width": (
-    property: min-width,
-    responsive: true,
-    class: min-vw,
-    values: (100: 100vw)
-  ),
-  "height": (
-    property: height,
-    class: h,
-    responsive: true,
-    values: (
-      25: 25%,
-      50: 50%,
-      75: 75%,
-      100: 100%,
-      auto: auto
-    )
-  ),
-  "max-height": (
-    property: max-height,
-    responsive: true,
-    class: mh,
-    values: (100: 100%)
-  ),
-  "viewport-height": (
-    property: height,
-    responsive: true,
-    class: vh,
-    values: (100: 100vh)
-  ),
-  "min-viewport-height": (
-    property: min-height,
-    responsive: true,
-    class: min-vh,
-    values: (100: 100vh)
-  ),
+    'width': (
+        property: width,
+        responsive: true,
+        class: w,
+        values: (
+            25: 25%,
+            50: 50%,
+            75: 75%,
+            100: 100%,
+            auto: auto
+        )
+    ),
+    'max-width': (
+        property: max-width,
+        responsive: true,
+        class: mw,
+        values: (100: 100%)
+    ),
+    'viewport-width': (
+        property: width,
+        responsive: true,
+        class: vw,
+        values: (100: 100vw)
+    ),
+    'min-viewport-width': (
+        property: min-width,
+        responsive: true,
+        class: min-vw,
+        values: (100: 100vw)
+    ),
+    'height': (
+        property: height,
+        class: h,
+        responsive: true,
+        values: (
+            25: 25%,
+            50: 50%,
+            75: 75%,
+            100: 100%,
+            auto: auto
+        )
+    ),
+    'max-height': (
+        property: max-height,
+        responsive: true,
+        class: mh,
+        values: (100: 100%)
+    ),
+    'viewport-height': (
+        property: height,
+        responsive: true,
+        class: vh,
+        values: (100: 100vh)
+    ),
+    'min-viewport-height': (
+        property: min-height,
+        responsive: true,
+        class: min-vh,
+        values: (100: 100vh)
+    ),
 
 );

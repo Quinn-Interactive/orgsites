@@ -42,9 +42,9 @@ $bootstrap-icons-font-src: url('#{$bootstrap-icons-font-file}.woff2?#{$bootstrap
 .bi.btn::before,
 [class^='bi-'].btn.-separated::before,
 [class*=' bi-'].btn.-separated::before {
-    padding-right: 0.25em;
-    margin-right: 0.5em;
     border-right: 1px solid currentColor;
+    margin-right: 0.5em;
+    padding-right: 0.25em;
 }
 
 $bootstrap-icons-map: (
