@@ -3,7 +3,6 @@ import animateScrollTo from 'animated-scroll-to';
 import Hammer from 'hammerjs';
 
 const sliders = document.querySelectorAll('[data-slider]');
-console.log({sliders});
 const updateArrows = () => {
     sliders.forEach((slider) => {
         const wrapper = slider.querySelector('[data-slider-slides]');
