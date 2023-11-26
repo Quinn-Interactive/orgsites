@@ -1,0 +1,50 @@
+/* stylelint-disable scss/at-extend-no-missing-placeholder */
+.ElementImageText {
+    &__row {
+        @extend .mt-4;
+        overflow: hidden;
+
+        &.-image-left,
+        &.-image-right {
+            @extend .row;
+        }
+    }
+
+    &__image {
+        @extend .pb-4;
+
+        &.-image-left,
+        &.-image-right {
+            @extend .col-12;
+            @extend .col-lg-5;
+        }
+
+        &.-image-right {
+            @extend .order-lg-2;
+        }
+
+        &.-image-float-left,
+        &.-image-float-right {
+            @extend .mb-lg-3;
+        }
+
+        &.-image-float-right {
+            @extend .float-lg-end;
+            @extend .ms-lg-4;
+        }
+
+        &.-image-float-left {
+            @extend .float-lg-start;
+            @extend .me-lg-4;
+        }
+
+    }
+
+    &__text {
+        &.-image-left,
+        &.-image-right {
+            @extend .col-12;
+            @extend .col-lg-7;
+        }
+    }
+}
