@@ -3,6 +3,8 @@ namespace QI\App\Extension;
 
 use DNADesign\Elemental\Models\BaseElement;
 use Jawira\CaseConverter\Convert;
+use SilverStripe\Dev\Debug;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 
 /**
@@ -12,16 +14,6 @@ use SilverStripe\ORM\DataExtension;
  */
 class BaseElementExtension extends DataExtension
 {
-    // overriden for Fluent
-    public function isPublished() {
-        return $this->owner->isPublishedInLocale();
-    }
-
-    public function isLiveVersion() {
-        return $this->owner->isPublishedInLocale() && !$this->owner->stagesDifferInLocale();
-    }
-        
-
     /*
      * return the short name (ie, not fully qualified) of the class
      */
@@ -56,6 +48,16 @@ class BaseElementExtension extends DataExtension
         return null;
     }
 
+    public function isLiveVersion()
+    {
+        return $this->owner->isPublishedInLocale() && !$this->owner->stagesDifferInLocale();
+    }
+    // overriden for Fluent
+    public function isPublished()
+    {
+        return $this->owner->isPublishedInLocale();
+    }
+
     // allow elements to change their summary in the elemental grid field
     public function updateBlockSchema(&$blockSchema)
     {
@@ -64,4 +66,9 @@ class BaseElementExtension extends DataExtension
         }
     }
 
+    public function updateCMSFields(FieldList $fields)
+    {
+        $title = $fields->fieldByName('Root.Main.Title');
+        $this->owner->updateFluentCMSField($title);
+    }
 }

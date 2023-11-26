@@ -4,12 +4,6 @@ namespace QI\App\Page;
 
 use DNADesign\Elemental\Extensions\ElementalPageExtension;
 use Page;
-use QI\App\Extension\BlockPageFluentExtension;
-use QI\App\Lib\LiteralFieldWrapper;
-use SilverStripe\Forms\GridField\GridField;
-use SilverStripe\Forms\GridField\GridFieldConfig;
-use TractorCow\Fluent\Forms\VisibleLocalesColumn;
-use TractorCow\Fluent\Model\Locale;
 
 /**
  * Class \QI\App\Page\BlockPage

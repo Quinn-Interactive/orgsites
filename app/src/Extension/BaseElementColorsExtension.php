@@ -3,7 +3,6 @@ namespace QI\App\Extension;
 
 use QI\App\Lib\ColorHelpers;
 use SilverStripe\Core\Config\Config;
-use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;

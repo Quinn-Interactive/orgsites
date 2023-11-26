@@ -19,7 +19,7 @@ class ColorHelpers
             return DBField::create_field('Color', ltrim($siteConfig->$fieldName, '#'));
         } else {
             switch ($name) {
-                    // *-text-emphasis
+                // *-text-emphasis
                 case 'PrimaryTextEmphasis':
                     return self::color('Primary')->Blend(0.4, '#000000');
                 case 'SecondaryTextEmphasis':

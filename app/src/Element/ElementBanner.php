@@ -6,9 +6,6 @@ use DNADesign\Elemental\Models\ElementContent;
 use QI\App\Lib\Helpers;
 use SilverStripe\Assets\Image;
 use SilverStripe\Dev\Debug;
-use SilverStripe\View\ArrayData;
-use TractorCow\Fluent\Extension\FluentVersionedExtension;
-use TractorCow\Fluent\Extension\Traits\FluentBadgeTrait;
 
 /**
  * Class \QI\App\Element\ElementBanner
@@ -37,6 +34,10 @@ class ElementBanner extends ElementContent
     private static $singular_name = 'Banner';
     private static $table_name = 'ElementBanner';
     private static $title = 'Banner';
+    private static $translate = [
+        'HTML',
+        'ImageID',
+    ];
 
     public function getCMSFields()
     {
@@ -73,5 +74,5 @@ class ElementBanner extends ElementContent
     public function getType()
     {
         return _t(__CLASS__ . '.BlockType', 'Banner');
-    }    
+    }
 }

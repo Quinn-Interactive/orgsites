@@ -48,7 +48,7 @@ class Bio extends DataObject
         'Image',
     ];
     private static $summary_fields = [
-        'Name'          => 'Name',
+        'Name'           => 'Name',
         'JobTitle'       => 'Content',
         'GridFieldImage' => 'Image',
     ];
