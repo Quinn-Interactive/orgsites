@@ -15,7 +15,7 @@ use SilverStripe\ORM\DataExtension;
 /**
  * Class \QI\App\Extension\VideoExtension
  *
- * @property \QI\App\Element\ElementVideo|\QI\App\Extension\VideoExtension $owner
+ * @property \QI\App\Element\ElementVideo|\QI\App\Model\Video|\QI\App\Extension\VideoExtension $owner
  * @property string $VideoTitle
  * @property string $VideoURL
  * @property bool $VideoAutoPlay

@@ -45,6 +45,7 @@ class ElementVideo extends ElementContent
         // label missed localized fields
         $this->updateFluentCMSField($fields->dataFieldByName('VideoTitle'));
         $this->updateFluentCMSField($fields->dataFieldByName('VideoURL'));
+        $this->updateFluentCMSField($fields->dataFieldByName('VideoPreviewImage'));
 
         return $fields;
     }

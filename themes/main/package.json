@@ -30,7 +30,9 @@
     "IE 11"
   ],
   "dependencies": {
+    "animated-scroll-to": "^2.3.0",
     "core-js": "^3.8.1",
+    "hammerjs": "^2.0.8",
     "html-to-element": "^1.0.0",
     "image-focus": "^1.2.1",
     "laravel-mix-polyfill": "^2.0.0"

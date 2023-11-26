@@ -1,0 +1,18 @@
+/*
+#@mixin svg-bg()
+
+Apply an SVG image as the background. Path should be relative to the images folder. Do not use leading '/' or trailing '.svg'.
+
+```
+div {
+    @include svg-bg(path/to/file);
+}
+```
+
+Styleguide Mixins.svgbg
+*/
+@mixin svg-bg($file) {
+    background-image: url('/_resources/themes/main/images/#{$file}.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
