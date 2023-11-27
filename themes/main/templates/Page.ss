@@ -48,6 +48,7 @@
     <main class="main flex-grow-1 d-flex flex-column">
         $Layout
     </main>
+    <% include Footer %>
     <script src="$resourceURL('themes/main/dist/js/index.js')"></script>
     <% include ThemeVars %>    
 </body>

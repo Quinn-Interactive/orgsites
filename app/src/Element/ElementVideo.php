@@ -38,8 +38,9 @@ class ElementVideo extends ElementContent
             $html->setTitle('Caption');
             $html->setDescription('Optional');
             $fields->removeByName('HTML');
-            $fields->insertAfter('VideoServicePreview', $html);
+            $fields->addFieldToTab('Root.Main', $html);
         });
+
         $fields = parent::getCMSFields();
 
         // label missed localized fields

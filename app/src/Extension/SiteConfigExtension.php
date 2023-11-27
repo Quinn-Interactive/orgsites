@@ -12,6 +12,7 @@ use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HeaderField;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
 use TractorCow\Colorpicker\Color;
@@ -37,6 +38,8 @@ use TractorCow\Fluent\Extension\FluentExtension;
  * @property string $BodyFont
  * @property string $HeadlineFont
  * @property string $MonospaceFont
+ * @property string $Footer
+ * @property string $FooterBg
  * @property int $LogoID
  * @method \SilverStripe\Assets\File Logo()
  */
@@ -55,6 +58,8 @@ class SiteConfigExtension extends FluentExtension
         'BodyFont'       => 'Varchar',
         'HeadlineFont'   => 'Varchar',
         'MonospaceFont'  => 'Varchar',
+        'Footer'         => 'HTMLText',
+        'FooterBg'       => "Enum('primary, secondary, dark, light, white, black', 'primary')",
     ];
 
     private static $defaults = [
@@ -81,6 +86,7 @@ class SiteConfigExtension extends FluentExtension
     private static $translate = [
         'Title',
         'Tagline',
+        'Footer',
     ];
     public function AllFontsHeadCode($type = 'link'): string
     {
@@ -178,6 +184,20 @@ class SiteConfigExtension extends FluentExtension
         } else {
             $result->NavbarBGClass = 'navbar-light';
             $result->BtnCloseClass = 'btn-close-black';
+        }
+        return $result;
+    }
+
+    public function getFooterTextColor(): ArrayData
+    {
+        $footerBg = $this->owner->FooterBg;
+        $convert = new Convert("{$footerBg}");
+        $footerColorField = $convert->fromKebab()->toPascal();
+        $result = ColorHelpers::contrasting_text($footerColorField);
+        if (in_array($result->CssClass, ['text-light', 'text-white'])) {
+            $result->FooterBGClass = 'navbar-dark';
+        } else {
+            $result->FooterBGClass = 'navbar-light';
         }
         return $result;
     }
@@ -301,6 +321,13 @@ class SiteConfigExtension extends FluentExtension
         $typeSamples = $this->owner->renderWith('TypeSamples');
         $fields->addFieldToTab('Root.Theme.Type', LiteralFieldWrapper::create('TypeSamples', 'Type Samples', $typeSamples));
 
+        // Footer
+        $footerColors = $this->owner->dbObject('NavbarBg')->enumValues();
+        $fields->addFieldToTab('Root.Theme.Colors', $footerBg = DropdownField::create('FooterBg', 'Footer Background Color', $footerColors));
+        $footerBg->setDescription('Accessibility contrast rating: ' . $this->owner->getFooterTextColor()->Rating);
+        $fields->addFieldToTab('Root.Main', HTMLEditorField::create('Footer', 'Footer'));
+        
+        
         parent::updateCMSFields($fields);
     }
 }
