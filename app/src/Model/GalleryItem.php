@@ -1,6 +1,7 @@
 <?php
 namespace QI\App\Model;
 
+use DNADesign\Elemental\Forms\TextCheckboxGroupField;
 use QI\App\Element\ElementGallery;
 use QI\App\Extension\VideoExtension;
 use QI\App\Lib\LiteralFieldWrapper;
@@ -64,13 +65,23 @@ class GalleryItem extends DataObject
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
+
+        // Title
+        $fields->replaceField(
+            'Title',
+            TextCheckboxGroupField::create()
+                ->setName('Title')
+        );
+        $title = $fields->fieldByName('Root.Main.Title');
+        $this->owner->updateFluentCMSField($title);
+
         $fields->dataFieldByName('Image')->setDescription('Image or video preview');
 
         $videoURL = $fields->dataFieldByName('VideoURL');
         $videoURL->setDescription('Optional. ' . $videoURL->getDescription());
         $fields->removeByName(['Sort', 'VideoTitle', 'VideoAutoPlay', 'VideoPreviewImage', 'ElementGalleryID', 'Video', 'Content']);
         $fields->addFieldToTab('Root.Main', $videoURL);
-        
+
         // set up video service preview
         $videoServicePreview = null;
         if (!$this->Image()->exists()
