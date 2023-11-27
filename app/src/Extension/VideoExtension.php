@@ -15,7 +15,7 @@ use SilverStripe\ORM\DataExtension;
 /**
  * Class \QI\App\Extension\VideoExtension
  *
- * @property \QI\App\Element\ElementVideo|\QI\App\Model\Video|\QI\App\Extension\VideoExtension $owner
+ * @property \QI\App\Element\ElementVideo|\QI\App\Model\GalleryItem|\QI\App\Extension\VideoExtension $owner
  * @property string $VideoTitle
  * @property string $VideoURL
  * @property bool $VideoAutoPlay
@@ -47,15 +47,8 @@ class VideoExtension extends DataExtension
         'VideoURL',
     ];
 
-    private static $summary_fields = [
-        'VideoTitle' => 'Video Title',
-        'VideoURL'   => 'Video URL',
-    ];
-
     private static $translate = [
         'VideoTitle',
-        'VideoURL',
-        'VideoPreviewImageID',
     ];
 
     /**
@@ -104,7 +97,7 @@ class VideoExtension extends DataExtension
         }
         $fieldArray = [
             TextField::create('VideoTitle', 'Video Title'),
-            TextField::create('VideoURL', 'Video URL')->setRightTitle('Example: https://www.youtube.com/watch?v=wBNJ0BH3Dgs'),
+            TextField::create('VideoURL', 'Video URL')->setDescription('Example: https://www.youtube.com/watch?v=wBNJ0BH3Dgs'),
             $videoPreviewImageField,
             CheckboxField::create('VideoAutoPlay', 'Auto play video'),
             new LiteralField('VideoServicePreview', $videoServicePreview),
@@ -210,7 +203,7 @@ class VideoExtension extends DataExtension
     {
         $tag = $this->VideoThumbURL($size);
         if ($tag) {
-            return '<img class="video-thumb" src="' . $this->VideoThumbURL($size) . '" loading="lazy" />';
+            return '<img class="video-thumb img-fluid" src="' . $this->VideoThumbURL($size) . '" loading="lazy" />';
         } else {
             return false;
         }

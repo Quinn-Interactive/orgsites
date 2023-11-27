@@ -19,3 +19,9 @@ if (document.querySelector('[data-video-modal]')) {
 if (document.querySelector('[data-slider]')) {
     import(/* webpackChunkName: "slider" */ './slider').then();
 }
+
+// lightbox.js
+if (document.querySelector('[data-lightbox]')) {
+    import(/* webpackChunkName: "lightbox" */ './lightbox').then();
+}
+

@@ -3,7 +3,7 @@
 namespace QI\App\Element;
 
 use DNADesign\Elemental\Models\ElementContent;
-use QI\App\Model\Video;
+use QI\App\Model\GalleryItem;
 use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
@@ -14,23 +14,23 @@ use TractorCow\Fluent\Forms\VisibleLocalesColumn;
  * Class \QI\App\Element\ElementVideoCarousel
  *
  * @property bool $Slider
- * @method \SilverStripe\ORM\DataList|\QI\App\Model\Video[] Videos()
+ * @method \SilverStripe\ORM\DataList|\QI\App\Model\GalleryItem[] GalleryItems()
  */
-class ElementVideoCarousel extends ElementContent
+class ElementGallery extends ElementContent
 {
-
-    private static $icon = 'font-icon-block-video';
-    private static $table_name = 'ElementVideoCarousel';
-    private static $inline_editable = false;
     private static $db = [
         'Slider' => 'Boolean',
     ];
     private static $has_many = [
-        'Videos' => Video::class,
+        'GalleryItems' => GalleryItem::class,
     ];
+
+    private static $icon = 'font-icon-block-carousel';
+    private static $inline_editable = false;
     private static $owns = [
-        'Videos',
+        'GalleryItems',
     ];
+    private static $table_name = 'ElementGallery';
 
     public function getCMSFields()
     {
@@ -49,16 +49,16 @@ class ElementVideoCarousel extends ElementContent
             ->setDescription('Optional. Will show above videos')
             ->setRows(7);
 
-        // Videos
+        // GalleryItems
         /** @var GridField */
-        $videos = $fields->dataFieldByName('Videos');
-        if ($videos) {
-            $config = $videos->getConfig();
+        $galleryItems = $fields->dataFieldByName('GalleryItems');
+        if ($galleryItems) {
+            $config = $galleryItems->getConfig();
             $config->addComponent(new GridFieldOrderableRows('Sort'));
             $config->removeComponentsByType(GridFieldAddExistingAutocompleter::class);
             $config->addComponent(new VisibleLocalesColumn());
-            $fields->removeByName('Videos');
-            $fields->addFieldToTab('Root.Main', $videos);
+            $fields->removeByName('GalleryItems');
+            $fields->addFieldToTab('Root.Main', $galleryItems);
         }
 
         return $fields;
@@ -66,6 +66,6 @@ class ElementVideoCarousel extends ElementContent
 
     public function getType()
     {
-        return _t(__CLASS__ . '.BlockType', 'VideoCarousel');
+        return _t(__CLASS__ . '.BlockType', 'Gallery');
     }
 }

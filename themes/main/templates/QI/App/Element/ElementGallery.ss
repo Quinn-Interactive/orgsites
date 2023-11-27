@@ -1,4 +1,4 @@
-<% cached ElementVideoCarousel, $ID, $LastEdited, $Videos.Count, $Videos.Max('LastEdited'), $Locale %>
+<% uncached ElementVideoCarousel, $ID, $LastEdited, $Videos.Count, $Videos.Max('LastEdited'), $Locale %>
 <div class="content-container py-3">
     <% if $ShowTitle && $Title %>
         <% if $Pos == 1 %><h1>$Title</h1><% else %><h2>$Title</h2><% end_if %>
@@ -6,22 +6,22 @@
     <% if $HTML %>
         $HTML
     <% end_if %>
-    <% if $Videos %>
+    <% if $GalleryItems %>
         <% if $Slider %>
         <div class="slider" data-slider>
             <div class="row g-4 align-items-stretch slider__slides -has-modals" data-slider-slides>
-            <% loop $Videos %>
+            <% loop $GalleryItems %>
                 <div class="col-12 col-md-6 col-lg-4 mb-4 text-center slider__slide">
-                    <% include VideoPreviewAndModal %>
+                    <% include GalleryItem %>
                 </div>
             <% end_loop %>
             </div>
         </div>
         <% else %>
             <div class="row g-4 align-items-stretch">
-                <% loop $Videos %>
+                <% loop $GalleryItems %>
                     <div class="col-12 col-md-6 col-lg-4 mb-4 text-center">
-                        <% include VideoPreviewAndModal %>
+                        <% include GalleryItem %>
                     </div>
                 <% end_loop %>
             </div>

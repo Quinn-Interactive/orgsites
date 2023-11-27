@@ -1,7 +1,17 @@
 .play-icon {
-    opacity: 0.7;
+    &::after {
+        @include svg-bg('play');
+        content: '';
+        height: 4rem;
+        left: calc(50% - 2rem);
+        opacity: 0.7;
+        position: absolute;
+        top: calc(50% - 2rem);
+        width: 4rem;
+        z-index: 10;
+    }
 
-    .play-icon-hover:hover & {
+    &:hover::after {
         opacity: 1;
     }
 }
