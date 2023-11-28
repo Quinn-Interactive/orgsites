@@ -11,6 +11,39 @@ use TractorCow\Colorpicker\Color;
 
 class ColorHelpers
 {
+    private static $calculated_color_names = [
+        'Black',
+        'White',
+        'BodyColor',
+        'DangerBgSubtle',
+        'DangerBorderSubtle',
+        'DangerTextEmphasis',
+        'DarkBgSubtle',
+        'DarkBorderSubtle',
+        'DarkTextEmphasis',
+        'InfoBgSubtle',
+        'InfoBorderSubtle',
+        'InfoTextEmphasis',
+        'LightBgSubtle',
+        'LightBorderSubtle',
+        'LightTextEmphasis',
+        'PrimaryBgSubtle',
+        'PrimaryBorderSubtle',
+        'SecondaryBg',
+        'SecondaryBgSubtle',
+        'SecondaryBorderSubtle',
+        'SecondaryColor',
+        'SecondaryTextEmphasis',
+        'SuccessBgSubtle',
+        'SuccessBorderSubtle',
+        'SuccessTextEmphasis',
+        'TertiaryBg',
+        'TertiaryColor',
+        'WarningBgSubtle',
+        'WarningBorderSubtle',
+        'WarningTextEmphasis',
+        'PrimaryTextEmphasis',
+    ];
     public static function color($name): ?Color
     {
         $fieldName = $name . 'Color';
