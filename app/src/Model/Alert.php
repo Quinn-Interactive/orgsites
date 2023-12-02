@@ -65,6 +65,7 @@ class Alert extends DataObject
         'Title'            => 'Title',
         'Severity'         => 'Type',
         'NotificationType' => 'Notify',
+        'AlertStyle'       => 'Style',
         'Active'           => 'Active?',
         'Pages.Count'      => '# of Pages',
     ];
@@ -112,7 +113,7 @@ class Alert extends DataObject
         if ($this->Link()->exists()) {
             /** @var Link */
             $link = $this->Link();
-            $link->addExtraClass("btn btn-{$this->AlertColor()} btn-sm float-end");
+            $link->addExtraClass("btn btn-{$this->AlertColor()} btn-sm");
             return $link;
         }
         return null;

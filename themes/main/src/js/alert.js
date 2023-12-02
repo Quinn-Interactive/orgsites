@@ -49,7 +49,7 @@ alerts.forEach((el) => {
         updated,
         sessionId,
     } = alertData;
-    const close = el.querySelector('[data-alert-close]');
+    const closers = el.querySelectorAll('[data-alert-close]');
     const alertsStore = Cookies.get(cookieKey) ? JSON.parse(Cookies.get(cookieKey)) : {};
 
     // add in our alert to the alertsStore if we haven't saved it yet
@@ -90,12 +90,15 @@ alerts.forEach((el) => {
     Cookies.set(cookieKey, JSON.stringify(alertsStore), { expires: 365 });
 
     // close on click and remember that we closed it
-    close.addEventListener('click', (e) => {
-        e.preventDefault();
-        const savedAlerts = JSON.parse(Cookies.get(cookieKey));
-        savedAlerts[id].closed = true;
-        Cookies.set(cookieKey, JSON.stringify(savedAlerts), { expires: 365 });
-        hideAlert(el);
+    closers.forEach((close) => {
+        close.addEventListener('click', (e) => {
+            console.log({close, e});
+            e.preventDefault();
+            const savedAlerts = JSON.parse(Cookies.get(cookieKey));
+            savedAlerts[id].closed = true;
+            Cookies.set(cookieKey, JSON.stringify(savedAlerts), { expires: 365 });
+            hideAlert(el);
+        });    
     });
 
     window.addEventListener('resize', updateLayout);
