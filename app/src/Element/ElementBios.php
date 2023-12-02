@@ -3,6 +3,7 @@
 namespace QI\App\Element;
 
 use DNADesign\Elemental\Models\ElementContent;
+use Page;
 use QI\App\Model\Bio;
 use SilverStripe\Forms\GridField\GridFieldConfig;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
@@ -42,7 +43,7 @@ class ElementBios extends ElementContent
         // HTML
         /** @var HTMLEditorField */
         $html = $fields->dataFieldByName('HTML');
-        $html->setDescription(_t(self::class . '.OPTIONAL', 'Optional'));
+        $html->setDescription(_t(Page::class . '.OPTIONAL', 'Optional'));
 
         // Bios
         $bios = $fields->dataFieldByName('Bios');

@@ -29,7 +29,8 @@
         "tractorcow/silverstripe-colorpicker": "^4.2",
         "ryanpotter/silverstripe-color-field": "^1.0",
         "spatie/color": "^1.5",
-        "silverstripe/blog": "^4.1"
+        "silverstripe/blog": "^4.1",
+        "gorriecoe/silverstripe-linkfield": "^1.1"
     },
     "require-dev": {
         "oddnoc/silverstripe-artefactcleaner": "^4.0",

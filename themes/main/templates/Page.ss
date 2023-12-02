@@ -44,7 +44,7 @@
     <% require themedCSS('dist/css/styles') %>
 </head>
 <body class="body d-flex flex-column d-flex flex-column">
-    <% include Navbar %>
+    <% include Header %>
     <main class="main flex-grow-1 d-flex flex-column">
         $Layout
     </main>
