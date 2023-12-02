@@ -1,3 +1,4 @@
 .main {
     padding-top: 66px;
+    padding-top: calc(66px + var(--alert-height, 0px));
 }

@@ -3,6 +3,7 @@
 namespace QI\App\Element;
 
 use DNADesign\Elemental\Models\ElementContent;
+use Page;
 use QI\App\Extension\VideoExtension;
 
 /**
@@ -36,7 +37,7 @@ class ElementVideo extends ElementContent
 		$this->beforeUpdateCMSFields(function($fields) {
             $html = $fields->dataFieldByName('HTML');
             $html->setTitle('Caption');
-            $html->setDescription('Optional');
+            $html->setDescription(_t(Page::class . '.OPTIONAL', 'Optional'));
             $fields->removeByName('HTML');
             $fields->addFieldToTab('Root.Main', $html);
         });

@@ -3,6 +3,7 @@
 namespace QI\App\Element;
 
 use DNADesign\Elemental\Models\ElementContent;
+use Page;
 use QI\App\Lib\Helpers;
 use SilverStripe\Assets\Image;
 use SilverStripe\Dev\Debug;
@@ -48,7 +49,7 @@ class ElementBanner extends ElementContent
         Helpers::localize_select($fields->dataFieldByName('TextPosition'), $this);
 
         // HTML
-        $fields->dataFieldByName('HTML')->setDescription(_t(self::class . '.OPTIONAL', 'Optional'));
+        $fields->dataFieldByName('HTML')->setDescription(_t(Page::class . '.OPTIONAL', 'Optional'));
 
         // Image
         $fields->dataFieldByName('Image')

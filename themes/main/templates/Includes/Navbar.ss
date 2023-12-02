@@ -1,4 +1,4 @@
-<nav data-scroll-hide class="navbar navbar-expand-lg bg-$SiteConfig.NavbarBg $SiteConfig.NavbarTextColor.CssClass $SiteConfig.NavbarTextColor.NavbarBGClass fixed-top">
+<nav class="navbar navbar-expand-lg bg-$SiteConfig.NavbarBg $SiteConfig.NavbarTextColor.CssClass $SiteConfig.NavbarTextColor.NavbarBGClass">
     <div class="content-container">
         <a class="navbar-brand d-block $SiteConfig.NavbarTextColor.CssClass position-relative" href="/$CurrentLocaleObject.URLSegment" title="$SiteConfig.Title.ATT">
             <% include Brand %>
