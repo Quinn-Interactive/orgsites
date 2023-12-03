@@ -5,12 +5,15 @@ namespace QI\App\Model;
 use gorriecoe\Link\Models\Link;
 use gorriecoe\LinkField\LinkField;
 use Page;
+use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldAddNewButton;
 use SilverStripe\Forms\GridField\GridFieldConfig;
 use SilverStripe\Forms\GridField\GridFieldEditButton;
+use SilverStripe\Forms\TreeMultiselectField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\Permission;
+use SilverStripe\TagField\TagField;
 use SilverStripe\Versioned\GridFieldArchiveAction;
 use SilverStripe\Versioned\Versioned;
 use TractorCow\Fluent\Extension\FluentVersionedExtension;
@@ -39,7 +42,7 @@ class Alert extends DataObject
     private static $db = [
         'Title'            => 'Varchar(128)',
         'Active'           => 'Boolean',
-        'AlertStyle'       => "Enum('alert, toast ,modal','alert')",
+        'AlertStyle'       => "Enum('alert, toast, modal','alert')",
         'Severity'         => "Enum('critical, warning, notice, success','warning')",
         'NotificationType' => "Enum('session, once, always','session')",
         'Content'          => 'HTMLText',
@@ -139,6 +142,17 @@ class Alert extends DataObject
         $fields->removeByName(['LinkID']);
         $fields->addFieldToTab('Root.Main', LinkField::create('Link', 'Call to Action', $this)->setDescription(_t(Page::class . '.OPTIONAL', 'Optional')));
 
+        // AlertStyle
+        $alertStyle = $fields->dataFieldByName('AlertStyle');
+        $alertDescription = <<<EOT
+            <ui>
+                <li><strong>alert</strong>: Bands at the top of the page. Title and CTA only.</li>
+                <li><strong>toast</strong>: Small messages at the bottom right of the page.</li>
+                <li><strong>modal</strong>: Popup dialog. Only the first one will show on a page.</li>
+            </ui>
+        EOT;
+        $alertStyle->setDescription($alertDescription);
+
         // Content
         $content = $fields->dataFieldByName('Content')->setDescription(_t(Page::class . '.OPTIONAL', 'Optional'));
         $content->displayIf('AlertStyle')->isNotEqualTo('alert');
@@ -146,13 +160,9 @@ class Alert extends DataObject
         // Pages
         /** @var GridField */
         if ($this->isInDB()) {
-            $pages = $fields->dataFieldByName('Pages');
-            $pages->setTitle('Pages this alert appears on');
-            /** @var GridFieldConfig */
-            $pagesConfig = $pages->getConfig();
-            $pagesConfig->removeComponentsByType([GridFieldAddNewButton::class, GridFieldArchiveAction::class, GridFieldEditButton::class]);
             $fields->removeByName('Pages');
-            $fields->addFieldToTab('Root.Main', $pages);
+            $pages = TreeMultiselectField::create('Pages', 'On these pages', SiteTree::class);
+            $fields->insertAfter('Link', $pages);
         }
 
         return $fields;

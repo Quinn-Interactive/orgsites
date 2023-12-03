@@ -6,6 +6,7 @@ namespace {
     use SilverStripe\CMS\Model\SiteTree;
     use SilverStripe\Forms\GridField\GridField;
     use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
+    use SilverStripe\ORM\DataList;
     use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
     use TractorCow\Fluent\Forms\VisibleLocalesColumn;
 
@@ -43,5 +44,19 @@ namespace {
 
             return $fields;
         }
+
+        public function getActiveAlerts(): DataList
+        {
+            return $this->Alerts()->filter([
+                'Active' => true,
+            ])->sort('AlertSort');
+        }    
+        public function AlertsByType(string $type): DataList
+        {
+            $type = strtolower($type);
+            return $this->getActiveAlerts()->filter([
+                'AlertStyle' => $type,
+            ]);
+        }    
     }
 }
