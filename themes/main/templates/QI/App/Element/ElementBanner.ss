@@ -1,4 +1,4 @@
-<div class="banner <% if $ShowTitle || $HTML %>-text-$TextColor<% end_if %>">
+<div class="banner -text-$TextPosition <% if $ShowTitle || $HTML %>-text-$TextColor<% end_if %>">
     <% if $Image %>
         <% with $Image %>
             <img class="focused-image banner__image"
@@ -22,7 +22,7 @@
         <% end_with %>
     <% end_if %>
     <% if $ShowTitle || $HTML %>
-        <div class="content-container banner__content -$TextPosition">
+        <div class="content-container banner__content -text-$TextPosition">
             <div class="banner__text">
                 <% if $ShowTitle && $Title %>
                     <% if $Pos == 1 %><h1>$Title</h1><% else %><h2>$Title</h2><% end_if %>

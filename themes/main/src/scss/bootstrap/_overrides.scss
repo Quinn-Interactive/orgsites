@@ -4,3 +4,11 @@ h2,
 h3 {
     font-family: var(--bs-body-headline-family);
 }
+
+.text-bg-dark a {
+    color: $white;
+}
+
+.text-bg-light a {
+    color: $link-color;
+}

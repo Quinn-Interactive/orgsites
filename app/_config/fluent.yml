@@ -6,6 +6,9 @@ TractorCow\Fluent\Extension\FluentDirectorExtension:
 SilverStripe\Core\Injector\Injector:
   SilverStripe\CMS\Search\SearchForm:
     class: TractorCow\Fluent\Search\FluentSearchForm
+TractorCow\Fluent\Extension\FluentExtension:
+  field_exclude:
+    - BackgroundColor
 ---
 Name: fluentsearchfix
 ---

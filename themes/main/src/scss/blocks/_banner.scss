@@ -1,6 +1,30 @@
 .banner {
     min-height: clamp(10rem, 33vw, 40rem);
     position: relative;
+    display: flex;
+    align-items: center;
+
+    &.-text-left {
+        justify-content: flex-start;
+    }
+
+    &.-text-right {
+        justify-content: flex-end;
+    }
+
+    &.-text-top {
+        align-items: flex-start;
+    }
+
+    &.-text-bottom {
+        align-items: flex-end;
+    }
+
+    &.-text-center {
+        align-items: center;
+        justify-content: center;
+    }
+
 
     @include media-breakpoint-up(lg) {
         &.-text-white::after {
@@ -45,23 +69,23 @@
         position: relative;
         z-index: 30;
 
-        &.-left {
+        &.-text-left {
             justify-content: flex-start;
         }
     
-        &.-right {
+        &.-text-right {
             justify-content: flex-end;
         }
     
-        &.-top {
+        &.-text-top {
             align-items: flex-start;
         }
     
-        &.-bottom {
+        &.-text-bottom {
             align-items: flex-end;
         }
     
-        &.-center {
+        &.-text-center {
             align-items: center;
             justify-content: center;
         }
@@ -71,9 +95,9 @@
         text-shadow: 0 0 8px #000;
 
         @include media-breakpoint-up(lg) {
-            .banner__content.-left &,
-            .banner__content.-right &,
-            .banner__content.-center & {
+            .banner__content.-text-left &,
+            .banner__content.-text-right &,
+            .banner__content.-text-center & {
                 max-width: 50%;
             }
         }
