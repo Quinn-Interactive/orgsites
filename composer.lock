@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0e2c7f15910a31df2bc1bca0ddf2a580",
+    "content-hash": "62415dc43fb3804cbe24a0987cbedc83",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -7300,6 +7300,50 @@
                 "source": "https://github.com/silverleague/silverstripe-ideannotator/tree/3.4.0"
             },
             "time": "2023-09-04T00:38:22+00:00"
+        },
+        {
+            "name": "silverstripe/sspak",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silverstripe/sspak.git",
+                "reference": "ae13d5f94e37a67485347fb53ff0061505f529a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silverstripe/sspak/zipball/ae13d5f94e37a67485347fb53ff0061505f529a6",
+                "reference": "ae13d5f94e37a67485347fb53ff0061505f529a6",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^3.7"
+            },
+            "default-branch": true,
+            "bin": [
+                "bin-composer/sspak"
+            ],
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sam Minnee",
+                    "email": "sam@silverstripe.com"
+                }
+            ],
+            "description": "CLI tool for saving & loading data in SilverStripe installations",
+            "support": {
+                "issues": "https://github.com/silverstripe/sspak/issues",
+                "source": "https://github.com/silverstripe/sspak/tree/master"
+            },
+            "time": "2023-06-26T03:01:03+00:00"
         },
         {
             "name": "symfony/console",

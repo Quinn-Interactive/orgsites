@@ -37,7 +37,8 @@
         "silverleague/ideannotator": "^3.1",
         "deployer/deployer": "^7",
         "vlucas/phpdotenv": "^5.4",
-        "friendsofphp/php-cs-fixer": "*"
+        "friendsofphp/php-cs-fixer": "*",
+        "silverstripe/sspak": "dev-master"
     },
     "config": {
         "allow-plugins": {
