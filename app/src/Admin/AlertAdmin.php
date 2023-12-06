@@ -6,6 +6,9 @@ use QI\App\Action\GridFieldPublishAllButton;
 use QI\App\Model\Alert;
 use SilverStripe\Admin\ModelAdmin;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
+use TractorCow\Fluent\Forms\CopyLocaleAction;
+use TractorCow\Fluent\Forms\DeleteAllLocalesAction;
+use TractorCow\Fluent\Forms\GroupActionMenu;
 use TractorCow\Fluent\Forms\VisibleLocalesColumn;
 
 /**
@@ -33,7 +36,7 @@ class AlertAdmin extends ModelAdmin
         if ($gridField) {
             $config = $gridField->getConfig();
             $config->addComponent(new VisibleLocalesColumn());
-
+            $config->addComponent(new DeleteAllLocalesAction());
         }
         return $form;
     }
