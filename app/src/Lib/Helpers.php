@@ -43,6 +43,34 @@ class Helpers
         $field->setSource($newSource);
     }
 
+    public static function html_to_limited_text($html, $chars = 0): string
+    {
+        // strip newlines
+        $html = preg_replace('/[\n\r]+/s', ' ', $html);
+
+        $clean = strip_tags($html);
+
+        $text = substr($clean, 0, $chars);
+
+        // if chars = 0, no clipping, so return it.
+        if (!$chars) {
+            return $clean;
+        }
+
+        // if we didn't need to clip, return it.
+        if ($clean == $text) {
+            return $text;
+        }
+
+        // strip and ...
+        $text = preg_replace('/^(.*)\s+\S*$/s', '$1', $text);
+        if (preg_match('/\.$/', $text) || $clean == $text) {
+            return $text;
+        } else {
+            return $text . '…';
+        }
+    }
+
     /**
      * WCAG Contrast Ratings.
      */

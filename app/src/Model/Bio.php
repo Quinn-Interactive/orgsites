@@ -3,6 +3,7 @@
 namespace QI\App\Model;
 
 use QI\App\Element\ElementBios;
+use QI\App\Lib\Helpers;
 use SilverStripe\Assets\Image;
 use SilverStripe\Assets\Storage\AssetContainer;
 use SilverStripe\ORM\DataObject;
@@ -72,6 +73,20 @@ class Bio extends DataObject
     public function canView($member = null, $context = [])
     {
         return true;
+    }
+
+    /**
+     * Find the best summary for indexes and cards and promos
+     * return the first x characters that are complete words
+     * unless the last character is a period, add an ellipsis
+     *
+     * @param int     $chars (optional)
+     * @return string
+     */
+    public function DescriptionOrSummary($chars = 500)
+    {
+        $html = $this->Summary ?? $this->Content;
+        return Helpers::html_to_limited_text($html, $chars);
     }
 
     public function getCMSFields()

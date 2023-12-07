@@ -1,0 +1,1 @@
+<img src="$ScaleWidth(576).URL" width="$ScaleWidth(576).Width" height="$ScaleWidth(576).Height" class="card-img-top" alt="$Title.ATT" loading="lazy">

@@ -59,6 +59,11 @@ class ElementBios extends ElementContent
         return $fields;
     }
 
+    public function AllChildren()
+    {
+        return $this->Bios()->Sort('BioSort');
+    }
+
     public function getType()
     {
         return _t(__CLASS__ . '.BlockType', 'Bios');
