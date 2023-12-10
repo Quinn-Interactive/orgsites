@@ -5,18 +5,23 @@ namespace QI\App\Extension;
 use Jawira\CaseConverter\Convert;
 use QI\App\Lib\ColorHelpers;
 use QI\App\Lib\LiteralFieldWrapper;
+use QI\App\Model\FooterLink;
 use RyanPotter\SilverStripeColorField\Forms\ColorField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\File;
-use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
+use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
+use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use TractorCow\Colorpicker\Color;
 use TractorCow\Fluent\Extension\FluentExtension;
+use TractorCow\Fluent\Forms\VisibleLocalesColumn;
 
 /**
  * Class \QI\App\Extension\SiteConfigExtension
@@ -42,6 +47,7 @@ use TractorCow\Fluent\Extension\FluentExtension;
  * @property string $FooterBg
  * @property int $LogoID
  * @method \SilverStripe\Assets\File Logo()
+ * @method \SilverStripe\ORM\DataList|\QI\App\Model\FooterLink[] FooterLinks()
  */
 class SiteConfigExtension extends FluentExtension
 {
@@ -75,6 +81,9 @@ class SiteConfigExtension extends FluentExtension
         'BodyFont'       => 'native-sans-serif',
         'HeadlineFont'   => 'native-sans-serif',
         'MonospaceFont'  => 'native-monospace',
+    ];
+    private static $has_many = [
+        'FooterLinks' => FooterLink::class,
     ];
 
     private static $has_one = [
@@ -172,6 +181,20 @@ class SiteConfigExtension extends FluentExtension
         return $font;
     }
 
+    public function getFooterTextColor(): ArrayData
+    {
+        $footerBg = $this->owner->FooterBg;
+        $convert = new Convert("{$footerBg}");
+        $footerColorField = $convert->fromKebab()->toPascal();
+        $result = ColorHelpers::contrasting_text($footerColorField);
+        if (in_array($result->CssClass, ['text-light', 'text-white'])) {
+            $result->FooterBGClass = 'navbar-dark';
+        } else {
+            $result->FooterBGClass = 'navbar-light';
+        }
+        return $result;
+    }
+
     public function getNavbarTextColor(): ArrayData
     {
         $navbarBg = $this->owner->NavbarBg;
@@ -184,20 +207,6 @@ class SiteConfigExtension extends FluentExtension
         } else {
             $result->NavbarBGClass = 'navbar-light';
             $result->BtnCloseClass = 'btn-close-black';
-        }
-        return $result;
-    }
-
-    public function getFooterTextColor(): ArrayData
-    {
-        $footerBg = $this->owner->FooterBg;
-        $convert = new Convert("{$footerBg}");
-        $footerColorField = $convert->fromKebab()->toPascal();
-        $result = ColorHelpers::contrasting_text($footerColorField);
-        if (in_array($result->CssClass, ['text-light', 'text-white'])) {
-            $result->FooterBGClass = 'navbar-dark';
-        } else {
-            $result->FooterBGClass = 'navbar-light';
         }
         return $result;
     }
@@ -325,9 +334,17 @@ class SiteConfigExtension extends FluentExtension
         $footerColors = $this->owner->dbObject('NavbarBg')->enumValues();
         $fields->addFieldToTab('Root.Theme.Colors', $footerBg = DropdownField::create('FooterBg', 'Footer Background Color', $footerColors));
         $footerBg->setDescription('Accessibility contrast rating: ' . $this->owner->getFooterTextColor()->Rating);
-        $fields->addFieldToTab('Root.Main', HTMLEditorField::create('Footer', 'Footer'));
-        
-        
+        $fields->addFieldToTab('Root.Main', HTMLEditorField::create('Footer', 'Footer Text'));
+
+        // FooterLinks
+        $config = GridFieldConfig_RelationEditor::create();
+        $config->addComponent(GridFieldOrderableRows::create('Sort'));
+        $config->removeComponentsByType(GridFieldAddExistingAutocompleter::class);
+        $config->removeComponentsByType(GridFieldDeleteAction::class);
+        $config->addComponent(GridFieldDeleteAction::create());
+        $footerLinks = GridField::create('FooterLinks', 'Footer Links', $this->owner->FooterLinks(), $config);
+        $fields->addFieldToTab('Root.Main', $footerLinks);
+
         parent::updateCMSFields($fields);
     }
 }

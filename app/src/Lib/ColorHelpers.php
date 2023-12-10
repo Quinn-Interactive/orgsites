@@ -144,8 +144,9 @@ class ColorHelpers
         return null;
     }
 
-    public static function contrasting_text($bgColorName): ?ArrayData
+    public static function contrasting_text($bgColorName, ?array $options = null): ?ArrayData
     {
+
         $bg = self::color($bgColorName);
         if (!$bg) {
             return null;
@@ -158,7 +159,7 @@ class ColorHelpers
         $bgColor = Hex::fromString($bg);
         $ratings = [];
         $ratios = [];
-        $options = [
+        $options = $options ?? [
             'light' => $light,
             'dark'  => $dark,
             'white' => $white,

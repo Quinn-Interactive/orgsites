@@ -15,7 +15,8 @@ mix.setPublicPath("dist");
 
 // scss/css
 mix.sass("src/scss/styles.scss", "css")
-   .sass("src/scss/editor.scss", "css");
+    .sass("src/scss/icons.scss", "css")
+    .sass("src/scss/editor.scss", "css");
 
 // js
 mix.js("src/js/index.js", "js").polyfill({
