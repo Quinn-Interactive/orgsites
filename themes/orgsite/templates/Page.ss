@@ -49,7 +49,7 @@
         $Layout
     </main>
     <% include QuinnInteractive/Orgsite/Footer %>
-    <script src="$resourceURL('themes/main/dist/js/index.js')"></script>
+    <script src="$resourceURL('quinninteractive/orgsite:themes/orgsite/dist/js/index.js')"></script>
     <% include QuinnInteractive/Orgsite/ThemeVars %>    
 </body>
 </html>

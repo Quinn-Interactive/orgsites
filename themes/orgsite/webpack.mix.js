@@ -29,7 +29,7 @@ mix.sourceMaps(false);
 
 mix.webpackConfig({
     output: {
-        publicPath: '/_resources/themes/main/dist/',
+        publicPath: '/_resources/vendor/quinninteractive/orgsite/themes/orgsite/dist/',
         chunkFilename: 'js/chunks/[name].js?id=[chunkhash]',
     },
     stats: {
