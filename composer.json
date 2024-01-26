@@ -7,7 +7,7 @@
         "classmap": [
             "app/src/Page.php",
             "app/src/PageController.php"
-        ],
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
