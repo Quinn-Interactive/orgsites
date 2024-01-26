@@ -46,9 +46,9 @@
     "extra": {
         "resources-dir": "_resources",
         "expose": [
-            "dist",
-            "fonts",
-            "images"
+            "themes/orgsite/dist",
+            "themes/orgsite/fonts",
+            "themes/orgsite/images"
         ]
     }
 }
