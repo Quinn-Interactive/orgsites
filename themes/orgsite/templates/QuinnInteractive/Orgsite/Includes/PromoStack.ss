@@ -2,11 +2,11 @@
     <% if not $HideImages %>
         <div class="col-12 col-sm-5 col-md-4 col-lg-3">
             <% if $CardImage %>
-                <% with $CardImage %><% include PromoCardImage %><% end_with %>
+                <% with $CardImage %><% include QuinnInteractive/Orgsite/PromoCardImage %><% end_with %>
             <% else_if $FeaturedImage %>
-                <% with $FeaturedImage %><% include PromoCardImage %><% end_with %>
+                <% with $FeaturedImage %><% include QuinnInteractive/Orgsite/PromoCardImage %><% end_with %>
             <% else_if $Image %>
-                <% with $Image %><% include PromoCardImage %><% end_with %>
+                <% with $Image %><% include QuinnInteractive/Orgsite/PromoCardImage %><% end_with %>
             <% end_if %>
         </div>
     <% end_if %>

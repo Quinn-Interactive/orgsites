@@ -13,9 +13,9 @@
                     <% loop $CombinedPromos %>
                         <%-- badges, cards --%>
                         <% if $Up.PromoType == 'badges' %>
-                            <div class="col slider__slide"><% include PromoBadge HideImages=$Up.HideImages %></div>
+                            <div class="col slider__slide"><% include QuinnInteractive/Orgsite/PromoBadge HideImages=$Up.HideImages %></div>
                         <% else_if $Up.PromoType == 'cards' %>
-                            <div class="col slider__slide"><% include PromoCard HideImages=$Up.HideImages %></div>
+                            <div class="col slider__slide"><% include QuinnInteractive/Orgsite/PromoCard HideImages=$Up.HideImages %></div>
                         <% end_if %>
                     <% end_loop %>
                 </div>
@@ -25,13 +25,13 @@
                 <% loop $CombinedPromos %>
                     <%-- badges, stack, cards, blocks --%>
                     <% if $Up.PromoType == 'badges' %>
-                        <div class="col"><% include PromoBadge HideImages=$Up.HideImages %></div>
+                        <div class="col"><% include QuinnInteractive/Orgsite/PromoBadge HideImages=$Up.HideImages %></div>
                     <% else_if $Up.PromoType == 'stack' %>
-                        <% include PromoStack HideImages=$Up.HideImages %>
+                        <% include QuinnInteractive/Orgsite/PromoStack HideImages=$Up.HideImages %>
                     <% else_if $Up.PromoType == 'cards' %>
-                        <div class="col"><% include PromoCard HideImages=$Up.HideImages %></div>
+                        <div class="col"><% include QuinnInteractive/Orgsite/PromoCard HideImages=$Up.HideImages %></div>
                     <% else_if $Up.PromoType == 'blocks' %>
-                        <% include PromoBlock HideImages=$Up.HideImages %>
+                        <% include QuinnInteractive/Orgsite/PromoBlock HideImages=$Up.HideImages %>
                     <% end_if %>
                 <% end_loop %>
             </div>

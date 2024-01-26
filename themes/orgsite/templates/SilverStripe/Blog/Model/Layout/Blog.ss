@@ -23,7 +23,7 @@
 
 		<div class="content">$Content</div>
 
-		<% include BlogFilters %>
+		<% include QuinnInteractive/Orgsite/BlogFilters %>
 
 		<% if $PaginatedList.Exists %>
 			<% if $ArticleLayout == 'Grid' %>
@@ -50,5 +50,5 @@
 	$Form
 	<%-- $CommentsForm --%>
 
-	<% include Pagination %>
+	<% include QuinnInteractive/Orgsite/Pagination %>
 </div>

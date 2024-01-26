@@ -6,7 +6,7 @@
     style="text-transform: none;"
 >
     <div class="w-100 ratio ratio-16x9 rounded" style="background-image: url('$VideoThumbURL(l)'); background-size: cover;">
-        <% include PlayIcon %>
+        <% include QuinnInteractive/Orgsite/PlayIcon %>
     </div>
     <div class="h3 fs-5 text-black mt-2">$VideoTitle</div>
 </button>

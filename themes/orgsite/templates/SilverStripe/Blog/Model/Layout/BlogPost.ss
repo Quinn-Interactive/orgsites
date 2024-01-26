@@ -1,6 +1,6 @@
 <% require css('silverstripe/blog: client/dist/styles/main.css') %>
 <div class="blog-entry content-container py-3">
-	<% include Breadcrumbs %>
+	<% include QuinnInteractive/Orgsite/Breadcrumbs %>
 	<article>
 		<h1>$Title</h1>
 		<% include SilverStripe\\Blog\\EntryMeta %>

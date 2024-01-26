@@ -1,11 +1,11 @@
 <div class="position-relative mb-3" lang="$SourceLocale.Locale">
     <% if not $HideImages %>
         <% if $CardImage %>
-            <% with $CardImage %><% include PromoBadgeImage %><% end_with %>
+            <% with $CardImage %><% include QuinnInteractive/Orgsite/PromoBadgeImage %><% end_with %>
         <% else_if $FeaturedImage %>
-            <% with $FeaturedImage %><% include PromoBadgeImage %><% end_with %>
+            <% with $FeaturedImage %><% include QuinnInteractive/Orgsite/PromoBadgeImage %><% end_with %>
         <% else_if $Image %>
-            <% with $Image %><% include PromoBadgeImage %><% end_with %>
+            <% with $Image %><% include QuinnInteractive/Orgsite/PromoBadgeImage %><% end_with %>
         <% end_if %>
     <% end_if %>
     <div>

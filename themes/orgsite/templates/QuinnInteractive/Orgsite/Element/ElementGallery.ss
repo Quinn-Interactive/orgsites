@@ -12,7 +12,7 @@
             <div class="row g-4 align-items-stretch slider__slides -has-modals" data-slider-slides>
             <% loop $GalleryItems %>
                 <div class="col-12 col-md-6 col-lg-4 mb-4 text-center slider__slide">
-                    <% include GalleryItem %>
+                    <% include QuinnInteractive/Orgsite/GalleryItem %>
                 </div>
             <% end_loop %>
             </div>
@@ -21,7 +21,7 @@
             <div class="row g-4 align-items-stretch">
                 <% loop $GalleryItems %>
                     <div class="col-12 col-md-6 col-lg-4 mb-4 text-center">
-                        <% include GalleryItem %>
+                        <% include QuinnInteractive/Orgsite/GalleryItem %>
                     </div>
                 <% end_loop %>
             </div>

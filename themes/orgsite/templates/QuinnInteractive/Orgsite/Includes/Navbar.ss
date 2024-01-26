@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-$SiteConfig.NavbarBg $SiteConfig.NavbarTextColor.CssClass $SiteConfig.NavbarTextColor.NavbarBGClass">
     <div class="content-container">
         <a class="navbar-brand d-block $SiteConfig.NavbarTextColor.CssClass position-relative" href="/$CurrentLocaleObject.URLSegment" title="$SiteConfig.Title.ATT">
-            <% include Brand %>
+            <% include QuinnInteractive/Orgsite/Brand %>
         </a>
         <button class="navbar-toggler $SiteConfig.NavbarTextColor.CssClass" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,7 +9,7 @@
         </button>
         <div  id="navbarSupportedContent" class="offcanvas offcanvas-end" tabindex="-1" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header $SiteConfig.NavbarTextColor.CssClass bg-$SiteConfig.NavbarBg">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><% include Brand %></h5>
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><% include QuinnInteractive/Orgsite/Brand %></h5>
                 <button type="button" class="btn-close $SiteConfig.NavbarTextColor.BtnCloseClass" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body bg-$SiteConfig.NavbarBg">

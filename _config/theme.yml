@@ -3,7 +3,7 @@ Name: mytheme
 ---
 SilverStripe\View\SSViewer:
   themes:
-    - 'quinninteractive/orgsite:orgsite'
+    - quinninteractive/orgsite:orgsite
     - '$default'
 SilverStripe\i18n\i18n:
   default_locale: 'en_US'
@@ -17,4 +17,4 @@ Before:
 SilverStripe\LoginForms\EnablerExtension:
   login_themes:
     - '$default'
-    - 'quinninteractive/orgsite:orgsite'
+    - quinninteractive/orgsite:orgsite

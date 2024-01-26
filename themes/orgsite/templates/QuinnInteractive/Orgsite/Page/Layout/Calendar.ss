@@ -31,7 +31,7 @@
                             <h2 class="mb-0">
                                 <a href="$Link" class="stretched-link link-dark link-underline link-underline-opacity-0 link-underline-opacity-100-hover" text-dark" title="<%t SilverStripe\\Blog\\Model\\Blog.ReadMoreAbout "Read more about '{title}'..." title=$Title %>">$Title</a>
                             </h2>
-                            <% include EventDates %>
+                            <% include QuinnInteractive/Orgsite/EventDates %>
                             <div class="mb-n3">
                                 <% if $Summary %>
                                     $Summary
@@ -59,7 +59,7 @@
                 </div>
             <% end_loop %>
         </div>
-        <% include Pagination %>
+        <% include QuinnInteractive/Orgsite/Pagination %>
     <% else %>
         <p><%t SilverStripe\\Blog\\Model\\Blog.NoPosts 'There are no posts' %></p>
     <% end_if %>

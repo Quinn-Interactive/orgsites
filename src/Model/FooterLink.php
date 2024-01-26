@@ -93,7 +93,7 @@ class FooterLink extends Link
     {
         $link = '';
         $themes = SSViewer::get_themes();
-        SSViewer::set_themes(['silverstripe/admin:cms-forms', 'main', '$default']);
+        SSViewer::set_themes(['silverstripe/admin:cms-forms', 'quinninteractive/orgsite:orgsite', '$default']);
         $this->addExtraClass($this->getLinkColor()->CssClass);
         if ($this->LinkURL) {
             $link = $this->renderWith($this->getViewerTemplates());

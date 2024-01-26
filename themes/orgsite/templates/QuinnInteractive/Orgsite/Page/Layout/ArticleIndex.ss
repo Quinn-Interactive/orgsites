@@ -10,6 +10,6 @@
         <% end_loop  %>
     </ul>
 	<div class="overflow-hidden">
-	    <% include Pagination %>
+	    <% include QuinnInteractive/Orgsite/Pagination %>
 	</div>
 </div>

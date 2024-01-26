@@ -55,6 +55,6 @@
         <% end_if %>
     <% end_if %>
     <h1>$Title</h1>
-    <% include EventDates %>
+    <% include QuinnInteractive/Orgsite/EventDates %>
     <div class="content">$Content</div>
 </div>

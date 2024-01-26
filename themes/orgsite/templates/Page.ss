@@ -44,12 +44,12 @@
     <% require themedCSS('dist/css/styles') %>
 </head>
 <body class="body d-flex flex-column d-flex flex-column">
-    <% include Header %>
+    <% include QuinnInteractive/Orgsite/Header %>
     <main class="main flex-grow-1 d-flex flex-column">
         $Layout
     </main>
-    <% include Footer %>
+    <% include QuinnInteractive/Orgsite/Footer %>
     <script src="$resourceURL('themes/main/dist/js/index.js')"></script>
-    <% include ThemeVars %>    
+    <% include QuinnInteractive/Orgsite/ThemeVars %>    
 </body>
 </html>

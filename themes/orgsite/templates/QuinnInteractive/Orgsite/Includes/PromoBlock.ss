@@ -3,11 +3,11 @@
         <% if $CardImage || $FeaturedImage || $Image %>
             <div class="w-md-50 flex-shrink-0 ms-md-4 mb-3 mb-md-0 order-2">
                 <% if $CardImage %>
-                    <% with $CardImage %><% include PromoCardImage %><% end_with %>
+                    <% with $CardImage %><% include QuinnInteractive/Orgsite/PromoCardImage %><% end_with %>
                 <% else_if $FeaturedImage %>
-                    <% with $FeaturedImage %><% include PromoCardImage %><% end_with %>
+                    <% with $FeaturedImage %><% include QuinnInteractive/Orgsite/PromoCardImage %><% end_with %>
                 <% else_if $Image %>
-                    <% with $Image %><% include PromoCardImage %><% end_with %>
+                    <% with $Image %><% include QuinnInteractive/Orgsite/PromoCardImage %><% end_with %>
                 <% end_if %>
             </div>
         <% end_if %>
