@@ -38,5 +38,3 @@ $config->insertButtonsBefore('selectall', 'removeformat');
 // add charmap
 $config->insertButtonsBefore('anchor', 'charmap');
 $config->insertButtonsAfter('anchor', 'hr');
-
-$config->setOption('editor_css', ModuleResourceLoader::singleton()->resourceURL('quinninteractive/orgsite:dist/css/editor.css'));

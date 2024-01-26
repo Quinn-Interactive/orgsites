@@ -9,7 +9,7 @@ SilverStripe\i18n\i18n:
   default_locale: 'en_US'
 SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
   editor_css:
-    - quinninteractive/orgsite/dist/css/editor.css
+    - _resources/vendor/quinninteractive/orgsite/themes/orgsite/dist/css/editor.css
 ---
 Before:
   - '#login-forms'
