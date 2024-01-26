@@ -1,12 +1,9 @@
 ---
-Name: app-mimeuploadvalidator
+Name: additional-mimeuploadvalidator
 After: '#mimeuploadvalidator'
 Only:
   moduleexists: 'silverstripe/mimevalidator'
 ---
-SilverStripe\Core\Injector\Injector:
-  SilverStripe\Assets\Upload_Validator:
-    class: SilverStripe\MimeValidator\MimeUploadValidator
 SilverStripe\MimeValidator\MimeUploadValidator:
   MimeTypes:
     svg:
