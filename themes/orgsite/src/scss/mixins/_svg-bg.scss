@@ -12,7 +12,7 @@ div {
 Styleguide Mixins.svgbg
 */
 @mixin svg-bg($file) {
-    background-image: url('/_resources/quinninteractive/orgsite/themes/orgsite/images/#{$file}.svg');
+    background-image: url('/_resources/vendor/quinninteractive/orgsite/themes/orgsite/images/#{$file}.svg');
     background-repeat: no-repeat;
     background-size: contain;
 }
