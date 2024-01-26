@@ -2,7 +2,7 @@ const mix = require("laravel-mix");
 require("laravel-mix-polyfill");
 
 require("dotenv").config({
-    path: "../../.env",
+    path: "../../../../.env",
 });
 
 // set up mix options
@@ -14,12 +14,12 @@ mix.options({
 mix.setPublicPath("dist");
 
 // scss/css
-mix.sass("client/scss/styles.scss", "css")
-    .sass("client/scss/icons.scss", "css")
-    .sass("client/scss/editor.scss", "css");
+mix.sass("src/scss/styles.scss", "css")
+    .sass("src/scss/icons.scss", "css")
+    .sass("src/scss/editor.scss", "css");
 
 // js
-mix.js("client/js/index.js", "js").polyfill({
+mix.js("src/js/index.js", "js").polyfill({
     enabled: true,
     useBuiltIns: "usage",
     targets: false, // setting to false uses package.jons' browserlist info
@@ -46,8 +46,8 @@ if (process.env.MIX_HOST_DOMAIN && process.env.MIX_PROXY_URL) {
         // logLevel: "debug",
         reloadDelay: 1500,
         files: [
-            "client/scss/**/*.scss",
-            "client/js/**/*.js",
+            "src/scss/**/*.scss",
+            "src/js/**/*.js",
             "templates/",
             "images/",
             "fonts/",
