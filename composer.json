@@ -46,9 +46,9 @@
     "extra": {
         "resources-dir": "_resources",
         "expose": [
-            "themes/main/dist",
-            "themes/main/fonts",
-            "themes/main/images"
+            "dist",
+            "fonts",
+            "images"
         ]
     }
 }
