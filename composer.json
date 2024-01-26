@@ -4,10 +4,9 @@
     "type": "silverstripe-project",
     "license": "proprietary",
     "autoload": {
-        "classmap": [
-            "app/src/Page.php",
-            "app/src/PageController.php"
-        ]
+        "psr-4": {
+            "QuinnInteractive\\Orgsite\\": "src/"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
