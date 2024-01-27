@@ -12,12 +12,14 @@ use SilverStripe\Assets\File;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
+use SilverStripe\View\SSViewer;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use TractorCow\Colorpicker\Color;
 use TractorCow\Fluent\Extension\FluentExtension;
@@ -327,7 +329,8 @@ class SiteConfigExtension extends FluentExtension
             ->setDescription('Will be used for code samples or when monospaced is required.')
         );
         // Type Samples
-        $typeSamples = $this->owner->renderWith('TypeSamples');
+        SSViewer::add_themes(['quinninteractive/orgsite:orgsite']);
+        $typeSamples = $this->owner->renderWith('QuinnInteractive/Orgsite/TypeSamples');
         $fields->addFieldToTab('Root.Theme.Type', LiteralFieldWrapper::create('TypeSamples', 'Type Samples', $typeSamples));
 
         // Footer
