@@ -378,7 +378,7 @@ class SiteConfigExtension extends FluentExtension
         if ($this->owner->FaviconLarge()->exists()) {
             return $this->owner->FaviconLarge();
         }
-        if ($this->owner->Logo()->exists() && $this->owner->Logo()->IsImage()) {
+        if ($this->owner->Logo()->exists() && $this->owner->Logo()->getIsImage()) {
             return $this->owner->Logo();
         }
         return null;
