@@ -11,6 +11,7 @@ use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Image;
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
@@ -18,6 +19,7 @@ use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\SSViewer;
@@ -275,6 +277,8 @@ class SiteConfigExtension extends FluentExtension
 
     public function updateCMSFields(FieldList $fields): void
     {
+        SSViewer::add_themes(['quinninteractive/orgsite:orgsite']);
+
         // Logo
         $logoField = UploadField::create('Logo', 'Logo');
         $logoField->setAllowedExtensions(['png', 'jpg', 'gif', 'svg'])
@@ -297,14 +301,34 @@ class SiteConfigExtension extends FluentExtension
         $fields->addFieldToTab('Root.Logos', $faviconSmall);
 
         // Colors
-        $fields->addFieldToTab('Root.Theme.Colors', HeaderField::create('ColorsHeader', 'Colors'));
         $colors = $this->owner->config()->get('colors');
+        $colorFields = [];
         foreach ($colors as $key => $color) {
             $colorField = ColorField::create($key, $color['title'])
                 ->setDescription($color['description'])
                 ->setRightTitle("Default: {$color['default']}");
-            $fields->addFieldToTab('Root.Theme.Colors', $colorField);
+            $colorFields[] = $colorField;                    
         }
+        $fields->addFieldToTab(
+            'Root.Theme.Colors', 
+            FieldGroup::create($colorFields)
+                ->setTitle('Theme Colors')
+        );
+
+        // Background Colors
+        $bgColors = $this->owner->config()->get('background-colors');
+        $bgColorFields = [];
+        foreach ($bgColors as $key => $color) {
+            $bgColorField = ColorField::create($key, $color['title'], $this->owner->ColorHex($key))
+            ->performDisabledTransformation();
+            $bgColorFields[] = $bgColorField;                    
+        }
+        $fields->addFieldToTab(
+            'Root.Theme.Colors', 
+            FieldGroup::create($bgColorFields)
+                ->setTitle("Background Colors\n(read only)")
+                ->setDescription('These are calculated from Theme Colors. Save to re-calculate after changes to Theme Colors.')
+        );
 
         // NavbarBg
         $navColors = $this->owner->dbObject('NavbarBg')->enumValues();
@@ -348,7 +372,6 @@ class SiteConfigExtension extends FluentExtension
             ->setDescription('Will be used for code samples or when monospaced is required.')
         );
         // Type Samples
-        SSViewer::add_themes(['quinninteractive/orgsite:orgsite']);
         $typeSamples = $this->owner->renderWith('QuinnInteractive/Orgsite/TypeSamples');
         $fields->addFieldToTab('Root.Theme.Type', LiteralFieldWrapper::create('TypeSamples', 'Type Samples', $typeSamples));
 
