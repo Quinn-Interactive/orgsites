@@ -9,6 +9,7 @@ use QuinnInteractive\Orgsite\Model\FooterLink;
 use RyanPotter\SilverStripeColorField\Forms\ColorField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\File;
+use SilverStripe\Assets\Image;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
@@ -90,9 +91,13 @@ class SiteConfigExtension extends FluentExtension
 
     private static $has_one = [
         'Logo' => File::class,
+        'FaviconSmall'   => Image::class,
+        'FaviconLarge'   => Image::class,
     ];
     private static $owns = [
         'Logo',
+        'FaviconSmall',
+        'FaviconLarge',
     ];
     private static $translate = [
         'Title',
@@ -275,7 +280,21 @@ class SiteConfigExtension extends FluentExtension
         $logoField->setAllowedExtensions(['png', 'jpg', 'gif', 'svg'])
             ->setDescription('Small PNG, JPEG, GIF, or SVG file. This logo is shared across all locales.')
             ->setFolderName('SiteLogo');
-        $fields->addFieldToTab('Root.Main', $logoField);
+        $fields->addFieldToTab('Root.Logos', $logoField);
+
+        // FaviconLarge
+        $faviconLarge = UploadField::create('FaviconLarge', 'Favicon Large');
+        $faviconLarge->setAllowedExtensions(['png', 'jpg'])
+        ->setDescription('Large PNG or JPEG file. Ideally 600x600. This icon will be used for other app icons.')
+        ->setFolderName('Favicons');
+        $fields->addFieldToTab('Root.Logos', $faviconLarge);
+
+        // FaviconSmall
+        $faviconSmall = UploadField::create('FaviconSmall', 'Favicon Small');
+        $faviconSmall->setAllowedExtensions(['png', 'jpg'])
+            ->setDescription('Small PNG or JPEG file. Ideally 16x16px. This icon will be used as the browser tab icon.')
+            ->setFolderName('Favicons');
+        $fields->addFieldToTab('Root.Logos', $faviconSmall);
 
         // Colors
         $fields->addFieldToTab('Root.Theme.Colors', HeaderField::create('ColorsHeader', 'Colors'));
@@ -349,5 +368,32 @@ class SiteConfigExtension extends FluentExtension
         $fields->addFieldToTab('Root.Main', $footerLinks);
 
         parent::updateCMSFields($fields);
+    }
+
+    public function FaviconSmallOrLogo(): ?Image
+    {
+        if ($this->owner->FaviconSmall()->exists()) {
+            return $this->owner->FaviconSmall();
+        }
+        if ($this->owner->FaviconLarge()->exists()) {
+            return $this->owner->FaviconLarge();
+        }
+        if ($this->owner->Logo()->exists() && $this->owner->Logo()->IsImage()) {
+            return $this->owner->Logo();
+        }
+        return null;
+    }
+    public function FaviconLargeOrLogo(): ?Image
+    {
+        if ($this->owner->FaviconLarge()->exists()) {
+            return $this->owner->FaviconLarge();
+        }
+        if ($this->owner->FaviconSmall()->exists()) {
+            return $this->owner->FaviconSmall();
+        }
+        if ($this->owner->Logo()->exists() && $this->owner->Logo()->IsImage()) {
+            return $this->owner->Logo();
+        }
+        return null;
     }
 }
