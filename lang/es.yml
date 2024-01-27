@@ -1,0 +1,21 @@
+es:
+  Page:
+    LANGUAGE: Idioma
+    CHOOSE_YEAR: Elija el año
+    CHOOSE_CATEGORY: Elegir la categoría
+    CHOOSE_TAG: Elija etiqueta
+    ALL_YEARS: Todos los años
+    ALL_CATEGORYS: Todas las categorias
+    ALL_TAGS: Todas las etiquetas
+    READ_MORE: Leer más
+  QuinnInteractive\Orgsite\Page\BlockPage:
+    TITLE_DESCRIPTION: Debido a que esta es una página de bloque, el título no se mostrará en la página.Asegúrese de configurar y mostrar el título en su primer bloque.
+  QuinnInteractive\Orgsite\Element\ElementBanner:
+    OPTIONAL: Opcional
+    TextPosition_Title: Posición de texto
+    TextPosition_Options_top: Arriba
+    TextPosition_Options_bottom: Abajo
+    TextPosition_Options_right: Bien
+    TextPosition_Options_left: Izquierda
+    TextPosition_Options_center: Centro
+    Image_Description: 'El mejor tamaño: 3840 × 2160. Use "Focus Point" para asegurarse de que el área de enfoque permanezca en el marco.'    

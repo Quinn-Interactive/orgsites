@@ -1,6 +1,0 @@
-SilverStripe\Blog\Model\Blog:
-  extensions:
-    - QI\App\Extension\BlogExtension
-SilverStripe\Blog\Model\BlogPost:
-  extensions:
-    - QI\App\Extension\BlogPostExtension

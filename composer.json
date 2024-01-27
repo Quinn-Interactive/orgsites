@@ -1,15 +1,11 @@
 {
-    "name": "qi/bvhm",
-    "description": "BVHM PTA Website",
+    "name": "quinninteractive/orgsite",
+    "description": "QI Non-profit Organization Site Module",
     "type": "silverstripe-project",
     "license": "proprietary",
     "autoload": {
-        "classmap": [
-            "app/src/Page.php",
-            "app/src/PageController.php"
-        ],
         "psr-4": {
-            "QI\\Tiltify\\": "app/src/"
+            "QuinnInteractive\\Orgsite\\": "src/"
         }
     },
     "minimum-stability": "dev",
@@ -50,25 +46,9 @@
     "extra": {
         "resources-dir": "_resources",
         "expose": [
-            "app/javascript",
-            "app/images",
-            "themes/main/dist",
-            "themes/main/fonts",
-            "themes/main/images"
-        ],
-        "project-files-installed": [
-            ".htaccess",
-            "app/.htaccess",
-            "app/_config.php",
-            "app/_config/mimevalidator.yml",
-            "app/_config/mysite.yml",
-            "app/src/Page.php",
-            "app/src/PageController.php"
-        ],
-        "public-files-installed": [
-            ".htaccess",
-            "index.php",
-            "web.config"
+            "themes/orgsite/dist",
+            "themes/orgsite/fonts",
+            "themes/orgsite/images"
         ]
     }
 }

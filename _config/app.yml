@@ -1,0 +1,25 @@
+---
+Name: orgsite
+---
+SilverStripe\Assets\File:
+  allowed_extensions:
+    - svg
+    - csv
+    - zip
+# SilverStripe\Control\Email\Email:
+#   admin_email:
+#     no-reply+wearebvhm@quinn.com: 'BVHM PTA'
+#   support_email:
+#     support+wearebvhm@quinn.com: 'BVHM PTA Support'
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - QuinnInteractive\Orgsite\Extension\SiteConfigExtension
+SilverStripe\Assets\Image:
+  extensions:
+    - QuinnInteractive\Orgsite\Extension\QIImageExtension
+JonoM\BetterNavigator:
+  developers:
+    - 'phil@quinn.com'
+    - 'fcondo@quinn.com'
+  translucent: true
+  position: 'right-bottom'

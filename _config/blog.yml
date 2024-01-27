@@ -1,0 +1,6 @@
+SilverStripe\Blog\Model\Blog:
+  extensions:
+    - QuinnInteractive\Orgsite\Extension\BlogExtension
+SilverStripe\Blog\Model\BlogPost:
+  extensions:
+    - QuinnInteractive\Orgsite\Extension\BlogPostExtension
