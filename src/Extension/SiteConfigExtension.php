@@ -10,6 +10,7 @@ use RyanPotter\SilverStripeColorField\Forms\ColorField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Image;
+use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\FieldList;
@@ -19,14 +20,12 @@ use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
-use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\SSViewer;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use TractorCow\Colorpicker\Color;
 use TractorCow\Fluent\Extension\FluentExtension;
-use TractorCow\Fluent\Forms\VisibleLocalesColumn;
 
 /**
  * Class \QuinnInteractive\Orgsite\Extension\SiteConfigExtension
@@ -50,6 +49,7 @@ use TractorCow\Fluent\Forms\VisibleLocalesColumn;
  * @property string $MonospaceFont
  * @property string $Footer
  * @property string $FooterBg
+ * @property string $DefaultBg
  * @property int $LogoID
  * @method \SilverStripe\Assets\File Logo()
  * @method \SilverStripe\ORM\DataList|\QuinnInteractive\Orgsite\Model\FooterLink[] FooterLinks()
@@ -71,6 +71,7 @@ class SiteConfigExtension extends FluentExtension
         'MonospaceFont'  => 'Varchar',
         'Footer'         => 'HTMLText',
         'FooterBg'       => "Enum('primary, secondary, dark, light, white, black', 'primary')",
+        'DefaultBg'       => "Varchar",
     ];
 
     private static $defaults = [
@@ -83,6 +84,7 @@ class SiteConfigExtension extends FluentExtension
         'LightColor'     => '#f8f9fa',
         'DarkColor'      => '#212529',
         'NavbarBg'       => 'primary',
+        'DefaultBg'      => 'White',
         'BodyFont'       => 'native-sans-serif',
         'HeadlineFont'   => 'native-sans-serif',
         'MonospaceFont'  => 'native-monospace',
@@ -220,6 +222,25 @@ class SiteConfigExtension extends FluentExtension
         return $result;
     }
 
+    public function getDefaultBgTextColor(): ArrayData
+    {
+        $bgColors = $this->owner->config()->get('background-colors');
+        $defaultBg = $this->owner->DefaultBg ?? 'White';
+        $convert = new Convert($defaultBg);
+        $defaultBgColorField = $convert->fromKebab()->toPascal();
+        $result = ColorHelpers::contrasting_text($defaultBgColorField);
+        if (in_array($result->CssClass, ['text-light', 'text-white'])) {
+            $result->NavbarBGClass = 'navbar-dark';
+            $result->BtnCloseClass = 'btn-close-white';
+        } else {
+            $result->NavbarBGClass = 'navbar-light';
+            $result->BtnCloseClass = 'btn-close-black';
+        }
+        $result->BgClass = $bgColors[$defaultBg]['cssClass'];
+        Debug::dump($this->owner->DefaultBg); die;
+        return $result;
+    }
+
     public function makeGoogleFontsLink($keys): ?string
     {
         $link = null;
@@ -329,6 +350,15 @@ class SiteConfigExtension extends FluentExtension
                 ->setTitle("Background Colors\n(read only)")
                 ->setDescription('These are calculated from Theme Colors. Save to re-calculate after changes to Theme Colors.')
         );
+
+        // DefaultBg
+        $bgColorOptions = [];
+        foreach ($bgColors as $key => $color) {
+            $bgColorOptions[$key] = $color['title'];
+        }
+        $defaultBgField = DropdownField::create('DefaultBg', 'Default Background Color', $bgColorOptions);
+        $fields->addFieldToTab('Root.Theme.Colors', $defaultBgField);
+        $defaultBgField->setDescription('Accessibility contrast rating: ' . $this->owner->getDefaultBgTextColor()->Rating);
 
         // NavbarBg
         $navColors = $this->owner->dbObject('NavbarBg')->enumValues();

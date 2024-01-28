@@ -3,6 +3,7 @@ namespace QuinnInteractive\Orgsite\Extension;
 
 use QuinnInteractive\Orgsite\Lib\ColorHelpers;
 use SilverStripe\Core\Config\Config;
+use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
@@ -24,8 +25,12 @@ class BaseElementColorsExtension extends DataExtension
     public function getBackground(): ?ArrayData
     {
         $bgColor = $this->owner->getField('BackgroundColor');
-        if (!$this->owner || !$bgColor || $this->owner->config()->get('disable_background_color')) {
+        if (!$this->owner || $this->owner->config()->get('disable_background_color')) {
             return null;
+        }
+        if (!$bgColor) {
+            $siteConfig = SiteConfig::current_site_config();
+            return $siteConfig->getDefaultBgTextColor();
         }
         $colors = Config::inst()->get(SiteConfig::class, 'background-colors');
         $contrastingText = ColorHelpers::contrasting_text($bgColor);

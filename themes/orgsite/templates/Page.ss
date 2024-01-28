@@ -30,7 +30,7 @@
     <%-- CSS --%>
     <% require themedCSS('dist/css/styles') %>
 </head>
-<body class="body d-flex flex-column d-flex flex-column">
+<body class="body d-flex flex-column d-flex flex-column $SiteConfig.DefaultBgTextColor.BgClass $SiteConfig.DefaultBgTextColor.CssClass">
     <% include QuinnInteractive/Orgsite/Header %>
     <main class="main flex-grow-1 d-flex flex-column">
         $Layout
