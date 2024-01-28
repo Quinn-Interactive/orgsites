@@ -5,6 +5,7 @@ use QuinnInteractive\Orgsite\Lib\ColorHelpers;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\SiteConfig\SiteConfig;
@@ -20,6 +21,7 @@ class BaseElementColorsExtension extends DataExtension
 {
     private static $db = [
         'BackgroundColor' => 'Varchar',
+        'BackgroundPattern' => 'Varchar',
     ];
 
     public function getBackground(): ?ArrayData
@@ -36,7 +38,7 @@ class BaseElementColorsExtension extends DataExtension
 
     public function updateCMSFields(FieldList $fields): void
     {
-        $fields->removeByName('BackgroundColor');
+        $fields->removeByName(['BackgroundColor', 'BackgroundPattern']);
         if (!$this->owner->config()->get('disable_background_color')) {
             $colors = Config::inst()->get(SiteConfig::class, 'background-colors');
             $colorOptions = [];
@@ -45,7 +47,9 @@ class BaseElementColorsExtension extends DataExtension
             }
             $colorField = DropdownField::create('BackgroundColor', 'Background Color', $colorOptions)
                 ->setEmptyString('Default');
-            $fields->addFieldToTab('Root.Settings', $colorField);
+
+            $bgPattern = ColorHelpers::pattern_field('BackgroundPattern', 'Background Pattern');
+            $fields->addFieldToTab('Root.Settings', FieldGroup::create($colorField, $bgPattern)->setTitle('Background'));
         }
 
         parent::updateCMSFields($fields);

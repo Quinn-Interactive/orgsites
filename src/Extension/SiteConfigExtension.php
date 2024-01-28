@@ -365,7 +365,6 @@ class SiteConfigExtension extends FluentExtension
         $fields->addFieldToTab('Root.Theme.Colors', FieldGroup::create($defaultBgField, $defaultBgPattern)->setTitle('Default Background'));
 
         // NavbarBg & NavbarBgPattern
-        $fields->removeByName(['NavbarBg', 'NavbarBgPattern']);
         $navColors = $this->owner->dbObject('NavbarBg')->enumValues();
         $navbarBg = DropdownField::create('NavbarBg', 'Navigation Background Color', $navColors);
         $navbarBg->setDescription('Accessibility contrast rating: ' . $this->owner->getNavbarTextColor()->Rating);
@@ -373,7 +372,6 @@ class SiteConfigExtension extends FluentExtension
         $fields->addFieldToTab('Root.Theme.Colors', FieldGroup::create($navbarBg, $navbarBgPattern)->setTitle('Navbar Background'));
 
         // FooterBg && FooterBgPattern
-        $fields->removeByName(['FooterBg', 'FooterBgPattern']);
         $footerColors = $this->owner->dbObject('FooterBg')->enumValues();
         $footerBg = DropdownField::create('FooterBg', 'Footer Background Color', $footerColors);
         $footerBg->setDescription('Accessibility contrast rating: ' . $this->owner->getFooterTextColor()->Rating);
