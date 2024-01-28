@@ -2,6 +2,8 @@
 
 namespace QuinnInteractive\Orgsite\Lib;
 
+use Jawira\CaseConverter\Convert;
+use SilverStripe\Forms\DropdownField;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\View\ArrayData;
@@ -208,5 +210,19 @@ class ColorHelpers
             }
         }
         return 'error';
+    }
+
+    public static function pattern_field(string $name, ?string $title = 'Pattern'): DropdownField
+    {
+        $patterns = SiteConfig::config()->get('patterns');
+        $patternOptions = [];
+        foreach ($patterns as $pattern) {
+            $convert = new Convert($pattern);
+            $label = $convert->fromKebab()->toTitle();
+            $patternOptions[$pattern] = $label;
+        }
+        $field = DropdownField::create($name, $title, $patternOptions);
+        $field->setEmptyString('- None -');
+        return $field;
     }
 }

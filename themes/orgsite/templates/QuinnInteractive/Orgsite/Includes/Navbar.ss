@@ -1,4 +1,9 @@
-<nav class="navbar navbar-expand-lg bg-$SiteConfig.NavbarBg $SiteConfig.NavbarTextColor.CssClass $SiteConfig.NavbarTextColor.NavbarBGClass">
+<nav class="navbar navbar-expand-lg 
+    bg-$SiteConfig.NavbarBg 
+    $SiteConfig.NavbarTextColor.CssClass 
+    $SiteConfig.NavbarTextColor.NavbarBGClass
+    <% if $SiteConfig.NavbarBgPattern %>pattern-$SiteConfig.NavbarBgPattern<% end_if %>
+">
     <div class="content-container">
         <a class="navbar-brand d-block $SiteConfig.NavbarTextColor.CssClass position-relative" href="/$CurrentLocaleObject.URLSegment" title="$SiteConfig.Title.ATT">
             <% include QuinnInteractive/Orgsite/Brand %>

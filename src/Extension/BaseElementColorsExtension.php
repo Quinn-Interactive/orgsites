@@ -25,12 +25,8 @@ class BaseElementColorsExtension extends DataExtension
     public function getBackground(): ?ArrayData
     {
         $bgColor = $this->owner->getField('BackgroundColor');
-        if (!$this->owner || $this->owner->config()->get('disable_background_color')) {
+        if (!$bgColor || !$this->owner || $this->owner->config()->get('disable_background_color')) {
             return null;
-        }
-        if (!$bgColor) {
-            $siteConfig = SiteConfig::current_site_config();
-            return $siteConfig->getDefaultBgTextColor();
         }
         $colors = Config::inst()->get(SiteConfig::class, 'background-colors');
         $contrastingText = ColorHelpers::contrasting_text($bgColor);

@@ -66,12 +66,15 @@ class SiteConfigExtension extends FluentExtension
         'LightColor'     => 'Varchar(7)',
         'DarkColor'      => 'Varchar(7)',
         'NavbarBg'       => "Enum('primary, secondary, dark, light, white, black', 'primary')",
+        'NavbarBgPattern' => 'Varchar',
         'BodyFont'       => 'Varchar',
         'HeadlineFont'   => 'Varchar',
         'MonospaceFont'  => 'Varchar',
         'Footer'         => 'HTMLText',
         'FooterBg'       => "Enum('primary, secondary, dark, light, white, black', 'primary')",
+        'FooterBgPattern' => 'Varchar',
         'DefaultBg'       => "Varchar",
+        'DefaultBgPattern' => 'Varchar',
     ];
 
     private static $defaults = [
@@ -351,20 +354,32 @@ class SiteConfigExtension extends FluentExtension
                 ->setDescription('These are calculated from Theme Colors. Save to re-calculate after changes to Theme Colors.')
         );
 
-        // DefaultBg
+        // DefaultBg & DefaultBgPattern
         $bgColorOptions = [];
         foreach ($bgColors as $key => $color) {
             $bgColorOptions[$key] = $color['title'];
         }
         $defaultBgField = DropdownField::create('DefaultBg', 'Default Background Color', $bgColorOptions);
         $defaultBgField->setDescription('Accessibility contrast rating: ' . $this->owner->getDefaultBgTextColor()->Rating);
-        $fields->addFieldToTab('Root.Theme.Colors', $defaultBgField);
+        $defaultBgPattern = ColorHelpers::pattern_field('DefaultBgPattern', 'Default Bkgnd Pattern');
+        $fields->addFieldToTab('Root.Theme.Colors', FieldGroup::create($defaultBgField, $defaultBgPattern)->setTitle('Default Background'));
 
-        // NavbarBg
+        // NavbarBg & NavbarBgPattern
+        $fields->removeByName(['NavbarBg', 'NavbarBgPattern']);
         $navColors = $this->owner->dbObject('NavbarBg')->enumValues();
-        $fields->addFieldToTab('Root.Theme.Colors', $navbarBg = DropdownField::create('NavbarBg', 'Navigation Background Color', $navColors));
+        $navbarBg = DropdownField::create('NavbarBg', 'Navigation Background Color', $navColors);
         $navbarBg->setDescription('Accessibility contrast rating: ' . $this->owner->getNavbarTextColor()->Rating);
+        $navbarBgPattern = ColorHelpers::pattern_field('NavbarBgPattern', 'Navbar Bkgnd Pattern');
+        $fields->addFieldToTab('Root.Theme.Colors', FieldGroup::create($navbarBg, $navbarBgPattern)->setTitle('Navbar Background'));
 
+        // FooterBg && FooterBgPattern
+        $fields->removeByName(['FooterBg', 'FooterBgPattern']);
+        $footerColors = $this->owner->dbObject('FooterBg')->enumValues();
+        $footerBg = DropdownField::create('FooterBg', 'Footer Background Color', $footerColors);
+        $footerBg->setDescription('Accessibility contrast rating: ' . $this->owner->getFooterTextColor()->Rating);
+        $footerBgPattern = ColorHelpers::pattern_field('FooterBgPattern', 'Footer Bkgnd Pattern');
+        $fields->addFieldToTab('Root.Theme.Colors', FieldGroup::create($footerBg, $footerBgPattern)->setTitle('Footer Background'));
+        
         // Type
         $fields->addFieldToTab('Root.Theme.Type', HeaderField::create('TypeHeader', 'Typography'));
 
@@ -405,10 +420,7 @@ class SiteConfigExtension extends FluentExtension
         $typeSamples = $this->owner->renderWith('QuinnInteractive/Orgsite/TypeSamples');
         $fields->addFieldToTab('Root.Theme.Type', LiteralFieldWrapper::create('TypeSamples', 'Type Samples', $typeSamples));
 
-        // Footer
-        $footerColors = $this->owner->dbObject('NavbarBg')->enumValues();
-        $fields->addFieldToTab('Root.Theme.Colors', $footerBg = DropdownField::create('FooterBg', 'Footer Background Color', $footerColors));
-        $footerBg->setDescription('Accessibility contrast rating: ' . $this->owner->getFooterTextColor()->Rating);
+        // Footer Links
         $fields->addFieldToTab('Root.Main', HTMLEditorField::create('Footer', 'Footer Text'));
 
         // FooterLinks
