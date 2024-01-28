@@ -237,7 +237,7 @@ class SiteConfigExtension extends FluentExtension
             $result->BtnCloseClass = 'btn-close-black';
         }
         $result->BgClass = $bgColors[$defaultBg]['cssClass'];
-        Debug::dump($this->owner->DefaultBg); die;
+        // Debug::dump($this->owner->DefaultBg); die;
         return $result;
     }
 
@@ -357,8 +357,8 @@ class SiteConfigExtension extends FluentExtension
             $bgColorOptions[$key] = $color['title'];
         }
         $defaultBgField = DropdownField::create('DefaultBg', 'Default Background Color', $bgColorOptions);
-        $fields->addFieldToTab('Root.Theme.Colors', $defaultBgField);
         $defaultBgField->setDescription('Accessibility contrast rating: ' . $this->owner->getDefaultBgTextColor()->Rating);
+        $fields->addFieldToTab('Root.Theme.Colors', $defaultBgField);
 
         // NavbarBg
         $navColors = $this->owner->dbObject('NavbarBg')->enumValues();
