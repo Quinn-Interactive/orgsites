@@ -1,5 +1,10 @@
 <footer 
-    class="bg-$SiteConfig.NavbarBg $SiteConfig.NavbarTextColor.CssClass $SiteConfig.NavbarTextColor.NavbarBGClass"
+    class="
+        bg-$SiteConfig.NavbarBg 
+        $SiteConfig.NavbarTextColor.CssClass 
+        $SiteConfig.NavbarTextColor.NavbarBGClass
+        <% if $SiteConfig.FooterBgPattern %>pattern-$SiteConfig.FooterBgPattern<% end_if %>
+    "
     lang="$SiteConfig.SourceLocale.Locale"
 >
     <div class="content-container py-3">

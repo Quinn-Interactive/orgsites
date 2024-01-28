@@ -1,0 +1,24 @@
+/*
+#image-url()
+
+the `image-url` function helps with css URLs for images, putting them in the correct path.
+
+Usage:
+
+```scss
+background-image: image-url('someimage.png');
+```
+
+Produces:
+
+```scss
+background-image: url('/_resources/themes/main/images/someimage.png');
+```
+
+
+Styleguide Functions.imageurl
+*/
+
+@function image-url($path) {
+    @return url('/_resources/vendor/quinninteractive/orgsite/themes/orgsite/images/#{$path}');
+}
