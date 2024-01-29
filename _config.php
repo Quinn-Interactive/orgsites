@@ -2,9 +2,12 @@
 
 // admin_email
 
+use QuinnInteractive\Orgsite\ShortCode\NowShortcode;
+use QuinnInteractive\Orgsite\ShortCode\SinceShortcode;
 use SilverStripe\Control\Email\Email;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Environment;
+use SilverStripe\View\Parsers\ShortcodeParser;
 
 $qi_admin_email = Environment::getEnv('QI_ADMIN_EMAIL');
 $qi_admin_email_name = Environment::getEnv('QI_ADMIN_EMAIL_NAME');
@@ -16,6 +19,11 @@ if ($qi_admin_email) {
         Config::modify()->set(Email::class, 'admin_email', $qi_admin_email);
     }
 }
+
+// Shortcodes
+ShortcodeParser::get()->register('since', array(SinceShortcode::class, 'shortcode_handler'));
+ShortcodeParser::get()->register('now', array(NowShortcode::class, 'shortcode_handler'));
+
 
 
 // add FulltextSearchable
