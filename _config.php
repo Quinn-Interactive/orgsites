@@ -1,12 +1,8 @@
 <?php
 
-use SilverStripe\Dev\Debug;
-use SilverStripe\ORM\Search\FulltextSearchable;
-use SilverStripe\Security\PasswordValidator;
-use SilverStripe\Security\Member;
 
 // add FulltextSearchable
-FulltextSearchable::enable();
+// FulltextSearchable::enable();
 
 // // remove PasswordValidator for SilverStripe 5.0
 // $validator = PasswordValidator::create();
