@@ -1,1 +1,1 @@
-<img src="$ScaleWidth(576).URL" width="$ScaleWidth(576).Width" height="$ScaleWidth(576).Height" class="card-img-top w-100 h-auto" alt="$Title.ATT" loading="lazy">
+<img src="$ScaleWidth(576).URL?v=$Version" width="$ScaleWidth(576).Width" height="$ScaleWidth(576).Height" class="card-img-top w-100 h-auto" alt="$Title.ATT" loading="lazy">

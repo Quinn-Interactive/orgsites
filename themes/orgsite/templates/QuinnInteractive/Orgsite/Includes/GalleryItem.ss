@@ -7,7 +7,7 @@
     <% if $ItemType == 'video' %>class="play-icon position-relative d-block"<% end_if %>
 >
     <% if $Image %>
-        <img src="$Image.FitMax(400,400).URL" width="$Image.FitMax(400,400).Width" height="$Image.FitMax(400,400).Height" class="img-fluid" alt="$Title.ATT">
+        <img src="$Image.FitMax(400,400).URL?v=$Image.Version" width="$Image.FitMax(400,400).Width" height="$Image.FitMax(400,400).Height" class="img-fluid" alt="$Title.ATT">
     <% else_if $ItemType == 'video' %>
         $VideoThumbIMG(l).RAW
     <% end_if %>

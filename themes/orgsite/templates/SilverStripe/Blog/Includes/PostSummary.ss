@@ -16,7 +16,7 @@
 	<div class="d-none d-sm-block col-12 col-sm-5 col-md-4 col-lg-3 col-xl-2">
 		<% if $FeaturedImage %>
 			<% with $FeaturedImage %>
-			<img src="$FocusFill(300,300).URL"
+			<img src="$FocusFill(300,300).URL?v=$Version"
 				class="h-auto w-100"
 				alt="$Title.ATT"
 				loading="lazy"

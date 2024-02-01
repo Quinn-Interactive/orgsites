@@ -10,7 +10,7 @@
         <div class="col-sm-6 col-lg-4 col-xl-3 mb-3 mb-sm-0">
             <div class="card" lang="$SourceLocale.Locale">
                 <% if $Image %>
-                    <img src="$Image.FocusFillMax(400,300).URL" width="400" height="300" class="card-img-top img-fluid" alt="Picture of $Up.Title.ATT">
+                    <img src="$Image.FocusFillMax(400,300).URL?v=$Image.Version" width="400" height="300" class="card-img-top img-fluid" alt="Picture of $Up.Title.ATT">
                 <% end_if %>
                 <div class="card-body">
                     <h5 class="card-title">$Name</h5>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="modal-body">
                             <% if $Image %>
-                                <img src="$Image.FitMax(500,500).URL" width="$Image.FitMax(500,500).Width" height="$Image.FitMax(500,500).Height" class="card-img-top img-fluid float-end w-md-50 w-xl-25 ms-md-3 mb-3" alt="Picture of $Up.Title.ATT">
+                                <img src="$Image.FitMax(500,500).URL?v=$Image.Version" width="$Image.FitMax(500,500).Width" height="$Image.FitMax(500,500).Height" class="card-img-top img-fluid float-end w-md-50 w-xl-25 ms-md-3 mb-3" alt="Picture of $Up.Title.ATT">
                             <% end_if %>
                         
                             <h2>$Name</h2>

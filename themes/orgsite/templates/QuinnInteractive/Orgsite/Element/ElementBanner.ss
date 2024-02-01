@@ -2,18 +2,18 @@
     <% if $Image %>
         <% with $Image %>
             <img class="focused-image banner__image"
-                src="$ScaleWidth(1024).URL"
+                src="$ScaleWidth(1024).URL?v=$Version"
                 width="$ScaleWidth(1024).Width"
                 height="$ScaleWidth(1024).Height"
                 alt=""
                 <% if $Up.Sort > 1 %>loading="lazy"<% end_if %>
                 srcset="
-                <% if $WiderThanOrEqual(320) %>$ScaleWidth(320).URL 320w,<% end_if %>
-                <% if $WiderThanOrEqual(640) %>$ScaleWidth(640).URL 640w,<% end_if %>
-                <% if $WiderThanOrEqual(1024) %>$ScaleWidth(1024).URL 1024w,<% end_if %>
-                <% if $WiderThanOrEqual(1920) %>$ScaleWidth(1920).URL 1920w,<% end_if %>
-                <% if $WiderThanOrEqual(2880) %>$ScaleWidth(2880).URL 2880w,<% end_if %>
-                <% if $WiderThanOrEqual(3840) %>$ScaleWidth(3840).URL 3840w,<% end_if %>
+                <% if $WiderThanOrEqual(320) %>$ScaleWidth(320).URL?v=$Version 320w,<% end_if %>
+                <% if $WiderThanOrEqual(640) %>$ScaleWidth(640).URL?v=$Version 640w,<% end_if %>
+                <% if $WiderThanOrEqual(1024) %>$ScaleWidth(1024).URL?v=$Version 1024w,<% end_if %>
+                <% if $WiderThanOrEqual(1920) %>$ScaleWidth(1920).URL?v=$Version 1920w,<% end_if %>
+                <% if $WiderThanOrEqual(2880) %>$ScaleWidth(2880).URL?v=$Version 2880w,<% end_if %>
+                <% if $WiderThanOrEqual(3840) %>$ScaleWidth(3840).URL?v=$Version 3840w,<% end_if %>
                 "
                 sizes="100vw"
                 data-focus-x="$FocusPoint.X"

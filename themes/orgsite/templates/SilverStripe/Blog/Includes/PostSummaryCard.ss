@@ -2,7 +2,7 @@
 	<% if $FeaturedImage %>
 	<a href="$Link" class="card-img-top" title="<%t SilverStripe\\Blog\\Model\\Blog.ReadMoreAbout "Read more about '{title}'..." title=$Title %>">
 		<% with $FeaturedImage %>
-		<img src="$ScaleWidth(320).URL"
+		<img src="$ScaleWidth(320).URL?v=$Version"
 			class="h-auto w-100"
 			alt="$Title.ATT"
 			loading="lazy"
