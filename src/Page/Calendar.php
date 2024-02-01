@@ -10,6 +10,7 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\NumericField;
+use SilverStripe\ORM\DataList;
 use TractorCow\Fluent\Forms\VisibleLocalesColumn;
 
 /**
@@ -51,5 +52,26 @@ class Calendar extends Page
             $fields->addFieldToTab('Root.Events', $events);
         });
         return parent::getCMSFields();
+    }
+
+    public function PastEvents(): DataList
+    {
+        return $this->Events()->filterAny([
+            'Start:LessThan' => date('Y-m-d'),
+        ])->Sort('Start', 'DESC');
+    }
+
+    // for use on Element Promos block
+    public function Promos(): DataList
+    {
+        return $this->UpcomingEvents();
+    }
+
+    public function UpcomingEvents(): DataList
+    {
+        return $this->Events()->filterAny([
+            'Start:GreaterThanOrEqual' => date('Y-m-d'),
+            'End:GreaterThanOrEqual'   => date('Y-m-d'),
+        ])->Sort('Start', 'ASC');
     }
 }

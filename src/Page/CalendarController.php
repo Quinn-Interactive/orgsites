@@ -2,7 +2,6 @@
 
 use QuinnInteractive\Orgsite\Model\Event;
 use SilverStripe\Control\HTTPRequest;
-use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\PaginatedList;
 
 /**
@@ -44,21 +43,6 @@ class CalendarController extends PageController
         $posts->setPageStart($start);
 
         return $posts;
-    }
-
-    public function PastEvents(): DataList
-    {
-        return $this->Events()->filterAny([
-            'Start:LessThan' => date('Y-m-d'),
-        ])->Sort('Start', 'DESC');
-    }
-
-    public function UpcomingEvents(): DataList
-    {
-        return $this->Events()->filterAny([
-            'Start:GreaterThanOrEqual' => date('Y-m-d'),
-            'End:GreaterThanOrEqual'   => date('Y-m-d'),
-        ])->Sort('Start', 'ASC');
     }
 
     public function view(HTTPRequest $r)

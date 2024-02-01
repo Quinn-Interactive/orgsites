@@ -53,17 +53,25 @@ class ElementPromos extends BaseElement
     public function CombinedPromos(): SS_List
     {
         /** @var SiteTree */
-        $index = $this->Index();
         $list = null;
-        if ($index->exists() && $index->AllChildren()) {
-            /** @var DataList */
-            $list = $index->AllChildren();
-        } else {
-            /** @var ArrayList */
-            $list = $this->Promos();
-        }
+        $list = $this->IndexPromos() ?? $this->Promos();
         if ($this->MaxItems) {
             $list = $list->limit($this->MaxItems);
+        }
+        return $list;
+    }
+
+    public function IndexPromos(): ?DataList
+    {
+        /** @var SiteTree */
+        $index = $this->Index();
+        $list = null;
+        if ($index->exists() && $index->Promos()) {
+            /** @var DataList */
+            $list = $index->Promos();
+        } else if ($index->exists() && $index->AllChildren()) {
+            /** @var DataList */
+            $list = $index->AllChildren();
         }
         return $list;
     }

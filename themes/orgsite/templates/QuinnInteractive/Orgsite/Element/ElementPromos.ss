@@ -37,4 +37,12 @@
             </div>
         <% end_if %>
     <% end_if %>
+
+    <% if $Index && $MaxItems > 0 && $MaxItems < $IndexPromos.Count %>
+        <p class="mt-4">
+            <a href="$Index.Link" class="btn btn-primary btn-sm">
+                <%t SilverStripe\\Blog\\Model\\Blog.ReadMoreAbout "Read more about '{title}'..." title=$Index.Title %>
+            </a>
+        </p>
+    <% end_if %>
 </div>
