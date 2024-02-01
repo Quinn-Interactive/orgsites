@@ -11,8 +11,8 @@
     <div class="card-body">
         <h5 class="card-title">$Title</h5>
         <p class="card-text">
-            <% if $Date || $DisplayDate %>
-                <div class="mt-n3 mb-0"><% if $DisplayDate %>$DisplayDate<% else %>$Date.Date<% end_if %></div>
+            <% if $Start || $Date || $DisplayDate %>
+                <% include QuinnInteractive/Orgsite/EventDates %>
             <% end_if %>
             $DescriptionOrSummary
         </p>

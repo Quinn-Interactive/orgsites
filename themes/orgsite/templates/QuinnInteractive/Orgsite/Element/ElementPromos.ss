@@ -1,7 +1,19 @@
 <div class="content-container py-3">
-    <% if $ShowTitle && $Title %>
-        <% if $Pos == 1 %><h1>$Title</h1><% else %><h2>$Title</h2><% end_if %>
-    <% end_if %>
+    <div class=" d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+        <% if $ShowTitle && $Title %>
+            <% if $Pos == 1 %><h1>$Title</h1><% else %><h2>$Title</h2><% end_if %>
+        <% end_if %>
+        <% if $Index %>
+            <a href="$Index.Link" class="d-block fs-5">
+                <% if $IndexPromos.Count > CombinedPromos.Count %>
+                    <%t Page.MORE_TITLE "More {title}" title=$Index.Title %>
+                <% else %>
+                    $Index.Title 
+                <% end_if %>
+                <i class="ms-1 bi bi-arrow-right-circle fs-6"></i>
+            </a>
+        <% end_if %>
+    </div>
     <% if $HTML %>
         $HTML
     <% end_if %>
@@ -38,11 +50,4 @@
         <% end_if %>
     <% end_if %>
 
-    <% if $Index && $MaxItems > 0 && $MaxItems < $IndexPromos.Count %>
-        <p class="mt-4">
-            <a href="$Index.Link" class="btn btn-primary btn-sm">
-                <%t SilverStripe\\Blog\\Model\\Blog.ReadMoreAbout "Read more about '{title}'..." title=$Index.Title %>
-            </a>
-        </p>
-    <% end_if %>
 </div>

@@ -15,8 +15,8 @@
 
     <div class="flex-grow-1 order-1">
         <h5>$Title</h5>
-        <% if $Date || $DisplayDate %>
-            <p class="mt-n1 mb-0"><% if $DisplayDate %>$DisplayDate<% else %>$Date.Date<% end_if %></p>
+        <% if $Start || $Date || $DisplayDate %>
+            <% include QuinnInteractive/Orgsite/EventDates %>
         <% end_if %>
         <p>
             $DescriptionOrSummary

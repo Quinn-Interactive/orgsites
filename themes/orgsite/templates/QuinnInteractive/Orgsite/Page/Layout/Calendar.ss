@@ -28,8 +28,14 @@
                 <div class="border-bottom py-3">
                     <div class="row position-relative" lang="$SourceLocale.Locale">
                         <div class="col-12 col-sm-7 col-md-8 col-lg-9 col-xl-10">
-                            <h2 class="mb-0">
-                                <a href="$Link" class="stretched-link link-dark link-underline link-underline-opacity-0 link-underline-opacity-100-hover" text-dark" title="<%t SilverStripe\\Blog\\Model\\Blog.ReadMoreAbout "Read more about '{title}'..." title=$Title %>">$Title</a>
+                            <h2 class="mb-2">
+                                <% if $Link %>
+                                    <a href="$Link" class="stretched-link link-dark link-underline link-underline-opacity-0 link-underline-opacity-100-hover" text-dark" title="<%t SilverStripe\\Blog\\Model\\Blog.ReadMoreAbout "Read more about '{title}'..." title=$Title %>">
+                                        $Title <i class="ms-1 bi bi-arrow-right-circle fs-4"></i>
+                                    </a>
+                                <% else %>
+                                    $Title
+                                <% end_if %>
                             </h2>
                             <% include QuinnInteractive/Orgsite/EventDates %>
                             <div class="mb-n3">

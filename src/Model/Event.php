@@ -154,10 +154,14 @@ class Event extends DataObject
     /**
      * Figure out a link for this for the front end
      *
-     * @return string
+     * @return ?string
      */
     public function Link($action = 'view')
     {
+        // if we don't have any content, then we don't need a link
+        if (!$this->Content) {
+            return null;
+        }
         $base = $this->Calendar()->Link();
         $slug = Helpers::generate_slug($this->Title);
         $url = Controller::join_links($base, $action, $this->ID, $slug);

@@ -12,8 +12,8 @@
     <% end_if %>
     <div class="<% if not $HideImages %>col-12 col-sm-7 col-md-8 col-lg-9<% else %>col-12<% end_if %>">
         <h5>$Title</h5>
-        <% if $Date || $DisplayDate %>
-            <p class="mt-n1 mb-0"><% if $DisplayDate %>$DisplayDate<% else %>$Date.Date<% end_if %></p>
+        <% if $Start || $Date || $DisplayDate %>
+            <% include QuinnInteractive/Orgsite/EventDates %>
         <% end_if %>
         <p>
             $DescriptionOrSummary

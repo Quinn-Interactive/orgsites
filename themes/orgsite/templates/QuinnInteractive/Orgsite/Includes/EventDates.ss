@@ -1,4 +1,4 @@
-<div>
+<div class="mb-2">
     <i class="bi bi-calendar me-1" aria-hidden></i>
     <% if $DisplayDate %>
         $DisplayDate
