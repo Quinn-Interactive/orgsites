@@ -3,7 +3,6 @@ namespace QuinnInteractive\Orgsite\Extension;
 
 use DNADesign\Elemental\Models\BaseElement;
 use Jawira\CaseConverter\Convert;
-use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 
@@ -40,6 +39,12 @@ class BaseElementExtension extends DataExtension
         if ($parent && $parent->exists()) {
             return $parent->Elements()->filter('Sort:LessThan', $this->owner->Sort)->Sort('Sort', 'DESC')->first();
         }
+    }
+
+    // override this is your element to hide/show element
+    public function getShowElement()
+    {
+        return true;
     }
 
     // override this is your element to change the default summary value

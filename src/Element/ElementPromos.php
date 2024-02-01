@@ -33,6 +33,7 @@ class ElementPromos extends BaseElement
         'PromoLayout' => "Enum('grid, slider','grid')",
         'MaxItems'    => "Int",
         'HideImages'    => "Boolean",
+        'HideBlockIfNoPromos'    => "Boolean",
     ];
     private static $description = 'Promos';
     private static $has_many = [
@@ -129,6 +130,16 @@ class ElementPromos extends BaseElement
                 break;
         }
     }
+
+    // control whether or not to show the element
+    public function getShowElement(): bool
+    {
+        if ($this->HideBlockIfNoPromos && !$this->CombinedPromos()->Count) {
+            return false;
+        }
+        return true;
+    }
+    
 
     public function getType()
     {
