@@ -26,7 +26,8 @@
         "ryanpotter/silverstripe-color-field": "^1.0",
         "spatie/color": "^1.5",
         "silverstripe/blog": "^4.1",
-        "gorriecoe/silverstripe-linkfield": "^1.1"
+        "gorriecoe/silverstripe-linkfield": "^1.1",
+        "silverstripe/userforms": "^6.1"
     },
     "require-dev": {
         "oddnoc/silverstripe-artefactcleaner": "^4.0",
@@ -49,6 +50,19 @@
             "themes/orgsite/dist",
             "themes/orgsite/fonts",
             "themes/orgsite/images"
+        ],
+        "project-files-installed": [
+            ".htaccess",
+            "app/.htaccess",
+            "app/_config/mimevalidator.yml",
+            "app/_config/mysite.yml",
+            "app/src/Page.php",
+            "app/src/PageController.php"
+        ],
+        "public-files-installed": [
+            ".htaccess",
+            "index.php",
+            "web.config"
         ]
     }
 }
