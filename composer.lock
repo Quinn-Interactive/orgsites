@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "62415dc43fb3804cbe24a0987cbedc83",
+    "content-hash": "25a58cf2e861af907f63df1a5ff446e1",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -8099,7 +8099,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "silverstripe/sspak": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

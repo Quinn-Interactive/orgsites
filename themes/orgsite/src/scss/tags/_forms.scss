@@ -1,0 +1,223 @@
+/* stylelint-disable scss/at-extend-no-missing-placeholder, selector-max-compound-selectors */
+
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+textarea,
+input[type='password'] {
+    @extend .form-control;
+}
+
+input[type='button'],
+input[type='submit'],
+button {
+    @extend .btn;
+    @extend .btn-primary;
+
+    &.-secondary {
+        @extend .btn-secondary;
+    }
+}
+
+label {
+    @extend .form-label;
+
+    &.required {
+        &::after {
+            color: $red;
+            content: ' *';
+        }
+    }
+}
+
+.required.message {
+    color: $red;
+}
+
+.field.requiredField label {
+    &::after {
+        color: $red;
+        content: ' *';
+    }
+}
+
+fieldset > .field,
+.userform-fields .field {
+    @extend .mb-3;
+}
+
+.field.optionset:not(.inline-options) {
+    display: block;
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+
+    ul.optionset {
+        margin-left: 0;
+        padding-left: 0;
+    }
+
+    li {
+        @extend .form-check;
+    }
+
+    input {
+        @extend .form-check-input;
+    }
+
+    label {
+        @extend .form-check-label;
+    }
+}
+
+.optionset.inline-options {
+    >label {
+        display: block;
+    }
+
+    >.middleColumn>.optionset {
+        // @extend .btn-group;
+
+        li {
+            display: block;
+        }
+
+        input {
+            @extend .btn-check;
+        }
+
+        label {
+            @extend .btn-outline-primary;
+        }
+    }
+}
+
+ul.optionset.-list-columns {
+    @include media-breakpoint-up(md) {
+        columns: 2;
+    }
+    @include media-breakpoint-up(lg) {
+        columns: 3;
+    }
+}
+
+
+.field.dropdown,
+.fieldholder-small.dropdown {
+    select {
+        @extend .form-select;
+    }
+}
+
+ul.optionset[data-msg-required] {
+    span.required.message {
+        display: none !important;
+    }
+
+    &.invalid {
+        &::after {
+            color: $red;
+            content: attr(data-msg-required);
+            display: block;
+        }
+    }
+}
+
+.field.fieldgroup {
+    margin-bottom: 0 !important;
+}
+
+.CompositeField.fieldgroup {
+    .middleColumn {
+        @extend .row;
+
+        @include media-breakpoint-down(md) {
+            display: block;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        >.fieldgroup-field {
+            @extend .col;
+            @extend .mb-3;
+
+            @include media-breakpoint-down(md) {
+                display: block;
+                margin-bottom: 0;
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    }
+
+    &.-wrap-2 .middleColumn {
+        @include media-breakpoint-up(md) {
+            flex-wrap: wrap !important;
+            // width: 100%;
+
+            .fieldgroup-field {
+                flex: 0 0 50%;
+                width: 50%;
+            }
+        }
+    }
+}
+
+// yes or no checkboxes
+.field.-yesorno {
+    label {
+        cursor: pointer;
+        position: relative;
+
+        &::before {
+            background-color: $gray-200;
+            border: 1px solid $gray-500;
+            border-radius: 4px;
+            content: 'NO';
+            display: inline-block;
+            font-size: 0.7em;
+            font-weight: bold;
+            line-height: 1;
+            margin-right: 0.75em;
+            padding: 0.5em;
+            text-align: right;
+            transform: translateY(-0.125em);
+            transition: all 0.25s ease;
+            vertical-align: baseline;
+            width: 4.2em;
+        }
+
+        &::after {
+            background-color: $gray-700;
+            border-radius: 3px;
+            content: '';
+            display: inline-block;
+            height: 1em;
+            left: 0.3em;
+            position: absolute;
+            top: 0.25em;
+            transition: all 0.25s ease;
+            vertical-align: top;
+            width: 0.5em;
+        }
+    }
+
+    input {
+        display: none;
+    }
+
+    input:checked + label {
+        &::before {
+            background-color: $primary;
+            border: 1px solid $primary;
+            color: $white;
+            content: 'YES';
+            text-align: left;
+        }
+
+        &::after {
+            background-color: $white;
+            left: 2.2em;
+        }
+    }
+}
