@@ -1,0 +1,65 @@
+.userform {
+    .userform-fields {
+        margin: 1em 0;
+    }
+
+    fieldset {
+        border: 0;
+        margin: 1em 0;
+        padding: 0;
+
+        &.userformsgroup {
+            border: 0;
+            margin: 0;
+            padding: 0;
+
+            legend {
+                padding: 0;
+            }
+
+            >.middleColumn {
+                @extend .row;
+
+                @include media-breakpoint-down(md) {
+                    display: block;
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+                /* stylelint-disable selector-max-compound-selectors */
+                >.field {
+                    @extend .col;
+                    @extend .mb-3;
+
+                    @include media-breakpoint-down(md) {
+                        display: block;
+                        margin-bottom: 0;
+                        padding-left: 0;
+                        padding-right: 0;
+                    }
+                }
+
+            }
+        }
+    }
+
+    .progress {
+        margin-bottom: 0.5em;
+
+        + nav {
+            height: 2em;
+        }
+    }
+
+    .step-buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .step-button-wrapper {
+        display: block;
+    }
+
+    .step-button-jump {
+        font-size: 0.75em;
+    }
+}
