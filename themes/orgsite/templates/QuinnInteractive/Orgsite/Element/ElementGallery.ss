@@ -1,4 +1,4 @@
-<% cached ElementVideoCarousel, $ID, $LastEdited, $Videos.Count, $Videos.Max('LastEdited'), $Locale %>
+<% cached ElementVideoCarousel, $ID, $LastEdited, $Videos.Count, $Videos.Max('LastEdited'), $GalleryItems.Max('LastEdited'), $GalleryItems.Count, $Locale %>
 <div class="content-container py-3">
     <% if $ShowTitle && $Title %>
         <% if $Pos == 1 %><h1>$Title</h1><% else %><h2>$Title</h2><% end_if %>

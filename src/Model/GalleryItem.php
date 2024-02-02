@@ -34,9 +34,10 @@ use TractorCow\Fluent\Extension\FluentVersionedExtension;
 class GalleryItem extends DataObject
 {
     private static $db = [
-        'Title'   => 'Varchar(128)',
-        'Caption' => 'HTMLText',
-        'Sort'    => 'Int',
+        'Title'     => 'Varchar(128)',
+        'ShowTitle' => 'Boolean',
+        'Caption'   => 'HTMLText',
+        'Sort'      => 'Int',
     ];
 
     private static $default_sort = 'Sort ASC';
@@ -67,6 +68,7 @@ class GalleryItem extends DataObject
         $fields = parent::getCMSFields();
 
         // Title
+        $fields->removeByName('ShowTitle');
         $fields->replaceField(
             'Title',
             TextCheckboxGroupField::create()
@@ -93,9 +95,10 @@ class GalleryItem extends DataObject
         return $fields;
     }
 
-    public function getImageThumbnail() {
+    public function getImageThumbnail()
+    {
         if ($this->Image()->exists()) {
-            return $this->Image()->FitMax(120,90);
+            return $this->Image()->FitMax(120, 90);
         }
         if ($this->owner->VideoSource() == 'Vimeo' || $this->owner->VideoSource() == 'YouTube') {
             return DBField::create_field('HTMLText', $this->VideoThumbIMG('s'));
@@ -103,22 +106,24 @@ class GalleryItem extends DataObject
         return null;
     }
 
-    public function getLink() {
-        switch ($this->getItemType()) {
-            case 'video':
-                return $this->VideoURL;            
-            case 'image':
-                return $this->Image()->getURL();            
-        }
-        return null;
-    }
-
-    public function getItemType() {
+    public function getItemType()
+    {
         if ($this->VideoURL && ($this->IsYouTube() || $this->IsVimeo())) {
             return 'video';
-        } else if ($this->Image()->exists()) {
+        } elseif ($this->Image()->exists()) {
             return 'image';
         }
         return 'unknown';
+    }
+
+    public function getLink()
+    {
+        switch ($this->getItemType()) {
+            case 'video':
+                return $this->VideoURL;
+            case 'image':
+                return $this->Image()->getURL();
+        }
+        return null;
     }
 }
