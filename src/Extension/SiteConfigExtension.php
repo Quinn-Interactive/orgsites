@@ -20,6 +20,7 @@ use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\TextareaField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\SSViewer;
@@ -57,24 +58,25 @@ use TractorCow\Fluent\Extension\FluentExtension;
 class SiteConfigExtension extends FluentExtension
 {
     private static $db = [
-        'PrimaryColor'   => 'Varchar(7)',
-        'SecondaryColor' => 'Varchar(7)',
-        'SuccessColor'   => 'Varchar(7)',
-        'DangerColor'    => 'Varchar(7)',
-        'WarningColor'   => 'Varchar(7)',
-        'InfoColor'      => 'Varchar(7)',
-        'LightColor'     => 'Varchar(7)',
-        'DarkColor'      => 'Varchar(7)',
-        'NavbarBg'       => "Enum('primary, secondary, dark, light, white, black', 'primary')",
-        'NavbarBgPattern' => 'Varchar',
-        'BodyFont'       => 'Varchar',
-        'HeadlineFont'   => 'Varchar',
-        'MonospaceFont'  => 'Varchar',
-        'Footer'         => 'HTMLText',
-        'FooterBg'       => "Enum('primary, secondary, dark, light, white, black', 'primary')",
-        'FooterBgPattern' => 'Varchar',
-        'DefaultBg'       => "Varchar",
+        'PrimaryColor'     => 'Varchar(7)',
+        'SecondaryColor'   => 'Varchar(7)',
+        'SuccessColor'     => 'Varchar(7)',
+        'DangerColor'      => 'Varchar(7)',
+        'WarningColor'     => 'Varchar(7)',
+        'InfoColor'        => 'Varchar(7)',
+        'LightColor'       => 'Varchar(7)',
+        'DarkColor'        => 'Varchar(7)',
+        'NavbarBg'         => "Enum('primary, secondary, dark, light, white, black', 'primary')",
+        'NavbarBgPattern'  => 'Varchar',
+        'BodyFont'         => 'Varchar',
+        'HeadlineFont'     => 'Varchar',
+        'MonospaceFont'    => 'Varchar',
+        'Footer'           => 'HTMLText',
+        'FooterBg'         => "Enum('primary, secondary, dark, light, white, black', 'primary')",
+        'FooterBgPattern'  => 'Varchar',
+        'DefaultBg'        => "Varchar",
         'DefaultBgPattern' => 'Varchar',
+        'CustomCSS'        => 'Text',
     ];
 
     private static $defaults = [
@@ -97,9 +99,9 @@ class SiteConfigExtension extends FluentExtension
     ];
 
     private static $has_one = [
-        'Logo' => File::class,
-        'FaviconSmall'   => Image::class,
-        'FaviconLarge'   => Image::class,
+        'Logo'         => File::class,
+        'FaviconSmall' => Image::class,
+        'FaviconLarge' => Image::class,
     ];
     private static $owns = [
         'Logo',
@@ -160,6 +162,33 @@ class SiteConfigExtension extends FluentExtension
     {
         return ColorHelpers::color_rgb_vals($name);
     }
+    public function FaviconLargeOrLogo(): ?Image
+    {
+        if ($this->owner->FaviconLarge()->exists()) {
+            return $this->owner->FaviconLarge();
+        }
+        if ($this->owner->FaviconSmall()->exists()) {
+            return $this->owner->FaviconSmall();
+        }
+        if ($this->owner->Logo()->exists() && $this->owner->Logo()->getIsImage()) {
+            return $this->owner->Logo();
+        }
+        return null;
+    }
+
+    public function FaviconSmallOrLogo(): ?Image
+    {
+        if ($this->owner->FaviconSmall()->exists()) {
+            return $this->owner->FaviconSmall();
+        }
+        if ($this->owner->FaviconLarge()->exists()) {
+            return $this->owner->FaviconLarge();
+        }
+        if ($this->owner->Logo()->exists() && $this->owner->Logo()->getIsImage()) {
+            return $this->owner->Logo();
+        }
+        return null;
+    }
 
     public function FontData($name): ?ArrayData
     {
@@ -186,6 +215,25 @@ class SiteConfigExtension extends FluentExtension
         }
         // Debug::dump($code); die;
         return join("\n", $code);
+    }
+
+    public function getDefaultBgTextColor(): ArrayData
+    {
+        $bgColors = $this->owner->config()->get('background-colors');
+        $defaultBg = $this->owner->DefaultBg ?? 'White';
+        $convert = new Convert($defaultBg);
+        $defaultBgColorField = $convert->fromKebab()->toPascal();
+        $result = ColorHelpers::contrasting_text($defaultBgColorField);
+        if (in_array($result->CssClass, ['text-light', 'text-white'])) {
+            $result->NavbarBGClass = 'navbar-dark';
+            $result->BtnCloseClass = 'btn-close-white';
+        } else {
+            $result->NavbarBGClass = 'navbar-light';
+            $result->BtnCloseClass = 'btn-close-black';
+        }
+        $result->BgClass = $bgColors[$defaultBg]['cssClass'];
+        // Debug::dump($this->owner->DefaultBg); die;
+        return $result;
     }
 
     public function getFont($key): ?array
@@ -222,25 +270,6 @@ class SiteConfigExtension extends FluentExtension
             $result->NavbarBGClass = 'navbar-light';
             $result->BtnCloseClass = 'btn-close-black';
         }
-        return $result;
-    }
-
-    public function getDefaultBgTextColor(): ArrayData
-    {
-        $bgColors = $this->owner->config()->get('background-colors');
-        $defaultBg = $this->owner->DefaultBg ?? 'White';
-        $convert = new Convert($defaultBg);
-        $defaultBgColorField = $convert->fromKebab()->toPascal();
-        $result = ColorHelpers::contrasting_text($defaultBgColorField);
-        if (in_array($result->CssClass, ['text-light', 'text-white'])) {
-            $result->NavbarBGClass = 'navbar-dark';
-            $result->BtnCloseClass = 'btn-close-white';
-        } else {
-            $result->NavbarBGClass = 'navbar-light';
-            $result->BtnCloseClass = 'btn-close-black';
-        }
-        $result->BgClass = $bgColors[$defaultBg]['cssClass'];
-        // Debug::dump($this->owner->DefaultBg); die;
         return $result;
     }
 
@@ -331,10 +360,10 @@ class SiteConfigExtension extends FluentExtension
             $colorField = ColorField::create($key, $color['title'])
                 ->setDescription($color['description'])
                 ->setRightTitle("Default: {$color['default']}");
-            $colorFields[] = $colorField;                    
+            $colorFields[] = $colorField;
         }
         $fields->addFieldToTab(
-            'Root.Theme.Colors', 
+            'Root.Theme.Colors',
             FieldGroup::create($colorFields)
                 ->setTitle('Theme Colors')
         );
@@ -345,10 +374,10 @@ class SiteConfigExtension extends FluentExtension
         foreach ($bgColors as $key => $color) {
             $bgColorField = ColorField::create($key, $color['title'], $this->owner->ColorHex($key))
             ->performDisabledTransformation();
-            $bgColorFields[] = $bgColorField;                    
+            $bgColorFields[] = $bgColorField;
         }
         $fields->addFieldToTab(
-            'Root.Theme.Colors', 
+            'Root.Theme.Colors',
             FieldGroup::create($bgColorFields)
                 ->setTitle("Background Colors\n(read only)")
                 ->setDescription('These are calculated from Theme Colors. Save to re-calculate after changes to Theme Colors.')
@@ -377,7 +406,7 @@ class SiteConfigExtension extends FluentExtension
         $footerBg->setDescription('Accessibility contrast rating: ' . $this->owner->getFooterTextColor()->Rating);
         $footerBgPattern = ColorHelpers::pattern_field('FooterBgPattern', 'Footer Bkgnd Pattern');
         $fields->addFieldToTab('Root.Theme.Colors', FieldGroup::create($footerBg, $footerBgPattern)->setTitle('Footer Background'));
-        
+
         // Type
         $fields->addFieldToTab('Root.Theme.Type', HeaderField::create('TypeHeader', 'Typography'));
 
@@ -418,6 +447,13 @@ class SiteConfigExtension extends FluentExtension
         $typeSamples = $this->owner->renderWith('QuinnInteractive/Orgsite/TypeSamples');
         $fields->addFieldToTab('Root.Theme.Type', LiteralFieldWrapper::create('TypeSamples', 'Type Samples', $typeSamples));
 
+        // CustomCSS
+        $customCSS = TextareaField::create('CustomCSS', 'Custom CSS');
+        $customCSS->setRows(20);
+        $customCSS->setDescription('Optional. Will be added to every page inside &lt;style&gt;…&lt;style&gt; tags.');
+        $fields->removeByName('CustomCSS');
+        $fields->addFieldToTab('Root.Theme.CSS', $customCSS);
+
         // Footer Links
         $fields->addFieldToTab('Root.Main', HTMLEditorField::create('Footer', 'Footer Text'));
 
@@ -431,32 +467,5 @@ class SiteConfigExtension extends FluentExtension
         $fields->addFieldToTab('Root.Main', $footerLinks);
 
         parent::updateCMSFields($fields);
-    }
-
-    public function FaviconSmallOrLogo(): ?Image
-    {
-        if ($this->owner->FaviconSmall()->exists()) {
-            return $this->owner->FaviconSmall();
-        }
-        if ($this->owner->FaviconLarge()->exists()) {
-            return $this->owner->FaviconLarge();
-        }
-        if ($this->owner->Logo()->exists() && $this->owner->Logo()->getIsImage()) {
-            return $this->owner->Logo();
-        }
-        return null;
-    }
-    public function FaviconLargeOrLogo(): ?Image
-    {
-        if ($this->owner->FaviconLarge()->exists()) {
-            return $this->owner->FaviconLarge();
-        }
-        if ($this->owner->FaviconSmall()->exists()) {
-            return $this->owner->FaviconSmall();
-        }
-        if ($this->owner->Logo()->exists() && $this->owner->Logo()->getIsImage()) {
-            return $this->owner->Logo();
-        }
-        return null;
     }
 }

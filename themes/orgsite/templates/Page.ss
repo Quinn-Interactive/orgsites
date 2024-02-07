@@ -29,6 +29,12 @@
     $SiteConfig.FontHeadCode.RAW
     <%-- CSS --%>
     <% require themedCSS('dist/css/styles') %>
+
+    <% if $SiteConfig.CustomCSS %>
+        <style>
+            $SiteConfig.CustomCSS.RAW
+        </style>
+    <% end_if %>
 </head>
 <body class="
     body d-flex flex-column d-flex flex-column min-vh-100 

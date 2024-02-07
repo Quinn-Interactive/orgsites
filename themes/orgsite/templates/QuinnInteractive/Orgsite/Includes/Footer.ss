@@ -1,5 +1,6 @@
 <footer 
     class="
+        footer
         bg-$SiteConfig.NavbarBg 
         $SiteConfig.NavbarTextColor.CssClass 
         $SiteConfig.NavbarTextColor.NavbarBGClass
