@@ -31,6 +31,7 @@ class ElementPromos extends BaseElement
     private static $db = [
         'PromoType'   => "Enum('badges, stack, cards, blocks', 'cards')",
         'PromoLayout' => "Enum('grid, slider','grid')",
+        'ButtonStyle' => "Enum('button, whole card, whole card and button', 'button')",
         'MaxItems'    => "Int",
         'HideImages'    => "Boolean",
         'HideText'    => "Boolean",
@@ -88,6 +89,10 @@ class ElementPromos extends BaseElement
         // PromoLayout
         $layout = $fields->dataFieldByName('PromoLayout')->setDescription('slider will make one line of promos where you can go forward or back. Blocks and stacks are always stacked and cannot be sliders. Make sure your items all have images the same aspect ratio, and text similar lengths.');
 
+        // ButtonStyle
+        $btnStyle = $fields->dataFieldByName('ButtonStyle');
+        $btnStyle->setDescription('Do not whole card if there are links in the content');
+
         // MaxItems
         $fields->dataFieldByName('MaxItems')->setDescription('Maximum number of items to show. If 0 or empty, block will show all items.');
 
@@ -121,10 +126,10 @@ class ElementPromos extends BaseElement
         // badges, stack, cards, blocks
         switch ($this->PromoType) {
             case 'badges':
-                return 'row row-cols-2 row-cols-sm-3 row-cols-lg-4 row-cols-xl-6 g-4';
+                return 'row row-cols-2 row-cols-sm-3 row-cols-lg-4 row-cols-xl-6 g-4 justify-content-center';
                 break;
             case 'cards':
-                return 'row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4';
+                return 'row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-4 justify-content-center';
                 break;
             case 'cards':
                 return 'row row-cols-1 row-cols-lg-2 g-4';

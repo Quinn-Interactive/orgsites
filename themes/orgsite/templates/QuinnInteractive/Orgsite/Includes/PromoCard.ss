@@ -25,21 +25,21 @@
                 <a 
                     href="$Link.LinkURL" 
                     class="
-                        <% if not $HideText %>btn btn-small btn-primary<% end_if %>
-                        <% if $StretchedLink || $HideText %> stretched-link<% end_if %>
+                        <% if not $HideButtonText %>btn btn-small btn-primary<% end_if %>
+                        <% if $StretchedLink %> stretched-link<% end_if %>
                     "
                     $Link.TargetAttr
                     title="$Title.ATT"
-                ><% if not $HideText %>$Link.Title<% end_if %></a>
+                ><% if not $HideButtonText %>$Link.Title<% end_if %></a>
             <% else %>
                 <a 
                     href="$Link" 
                     class="
-                        <% if not $HideText %>btn btn-small btn-primary<% end_if %>
-                        <% if $StretchedLink || $HideText %> stretched-link<% end_if %>
+                        <% if not $HideButtonText %>btn btn-small btn-primary<% end_if %>
+                        <% if $StretchedLink %> stretched-link<% end_if %>
                     "
                     title="<%t SilverStripe\\Blog\\Model\\Blog.ReadMoreAbout "Read more about '{title}'..." title=$Title %>"
-                ><% if not $HideText %><%t Page.READ_MORE "Read More" %><% end_if %></a>
+                ><% if not $HideButtonText %><%t Page.READ_MORE "Read More" %><% end_if %></a>
             <% end_if %>
         </div>
     <% end_if %>
