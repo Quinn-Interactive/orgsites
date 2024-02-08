@@ -33,6 +33,7 @@ class ElementPromos extends BaseElement
         'PromoLayout' => "Enum('grid, slider','grid')",
         'MaxItems'    => "Int",
         'HideImages'    => "Boolean",
+        'HideText'    => "Boolean",
         'HideBlockIfNoPromos'    => "Boolean",
     ];
     private static $description = 'Promos';
@@ -97,6 +98,10 @@ class ElementPromos extends BaseElement
         $index = TreeDropdownField::create('IndexID', 'Index Source', SiteTree::class);
         $index->setDescription('Optional. If page selected, it’s subpages will be used as the promos, and use their Card Images and Card Summarys');
         $fields->replaceField('IndexID', $index);
+
+        // HideText
+        $hideText = $fields->dataFieldByName('HideText');
+        $hideText->displayIf('PromoType')->isEqualTo('cards')->orIf('PromoType')->isEqualTo('badges');
 
         $promos = $fields->dataFieldByName('Promos');
         if ($promos) {

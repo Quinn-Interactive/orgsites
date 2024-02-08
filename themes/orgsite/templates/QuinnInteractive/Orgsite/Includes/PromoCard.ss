@@ -8,6 +8,7 @@
             <% with $Image %><% include QuinnInteractive/Orgsite/PromoCardImage %><% end_with %>
         <% end_if %>
     <% end_if %>
+    <% if not $HideText %>
     <div class="card-body">
         <h5 class="card-title">$Title</h5>
         <p class="card-text">
@@ -17,20 +18,28 @@
             $DescriptionOrSummary
         </p>
     </div>
+    <% end_if %>
     <% if $Link %>
         <div class="card-footer text-center border-top-0 bg-white">
             <% if $Link.LinkURL %>
                 <a 
                     href="$Link.LinkURL" 
-                    class="btn btn-small btn-primary stretched-link"
+                    class="
+                        <% if not $HideText %>btn btn-small btn-primary<% end_if %>
+                        <% if $StretchedLink || $HideText %> stretched-link<% end_if %>
+                    "
+                    $Link.TargetAttr
                     title="$Title.ATT"
-                >$Title</a>
+                ><% if not $HideText %>$Title<% end_if %></a>
             <% else %>
                 <a 
                     href="$Link" 
-                    class="btn btn-small btn-primary stretched-link"
+                    class="
+                        <% if not $HideText %>btn btn-small btn-primary<% end_if %>
+                        <% if $StretchedLink || $HideText %> stretched-link<% end_if %>
+                    "
                     title="<%t SilverStripe\\Blog\\Model\\Blog.ReadMoreAbout "Read more about '{title}'..." title=$Title %>"
-                ><%t Page.READ_MORE "Read More" %></a>
+                ><% if not $HideText %><%t Page.READ_MORE "Read More" %><% end_if %></a>
             <% end_if %>
         </div>
     <% end_if %>
