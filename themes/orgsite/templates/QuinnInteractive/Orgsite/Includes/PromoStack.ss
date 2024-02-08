@@ -23,7 +23,7 @@
                         href="$Link.LinkURL" 
                         class="stretched-link text-nowrap"
                         title="$Title.ATT"
-                    >$Title <i class="bi bi-arrow-right-short"></i></a>
+                    >$Link.Title <i class="bi bi-arrow-right-short"></i></a>
                 <% else %>
                     <a 
                         href="$Link" 

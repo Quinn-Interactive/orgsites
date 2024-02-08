@@ -30,7 +30,7 @@
                     "
                     $Link.TargetAttr
                     title="$Title.ATT"
-                ><% if not $HideText %>$Title<% end_if %></a>
+                ><% if not $HideText %>$Link.Title<% end_if %></a>
             <% else %>
                 <a 
                     href="$Link" 

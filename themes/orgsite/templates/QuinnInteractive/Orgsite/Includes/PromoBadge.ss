@@ -25,7 +25,7 @@
                     class="text-nowrap<% if $StretchedLink || $HideText %> stretched-link<% end_if %>"
                     title="$Title.ATT"
                     $Link.TargetAttr
-                ><% if not $HideText %>$Title <i class="bi bi-arrow-right-short"></i><% end_if %></a>
+                ><% if not $HideText %>$Link.Title <i class="bi bi-arrow-right-short"></i><% end_if %></a>
             <% else %>
                 <a 
                     href="$Link" 

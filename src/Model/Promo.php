@@ -59,6 +59,10 @@ class Promo extends DataObject
         'Link.LinkURL' => 'Link',
     ];
 
+    private static $casting = [
+        'DescriptionOrSummary' => 'HTMLText',
+    ];
+
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
