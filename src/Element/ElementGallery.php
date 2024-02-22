@@ -25,7 +25,7 @@ class ElementGallery extends ElementContent
         'GalleryItems' => GalleryItem::class,
     ];
 
-    private static $icon = 'font-icon-block-carousel';
+    private static $icon = 'font-icon-block-layout-2';
     private static $inline_editable = false;
     private static $owns = [
         'GalleryItems',

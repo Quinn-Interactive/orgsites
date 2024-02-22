@@ -12,3 +12,25 @@ h3 {
 .text-bg-light a {
     color: $link-color;
 }
+
+// carousel
+.carousel-indicators {
+    z-index: 50;
+
+    + .carousel-inner .banner__content {
+        padding-bottom: 3rem;
+    }
+}
+
+.carousel:not(.carousel-fade) .carousel-item {
+    display: none !important;
+
+    &.active {
+        display: block !important;
+    }
+}
+
+button.carousel-control-prev,
+button.carousel-control-next {
+    background: none !important;
+}
