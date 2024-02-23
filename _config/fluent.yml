@@ -9,6 +9,7 @@ SilverStripe\Core\Injector\Injector:
 TractorCow\Fluent\Extension\FluentExtension:
   field_exclude:
     - BackgroundColor
+    - CustomCode
 ---
 Name: fluentsearchfix
 ---

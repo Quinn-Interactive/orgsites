@@ -11,4 +11,5 @@
 	id="$Anchor">
 	$Element
 </div>
+$CustomCode.RAW
 <% end_if %>

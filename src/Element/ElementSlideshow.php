@@ -24,6 +24,7 @@ class ElementSlideshow extends ElementContent
 {
     private static $db = [
         'AspectRatio' => 'Varchar(8)',
+        'FullWidth' => 'Boolean',
     ];
     private static $has_many = [
         'Slides' => ElementBanner::class,
@@ -96,7 +97,10 @@ class ElementSlideshow extends ElementContent
         $aspectRatio->setDescription('Crop images to this ratio.');
         $fields->removeByName('AspectRatio');
         $fields->insertAfter('HTML', $aspectRatio);
-                        
+
+        // FullWidth
+        $fullWidth = $fields->dataFieldByName('FullWidth');
+        $fullWidth->setTitle('Show slides full browser window width?');
 
         return $fields;
     }
