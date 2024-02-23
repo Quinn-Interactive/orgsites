@@ -19,30 +19,26 @@
             <% loop $Slides %>
                 <div class="carousel-item <% if $SlideFirst %>active<% end_if %> banner -ratio-$Top.AspectRatio -text-$TextPosition <% if $ShowTitle || $HTML %>-text-$TextColor<% end_if %>">
                     <% if $Image %>
-                        <% with $Image %>
-                            <img class="focused-image banner__image"
-                                <% if $Up.Sort > 1 %>loading="lazy"<% end_if %>
-                                alt=""
-                                src="$ScaleWidth(1024).URL?v=$Version"
-                                width="$ScaleWidth(1024).Width"
-                                height="$ScaleWidth(1024).Height"
-                                srcset="
-                                <% if $WiderThanOrEqual(320) %>$ScaleWidth(320).URL?v=$Version 320w,<% end_if %>
-                                <% if $WiderThanOrEqual(640) %>$ScaleWidth(640).URL?v=$Version 640w,<% end_if %>
-                                <% if $WiderThanOrEqual(1024) %>$ScaleWidth(1024).URL?v=$Version 1024w,<% end_if %>
-                                <% if $WiderThanOrEqual(1920) %>$ScaleWidth(1920).URL?v=$Version 1920w,<% end_if %>
-                                <% if $WiderThanOrEqual(2880) %>$ScaleWidth(2880).URL?v=$Version 2880w,<% end_if %>
-                                <% if $WiderThanOrEqual(3840) %>$ScaleWidth(3840).URL?v=$Version 3840w,<% end_if %>
-                                "
-                                <% if $Up.FullWidth %>
-                                    sizes="100vw"
-                                <% else %>
-                                    sizes="(min-width: 1200px) 1200px, 100vw"
-                                <% end_if %>
-                                data-focus-x="$FocusPoint.X"
-                                data-focus-y="$FocusPoint.Y"
-                            />
-                        <% end_with %>
+                        <img class="banner__image w-100 h-auto position-absolute"
+                            <% if $Up.Sort > 1 %>loading="lazy"<% end_if %>
+                            alt=""
+                            src="$FocusRatioFill(1024).URL?v=$Image.Version"
+                            width="$FocusRatioFill(1024).Width"
+                            height="$FocusRatioFill(1024).Height"
+                            srcset="
+                            <% if $Image.WiderThanOrEqual(320) %>$FocusRatioFill(320).URL?v=$Version 320w,<% end_if %>
+                            <% if $Image.WiderThanOrEqual(640) %>$FocusRatioFill(640).URL?v=$Version 640w,<% end_if %>
+                            <% if $Image.WiderThanOrEqual(1024) %>$FocusRatioFill(1024).URL?v=$Version 1024w,<% end_if %>
+                            <% if $Image.WiderThanOrEqual(1920) %>$FocusRatioFill(1920).URL?v=$Version 1920w,<% end_if %>
+                            <% if $Image.WiderThanOrEqual(2880) %>$FocusRatioFill(2880).URL?v=$Version 2880w,<% end_if %>
+                            <% if $Image.WiderThanOrEqual(3840) %>$FocusRatioFill(3840).URL?v=$Version 3840w,<% end_if %>
+                            "
+                            <% if $Up.FullWidth %>
+                                sizes="100vw"
+                            <% else %>
+                                sizes="(min-width: 1200px) 1200px, 100vw"
+                            <% end_if %>
+                        />
                     <% end_if %>
                     <% if $ShowTitle || $HTML %>
                         <div class="content-container banner__content -text-$TextPosition">

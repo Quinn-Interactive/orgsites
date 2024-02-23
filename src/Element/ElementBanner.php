@@ -98,6 +98,26 @@ class ElementBanner extends ElementContent
 
     /**
      * For use in ElementSlideshow
+     * @return ?DBFile
+     */
+    public function FocusRatioFill(int $width = 1024): ?DBFile
+    {
+        $image = $this->Image();
+        if (!$image) {
+            return null;
+        }
+        if (!$this->ElementSlideshow()->exists()) {
+            return $image;
+        }
+        $ratios = ElementSlideshow::config()->get('aspect_ratios');
+        $parentRatio = $this->ElementSlideshow()->AspectRatio;
+        $ratio = $ratios[$parentRatio]['ratio'] ?? 16 / 9; // default to 16:9
+        $scaled = $image->FocusFillMax($width, round($width / $ratio));
+        return $scaled;
+    }
+
+    /**
+     * For use in ElementSlideshow
      * @return boolean
      */
     public function SlideFirst()
