@@ -27,7 +27,6 @@ class ElementBanner extends ElementContent
     private static $disable_background_color = true;
     private static $has_one = [
         'Image' => Image::class,
-        'ElementSlideshow' => ElementSlideshow::class,
     ];
     private static $icon = 'font-icon-block-banner';
     private static $owns = [
@@ -40,12 +39,6 @@ class ElementBanner extends ElementContent
     private static $translate = [
         'HTML',
         'ImageID',
-    ];
-    private static $summary_fields = [
-        'ImageThumb',
-        'ShowTitle',
-        'TextPosition',
-        'TextColor',
     ];
 
     public function getCMSFields()
@@ -86,83 +79,4 @@ class ElementBanner extends ElementContent
     {
         return _t(__CLASS__ . '.BlockType', 'Banner');
     }
-
-    public function getImageThumb(): ?DBFile
-    {
-        $image = $this->Image();
-        if ($image->exists() && $image->getIsImage()) {
-            return $image->StripThumbnail();
-        }
-        return null;
-    }
-
-    /**
-     * For use in ElementSlideshow
-     * @return ?DBFile
-     */
-    public function FocusRatioFill(int $width = 1024): ?DBFile
-    {
-        $image = $this->Image();
-        if (!$image) {
-            return null;
-        }
-        if (!$this->ElementSlideshow()->exists()) {
-            return $image;
-        }
-        $ratios = ElementSlideshow::config()->get('aspect_ratios');
-        $parentRatio = $this->ElementSlideshow()->AspectRatio;
-        $ratio = $ratios[$parentRatio]['ratio'] ?? 16 / 9; // default to 16:9
-        $scaled = $image->FocusFillMax($width, round($width / $ratio));
-        return $scaled;
-    }
-
-    /**
-     * For use in ElementSlideshow
-     * @return boolean
-     */
-    public function SlideFirst()
-    {
-        return ($this->ElementSlideshow()->Slides()->first()->ID === $this->ID);
-    }
-
-    /**
-     * For use in ElementSlideshow
-     * @return boolean
-     */
-    public function SlideLast()
-    {
-        return ($this->ElementSlideshow()->Slides()->last()->ID === $this->ID);
-    }
-
-    /**
-     * For use in ElementSlideshow
-     * @return int
-     */
-    public function SlideTotalItems()
-    {
-        return $this->ElementSlideshow()->Slides()->count();
-    }
-
-    /**
-     * For use in ElementSlideshow
-     * Returns the position of the current element.
-     *
-     * @return int
-     */
-    public function SlidePos(int $root = 1)
-    {
-        return ($this->ElementSlideshow()->Slides()->filter('Sort:LessThan', $this->Sort)->count() + $root);
-    }
-
-    /**
-     * For use in ElementSlideshow
-     * @return string
-     */
-    public function SlideEvenOdd()
-    {
-        $odd = (bool) ($this->Pos() % 2);
-
-        return  ($odd) ? 'odd' : 'even';
-    }
-
 }

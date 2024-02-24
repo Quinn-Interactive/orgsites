@@ -27,7 +27,7 @@ class ElementSlideshow extends ElementContent
         'FullWidth' => 'Boolean',
     ];
     private static $has_many = [
-        'Slides' => ElementBanner::class,
+        'Slides' => Slide::class,
     ];
     private static $owns = [
         'Slides',
@@ -77,9 +77,6 @@ class ElementSlideshow extends ElementContent
         if ($slides) {
             /** @var GridFieldConfig $config */
             $config = $slides->getConfig();
-            /** @var GridFieldAddNewButton $addBtn */
-            $addBtn = $config->getComponentByType(GridFieldAddNewButton::class);
-            $addBtn->setButtonName('Add Slide');
             $config->addComponent(new GridFieldOrderableRows('Sort'));
             $config->removeComponentsByType(GridFieldAddExistingAutocompleter::class);
             $config->addComponent(new VisibleLocalesColumn());
