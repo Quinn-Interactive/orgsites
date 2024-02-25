@@ -1,5 +1,5 @@
 # ---
-# Name: approutes
+# Name: orgsite-routes
 # After: 
 #   - '#coreroutes'
 #   - '#rootroutes'
@@ -7,4 +7,4 @@
 # ---
 # SilverStripe\Control\Director:
 #   rules:
-#     'search//$Action/$ID/$OtherID': 'QuinnInteractive\Orgsite\Controller\SearchController'
+#     'theme//$Action/$ID/$OtherID': 'QuinnInteractive\Orgsite\Controller\ThemeController'

@@ -83,6 +83,36 @@ $formats = [
                 'classes'  => 'fs-1',
                 'selector' => '*', // If no text is selected but cursor is within one of these elements, apply class to element
             ],
+            [
+                'title'    => 'Display 1',
+                'classes'  => 'display-1',
+                'selector' => '*', // If no text is selected but cursor is within one of these elements, apply class to element
+            ],
+            [
+                'title'    => 'Display 2',
+                'classes'  => 'display-2',
+                'selector' => '*', // If no text is selected but cursor is within one of these elements, apply class to element
+            ],
+            [
+                'title'    => 'Display 3',
+                'classes'  => 'display-3',
+                'selector' => '*', // If no text is selected but cursor is within one of these elements, apply class to element
+            ],
+            [
+                'title'    => 'Display 4',
+                'classes'  => 'display-4',
+                'selector' => '*', // If no text is selected but cursor is within one of these elements, apply class to element
+            ],
+            [
+                'title'    => 'Display 5',
+                'classes'  => 'display-5',
+                'selector' => '*', // If no text is selected but cursor is within one of these elements, apply class to element
+            ],
+            [
+                'title'    => 'Display 6',
+                'classes'  => 'display-6',
+                'selector' => '*', // If no text is selected but cursor is within one of these elements, apply class to element
+            ],
         ],
     ],
     [
