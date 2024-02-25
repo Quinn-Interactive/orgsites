@@ -9,17 +9,25 @@
 </div>
 <div class="<% if not $FullWidth %>content-container<% end_if %> pb-3">
     <% if $Slides.Count %>
-    <div id="carousel-$ID" class="carousel slide carousel-fade">
+    <div id="carousel-$ID" class="carousel slide carousel-fade" <% if $Autoplay %>data-bs-ride="carousel"<% end_if %>>
         <div class="carousel-indicators">
             <% loop $Slides %>
-                <button type="button" data-bs-target="#carousel-$Up.ID" data-bs-slide-to="$SlidePos(0)" <% if $SlideFirst %> class="active" aria-current="true"<% end_if %> aria-label="Slide $Pos"></button>
+                <button type="button" data-bs-target="#carousel-$Up.ID" data-bs-slide-to="$Pos(0)" <% if $Pos == 1 %> class="active" aria-current="true"<% end_if %> aria-label="Slide $Pos"></button>
             <% end_loop %>
         </div>
         <div class="carousel-inner">
             <% loop $Slides %>
-                <div class="carousel-item <% if $SlideFirst %>active<% end_if %> banner -ratio-$Top.AspectRatio -text-$TextPosition <% if $ShowTitle || $HTML %>-text-$TextColor<% end_if %>">
+                <div 
+                    style="--bs-aspect-ratio: $Top.RatioPercentage;"
+                    class="
+                        carousel-item 
+                        ratio 
+                        -text-$TextPosition 
+                        <% if $Pos == 1 %>active<% end_if %> 
+                        <% if $ShowTitle || $HTML %>-text-$TextColor<% end_if %>
+                    ">
                     <% if $Image %>
-                        <img class="banner__image w-100 h-auto position-absolute"
+                        <img class="d-block w-100 h-auto"
                             <% if $Up.Sort > 1 %>loading="lazy"<% end_if %>
                             alt=""
                             src="$FocusRatioFill(1024).URL?v=$Image.Version"
@@ -40,30 +48,42 @@
                             <% end_if %>
                         />
                     <% end_if %>
-                    <% if $ShowTitle || $HTML %>
-                        <div class="content-container banner__content -text-$TextPosition">
-                            <div class="banner__text">
-                                <% if $ShowTitle && $Title %>
-                                    <% if $Pos == 1 %><h1>$Title</h1><% else %><h2>$Title</h2><% end_if %>
-                                <% end_if %>
-                                <% if $HTML %>
-                                    $HTML
-                                <% end_if %>
-                            </div>
+                    <% if $ShowTitle || $Caption || $Link %>
+                        <div class="carousel-caption content-container $ContentClasses">
+                            <% if $ShowTitle && $Title %>
+                                <% if $Pos == 1 %><h1>$Title</h1><% else %><h2>$Title</h2><% end_if %>
+                            <% end_if %>
+                            <% if $Caption %>
+                                $Caption
+                            <% end_if %>
+                            <% if $Link %>
+                                <a href="$Link.LinkURL" class="
+                                    <% if $HideButton %>
+                                        stretched-link
+                                    <% else %>
+                                        btn btn-primary
+                                    <% end_if %>
+                                "
+                                $Link.TargetAttr
+                                <% if $HideButton %>title="$Link.Title.ATT"<% end_if %>
+                                ><% if not $HideButton %>$Link.Title<% end_if %></a>
+                            <% end_if %>
                         </div>
                     <% end_if %>
                 </div>
 
             <% end_loop %>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-$ID" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carousel-$ID" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+        <% if $ShowArrows %>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-$ID" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-$ID" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        <% end_if %>
     </div>
     <% end_if %>
 </div>
