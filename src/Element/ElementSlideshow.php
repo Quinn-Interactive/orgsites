@@ -19,6 +19,7 @@ use TractorCow\Fluent\Forms\VisibleLocalesColumn;
 class ElementSlideshow extends ElementContent
 {
     private static $aspect_ratios = [
+        '21:9' => ['title' => '16:9 - Letterbox movie', 'ratio' => 21 / 9],
         '16:9' => ['title' => '16:9 - HD video', 'ratio' => 16 / 9],
         '5:4'  => ['title' => '5:4 - Old computer displays', 'ratio' => 5 / 4],
         '4:3'  => ['title' => '4:3 - SDTV (pre-HD Television)', 'ratio' => 4 / 3],
