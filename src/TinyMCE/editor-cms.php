@@ -2,8 +2,10 @@
 
 namespace QuinnInteractive\Orgsite\TinyMCE;
 
-use SilverStripe\Forms\HTMLEditor\HTMLEditorConfig;
+use Page;
+use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
+use SilverStripe\SiteConfig\SiteConfig;
 
 // Example TinyMCE configuration
 // Copy the code below to your app/_config.php file and customise as necessary to match your styles
@@ -289,6 +291,13 @@ $valid_elements = $config->getOption('valid_elements');
 // add some more valid elements
 $valid_elements .= ',-kbd[id|dir|class|align|style],-samp[id|dir|class|align|style]';
 $config->setOption('valid_elements', $valid_elements);
+
+// use our calculated themed CSS
+$fontsImport = SiteConfig::current_site_config()->FontHeadCode('import');
+$themeVars = Page::create()->renderWith('QuinnInteractive/Orgsite/Includes/ThemeVars')->__toString();
+$themeVars = preg_replace('@</?style>@', '', $themeVars);
+$customStyles = $fontsImport . "\n" .  $themeVars;
+$config->setOption('content_style', $customStyles);
 
 $config->addButtonsToLine(2, 'styleselect'); // add style select
 // TinyMCE cleanup on paste
