@@ -15,7 +15,7 @@
             <% if $Start || $Date || $DisplayDate %>
                 <% include QuinnInteractive/Orgsite/EventDates %>
             <% end_if %>
-            $DescriptionOrSummary
+            <% if not $HideSummaries %>$DescriptionOrSummary.RAW<% end_if %>
         </p>
         <% end_if %>
         <% if $Link %>

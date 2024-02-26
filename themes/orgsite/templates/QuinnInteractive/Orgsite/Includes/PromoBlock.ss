@@ -19,7 +19,7 @@
             <% include QuinnInteractive/Orgsite/EventDates %>
         <% end_if %>
         <p>
-            $DescriptionOrSummary
+            <% if not $HideSummaries %>$DescriptionOrSummary.RAW<% end_if %>
             <% if $Link %>
                 <% if $Link.LinkURL %>
                     <a 

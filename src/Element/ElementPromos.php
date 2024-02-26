@@ -35,6 +35,7 @@ class ElementPromos extends BaseElement
         'MaxItems'    => "Int",
         'HideImages'    => "Boolean",
         'HideText'    => "Boolean",
+        'HideSummaries'    => "Boolean",
         'HideBlockIfNoPromos'    => "Boolean",
     ];
     private static $description = 'Promos';
@@ -69,10 +70,13 @@ class ElementPromos extends BaseElement
         /** @var SiteTree */
         $index = $this->Index();
         $list = null;
-        if ($index->exists() && $index->Promos()) {
+        if (!$index->exists()) {
+            return $list;
+        }
+        if ($index->hasMethod('Promos')) {
             /** @var DataList */
             $list = $index->Promos();
-        } else if ($index->exists() && $index->AllChildren()) {
+        } else {
             /** @var DataList */
             $list = $index->AllChildren();
         }
@@ -153,7 +157,7 @@ class ElementPromos extends BaseElement
 
     public function getType()
     {
-        return _t(__CLASS__ . '.BlockType', 'Promos');
+        return _t(__CLASS__ . '.BlockType', 'Promos/Index');
     }
 
     public function onBeforeWrite()

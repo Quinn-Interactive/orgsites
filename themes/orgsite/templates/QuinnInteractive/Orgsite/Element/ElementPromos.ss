@@ -25,9 +25,9 @@
                     <% loop $CombinedPromos %>
                         <%-- badges, cards --%>
                         <% if $Up.PromoType == 'badges' %>
-                            <div class="col slider__slide"><% include QuinnInteractive/Orgsite/PromoBadge %></div>
+                            <div class="col slider__slide"><% include QuinnInteractive/Orgsite/PromoBadge  HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries %></div>
                         <% else_if $Up.PromoType == 'cards' %>
-                            <div class="col slider__slide"><% include QuinnInteractive/Orgsite/PromoCard %></div>
+                            <div class="col slider__slide"><% include QuinnInteractive/Orgsite/PromoCard  HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries %></div>
                         <% end_if %>
                     <% end_loop %>
                 </div>
@@ -37,13 +37,13 @@
                 <% loop $CombinedPromos %>
                     <%-- badges, stack, cards, blocks --%>
                     <% if $Up.PromoType == 'badges' %>
-                        <div class="col"><% include QuinnInteractive/Orgsite/PromoBadge %></div>
+                        <div class="col"><% include QuinnInteractive/Orgsite/PromoBadge  HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries %></div>
                     <% else_if $Up.PromoType == 'stack' %>
-                        <% include QuinnInteractive/Orgsite/PromoStack %>
+                        <% include QuinnInteractive/Orgsite/PromoStack  HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries %>
                     <% else_if $Up.PromoType == 'cards' %>
-                        <div class="col"><% include QuinnInteractive/Orgsite/PromoCard %></div>
+                        <div class="col"><% include QuinnInteractive/Orgsite/PromoCard  HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries %></div>
                     <% else_if $Up.PromoType == 'blocks' %>
-                        <% include QuinnInteractive/Orgsite/PromoBlock %>
+                        <% include QuinnInteractive/Orgsite/PromoBlock HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries %>
                     <% end_if %>
                 <% end_loop %>
             </div>
