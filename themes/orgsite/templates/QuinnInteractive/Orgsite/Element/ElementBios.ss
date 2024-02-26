@@ -7,7 +7,7 @@
     <% end_if %>
     <div class="row">
     <% loop $Bios.Sort('BioSort') %>
-        <div class="col-sm-6 col-lg-4 col-xl-3 mb-3 mb-sm-0">
+        <div class="col-sm-6 col-lg-4 col-xl-3 mb-4">
             <div class="card" lang="$SourceLocale.Locale">
                 <% if $Image %>
                     <img src="$Image.FocusFillMax(400,300).URL?v=$Image.Version" width="400" height="300" class="card-img-top img-fluid" alt="Picture of $Up.Title.ATT">

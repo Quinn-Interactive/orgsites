@@ -6,9 +6,6 @@
     <% if $Subtitle %>
         <p class="<% if $Pos == 1 %>fs-3<% else %>fs-4<% end_if %>">$Subtitle</p>
     <% end_if %>
-    <% if $HTML %>
-        $HTML
-    <% end_if %>
     <div class="ElementImageText__row -image-$ImagePos">
         <% if $Image %>
         <div class="ElementImageText__image -image-$ImagePos">
