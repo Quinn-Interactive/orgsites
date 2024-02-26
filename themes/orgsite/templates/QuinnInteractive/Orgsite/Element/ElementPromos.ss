@@ -3,7 +3,7 @@
         <% if $ShowTitle && $Title %>
             <% if $Pos == 1 %><h1>$Title</h1><% else %><h2>$Title</h2><% end_if %>
         <% end_if %>
-        <% if $Index %>
+        <% if $Index && $Index.Link != $Page.Link %>
             <a href="$Index.Link" class="d-block fs-5">
                 <% if $IndexPromos.Count > CombinedPromos.Count %>
                     <%t Page.MORE_TITLE "More {title}" title=$Index.Title %>

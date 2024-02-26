@@ -65,22 +65,39 @@ class ElementPromos extends BaseElement
         return $list;
     }
 
-    public function IndexPromos(): ?DataList
+    public function IndexPromos(): ?SS_List
     {
         /** @var SiteTree */
         $index = $this->Index();
-        $list = null;
         if (!$index->exists()) {
+            return null;
+        }
+        $list = null;
+        if ($index->hasMethod('Promos')) {
+            return $index->Promos();
+        } else {
+            /** @var DataList $pages */
+            $pages = $index->AllChildren();
+            if ($this->MaxItems) {
+                $pages = $index->AllChildren()->Limit($this->MaxItems);
+            }
+            $list = ArrayList::create();
+            foreach ($pages as $page) {
+                /** @var SiteTree $page */
+                $promo = Promo::create($page->toMap());
+                $promo->ParentID = $this->ID;
+                $link = Link::create([
+                    'Title' => 'More',
+                    'SiteTreeID' => $page->ID,
+                    'Type' => 'SiteTree',
+                    'URL' => $page->Link(),
+                ]);
+                $promo->Link = $link;
+                $list->push($promo);
+            }
+            
             return $list;
         }
-        if ($index->hasMethod('Promos')) {
-            /** @var DataList */
-            $list = $index->Promos();
-        } else {
-            /** @var DataList */
-            $list = $index->AllChildren();
-        }
-        return $list;
     }
 
     public function getCMSFields()
@@ -95,7 +112,7 @@ class ElementPromos extends BaseElement
 
         // ButtonStyle
         $btnStyle = $fields->dataFieldByName('ButtonStyle');
-        $btnStyle->setDescription('Do not whole card if there are links in the content');
+        $btnStyle->setDescription('Do not choose "whole card" if there are links in the content');
 
         // MaxItems
         $fields->dataFieldByName('MaxItems')->setDescription('Maximum number of items to show. If 0 or empty, block will show all items.');

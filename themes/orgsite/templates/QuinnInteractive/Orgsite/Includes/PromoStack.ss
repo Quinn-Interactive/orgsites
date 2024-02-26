@@ -26,7 +26,7 @@
                         <% if $StretchedLink %> stretched-link<% end_if %>
                         "
                         title="$Title.ATT"
-                    >$Link.Title <i class="bi bi-arrow-right-short"></i></a>
+                    ><% if not $HideButtonText %>$Link.Title <i class="bi bi-arrow-right-short"></i><% end_if %></a>
                 <% else %>
                     <a 
                         href="$Link" 
