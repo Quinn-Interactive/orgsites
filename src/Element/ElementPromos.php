@@ -4,8 +4,10 @@ namespace QuinnInteractive\Orgsite\Element;
 
 use DNADesign\Elemental\Models\BaseElement;
 use gorriecoe\Link\Models\Link;
+use Page;
 use QuinnInteractive\Orgsite\Model\Promo;
 use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
 use SilverStripe\Forms\GridField\GridFieldConfig;
 use SilverStripe\Forms\TreeDropdownField;
@@ -83,9 +85,14 @@ class ElementPromos extends BaseElement
             }
             $list = ArrayList::create();
             foreach ($pages as $page) {
-                /** @var SiteTree $page */
+                /** @var Page $page */
                 $promo = Promo::create($page->toMap());
                 $promo->ParentID = $this->ID;
+                if ($page->CardSummary && strlen($page->CardSummary)) {
+                    $promo->Content = nl2br($page->CardSummary);
+                } else {
+                    $promo->Content = $page->DescriptionOrSummary();
+                }
                 $link = Link::create([
                     'Title' => 'More',
                     'SiteTreeID' => $page->ID,

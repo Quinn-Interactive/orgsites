@@ -1,4 +1,4 @@
-<div class="row mb-3" lang="$SourceLocale.Locale">
+<div class="row mb-3 position-relative" lang="$SourceLocale.Locale">
     <% if not $HideImages %>
         <div class="col-12 col-sm-5 col-md-4 col-lg-3">
             <% if $CardImage %>
@@ -16,7 +16,7 @@
             <% include QuinnInteractive/Orgsite/EventDates %>
         <% end_if %>
         <p>
-            <% if not $HideSummaries %>$DescriptionOrSummary.RAW<% end_if %>
+            <% if not $HideSummaries %><div>$DescriptionOrSummary.RAW</div><% end_if %>
             <% if $Link %>
                 <% if $Link.LinkURL %>
                     <a 
