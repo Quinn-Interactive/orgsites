@@ -302,11 +302,11 @@ class EditorCMS {
         if (DB::is_active()) {
             $siteConfig = SiteConfig::current_site_config();
             if ($siteConfig->exists()) {
-                $fontsImport = $siteConfig->FontHeadCode('import');
-                $themeVars = Page::create()->renderWith('QuinnInteractive/Orgsite/Includes/ThemeVars')->__toString();
-                $themeVars = preg_replace('@</?style>@', '', $themeVars);
-                $customStyles = $fontsImport . "\n" .  $themeVars;
-                $config->setOption('content_style', $customStyles);
+                // $fontsImport = $siteConfig->FontHeadCode('import');
+                // $themeVars = Page::create()->renderWith('QuinnInteractive/Orgsite/Includes/ThemeVars')->__toString();
+                // $themeVars = preg_replace('@</?style>@', '', $themeVars);
+                // $customStyles = $fontsImport . "\n" .  $themeVars;
+                // $config->setOption('content_style', $customStyles);
             }        
         }
     }
