@@ -5,6 +5,7 @@ namespace QuinnInteractive\Orgsite\TinyMCE;
 use Page;
 use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
+use SilverStripe\Security\Security;
 use SilverStripe\SiteConfig\SiteConfig;
 
 class EditorCMS {
@@ -299,14 +300,16 @@ class EditorCMS {
         $config->insertButtonsAfter('anchor', 'hr');
 
         // use our calculated themed CSS
-        $siteConfig = SiteConfig::current_site_config();
-        if ($siteConfig) {
-            $fontsImport = $siteConfig->FontHeadCode('import');
-            $themeVars = Page::create()->renderWith('QuinnInteractive/Orgsite/Includes/ThemeVars')->__toString();
-            $themeVars = preg_replace('@</?style>@', '', $themeVars);
-            $customStyles = $fontsImport . "\n" .  $themeVars;
-            $config->setOption('content_style', $customStyles);
-        }        
+        if (Security::database_is_ready()) {
+            $siteConfig = SiteConfig::current_site_config();
+            if ($siteConfig) {
+                $fontsImport = $siteConfig->FontHeadCode('import');
+                $themeVars = Page::create()->renderWith('QuinnInteractive/Orgsite/Includes/ThemeVars')->__toString();
+                $themeVars = preg_replace('@</?style>@', '', $themeVars);
+                $customStyles = $fontsImport . "\n" .  $themeVars;
+                $config->setOption('content_style', $customStyles);
+            }        
+        }
     }
 }
 
