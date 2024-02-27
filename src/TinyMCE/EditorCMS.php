@@ -302,7 +302,7 @@ class EditorCMS {
         // use our calculated themed CSS
         if (Security::database_is_ready()) {
             $siteConfig = SiteConfig::current_site_config();
-            if ($siteConfig) {
+            if ($siteConfig->exists()) {
                 $fontsImport = $siteConfig->FontHeadCode('import');
                 $themeVars = Page::create()->renderWith('QuinnInteractive/Orgsite/Includes/ThemeVars')->__toString();
                 $themeVars = preg_replace('@</?style>@', '', $themeVars);
