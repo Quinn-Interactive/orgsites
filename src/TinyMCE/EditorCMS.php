@@ -290,14 +290,6 @@ class EditorCMS {
         // add some more valid elements
         $valid_elements .= ',-kbd[id|dir|class|align|style],-samp[id|dir|class|align|style]';
         $config->setOption('valid_elements', $valid_elements);
-
-        // use our calculated themed CSS
-        $fontsImport = SiteConfig::current_site_config()->FontHeadCode('import');
-        $themeVars = Page::create()->renderWith('QuinnInteractive/Orgsite/Includes/ThemeVars')->__toString();
-        $themeVars = preg_replace('@</?style>@', '', $themeVars);
-        $customStyles = $fontsImport . "\n" .  $themeVars;
-        $config->setOption('content_style', $customStyles);
-
         $config->addButtonsToLine(2, 'styleselect'); // add style select
         // TinyMCE cleanup on paste
         // add removeformat
@@ -305,6 +297,16 @@ class EditorCMS {
         // add charmap
         $config->insertButtonsBefore('anchor', 'charmap');
         $config->insertButtonsAfter('anchor', 'hr');
+
+        // use our calculated themed CSS
+        $siteConfig = SiteConfig::current_site_config()->FontHeadCode('import');
+        if ($siteConfig) {
+            $fontsImport = SiteConfig::current_site_config()->FontHeadCode('import');
+            $themeVars = Page::create()->renderWith('QuinnInteractive/Orgsite/Includes/ThemeVars')->__toString();
+            $themeVars = preg_replace('@</?style>@', '', $themeVars);
+            $customStyles = $fontsImport . "\n" .  $themeVars;
+            $config->setOption('content_style', $customStyles);
+        }        
     }
 }
 
