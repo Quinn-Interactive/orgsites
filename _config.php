@@ -4,6 +4,7 @@
 
 use QuinnInteractive\Orgsite\ShortCode\NowShortcode;
 use QuinnInteractive\Orgsite\ShortCode\SinceShortcode;
+use QuinnInteractive\Orgsite\TinyMCE\EditorCMS;
 use SilverStripe\Control\Email\Email;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Environment;
@@ -35,4 +36,4 @@ ShortcodeParser::get()->register('now', array(NowShortcode::class, 'shortcode_ha
 // Member::set_password_validator($validator);
 
 // rich text editor config
-require_once 'src/TinyMCE/editor-cms.php';
+EditorCMS::init();
