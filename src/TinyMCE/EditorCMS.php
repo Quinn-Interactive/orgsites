@@ -301,7 +301,7 @@ class EditorCMS {
         $config->insertButtonsAfter('anchor', 'hr');
 
         // bail out if we are in a dev/build
-        if (Controller::curr() instanceof DevBuildController) {
+        if (!Controller::curr() || Controller::curr() instanceof DevBuildController) {
             return;
         }
         // use our calculated themed CSS
