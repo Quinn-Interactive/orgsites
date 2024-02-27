@@ -300,17 +300,19 @@ class EditorCMS {
         $config->insertButtonsBefore('anchor', 'charmap');
         $config->insertButtonsAfter('anchor', 'hr');
 
-        // use our calculated themed CSS
+        // bail out if we are in a dev/build
         if (Controller::curr() instanceof DevBuildController) {
-            $siteConfig = SiteConfig::current_site_config();
-            if ($siteConfig->exists()) {
-                $fontsImport = $siteConfig->FontHeadCode('import');
-                $themeVars = Page::create()->renderWith('QuinnInteractive/Orgsite/Includes/ThemeVars')->__toString();
-                $themeVars = preg_replace('@</?style>@', '', $themeVars);
-                $customStyles = $fontsImport . "\n" .  $themeVars;
-                $config->setOption('content_style', $customStyles);
-            }        
+            return;
         }
+        // use our calculated themed CSS
+        $siteConfig = SiteConfig::current_site_config();
+        if ($siteConfig->exists()) {
+            $fontsImport = $siteConfig->FontHeadCode('import');
+            $themeVars = Page::create()->renderWith('QuinnInteractive/Orgsite/Includes/ThemeVars')->__toString();
+            $themeVars = preg_replace('@</?style>@', '', $themeVars);
+            $customStyles = $fontsImport . "\n" .  $themeVars;
+            $config->setOption('content_style', $customStyles);
+        }        
     }
 }
 
