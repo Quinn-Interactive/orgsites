@@ -56,13 +56,12 @@ class ElementPromos extends BaseElement
     private static $singular_name = 'Promos';
     private static $table_name = 'ElementPromos';
 
-    public function CombinedPromos(): SS_List
+    public function CombinedPromos(): ArrayList|DataList
     {
-        /** @var SiteTree */
-        $list = null;
+        /** @var ArrayList|DataList $list */        
         $list = $this->IndexPromos() ?? $this->Promos();
         if ($this->MaxItems) {
-            $list = $list->limit($this->MaxItems);
+            $list = $list->Limit($this->MaxItems);
         }
         return $list;
     }

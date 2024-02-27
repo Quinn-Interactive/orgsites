@@ -8,6 +8,8 @@ namespace {
     use SilverStripe\Assets\Image;
     use SilverStripe\CMS\Model\RedirectorPage;
     use SilverStripe\CMS\Model\SiteTree;
+    use SilverStripe\Forms\CheckboxField;
+    use SilverStripe\Forms\FieldGroup;
     use SilverStripe\Forms\GridField\GridField;
     use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
     use SilverStripe\Forms\TextareaField;
@@ -26,7 +28,11 @@ namespace {
     class Page extends SiteTree
     {
         private static $db = [
-            'CardSummary' => 'Text',
+            'ShowBreadcrumbs' => 'Boolean',
+            'CardSummary'     => 'Text',
+        ];
+        private static $defaults = [
+            'ShowBreadcrumbs' => true,
         ];
         private static $has_one = [
             'CardImage' => Image::class,
@@ -48,6 +54,24 @@ namespace {
             return $this->getActiveAlerts()->filter([
                 'AlertStyle' => $type,
             ]);
+        }
+
+        /**
+         * Find the best summary for indexes and cards and promos
+         * return the first x characters that are complete words
+         * unless the last character is a period, add an ellipsis
+         *
+         * @param int     $chars (optional)
+         * @return string
+         */
+        public function DescriptionOrSummary($chars = 500)
+        {
+            $page = $this;
+            if ($this->ClassName == RedirectorPage::class && $this->RedirectionType == 'Internal') {
+                $page = $this->LinkTo();
+            }
+            $html = $page->CardSummary ?? $page->Summary ?? $page->MetaDescription ?? $page->Content ?? $page->HTML ?? '';
+            return Helpers::html_to_limited_text($html, $chars);
         }
 
         public function getActiveAlerts(): DataList
@@ -89,22 +113,18 @@ namespace {
             return $fields;
         }
 
-        /**
-         * Find the best summary for indexes and cards and promos
-         * return the first x characters that are complete words
-         * unless the last character is a period, add an ellipsis
-         *
-         * @param int     $chars (optional)
-         * @return string
-         */
-        public function DescriptionOrSummary($chars = 500)
+        public function getSettingsFields()
         {
-            $page = $this;
-            if ($this->ClassName == RedirectorPage::class && $this->RedirectionType == 'Internal') {
-                $page = $this->LinkTo();
+            $fields = parent::getSettingsFields();
+            if ($this->ParentID) {
+                $fields->addFieldToTab(
+                    'Root.Settings',
+                    FieldGroup::create(CheckboxField::create('ShowBreadcrumbs'))
+                        ->setTitle('Breadcrumbs'),
+                    'Visibility'
+                );
             }
-            $html = $page->CardSummary ?? $page->Summary ?? $page->MetaDescription ?? $page->Content ?? $page->HTML ?? '';
-            return Helpers::html_to_limited_text($html, $chars);
+            return $fields;
         }
     }
 }

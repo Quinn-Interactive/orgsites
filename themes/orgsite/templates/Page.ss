@@ -44,6 +44,7 @@
 ">
     <% include QuinnInteractive/Orgsite/Header %>
     <main class="main flex-grow-1 d-flex flex-column">
+        <% include QuinnInteractive/Orgsite/Breadcrumbs %>
         $Layout
     </main>
     <% include QuinnInteractive/Orgsite/Footer %>
