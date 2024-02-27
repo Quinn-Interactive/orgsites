@@ -3,9 +3,8 @@
 namespace QuinnInteractive\Orgsite\TinyMCE;
 
 use Page;
-use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
-use SilverStripe\Security\Security;
+use SilverStripe\ORM\DB;
 use SilverStripe\SiteConfig\SiteConfig;
 
 class EditorCMS {
@@ -300,7 +299,7 @@ class EditorCMS {
         $config->insertButtonsAfter('anchor', 'hr');
 
         // use our calculated themed CSS
-        if (Security::database_is_ready()) {
+        if (DB::is_active()) {
             $siteConfig = SiteConfig::current_site_config();
             if ($siteConfig->exists()) {
                 $fontsImport = $siteConfig->FontHeadCode('import');
