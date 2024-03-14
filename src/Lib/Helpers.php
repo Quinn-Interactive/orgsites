@@ -2,6 +2,7 @@
 
 namespace QuinnInteractive\Orgsite\Lib;
 
+use DateTimeZone;
 use SilverStripe\Forms\SelectField;
 use SilverStripe\View\Parsers\URLSegmentFilter;
 
@@ -69,6 +70,19 @@ class Helpers
         } else {
             return $text . '…';
         }
+    }
+
+    public static function timezone_array()
+    {
+        // Timezone
+        $timezones = [];
+        $tzArray = DateTimeZone::listIdentifiers();
+        foreach ($tzArray as $name) {
+            $tz = new DateTimeZone($name);
+            $loc = $tz->getLocation();
+            $timezones[$name] = $loc['comments'] ? "{$name} - {$loc['comments']}" : $name;
+        }
+        return $timezones;
     }
 
     /**

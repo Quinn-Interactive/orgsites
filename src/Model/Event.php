@@ -2,6 +2,7 @@
 
 namespace QuinnInteractive\Orgsite\Model;
 
+use DateTimeZone;
 use QuinnInteractive\Orgsite\Lib\GroupFields;
 use QuinnInteractive\Orgsite\Lib\Helpers;
 use QuinnInteractive\Orgsite\Page\Calendar;
@@ -9,9 +10,7 @@ use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
 use SilverStripe\Blog\Model\BlogPost;
 use SilverStripe\Control\Controller;
-use SilverStripe\Forms\DateField;
-use SilverStripe\Forms\DatetimeField;
-use SilverStripe\Forms\ToggleCompositeField;
+use SilverStripe\Forms\DropdownField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\Filters\PartialMatchFilter;
 use SilverStripe\Versioned\Versioned;
@@ -41,7 +40,8 @@ class Event extends DataObject
         'Start'       => 'DBDatetime',
         'End'         => 'DBDatetime',
         'DisplayDate' => 'Varchar(128)',
-        'AllDay'   => 'Boolean',
+        'AllDay'      => 'Boolean',
+        'Timezone'    => 'Varchar(32)',
         'Summary'     => 'HTMLText',
         'Content'     => 'HTMLText',
     ];
@@ -97,6 +97,15 @@ class Event extends DataObject
         return $content->Summary($wordsToDisplay);
     }
 
+    public function getCalculatedTimezone(): ?DateTimeZone
+    {
+        $timezone = $this->Timezone ?? $this->Calendar()->Timezone ?? null;
+        if ($timezone) {
+            return new DateTimeZone($timezone);
+        }
+        return null;
+    }
+
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
@@ -120,6 +129,14 @@ class Event extends DataObject
             $fields->removeByName('FeaturedImage');
             $fields->insertBefore('Summary', $featuredImage);
         }
+
+        // Timezone
+        $defaultTimezone = $this->Calendar()->Timezone ?? 'unset';
+        $timezone = DropdownField::create('Timezone', 'Timezone', Helpers::timezone_array())
+        ->setTitle('Timezone')
+        ->setDescription("Optional. Override calendar’s default timezone ($defaultTimezone) for use in iCal downloads.")
+        ->setEmptyString('Choose a timezone');
+        $fields->insertAfter('DisplayDate', $timezone);
 
         // Content
         $fields->dataFieldByName('Content')->setDescription(_t(

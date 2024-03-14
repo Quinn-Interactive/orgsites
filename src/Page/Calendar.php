@@ -5,7 +5,9 @@ namespace QuinnInteractive\Orgsite\Page;
 use CalendarController;
 use DateTimeZone;
 use Page;
+use QuinnInteractive\Orgsite\Lib\Helpers;
 use QuinnInteractive\Orgsite\Model\Event;
+use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
@@ -28,8 +30,8 @@ class Calendar extends Page
     private static $controller_name = CalendarController::class;
     private static $db = [
         'PostsPerPage' => 'Int',
-        'ICalendar' => 'Boolean',
-        'Timezone' => 'Varchar(32)',
+        'ICalendar'    => 'Boolean',
+        'Timezone'     => 'Varchar(32)',
     ];
     private static $defaults = [
         'PostsPerPage' => 10
@@ -58,25 +60,16 @@ class Calendar extends Page
                 'Content'
             );
 
-            // Timezone
-            $timezones = [];
-            // $tzArray = DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, 'US');
-            $tzArray = DateTimeZone::listIdentifiers();
-            foreach ($tzArray as $name) {
-                $tz = new DateTimeZone($name);
-                $loc = $tz->getLocation();
-                $timezones[$name] = $loc['comments'] ? "$name - {$loc['comments']}" : $name;
-            }
-    
+
             $fields->addFieldToTab(
                 'Root.Main',
-                DropdownField::create('Timezone', 'Timezone', $timezones)
+                DropdownField::create('Timezone', 'Timezone', Helpers::timezone_array())
                 ->setTitle('Timezone')
-                ->setDescription('Required. The default timezone for this calendar’s events. Can be overriden on individual events.')
+                ->setDescription('Recommended. The default timezone for this calendar’s events. Used in iCalendar events to make sure they show up at the correct time in people’s calendars. Can be overriden on individual events.')
                 ->setEmptyString('Choose a timezone'),
                 'MenuTitle'
             );
-            
+
             // Events
             $config = GridFieldConfig_RelationEditor::create();
             $config->removeComponentsByType(GridFieldAddExistingAutocompleter::class);
@@ -85,18 +78,6 @@ class Calendar extends Page
             $fields->addFieldToTab('Root.Events', $events);
         });
         return parent::getCMSFields();
-    }
-
-    public function validate(): ValidationResult
-    {
-        $result = parent::validate();
-
-        if (!$this->Timezone) {
-            $result->addFieldError('Timezone', 'You must select a timezone.');
-        }
-
-        return $result;
-
     }
 
     public function PastEvents(): DataList

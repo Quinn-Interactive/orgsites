@@ -6,6 +6,7 @@ use SilverStripe\Control\Director;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Dev\Debug;
+use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\ORM\PaginatedList;
 use SilverStripe\View\Requirements;
 use Spatie\IcalendarGenerator\Components\Calendar;
@@ -71,25 +72,27 @@ class CalendarController extends PageController
         $this->ShowPast = $this->getRequest()->getVar('past') ? true : false;
     }
 
-    public function ical(): ?string
+    public function ical(): void
     {
         if (!$this->ICalendar) {
-            return null;
+            return;
         }
         
         $ical = Calendar::create($this->Title);
         $lastYear = date('Y-m-d', strtotime('1 year ago'));
         $events = $this->Events()->filter('Start:GreaterThan', $lastYear);
         foreach ($events as $event) {
+            $timezone = $event->getCalculatedTimezone();
+            
             $entry = ComponentsEvent::create()
             ->name($event->Title)
             ->description($event->DescriptionOrSummary())
             ->uniqueIdentifier($event->ID)
-            ->createdAt(new DateTime($event->Created))
-            ->startsAt(new DateTime('6 march 2019 15:00'));
+            ->createdAt(new DateTime($event->Created, $timezone))
+            ->startsAt(new DateTime($event->Start, $timezone));
         
             if ($event->End) {
-                $entry->endsAt(new DateTime($event->End));
+                $entry->endsAt(new DateTime($event->End, $timezone));
             }
             if ($event->AllDay) {
                 $entry->fullDay();
@@ -100,6 +103,10 @@ class CalendarController extends PageController
                 $entry->image(Director::absoluteURL($image->getURL()));
             }
             $ical->event($entry);
+
+            if (!$event->getCalculatedTimezone()) {
+                $entry->withoutTimezone();
+            }
         }
         $file = $ical->get();
         header('Content-type:application/pdf');
