@@ -1,5 +1,14 @@
 <div class="calendar content-container py-3">
-    <h1>$Title</h1>
+    <% if $ICalendar %>
+        <a class="float-end" 
+           href="{$Link}/ical/{$URLSegment}.ics" 
+           style="color: inherit;" 
+           title="<%t QuinnInteractive\Orgsite\Page\Calendar.ADD_TO_CALENDAR 'Add to Calendar' %>" 
+           ><i class="bi-calendar-plus"></i></a>
+    <% end_if %>
+    <h1>
+        $Title
+    </h1>
 
     <div class="content">$Content</div>
     <% if $UpcomingEvents && $PastEvents %>

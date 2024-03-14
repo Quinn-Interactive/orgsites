@@ -4,8 +4,10 @@ use QuinnInteractive\Orgsite\Model\Event;
 use SilverStripe\Assets\Image;
 use SilverStripe\Control\Director;
 use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Dev\Debug;
 use SilverStripe\ORM\PaginatedList;
+use SilverStripe\View\Requirements;
 use Spatie\IcalendarGenerator\Components\Calendar;
 use Spatie\IcalendarGenerator\Components\Event as ComponentsEvent;
 
@@ -69,8 +71,12 @@ class CalendarController extends PageController
         $this->ShowPast = $this->getRequest()->getVar('past') ? true : false;
     }
 
-    public function ical() 
+    public function ical(): ?string
     {
+        if (!$this->ICalendar) {
+            return null;
+        }
+        
         $ical = Calendar::create($this->Title);
         $lastYear = date('Y-m-d', strtotime('1 year ago'));
         $events = $this->Events()->filter('Start:GreaterThan', $lastYear);
@@ -95,6 +101,11 @@ class CalendarController extends PageController
             }
             $ical->event($entry);
         }
-        return $ical->get();
+        $file = $ical->get();
+        header('Content-type:application/pdf');
+        header('Content-Disposition: attachment; filename="' . $this->URLSegment . '.ics"');
+        header('Content-Length: ' . strlen($file));
+        header('Connection: close');
+        echo $file;
     }
 }

@@ -5,6 +5,7 @@ namespace QuinnInteractive\Orgsite\Page;
 use CalendarController;
 use Page;
 use QuinnInteractive\Orgsite\Model\Event;
+use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
@@ -24,6 +25,7 @@ class Calendar extends Page
     private static $controller_name = CalendarController::class;
     private static $db = [
         'PostsPerPage' => 'Int',
+        'ICalendar' => 'Boolean',
     ];
     private static $defaults = [
         'PostsPerPage' => 10
@@ -44,6 +46,14 @@ class Calendar extends Page
                 NumericField::create('PostsPerPage', _t(__CLASS__ . '.PostsPerPage', 'Posts Per Page')),
                 'Content'
             );
+
+            // ICalendar
+            $fields->addFieldToTab(
+                'Root.Main',
+                CheckboxField::create('ICalendar', _t(__CLASS__ . '.ICalendar', 'Allow iCalendar Feed?')),
+                'Content'
+            );
+
             // Events
             $config = GridFieldConfig_RelationEditor::create();
             $config->removeComponentsByType(GridFieldAddExistingAutocompleter::class);
