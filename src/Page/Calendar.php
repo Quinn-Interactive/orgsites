@@ -3,15 +3,18 @@
 namespace QuinnInteractive\Orgsite\Page;
 
 use CalendarController;
+use DateTimeZone;
 use Page;
 use QuinnInteractive\Orgsite\Model\Event;
 use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
 use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\ORM\DataList;
+use SilverStripe\ORM\ValidationResult;
 use TractorCow\Fluent\Forms\VisibleLocalesColumn;
 
 /**
@@ -26,6 +29,7 @@ class Calendar extends Page
     private static $db = [
         'PostsPerPage' => 'Int',
         'ICalendar' => 'Boolean',
+        'Timezone' => 'Varchar(32)',
     ];
     private static $defaults = [
         'PostsPerPage' => 10
@@ -54,6 +58,25 @@ class Calendar extends Page
                 'Content'
             );
 
+            // Timezone
+            $timezones = [];
+            // $tzArray = DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, 'US');
+            $tzArray = DateTimeZone::listIdentifiers();
+            foreach ($tzArray as $name) {
+                $tz = new DateTimeZone($name);
+                $loc = $tz->getLocation();
+                $timezones[$name] = $loc['comments'] ? "$name - {$loc['comments']}" : $name;
+            }
+    
+            $fields->addFieldToTab(
+                'Root.Main',
+                DropdownField::create('Timezone', 'Timezone', $timezones)
+                ->setTitle('Timezone')
+                ->setDescription('Required. The default timezone for this calendar’s events. Can be overriden on individual events.')
+                ->setEmptyString('Choose a timezone'),
+                'MenuTitle'
+            );
+            
             // Events
             $config = GridFieldConfig_RelationEditor::create();
             $config->removeComponentsByType(GridFieldAddExistingAutocompleter::class);
@@ -62,6 +85,18 @@ class Calendar extends Page
             $fields->addFieldToTab('Root.Events', $events);
         });
         return parent::getCMSFields();
+    }
+
+    public function validate(): ValidationResult
+    {
+        $result = parent::validate();
+
+        if (!$this->Timezone) {
+            $result->addFieldError('Timezone', 'You must select a timezone.');
+        }
+
+        return $result;
+
     }
 
     public function PastEvents(): DataList
