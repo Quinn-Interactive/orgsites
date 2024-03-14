@@ -27,7 +27,6 @@ use TractorCow\Fluent\Extension\FluentVersionedExtension;
  * @property string $Start
  * @property string $End
  * @property string $DisplayDate
- * @property bool $ShowTimes
  * @property int $CalendarID
  * @property int $FeaturedImageID
  * @method \QuinnInteractive\Orgsite\Page\Calendar Calendar()
@@ -42,7 +41,7 @@ class Event extends DataObject
         'Start'       => 'DBDatetime',
         'End'         => 'DBDatetime',
         'DisplayDate' => 'Varchar(128)',
-        'ShowTimes'   => 'Boolean',
+        'AllDay'   => 'Boolean',
         'Summary'     => 'HTMLText',
         'Content'     => 'HTMLText',
     ];
@@ -104,13 +103,11 @@ class Event extends DataObject
         $fields->removeByName('CalendarID');
 
         // Dates
-        $start = $this->ShowTimes ? DatetimeField::create('Start') : DateField::create('Start');
-        $end = $this->ShowTimes ? DatetimeField::create('End') : DateField::create('End');
-        $fields->replaceField('Start', $start);
-        $fields->replaceField('End', $end);
+        $start = $fields->dataFieldByName('Start');
+        $end = $fields->dataFieldByName('End');
         $end->setTitle('End (optional)');
         $start->setTitle('Start (required)');
-        GroupFields::create(['Start', 'End', 'ShowTimes'], 'Dates', $fields, 'Summary');
+        GroupFields::create(['Start', 'End', 'AllDay'], 'Dates', $fields, 'Summary');
 
         // Display Date
         $displayDate = $fields->dataFieldByName('DisplayDate')->setDescription('Optional. Will show up instead of set dates, if not empty.');

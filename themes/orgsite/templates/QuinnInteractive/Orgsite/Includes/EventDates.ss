@@ -3,9 +3,9 @@
     <% if $DisplayDate %>
         $DisplayDate
     <% else %>
-        <% if $ShowTimes %>$Start.Nice<% else %>$Start.Date<% end_if %>
+        <% if $AllDay %>$Start.Date<% else %>$Start.Nice<% end_if %>
         <% if $End %>
-            &ndash; <% if $ShowTimes %>$End.Nice<% else %>$End.Date<% end_if %>
+            &ndash; <% if $AllDay %>$End.Date<% else %>$End.Nice<% end_if %>
         <% end_if %>
     <% end_if %>
 </div>

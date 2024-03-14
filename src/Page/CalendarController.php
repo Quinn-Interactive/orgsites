@@ -1,8 +1,13 @@
 <?php
 
 use QuinnInteractive\Orgsite\Model\Event;
+use SilverStripe\Assets\Image;
+use SilverStripe\Control\Director;
 use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Dev\Debug;
 use SilverStripe\ORM\PaginatedList;
+use Spatie\IcalendarGenerator\Components\Calendar;
+use Spatie\IcalendarGenerator\Components\Event as ComponentsEvent;
 
 /**
  * Class \CalendarController
@@ -17,6 +22,7 @@ class CalendarController extends PageController
 
     private static $allowed_actions = [
         'view',
+        'ical',
     ];
 
     /**
@@ -61,5 +67,34 @@ class CalendarController extends PageController
     {
         parent::init();
         $this->ShowPast = $this->getRequest()->getVar('past') ? true : false;
+    }
+
+    public function ical() 
+    {
+        $ical = Calendar::create($this->Title);
+        $lastYear = date('Y-m-d', strtotime('1 year ago'));
+        $events = $this->Events()->filter('Start:GreaterThan', $lastYear);
+        foreach ($events as $event) {
+            $entry = ComponentsEvent::create()
+            ->name($event->Title)
+            ->description($event->DescriptionOrSummary())
+            ->uniqueIdentifier($event->ID)
+            ->createdAt(new DateTime($event->Created))
+            ->startsAt(new DateTime('6 march 2019 15:00'));
+        
+            if ($event->End) {
+                $entry->endsAt(new DateTime($event->End));
+            }
+            if ($event->AllDay) {
+                $entry->fullDay();
+            }
+            /** @var Image $image */
+            $image = $event->FeaturedImage();
+            if ($image && $image->exists() && $image->canView()) {
+                $entry->image(Director::absoluteURL($image->getURL()));
+            }
+            $ical->event($entry);
+        }
+        return $ical->get();
     }
 }
