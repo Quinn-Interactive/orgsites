@@ -39,12 +39,12 @@ class Event extends DataObject
 {
     private static $db = [
         'Title'       => 'Varchar(128)',
-        'Content'     => 'HTMLText',
-        'Summary'     => 'HTMLText',
         'Start'       => 'DBDatetime',
         'End'         => 'DBDatetime',
         'DisplayDate' => 'Varchar(128)',
         'ShowTimes'   => 'Boolean',
+        'Summary'     => 'HTMLText',
+        'Content'     => 'HTMLText',
     ];
     private static $default_sort = 'Start DESC';
     private static $extensions = [
@@ -110,7 +110,7 @@ class Event extends DataObject
         $fields->replaceField('End', $end);
         $end->setTitle('End (optional)');
         $start->setTitle('Start (required)');
-        GroupFields::create(['Start', 'End', 'ShowTimes'], 'Dates', $fields, 'Content');
+        GroupFields::create(['Start', 'End', 'ShowTimes'], 'Dates', $fields, 'Summary');
 
         // Display Date
         $displayDate = $fields->dataFieldByName('DisplayDate')->setDescription('Optional. Will show up instead of set dates, if not empty.');
@@ -121,32 +121,24 @@ class Event extends DataObject
         $featuredImage->setFolderName('Event-Images');
         if ($featuredImage) {
             $fields->removeByName('FeaturedImage');
-            $fields->insertBefore('Content', $featuredImage);
+            $fields->insertBefore('Summary', $featuredImage);
         }
+
+        // Content
+        $fields->dataFieldByName('Content')->setDescription(_t(
+            BlogPost::class . '.CONTENT_DESCRIPTION',
+            'If empty, event will show in Calendar listing, but will not be linked to a page.'
+        ));
 
         // Summary
         $summary = $fields->dataFieldByName('Summary');
         $summary->setRows(5);
         $summary->setDescription(_t(
             BlogPost::class . '.SUMMARY_DESCRIPTION',
-            'If no summary is specified the first 30 words will be used.'
+            'Used on Calendar listing. If no summary is specified the first 30 words of the Content will be used.'
         ));
 
-        $summaryHolder = ToggleCompositeField::create(
-            'CustomSummary',
-            _t(BlogPost::class . '.CUSTOMSUMMARY', 'Add A Custom Summary'),
-            [
-                $summary,
-            ]
-        );
-        $summaryHolder->setHeadingLevel(4);
-        $summaryHolder->addExtraClass('custom-summary');
-
-        if ($this->Summary) {
-            $summaryHolder->setStartClosed(false);
-        }
-        $fields->removeByName('Summary');
-        $fields->insertAfter('FeaturedImage', $summaryHolder);
+        // $fields->insertAfter('FeaturedImage', $summary);
 
         return $fields;
     }

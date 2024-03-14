@@ -21,6 +21,7 @@
         "symbiote/silverstripe-gridfieldextensions": "^4.0",
         "tractorcow/silverstripe-fluent": "^7.0",
         "dnadesign/silverstripe-elemental": "^5.1",
+        "spatie/icalendar-generator": "^2.6.1",
         "jawira/case-converter": "^3.5",
         "tractorcow/silverstripe-colorpicker": "^4.2",
         "ryanpotter/silverstripe-color-field": "^1.0",
