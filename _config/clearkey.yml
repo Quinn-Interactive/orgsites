@@ -1,0 +1,11 @@
+---
+Name: clearkey-config
+After:
+  - '#corecache'
+---
+QuinnInteractive\ClearKey\Extensions\ClearKeyExtension:
+  invalidators:
+    Calendar:
+      - QuinnInteractive\Orgsite\Model\Event
+      - QuinnInteractive\Orgsite\Page\Calendar
+      - SilverStripe\Assets\Image

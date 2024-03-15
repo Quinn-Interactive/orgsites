@@ -23,3 +23,9 @@ JonoM\BetterNavigator:
     - 'fcondo@quinn.com'
   translucent: true
   position: 'right-bottom'
+SilverStripe\Core\Injector\Injector:
+  Psr\SimpleCache\CacheInterface.calendarCache:
+    factory: SilverStripe\Core\Cache\CacheFactory
+    constructor:
+      namespace: "calendarCache"
+      defaultLifetime: 86400

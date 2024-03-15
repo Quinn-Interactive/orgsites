@@ -100,4 +100,9 @@ class Calendar extends Page
             'End:GreaterThanOrEqual'   => date('Y-m-d'),
         ])->Sort('Start', 'ASC');
     }
+
+    public function getCalendarClearKey(): ?string
+    {
+        return "calender-{$this->ID}" . hash('md5', $this->ClearKey('Calendar'));
+    }
 }

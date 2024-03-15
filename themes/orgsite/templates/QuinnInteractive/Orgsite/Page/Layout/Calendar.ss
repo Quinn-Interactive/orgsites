@@ -1,3 +1,4 @@
+<% cached $ClearKey('Calendar'), $ID, $Locale %>
 <div class="calendar content-container py-3">
     <% if $ICalendar %>
         <a class="float-end" 
@@ -80,3 +81,4 @@
     <% end_if %>
 
 </div>
+<% end_cached %>

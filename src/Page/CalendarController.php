@@ -1,14 +1,13 @@
 <?php
 
+use Psr\SimpleCache\CacheInterface;
 use QuinnInteractive\Orgsite\Model\Event;
 use SilverStripe\Assets\Image;
 use SilverStripe\Control\Director;
 use SilverStripe\Control\HTTPRequest;
-use SilverStripe\Control\HTTPResponse;
-use SilverStripe\Dev\Debug;
-use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Core\Flushable;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\ORM\PaginatedList;
-use SilverStripe\View\Requirements;
 use Spatie\IcalendarGenerator\Components\Calendar;
 use Spatie\IcalendarGenerator\Components\Event as ComponentsEvent;
 
@@ -19,7 +18,7 @@ use Spatie\IcalendarGenerator\Components\Event as ComponentsEvent;
  * @method \QuinnInteractive\Orgsite\Page\Calendar data()
  * @mixin \QuinnInteractive\Orgsite\Page\Calendar
  */
-class CalendarController extends PageController
+class CalendarController extends PageController implements Flushable
 {
     public bool $ShowPast = false;
 
@@ -28,9 +27,62 @@ class CalendarController extends PageController
         'ical',
     ];
 
+    public function ical(): void
+    {
+        if (!$this->ICalendar) {
+            return;
+        }
+
+        $cache = self::get_cache();
+        $key = $this->getCalendarClearKey();
+        if ($key && $cache && $cache->has($key)) {
+            $file = $cache->get($key);
+        } else {
+            $ical = Calendar::create($this->Title);
+            $lastYear = date('Y-m-d', strtotime('1 year ago'));
+            $events = $this->Events()->filter('Start:GreaterThan', $lastYear);
+            foreach ($events as $event) {
+                $timezone = $event->getCalculatedTimezone();
+    
+                $entry = ComponentsEvent::create()
+                ->name($event->Title)
+                ->description($event->DescriptionOrSummary())
+                ->uniqueIdentifier($event->ID)
+                ->createdAt(new DateTime($event->Created, $timezone))
+                ->startsAt(new DateTime($event->Start, $timezone));
+    
+                if ($event->End) {
+                    $entry->endsAt(new DateTime($event->End, $timezone));
+                }
+                if ($event->AllDay) {
+                    $entry->fullDay();
+                }
+                /** @var Image $image */
+                $image = $event->FeaturedImage();
+                if ($image && $image->exists() && $image->canView()) {
+                    $entry->image(Director::absoluteURL($image->getURL()));
+                }
+                $ical->event($entry);
+    
+                if (!$event->getCalculatedTimezone()) {
+                    $entry->withoutTimezone();
+                }
+            }
+            $file = $ical->get();
+            $cache->set($key, $file);
+        }
+
+
+        header('Content-type:application/pdf');
+        header('Content-Disposition: attachment; filename="' . $this->URLSegment . '.ics"');
+        header('Content-Length: ' . strlen($file));
+        header('Connection: close');
+        echo $file;
+    }
+
     /**
      * Returns a list of paginated blog posts based on the BlogPost dataList.
-     *
+     *ac
      * @return PaginatedList
      */
     public function PaginatedList()
@@ -72,47 +124,14 @@ class CalendarController extends PageController
         $this->ShowPast = $this->getRequest()->getVar('past') ? true : false;
     }
 
-    public function ical(): void
+    public static function flush()
     {
-        if (!$this->ICalendar) {
-            return;
-        }
-        
-        $ical = Calendar::create($this->Title);
-        $lastYear = date('Y-m-d', strtotime('1 year ago'));
-        $events = $this->Events()->filter('Start:GreaterThan', $lastYear);
-        foreach ($events as $event) {
-            $timezone = $event->getCalculatedTimezone();
-            
-            $entry = ComponentsEvent::create()
-            ->name($event->Title)
-            ->description($event->DescriptionOrSummary())
-            ->uniqueIdentifier($event->ID)
-            ->createdAt(new DateTime($event->Created, $timezone))
-            ->startsAt(new DateTime($event->Start, $timezone));
-        
-            if ($event->End) {
-                $entry->endsAt(new DateTime($event->End, $timezone));
-            }
-            if ($event->AllDay) {
-                $entry->fullDay();
-            }
-            /** @var Image $image */
-            $image = $event->FeaturedImage();
-            if ($image && $image->exists() && $image->canView()) {
-                $entry->image(Director::absoluteURL($image->getURL()));
-            }
-            $ical->event($entry);
+        $cache = self::get_cache();
+        $cache->clear();
+    }
 
-            if (!$event->getCalculatedTimezone()) {
-                $entry->withoutTimezone();
-            }
-        }
-        $file = $ical->get();
-        header('Content-type:application/pdf');
-        header('Content-Disposition: attachment; filename="' . $this->URLSegment . '.ics"');
-        header('Content-Length: ' . strlen($file));
-        header('Connection: close');
-        echo $file;
+    private static function get_cache()
+    {
+        return Injector::inst()->get(CacheInterface::class . '.calendarCache');
     }
 }
