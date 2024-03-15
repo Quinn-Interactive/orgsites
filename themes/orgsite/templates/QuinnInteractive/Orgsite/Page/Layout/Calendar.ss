@@ -1,11 +1,10 @@
 <% cached $ClearKey('Calendar'), $PaginatedList.PageStart, $ID, $Locale %>
 <div class="calendar content-container py-3">
     <% if $ICalendar %>
-        <a class="float-end" 
+        <a class="float-end btn btn-outline-primary" 
            href="{$Link}/ical/{$URLSegment}.ics" 
-           style="color: inherit;" 
            title="<%t QuinnInteractive\Orgsite\Page\Calendar.ADD_TO_CALENDAR 'Add to Calendar' %>" 
-           ><i class="bi-calendar-plus"></i></a>
+           ><i class="bi-calendar-plus me-1"></i> Subscribe</a>
     <% end_if %>
     <h1>
         $Title

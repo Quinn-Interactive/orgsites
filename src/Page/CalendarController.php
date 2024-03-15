@@ -10,6 +10,7 @@ use SilverStripe\Core\Injector\Injector;
 use SilverStripe\ORM\PaginatedList;
 use Spatie\IcalendarGenerator\Components\Calendar;
 use Spatie\IcalendarGenerator\Components\Event as ComponentsEvent;
+use Spatie\IcalendarGenerator\Components\Timezone;
 
 /**
  * Class \CalendarController
@@ -39,39 +40,20 @@ class CalendarController extends PageController implements Flushable
             $file = $cache->get($key);
         } else {
             $ical = Calendar::create($this->Title);
+            if ($this->Timezone) {
+                $timezone = Timezone::create($this->Title);
+                $ical->timezone($timezone);
+            } else {
+                $ical->withoutTimezone();
+            }
             $lastYear = date('Y-m-d', strtotime('1 year ago'));
             $events = $this->Events()->filter('Start:GreaterThan', $lastYear);
             foreach ($events as $event) {
-                $timezone = $event->getCalculatedTimezone();
-    
-                $entry = ComponentsEvent::create()
-                ->name($event->Title)
-                ->description($event->DescriptionOrSummary())
-                ->uniqueIdentifier($event->ID)
-                ->createdAt(new DateTime($event->Created, $timezone))
-                ->startsAt(new DateTime($event->Start, $timezone));
-    
-                if ($event->End) {
-                    $entry->endsAt(new DateTime($event->End, $timezone));
-                }
-                if ($event->AllDay) {
-                    $entry->fullDay();
-                }
-                /** @var Image $image */
-                $image = $event->FeaturedImage();
-                if ($image && $image->exists() && $image->canView()) {
-                    $entry->image(Director::absoluteURL($image->getURL()));
-                }
-                $ical->event($entry);
-    
-                if (!$event->getCalculatedTimezone()) {
-                    $entry->withoutTimezone();
-                }
+                $ical->event($event->iCal());
             }
             $file = $ical->get();
             $cache->set($key, $file);
         }
-
 
         header('Content-type:application/pdf');
         header('Content-Disposition: attachment; filename="' . $this->URLSegment . '.ics"');
@@ -134,4 +116,10 @@ class CalendarController extends PageController implements Flushable
     {
         return Injector::inst()->get(CacheInterface::class . '.calendarCache');
     }
+
+    public function getCalendarClearKey(): ?string
+    {
+        return "event-{$this->ID}-" . hash('md5', $this->ClearKey('Calendar'));
+    }
+
 }

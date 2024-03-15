@@ -103,6 +103,6 @@ class Calendar extends Page
 
     public function getCalendarClearKey(): ?string
     {
-        return "calender-{$this->ID}" . hash('md5', $this->ClearKey('Calendar'));
+        return "calender-{$this->ID}-" . hash('md5', $this->ClearKey('Calendar'));
     }
 }

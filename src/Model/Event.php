@@ -2,7 +2,9 @@
 
 namespace QuinnInteractive\Orgsite\Model;
 
+use DateTime;
 use DateTimeZone;
+use Psr\SimpleCache\CacheInterface;
 use QuinnInteractive\Orgsite\Lib\GroupFields;
 use QuinnInteractive\Orgsite\Lib\Helpers;
 use QuinnInteractive\Orgsite\Page\Calendar;
@@ -10,10 +12,14 @@ use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
 use SilverStripe\Blog\Model\BlogPost;
 use SilverStripe\Control\Controller;
+use SilverStripe\Control\Director;
+use SilverStripe\Core\Flushable;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\Filters\PartialMatchFilter;
 use SilverStripe\Versioned\Versioned;
+use Spatie\IcalendarGenerator\Components\Event as ComponentsEvent;
 use TractorCow\Fluent\Extension\FluentVersionedExtension;
 
 /**
@@ -33,7 +39,7 @@ use TractorCow\Fluent\Extension\FluentVersionedExtension;
  * @mixin \SilverStripe\Versioned\Versioned
  * @mixin \TractorCow\Fluent\Extension\FluentVersionedExtension
  */
-class Event extends DataObject
+class Event extends DataObject implements Flushable
 {
     private static $db = [
         'Title'       => 'Varchar(128)',
@@ -177,5 +183,47 @@ class Event extends DataObject
     public function Parent()
     {
         return $this->Calendar();
+    }
+
+    public function iCal(): ComponentsEvent
+    {
+        $timezone = $this->getCalculatedTimezone();
+    
+        $ical = ComponentsEvent::create()
+        ->name($this->Title)
+        ->description($this->DescriptionOrSummary())
+        ->uniqueIdentifier($this->ID)
+        ->createdAt(new DateTime($this->Created, $timezone))
+        ->startsAt(new DateTime($this->Start, $timezone));
+
+        if ($this->End) {
+            $ical->endsAt(new DateTime($this->End, $timezone));
+        }
+        if ($this->AllDay) {
+            $ical->fullDay();
+        }
+        /** @var Image $image */
+        $image = $this->FeaturedImage();
+        if ($image && $image->exists() && $image->canView()) {
+            $ical->image(Director::absoluteURL($image->getURL()));
+        }
+
+        if (!$this->getCalculatedTimezone()) {
+            $ical->withoutTimezone();
+        }
+
+        return $ical;
+
+    }
+
+    public static function flush()
+    {
+        $cache = self::get_cache();
+        $cache->clear();
+    }
+
+    private static function get_cache()
+    {
+        return Injector::inst()->get(CacheInterface::class . '.calendarCache');
     }
 }
