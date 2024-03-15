@@ -1,4 +1,4 @@
-<% cached $ClearKey('Calendar'), $ID, $Locale %>
+<% cached $ClearKey('Calendar'), $PaginatedList.PageStart, $ID, $Locale %>
 <div class="calendar content-container py-3">
     <% if $ICalendar %>
         <a class="float-end" 
