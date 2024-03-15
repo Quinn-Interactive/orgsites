@@ -1,3 +1,4 @@
+<% cached $ClearKey('Calendar'), 'Event', $ID, $Locale %>
 <div class="calendar content-container py-3">
     <% if $Parent %>
     <a class="d-block mb-2" href="$Parent.Link">
@@ -58,3 +59,4 @@
     <% include QuinnInteractive/Orgsite/EventDates %>
     <div class="content">$Content</div>
 </div>
+<% end_cached %>
