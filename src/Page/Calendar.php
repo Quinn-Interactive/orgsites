@@ -56,7 +56,7 @@ class Calendar extends Page
             // ICalendar
             $fields->addFieldToTab(
                 'Root.Main',
-                CheckboxField::create('ICalendar', _t(__CLASS__ . '.ICalendar', 'Allow iCalendar Feed?')),
+                CheckboxField::create('ICalendar', _t(__CLASS__ . '.ICalendar', 'Allow iCalendar Feed and "add to event calendar"?')),
                 'Content'
             );
 

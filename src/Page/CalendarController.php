@@ -7,6 +7,7 @@ use SilverStripe\Control\Director;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Core\Flushable;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Dev\Debug;
 use SilverStripe\ORM\PaginatedList;
 use Spatie\IcalendarGenerator\Components\Calendar;
 use Spatie\IcalendarGenerator\Components\Event as ComponentsEvent;
@@ -24,7 +25,8 @@ class CalendarController extends PageController implements Flushable
     public bool $ShowPast = false;
 
     private static $allowed_actions = [
-        'view',
+        'event',
+        'event_ical',
         'ical',
     ];
 
@@ -88,7 +90,7 @@ class CalendarController extends PageController implements Flushable
         return $posts;
     }
 
-    public function view(HTTPRequest $r)
+    public function event(HTTPRequest $r)
     {
         $id = $r->param('ID');
         /** @var Event */
@@ -98,6 +100,47 @@ class CalendarController extends PageController implements Flushable
         }
         $templates = array_merge($event->getViewerTemplates(), $this->getViewerTemplates());
         return $this->customise($event)->renderWith($templates);
+    }
+
+    public function event_ical(HTTPRequest $r): mixed
+    {
+        $id = $r->param('ID');
+        if (!$id) {
+            return $this->redirect($this->Link());
+        }
+        if (!$this->ICalendar) {
+            return $this->redirect($this->Link());
+        }
+        
+        /** @var Event */
+        $event = $this->Events()->byID($id);
+        if (!$event || !$this->canView()) {
+            return $this->redirect($this->Link());
+        }
+
+        $cache = self::get_cache();
+        $key = $this->getCalendarClearKey('event-' . $event->ID);
+        if ($key && $cache && $cache->has($key)) {
+            $file = $cache->get($key);
+        } else {
+            $ical = Calendar::create($this->Title);
+            if ($this->Timezone) {
+                $timezone = Timezone::create($this->Title);
+                $ical->timezone($timezone);
+            } else {
+                $ical->withoutTimezone();
+            }
+            $ical->event($event->iCal());
+            $file = $ical->get();
+            $cache->set($key, $file);
+        }
+
+        header('Content-type:application/pdf');
+        header('Content-Disposition: attachment; filename="' . $event->getSlug() . '.ics"');
+        header('Content-Length: ' . strlen($file));
+        header('Connection: close');
+        echo $file;
+        return null;
     }
 
     protected function init()
@@ -117,9 +160,9 @@ class CalendarController extends PageController implements Flushable
         return Injector::inst()->get(CacheInterface::class . '.calendarCache');
     }
 
-    public function getCalendarClearKey(): ?string
+    public function getCalendarClearKey($name = 'calendar'): ?string
     {
-        return "event-{$this->ID}-" . hash('md5', $this->ClearKey('Calendar'));
+        return "$name-{$this->ID}-" . hash('md5', $this->ClearKey('Calendar'));
     }
 
 }

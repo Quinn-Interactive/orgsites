@@ -168,16 +168,29 @@ class Event extends DataObject implements Flushable
      *
      * @return ?string
      */
-    public function Link($action = 'view')
+    public function Link($action = 'event')
     {
         // if we don't have any content, then we don't need a link
         if (!$this->Content) {
             return null;
         }
         $base = $this->Calendar()->Link();
-        $slug = Helpers::generate_slug($this->Title);
-        $url = Controller::join_links($base, $action, $this->ID, $slug);
+        $url = Controller::join_links($base, $action, $this->ID, $this->getSlug());
         return $url;
+    }
+
+    public function getSlug(): string
+    {
+        return Helpers::generate_slug($this->Title);
+    }
+
+    public function iCalLink(): ?string
+    {
+        if ($this->Parent()->ICalendar) {
+            $base = $this->Calendar()->Link();
+            $url = Controller::join_links($base, 'event-ical', $this->ID, "{$this->getSlug()}.ics");
+            return $url;
+        }
     }
 
     public function Parent()

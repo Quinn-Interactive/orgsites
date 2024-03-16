@@ -1,5 +1,9 @@
 <div class="mb-2">
-    <i class="bi bi-calendar me-1" aria-hidden></i>
+    <% if $iCalLink %>
+        <a href="$iCalLink" class="bi bi-calendar-plus me-1" aria-hidden title="Add to calendar"></a>
+    <% else %>
+        <i class="bi bi-calendar me-1" aria-hidden></i>
+    <% end_if %>
     <% if $DisplayDate %>
         $DisplayDate
     <% else %>
