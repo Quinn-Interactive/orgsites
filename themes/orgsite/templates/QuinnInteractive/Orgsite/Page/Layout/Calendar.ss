@@ -4,7 +4,7 @@
         <a class="float-end btn btn-outline-primary" 
            href="{$Link}/ical/{$URLSegment}.ics" 
            title="<%t QuinnInteractive\Orgsite\Page\Calendar.ADD_TO_CALENDAR 'Add to Calendar' %>" 
-           ><i class="bi-calendar-plus me-1"></i> Subscribe</a>
+           ><i class="bi-calendar-plus me-1"></i> <%t QuinnInteractive\\Orgsite\\Page\\Calendar.SUBSCRIBE 'Subscribe' %></a>
     <% end_if %>
     <h1>
         $Title

@@ -11,6 +11,9 @@ es:
     MORE_TITLE: 'Más {title}'
   QuinnInteractive\Orgsite\Page\BlockPage:
     TITLE_DESCRIPTION: Debido a que esta es una página de bloque, el título no se mostrará en la página.Asegúrese de configurar y mostrar el título en su primer bloque.
+  QuinnInteractive\Orgsite\Page\Calendar:
+    ADD_TO_CALENDAR: Añadir al calendario
+    SUBSCRIBE: Suscribir
   QuinnInteractive\Orgsite\Element\ElementBanner:
     OPTIONAL: Opcional
     TextPosition_Title: Posición de texto

@@ -1,6 +1,6 @@
 <div class="mb-2">
     <% if $iCalLink %>
-        <a href="$iCalLink" class="bi bi-calendar-plus me-1" aria-hidden title="Add to calendar"></a>
+        <a href="$iCalLink" class="bi bi-calendar-plus me-1" aria-hidden title="<%t QuinnInteractive\\Orgsite\\Page\\Calendar.ADD_TO_CALENDAR 'Add to calendar' %>"></a>
     <% else %>
         <i class="bi bi-calendar me-1" aria-hidden></i>
     <% end_if %>
