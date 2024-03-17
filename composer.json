@@ -18,7 +18,7 @@
         "jonom/focuspoint": "^5.0",
         "jonom/silverstripe-betternavigator": "^6.0",
         "jonom/silverstripe-text-target-length": "^2.0",
-        "composer require scssphp/scssphp": "^1.12.1",
+        "scssphp/scssphp": "^1.12.1",
         "quinninteractive/silverstripe-clearkey": "dev-feature/ss5-support",
         "ryanpotter/silverstripe-color-field": "^1.0",
         "silverstripe/blog": "^4.1",
