@@ -81,12 +81,12 @@
 
 --bs-tertiary-bg: #f8f9fa;
 --bs-tertiary-bg-rgb: 248, 249, 250;
-<%-- --bs-heading-color: inherit;
+--bs-heading-color: inherit;
 --bs-link-color: $ColorHex(Primary);
 --bs-link-color-rgb: $ColorRGBVals(Primary);
 --bs-link-decoration: underline;
 --bs-link-hover-color: $ColorHex(Primary).Blend(0.2, '#000000');
---bs-link-hover-color-rgb: $ColorRGBVals(Primary).Blend(0.2, '#000000'); --%>
+--bs-link-hover-color-rgb: $ColorRGBVals(Primary).Blend(0.2, '#000000');
 
 <%-- --bs-code-color: #d63384;
 --bs-highlight-color: #212529;
