@@ -170,6 +170,309 @@ color-scheme: dark;
 --bs-form-invalid-color: #ea868f;
 --bs-form-invalid-border-color: #ea868f;
 } --%>
+
+<%-- btn vars --%>
+
+<%--
+--bs-primary: $ColorHex(Primary);
+--bs-secondary: $ColorHex(Secondary);
+--bs-success: $ColorHex(Success);
+--bs-info: $ColorHex(Info);
+--bs-warning: $ColorHex(Warning);
+--bs-danger: $ColorHex(Danger);
+--bs-light: $ColorHex(Light);
+--bs-dark: $ColorHex(Dark);
+--%>
+
+.btn-primary, button, input[type=button], input[type=submit] {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: $ColorHex(Primary);
+    --bs-btn-border-color: $ColorHex(Primary);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: $ColorHex(PrimaryTextEmphasis);
+    --bs-btn-hover-border-color: $ColorHex(PrimaryTextEmphasis);
+    --bs-btn-focus-shadow-rgb: $ColorRGBVals(Primary);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: $ColorHex(PrimaryTextEmphasis);
+    --bs-btn-active-border-color: $ColorHex(PrimaryTextEmphasis);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: $ColorHex(Primary);
+    --bs-btn-disabled-border-color:$ColorHex(Primary)
+}
+
+.btn-secondary, button.-secondary, input[type=button].-secondary, input[type=submit].-secondary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: $ColorHex(Secondary);
+    --bs-btn-border-color: $ColorHex(Secondary);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #5c636a;
+    --bs-btn-hover-border-color: $ColorHex(SecondaryTextEmphasis);
+    --bs-btn-focus-shadow-rgb: $ColorRGBVals(Secondary);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: $ColorHex(SecondaryTextEmphasis);
+    --bs-btn-active-border-color: $ColorHex(SecondaryTextEmphasis);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: $ColorHex(Secondary);
+    --bs-btn-disabled-border-color:$ColorHex(Secondary)
+}
+
+.btn-success {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: $ColorHex(Success);
+    --bs-btn-border-color: $ColorHex(Success);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: $ColorHex(SuccessTextEmphasis);
+    --bs-btn-hover-border-color: $ColorHex(SuccessTextEmphasis);
+    --bs-btn-focus-shadow-rgb: $ColorRGBVals(Success);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: $ColorHex(SuccessTextEmphasis);
+    --bs-btn-active-border-color: $ColorHex(SuccessTextEmphasis);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: $ColorHex(Success);
+    --bs-btn-disabled-border-color:$ColorHex(Success)
+}
+
+.btn-info {
+    --bs-btn-color: #000;
+    --bs-btn-bg: $ColorHex(Info);
+    --bs-btn-border-color: $ColorHex(Info);
+    --bs-btn-hover-color: #000;
+    --bs-btn-hover-bg: $ColorHex(InfoTextEmphasis);
+    --bs-btn-hover-border-color: $ColorHex(InfoTextEmphasis);
+    --bs-btn-focus-shadow-rgb: $ColorRGBVals(Info);
+    --bs-btn-active-color: #000;
+    --bs-btn-active-bg: #3dd5f3;
+    --bs-btn-active-border-color: $ColorHex(InfoTextEmphasis);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-disabled-color: #000;
+    --bs-btn-disabled-bg: $ColorHex(Info);
+    --bs-btn-disabled-border-color:$ColorHex(Info)
+}
+
+.btn-warning {
+    --bs-btn-color: #000;
+    --bs-btn-bg: $ColorHex(Warning);
+    --bs-btn-border-color: $ColorHex(Warning);
+    --bs-btn-hover-color: #000;
+    --bs-btn-hover-bg: $ColorHex(WarningTextEmphasis);
+    --bs-btn-hover-border-color: $ColorHex(WarningTextEmphasis);
+    --bs-btn-focus-shadow-rgb: $ColorRGBVals(Warning);
+    --bs-btn-active-color: #000;
+    --bs-btn-active-bg: $ColorHex(WarningTextEmphasis);
+    --bs-btn-active-border-color: $ColorHex(WarningTextEmphasis);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-disabled-color: #000;
+    --bs-btn-disabled-bg: $ColorHex(Warning);
+    --bs-btn-disabled-border-color:$ColorHex(Warning)
+}
+
+.btn-danger {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: $ColorHex(Danger);
+    --bs-btn-border-color: $ColorHex(Danger);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: $ColorHex(DangerTextEmphasis);
+    --bs-btn-hover-border-color: $ColorHex(DangerTextEmphasis);
+    --bs-btn-focus-shadow-rgb: $ColorRGBVals(Danger);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: $ColorHex(DangerTextEmphasis);
+    --bs-btn-active-border-color: $ColorHex(DangerTextEmphasis);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: $ColorHex(Danger);
+    --bs-btn-disabled-border-color:$ColorHex(Danger)
+}
+
+.btn-light {
+    --bs-btn-color: #000;
+    --bs-btn-bg: $ColorHex(Light);
+    --bs-btn-border-color: $ColorHex(Light);
+    --bs-btn-hover-color: #000;
+    --bs-btn-hover-bg: $ColorHex(LightTextEmphasis);
+    --bs-btn-hover-border-color: $ColorHex(LightTextEmphasis);
+    --bs-btn-focus-shadow-rgb: $ColorRGBVals(Light);
+    --bs-btn-active-color: #000;
+    --bs-btn-active-bg: $ColorHex(LightTextEmphasis);
+    --bs-btn-active-border-color: $ColorHex(LightTextEmphasis);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-disabled-color: #000;
+    --bs-btn-disabled-bg: $ColorHex(Light);
+    --bs-btn-disabled-border-color:$ColorHex(Light)
+}
+
+.btn-dark {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: $ColorHex(Dark);
+    --bs-btn-border-color: $ColorHex(Dark);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: $ColorHex(DarkTextEmphasis);
+    --bs-btn-hover-border-color: $ColorHex(DarkTextEmphasis);
+    --bs-btn-focus-shadow-rgb: $ColorRGBVals(Dark);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: $ColorHex(DarkTextEmphasis);
+    --bs-btn-active-border-color: $ColorHex(DarkTextEmphasis);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: $ColorHex(Dark);
+    --bs-btn-disabled-border-color:$ColorHex(Dark)
+}
+
+.btn-outline-primary, .optionset.inline-options > .middleColumn > .optionset label {
+    --bs-btn-color: $ColorHex(Primary);
+    --bs-btn-border-color: $ColorHex(Primary);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: $ColorHex(Primary);
+    --bs-btn-hover-border-color: $ColorHex(Primary);
+    --bs-btn-focus-shadow-rgb: $ColorRGBVals(Primary);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: $ColorHex(Primary);
+    --bs-btn-active-border-color: $ColorHex(Primary);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-disabled-color: $ColorHex(Primary);
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: $ColorHex(Primary);
+    --bs-gradient:none
+}
+
+.btn-outline-secondary {
+    --bs-btn-color: $ColorHex(Secondary);
+    --bs-btn-border-color: $ColorHex(Secondary);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: $ColorHex(Secondary);
+    --bs-btn-hover-border-color: $ColorHex(Secondary);
+    --bs-btn-focus-shadow-rgb: $ColorRGBVals(Secondary);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: $ColorHex(Secondary);
+    --bs-btn-active-border-color: $ColorHex(Secondary);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-disabled-color: $ColorHex(Secondary);
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: $ColorHex(Secondary);
+    --bs-gradient:none
+}
+
+.btn-outline-success {
+    --bs-btn-color: $ColorHex(Success);
+    --bs-btn-border-color: $ColorHex(Success);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: $ColorHex(Success);
+    --bs-btn-hover-border-color: $ColorHex(Success);
+    --bs-btn-focus-shadow-rgb: $ColorRGBVals(Success);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: $ColorHex(Success);
+    --bs-btn-active-border-color: $ColorHex(Success);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-disabled-color: $ColorHex(Success);
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: $ColorHex(Success);
+    --bs-gradient:none
+}
+
+.btn-outline-info {
+    --bs-btn-color: $ColorHex(Info);
+    --bs-btn-border-color: $ColorHex(Info);
+    --bs-btn-hover-color: #000;
+    --bs-btn-hover-bg: $ColorHex(Info);
+    --bs-btn-hover-border-color: $ColorHex(Info);
+    --bs-btn-focus-shadow-rgb: $ColorRGBVals(Info);
+    --bs-btn-active-color: #000;
+    --bs-btn-active-bg: $ColorHex(Info);
+    --bs-btn-active-border-color: $ColorHex(Info);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-disabled-color: $ColorHex(Info);
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: $ColorHex(Info);
+    --bs-gradient:none
+}
+
+.btn-outline-warning {
+    --bs-btn-color: $ColorHex(Warning);
+    --bs-btn-border-color: $ColorHex(Warning);
+    --bs-btn-hover-color: #000;
+    --bs-btn-hover-bg: $ColorHex(Warning);
+    --bs-btn-hover-border-color: $ColorHex(Warning);
+    --bs-btn-focus-shadow-rgb: $ColorRGBVals(Warning);
+    --bs-btn-active-color: #000;
+    --bs-btn-active-bg: $ColorHex(Warning);
+    --bs-btn-active-border-color: $ColorHex(Warning);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-disabled-color: $ColorHex(Warning);
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: $ColorHex(Warning);
+    --bs-gradient:none
+}
+
+.btn-outline-danger {
+    --bs-btn-color: $ColorHex(Danger);
+    --bs-btn-border-color: $ColorHex(Danger);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: $ColorHex(Danger);
+    --bs-btn-hover-border-color: $ColorHex(Danger);
+    --bs-btn-focus-shadow-rgb: $ColorRGBVals(Danger);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: $ColorHex(Danger);
+    --bs-btn-active-border-color: $ColorHex(Danger);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-disabled-color: $ColorHex(Danger);
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: $ColorHex(Danger);
+    --bs-gradient:none
+}
+
+.btn-outline-light {
+    --bs-btn-color: $ColorHex(Light);
+    --bs-btn-border-color: $ColorHex(Light);
+    --bs-btn-hover-color: #000;
+    --bs-btn-hover-bg: $ColorHex(Light);
+    --bs-btn-hover-border-color: $ColorHex(Light);
+    --bs-btn-focus-shadow-rgb: $ColorRGBVals(Light);
+    --bs-btn-active-color: #000;
+    --bs-btn-active-bg: $ColorHex(Light);
+    --bs-btn-active-border-color: $ColorHex(Light);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-disabled-color: $ColorHex(Light);
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: $ColorHex(Light);
+    --bs-gradient:none
+}
+
+.btn-outline-dark {
+    --bs-btn-color: $ColorHex(Dark);
+    --bs-btn-border-color: $ColorHex(Dark);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: $ColorHex(Dark);
+    --bs-btn-hover-border-color: $ColorHex(Dark);
+    --bs-btn-focus-shadow-rgb: $ColorRGBVals(Dark);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: $ColorHex(Dark);
+    --bs-btn-active-border-color: $ColorHex(Dark);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+    --bs-btn-disabled-color: $ColorHex(Dark);
+    --bs-btn-disabled-bg: transparent;
+    --bs-btn-disabled-border-color: $ColorHex(Dark);
+    --bs-gradient:none
+}
+
+.btn-link {
+    --bs-btn-font-weight: 400;
+    --bs-btn-color: var(--bs-link-color);
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: transparent;
+    --bs-btn-hover-color: var(--bs-link-hover-color);
+    --bs-btn-hover-border-color: transparent;
+    --bs-btn-active-color: var(--bs-link-hover-color);
+    --bs-btn-active-border-color: transparent;
+    --bs-btn-disabled-color: $ColorHex(Secondary);
+    --bs-btn-disabled-border-color: transparent;
+    --bs-btn-box-shadow: 0 0 0 #000;
+    --bs-btn-focus-shadow-rgb: $ColorRGBVals(Primary);
+    text-decoration:underline
+}
+
+
 </style>
 <% end_with %>
 <% end_cached %>

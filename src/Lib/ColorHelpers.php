@@ -72,7 +72,7 @@ class ColorHelpers
                 case 'DarkTextEmphasis':
                     return self::color('Dark')->Blend(0.4, '#000000');
 
-                    // *-bg-subtle
+                // *-bg-subtle
                 case 'PrimaryBgSubtle':
                     return self::color('Primary')->Blend(0.2, '#ffffff');
                 case 'SecondaryBgSubtle':
@@ -90,7 +90,7 @@ class ColorHelpers
                 case 'DarkBgSubtle':
                     return DBField::create_field('Color', 'ced4da');
 
-                    // *-border-subtle
+                // *-border-subtle
                 case 'PrimaryBorderSubtle':
                     return self::color('Primary')->Blend(0.4, '#ffffff');
                 case 'SecondaryBorderSubtle':
@@ -108,7 +108,7 @@ class ColorHelpers
                 case 'DarkBorderSubtle':
                     return DBField::create_field('Color', 'adb5bd');
 
-                    // other
+                // other
                 case 'SecondaryColor':
                     return self::color('Dark')->Blend(0.25, '#ffffff');
                 case 'SecondaryBg':
