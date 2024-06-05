@@ -5,6 +5,7 @@
 PHP_CHECK=ON
 COMPOSER_LOCK_CHECK=ON
 JS_CSS_CHECK=off
+THEME_COMMIT=ON
 
 # PHP
 php_check() {
@@ -82,6 +83,29 @@ js_css_linting() {
     fi
 }
 
+# Commit theme if anything changes
+theme_commit() {
+    YARN="/opt/homebrew/bin/yarn"
+    if [ -x $YARN ]; then
+        FILES=$(git status --porcelain themes/orgsite | cut -c 4- | tr '\n' ' ')
+        if [ -z "$FILES" ]
+        then
+            echo "No theme changes, so no /dist/ changes to commit." >/dev/stderr
+        else
+            cd themes/orgsite || echo 'No theme, exiting.' >/dev/stderr && return
+            if [ "$(git branch --show-current)" = 'main' ]; then
+                $YARN prod
+            else
+                $YARN dev    
+            fi
+            git add themes/orgsite
+        fi
+    else
+        echo "ERROR: $YARN is not available or not executable." >/dev/stderr
+        exit 1
+    fi
+}
+
 # Check a variable for yes/no/on/off/1/0 and return true if truthy
 yes_enabled() {
     case "$1" in
@@ -108,4 +132,5 @@ echo "pre commit hook start" >/dev/stderr
 yes_enabled $PHP_CHECK && php_check
 yes_enabled $COMPOSER_LOCK_CHECK && content_hash_check
 yes_enabled $JS_CSS_CHECK && js_css_linting
+yes_enabled $THEME_COMMIT && theme_commit
 echo "pre commit hook finish" >/dev/stderr
