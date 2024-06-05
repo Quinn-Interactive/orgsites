@@ -92,10 +92,13 @@ theme_commit() {
         then
             echo "No theme changes, so no /dist/ changes to commit." >/dev/stderr
         else
+            echo "File Changes: $FILES" >/dev/stderr
             cd themes/orgsite || echo 'No theme, exiting.' >/dev/stderr && return
             if [ "$(git branch --show-current)" = 'main' ]; then
+                echo "PROD Current branch: $(git branch --show-current)" >/dev/stderr
                 $YARN prod
             else
+                echo "DEV Current branch: $(git branch --show-current)" >/dev/stderr
                 $YARN dev    
             fi
             git add themes/orgsite
