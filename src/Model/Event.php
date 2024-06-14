@@ -191,6 +191,7 @@ class Event extends DataObject implements Flushable
             $url = Controller::join_links($base, 'event-ical', $this->ID, "{$this->getSlug()}.ics");
             return $url;
         }
+        return null;
     }
 
     public function Parent()
