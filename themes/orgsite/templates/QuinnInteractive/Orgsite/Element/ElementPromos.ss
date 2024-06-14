@@ -25,9 +25,9 @@
                     <% loop $CombinedPromos %>
                         <%-- badges, cards --%>
                         <% if $Up.PromoType == 'badges' %>
-                            <div class="col slider__slide"><% include QuinnInteractive/Orgsite/PromoBadge  HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries %></div>
+                            <div class="col slider__slide"><% include QuinnInteractive/Orgsite/PromoBadge Parent=$Me, HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries, HideText=$Up.HideText, ButtonStyle=$ButtonStyle %></div>
                         <% else_if $Up.PromoType == 'cards' %>
-                            <div class="col slider__slide"><% include QuinnInteractive/Orgsite/PromoCard  HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries %></div>
+                            <div class="col slider__slide"><% include QuinnInteractive/Orgsite/PromoCard Parent=$Me, HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries, HideText=$Up.HideText, ButtonStyle=$ButtonStyle %></div>
                         <% end_if %>
                     <% end_loop %>
                 </div>
@@ -37,13 +37,13 @@
                 <% loop $CombinedPromos %>
                     <%-- badges, stack, cards, blocks --%>
                     <% if $Up.PromoType == 'badges' %>
-                        <div class="col"><% include QuinnInteractive/Orgsite/PromoBadge  HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries %></div>
+                        <div class="col"><% include QuinnInteractive/Orgsite/PromoBadge Parent=$Me, HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries, HideText=$Up.HideText, ButtonStyle=$ButtonStyle %></div>
                     <% else_if $Up.PromoType == 'stack' %>
-                        <% include QuinnInteractive/Orgsite/PromoStack  HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries %>
+                        <% include QuinnInteractive/Orgsite/PromoStack  Parent=$Me, HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries, HideText=$Up.HideText, ButtonStyle=$ButtonStyle %>
                     <% else_if $Up.PromoType == 'cards' %>
-                        <div class="col"><% include QuinnInteractive/Orgsite/PromoCard  HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries %></div>
+                        <div class="col"><% include QuinnInteractive/Orgsite/PromoCard  Parent=$Me, HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries, HideText=$Up.HideText, ButtonStyle=$ButtonStyle %></div>
                     <% else_if $Up.PromoType == 'blocks' %>
-                        <% include QuinnInteractive/Orgsite/PromoBlock HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries %>
+                        <% include QuinnInteractive/Orgsite/PromoBlock Parent=$Me, HideImages=$Up.HideImages, HideSummaries=$Up.HideSummaries, HideText=$Up.HideText, ButtonStyle=$ButtonStyle %>
                     <% end_if %>
                 <% end_loop %>
             </div>

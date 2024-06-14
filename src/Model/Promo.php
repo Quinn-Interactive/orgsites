@@ -19,7 +19,6 @@ use TractorCow\Fluent\Extension\FluentVersionedExtension;
  * @property string $Title
  * @property string $Content
  * @property bool $StretchedLink
- * @property int $Sort
  * @property int $ImageID
  * @property int $ParentID
  * @property int $LinkID
@@ -31,6 +30,9 @@ use TractorCow\Fluent\Extension\FluentVersionedExtension;
  */
 class Promo extends DataObject
 {
+    private static $belongs_many_many = [
+        'Parents' => ElementPromos::class,
+    ];
 
     private static $casting = [
         'DescriptionOrSummary' => 'HTMLText',
@@ -39,27 +41,34 @@ class Promo extends DataObject
     private static $db = [
         'Title'   => 'Varchar(128)',
         'Content' => 'HTMLText',
-        'Sort'    => 'Int',
     ];
-    private static $default_sort = 'Sort';
     private static $extensions = [
         Versioned::class,
         FluentVersionedExtension::class,
     ];
     private static $has_one = [
-        'Image'  => File::class,
-        'Parent' => ElementPromos::class,
-        'Link'   => Link::class,
+        'Image' => File::class,
+        'Link'  => Link::class,
     ];
     private static $owns = [
         'Image',
         'Link',
     ];
+    private static $searchable_fields = [
+        'Title'   => 'PartialMatchFilter',
+        'Content' => [
+            'title'   => 'Content',
+            'filter'  => 'PartialMatchFilter',
+            'general' => false,
+        ],
+     ];
     private static $summary_fields = [
-        'Thumbnail'    => 'Image',
-        'Title'        => 'Title',
-        'Link.LinkURL' => 'Link',
+        'Thumbnail'     => 'Image',
+        'Title'         => 'Title',
+        'Link.LinkURL'  => 'Link',
+        'Parents.Count' => 'Uses',
     ];
+
     private static $table_name = 'Promo';
 
     public function DescriptionOrSummary()
@@ -67,25 +76,24 @@ class Promo extends DataObject
         return $this->Content;
     }
 
-    public function getButtonStyle(): string
-    {
-        return $this->Parent()->ButtonStyle ?? 'button';
-    }
+    // public function getButtonStyle(): string
+    // {
+    //     return $this->Parent()->ButtonStyle ?? 'button';
+    // }
 
-    public function getStretchedLink(): string
-    {
-        return $this->getButtonStyle() != 'button';
-    }
+    // public function getStretchedLink(): string
+    // {
+    //     return $this->getButtonStyle() != 'button';
+    // }
 
-    public function getHideButtonText(): string
-    {
-        return $this->getButtonStyle() == 'whole card' || $this->getHideText();
-    }
+    // public function getHideButtonText(): string
+    // {
+    //     return $this->getButtonStyle() == 'whole card' || $this->getHideText();
+    // }
 
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
-        $fields->removeByName(['Sort', 'ParentID']);
         /** @var UploadField */
         $image = $fields->dataFieldByName('Image');
         if ($image) {
@@ -100,16 +108,15 @@ class Promo extends DataObject
         return $fields;
     }
 
-    public function getHideImages(): bool
-    {
-        return $this->Parent()->HideImages ?? false;
+    // public function getHideImages(): bool
+    // {
+    //     return $this->Parent()->HideImages ?? false;
+    // }
 
-    }
-
-    public function getHideText(): bool
-    {
-        return $this->Parent()->HideText ?? false;
-    }
+    // public function getHideText(): bool
+    // {
+    //     return $this->Parent()->HideText ?? false;
+    // }
 
     public function getThumbnail()
     {

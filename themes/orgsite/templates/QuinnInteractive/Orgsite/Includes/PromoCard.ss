@@ -8,7 +8,7 @@
             <% with $Image %><% include QuinnInteractive/Orgsite/PromoCardImage %><% end_with %>
         <% end_if %>
     <% end_if %>
-    <% if not $HideText %>
+    <% if not $Parent.HideText %>
     <div class="card-body">
         <h5 class="card-title">$Title</h5>
         <p class="card-text">
@@ -25,21 +25,21 @@
                 <a 
                     href="$Link.LinkURL" 
                     class="
-                        <% if not $HideButtonText %>btn btn-small btn-primary<% end_if %>
-                        <% if $StretchedLink %> stretched-link<% end_if %>
+                        <% if not $ButtonStyle == 'whole card' && not $Parent.HideText %>btn btn-small btn-primary<% end_if %>
+                        <% if $ButtonStyle != 'button' %> stretched-link<% end_if %>
                     "
                     $Link.TargetAttr
                     title="$Title.ATT"
-                ><% if not $HideButtonText %>$Link.Title<% end_if %></a>
+                ><% if not $ButtonStyle == 'whole card' && not $Parent.HideText %>$Link.Title<% end_if %></a>
             <% else %>
                 <a 
                     href="$Link" 
                     class="
-                        <% if not $HideButtonText %>btn btn-small btn-primary<% end_if %>
-                        <% if $StretchedLink %> stretched-link<% end_if %>
+                        <% if not $ButtonStyle == 'whole card' && not $Parent.HideText %>btn btn-small btn-primary<% end_if %>
+                        <% if $ButtonStyle != 'button' %> stretched-link<% end_if %>
                     "
                     title="<%t SilverStripe\\Blog\\Model\\Blog.ReadMoreAbout "Read more about '{title}'..." title=$Title %>"
-                ><% if not $HideButtonText %><%t Page.READ_MORE "Read More" %><% end_if %></a>
+                ><% if not $ButtonStyle == 'whole card' && not $Parent.HideText %><%t Page.READ_MORE "Read More" %><% end_if %></a>
             <% end_if %>
         </div>
     <% end_if %>

@@ -7,7 +7,6 @@ use gorriecoe\Link\Models\Link;
 use Page;
 use QuinnInteractive\Orgsite\Model\Promo;
 use SilverStripe\CMS\Model\SiteTree;
-use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\GridField\GridFieldAddExistingAutocompleter;
 use SilverStripe\Forms\GridField\GridFieldConfig;
 use SilverStripe\Forms\TreeDropdownField;
@@ -31,24 +30,29 @@ class ElementPromos extends BaseElement
 {
 
     private static $db = [
-        'PromoType'   => "Enum('badges, stack, cards, blocks', 'cards')",
-        'PromoLayout' => "Enum('grid, slider','grid')",
-        'ButtonStyle' => "Enum('button, whole card, whole card and button', 'button')",
-        'MaxItems'    => "Int",
-        'HideImages'    => "Boolean",
-        'HideText'    => "Boolean",
-        'HideSummaries'    => "Boolean",
-        'HideBlockIfNoPromos'    => "Boolean",
+        'PromoType'           => "Enum('badges, stack, cards, blocks', 'cards')",
+        'PromoLayout'         => "Enum('grid, slider','grid')",
+        'ButtonStyle'         => "Enum('button, whole card, whole card and button', 'button')",
+        'MaxItems'            => "Int",
+        'HideImages'          => "Boolean",
+        'HideText'            => "Boolean",
+        'HideSummaries'       => "Boolean",
+        'HideBlockIfNoPromos' => "Boolean",
     ];
     private static $description = 'Promos';
-    private static $has_many = [
-        'Promos' => Promo::class,
-    ];
     private static $has_one = [
         'Index' => SiteTree::class,
     ];
     private static $icon = 'font-icon-block-promo';
     private static $inline_editable = false;
+    private static $many_many = [
+        'Promos' => Promo::class,
+    ];
+    private static $many_many_extraFields = [
+        'Promos' => [
+            'Sort' => 'Int',
+        ],
+    ];
     private static $owns = [
         'Promos',
     ];
@@ -58,52 +62,12 @@ class ElementPromos extends BaseElement
 
     public function CombinedPromos(): ArrayList|DataList
     {
-        /** @var ArrayList|DataList $list */        
+        /** @var ArrayList|DataList $list */
         $list = $this->IndexPromos() ?? $this->Promos();
         if ($this->MaxItems) {
             $list = $list->Limit($this->MaxItems);
         }
         return $list;
-    }
-
-    public function IndexPromos(): ?SS_List
-    {
-        /** @var SiteTree */
-        $index = $this->Index();
-        if (!$index->exists()) {
-            return null;
-        }
-        $list = null;
-        if ($index->hasMethod('Promos')) {
-            return $index->Promos();
-        } else {
-            /** @var DataList $pages */
-            $pages = $index->AllChildren();
-            if ($this->MaxItems) {
-                $pages = $index->AllChildren()->Limit($this->MaxItems);
-            }
-            $list = ArrayList::create();
-            foreach ($pages as $page) {
-                /** @var Page $page */
-                $promo = Promo::create($page->toMap());
-                $promo->ParentID = $this->ID;
-                if ($page->CardSummary && strlen($page->CardSummary)) {
-                    $promo->Content = nl2br($page->CardSummary);
-                } else {
-                    $promo->Content = $page->DescriptionOrSummary();
-                }
-                $link = Link::create([
-                    'Title' => 'More',
-                    'SiteTreeID' => $page->ID,
-                    'Type' => 'SiteTree',
-                    'URL' => $page->Link(),
-                ]);
-                $promo->Link = $link;
-                $list->push($promo);
-            }
-            
-            return $list;
-        }
     }
 
     public function getCMSFields()
@@ -139,13 +103,29 @@ class ElementPromos extends BaseElement
         if ($promos) {
             /** @var GridFieldConfig */
             $config = $promos->getConfig();
-            $config->removeComponentsByType(GridFieldAddExistingAutocompleter::class);
             $config->addComponent(new GridFieldOrderableRows('Sort'));
+            // /** @var GridFieldAddExistingAutocompleter $autoCompleter */
+            // $autoCompleter = $config->getComponentByType(GridFieldAddExistingAutocompleter::class);
+            // $autoCompleter->setSearchFields();
             $fields->removeByName('Promos');
             $fields->insertAfter('IndexID', $promos);
         }
 
         return $fields;
+    }
+
+    // control whether or not to show the element
+    public function getShowElement(): bool
+    {
+        if ($this->HideBlockIfNoPromos && !$this->CombinedPromos()->Count) {
+            return false;
+        }
+        return true;
+    }
+
+    public function getType()
+    {
+        return _t(__CLASS__ . '.BlockType', 'Promos/Index');
     }
 
     public function GridClasses(): string
@@ -168,19 +148,44 @@ class ElementPromos extends BaseElement
         }
     }
 
-    // control whether or not to show the element
-    public function getShowElement(): bool
+    public function IndexPromos(): ?SS_List
     {
-        if ($this->HideBlockIfNoPromos && !$this->CombinedPromos()->Count) {
-            return false;
+        /** @var SiteTree */
+        $index = $this->Index();
+        if (!$index->exists()) {
+            return null;
         }
-        return true;
-    }
-    
+        $list = null;
+        if ($index->hasMethod('Promos')) {
+            return $index->Promos();
+        } else {
+            /** @var DataList $pages */
+            $pages = $index->AllChildren();
+            if ($this->MaxItems) {
+                $pages = $index->AllChildren()->Limit($this->MaxItems);
+            }
+            $list = ArrayList::create();
+            foreach ($pages as $page) {
+                /** @var Page $page */
+                $promo = Promo::create($page->toMap());
+                $promo->ParentID = $this->ID;
+                if ($page->CardSummary && strlen($page->CardSummary)) {
+                    $promo->Content = nl2br($page->CardSummary);
+                } else {
+                    $promo->Content = $page->DescriptionOrSummary();
+                }
+                $link = Link::create([
+                    'Title'      => 'More',
+                    'SiteTreeID' => $page->ID,
+                    'Type'       => 'SiteTree',
+                    'URL'        => $page->Link(),
+                ]);
+                $promo->Link = $link;
+                $list->push($promo);
+            }
 
-    public function getType()
-    {
-        return _t(__CLASS__ . '.BlockType', 'Promos/Index');
+            return $list;
+        }
     }
 
     public function onBeforeWrite()
