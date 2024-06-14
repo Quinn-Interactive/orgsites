@@ -10,8 +10,8 @@
     <% end_if %>
     <div>
         <% if not $HideText %>
-        <h5>$Title</h5>
-        <p>
+        <h5 class="text-center">$Title</h5>
+        <p class="text-center">
             <% if $Start || $Date || $DisplayDate %>
                 <% include QuinnInteractive/Orgsite/EventDates %>
             <% end_if %>
