@@ -16,15 +16,18 @@ namespace {
     use SilverStripe\ORM\DataList;
     use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
     use TractorCow\Fluent\Forms\VisibleLocalesColumn;
+    use chillerlan\QRCode\QRCode;
+    use QuinnInteractive\Orgsite\Lib\LiteralFieldWrapper;
+    use SilverStripe\Forms\ToggleCompositeField;
 
     /**
- * Class \Page
- *
- * @property string $CardSummary
- * @property int $CardImageID
- * @method \SilverStripe\Assets\Image CardImage()
- * @method \SilverStripe\ORM\ManyManyList|\QuinnInteractive\Orgsite\Model\Alert[] Alerts()
- */
+     * Class \Page
+     *
+     * @property string $CardSummary
+     * @property int $CardImageID
+     * @method \SilverStripe\Assets\Image CardImage()
+     * @method \SilverStripe\ORM\ManyManyList|\QuinnInteractive\Orgsite\Model\Alert[] Alerts()
+     */
     class Page extends SiteTree
     {
         private static $db = [
@@ -84,6 +87,30 @@ namespace {
         public function getCMSFields()
         {
             $fields = parent::getCMSFields();
+
+            // QR Code
+            $link = $this->AbsoluteLink();
+            try {
+                $src = (new QRCode)->render($link);
+            
+                $code = <<<EOT
+                <div class="text-center">
+                    <img src="$src" alt="QR Code" width="300" height="300" style="max-width: 100%; height: auto;" />
+                    <p><a class="btn btn-primary" href="$src" download="{$this->URLSegment}.svg">Download</a></p>
+                </div>
+                EOT;
+                $fields->insertAfter(
+                    'Metadata', 
+                    ToggleCompositeField::create(
+                        'QRCodeToggle', 
+                        'QR Code', 
+                        LiteralFieldWrapper::create('QRCode', 'QR Code', $code)
+                ));
+            }
+            catch(Throwable $e){
+                // oopsies!
+            }
+            
 
             if ($this->ClassName !== RedirectorPage::class) {
                 // CardSumary
