@@ -35,8 +35,8 @@ class CRMContact extends DataObject
     {
         $fields = parent::getCMSFields();
         $fields->replaceField('Email', EmailField::create('Email'));
-        $Lists = $fields->dataFieldByName('Lists');
-        if ($Lists) {
+        $lists = $fields->dataFieldByName('Lists');
+        if ($lists) {
             $fields->removeByName('Lists');
             $fields->addFieldToTab('Root.Main', CheckboxSetField::create('Lists', 'Lists', CRMList::get()));
         }

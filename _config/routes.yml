@@ -1,10 +1,10 @@
-# ---
-# Name: orgsite-routes
-# After: 
-#   - '#coreroutes'
-#   - '#rootroutes'
-#   - '#security-limited'
-# ---
-# SilverStripe\Control\Director:
-#   rules:
-#     'theme//$Action/$ID/$OtherID': 'QuinnInteractive\Orgsite\Controller\ThemeController'
+---
+Name: orgsite-routes
+After: 
+  - '#coreroutes'
+  - '#rootroutes'
+  - '#security-limited'
+---
+SilverStripe\Control\Director:
+  rules:
+    'crm//$Action/$ID/$OtherID': 'QuinnInteractive\Orgsite\Controller\CRMController'
