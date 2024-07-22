@@ -4,6 +4,7 @@ namespace QuinnInteractive\Orgsite\Controller;
 
 use QuinnInteractive\Orgsite\Model\CRMList;
 use SilverStripe\Control\Controller;
+use SilverStripe\Control\Session;
 use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\CheckboxSetField;
 use SilverStripe\Forms\EmailField;
@@ -39,6 +40,11 @@ class CRMController extends Controller
     }
 
     public function signup($data, Form $form) {
-        return Debug::dump($data);
+        $session = $this->getRequest()->getSession();
+        $session->set('ListSignupSuccess', true);
+        if (isset($data['BackURL'])) {
+            return $this->redirect($data['BackURL']);
+        }
+        return $this->redirectBack();
     }
 }

@@ -5,5 +5,9 @@
     <% if $HTML %>
         $HTML
     <% end_if %>
-    $SignupForm
+    <% if $ListSignupSuccess %>
+        $SuccessMessage
+    <% else %>
+        $SignupForm
+    <% end_if %>
 </div>
