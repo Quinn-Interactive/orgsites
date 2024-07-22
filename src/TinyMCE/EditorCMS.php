@@ -4,6 +4,7 @@ namespace QuinnInteractive\Orgsite\TinyMCE;
 
 use Page;
 use SilverStripe\Control\Controller;
+use SilverStripe\Dev\Debug;
 use SilverStripe\Dev\DevBuildController;
 use SilverStripe\Forms\HTMLEditor\TinyMCEConfig;
 use SilverStripe\ORM\DB;
@@ -289,8 +290,9 @@ class EditorCMS {
         ]);
         $config->addButtonsToLine(1, 'styles');
         $valid_elements = $config->getOption('valid_elements');
+        // Debug::dump($valid_elements);
         // add some more valid elements
-        $valid_elements .= ',-kbd[id|dir|class|align|style],-samp[id|dir|class|align|style]';
+        $valid_elements .= ',-figure[id|dir|class|align|style],figcaption[id|dir|class|align|style],-kbd[id|dir|class|align|style],-samp[id|dir|class|align|style]';
         $config->setOption('valid_elements', $valid_elements);
         $config->addButtonsToLine(2, 'styleselect'); // add style select
         // TinyMCE cleanup on paste
