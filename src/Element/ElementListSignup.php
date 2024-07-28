@@ -39,7 +39,7 @@ class ElementListSignup extends ElementContent
         $fields = parent::getCMSFields();
         $fields->dataFieldByName('SuccessMessage')
             ->setRows(7)
-            ->setDesciption('Optional. Below this there will be message informing the visitor that they will receive a confirmation email with a link that they will need to click on before they will be signed up.');
+            ->setDescription('Optional. Below this there will be message informing the visitor that they will receive a confirmation email with a link that they will need to click on before they will be signed up.');
         $lists = $fields->dataFieldByName('Lists');
         if ($lists) {
             $fields->removeByName('Lists');
