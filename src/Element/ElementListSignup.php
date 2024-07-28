@@ -3,33 +3,27 @@
 namespace QuinnInteractive\Orgsite\Element;
 
 use DNADesign\Elemental\Models\ElementContent;
-use Page;
 use QuinnInteractive\Orgsite\Admin\CRMAdmin;
 use QuinnInteractive\Orgsite\Controller\CRMController;
-use QuinnInteractive\Orgsite\Extension\VideoExtension;
 use QuinnInteractive\Orgsite\Model\CRMList;
 use SilverStripe\Control\Controller;
 use SilverStripe\Forms\CheckboxSetField;
-use SilverStripe\Forms\EmailField;
-use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
-use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\HiddenField;
 use SilverStripe\Forms\LiteralField;
-use SilverStripe\Forms\TextField;
 
 class ElementListSignup extends ElementContent
 {
-
-    private static $icon = 'font-icon-block-email';
-    private static $inline_editable = true;
-    private static $table_name = 'ElementListSignup';
-    private static $many_many = [
-        'Lists' => CRMList::class,
-    ];
     private static $db = [
         'SuccessMessage' => 'HTMLText',
     ];
+
+    private static $icon = 'font-icon-block-email';
+    private static $inline_editable = true;
+    private static $many_many = [
+        'Lists' => CRMList::class,
+    ];
+    private static $table_name = 'ElementListSignup';
 
     private static $translate = [
         'HTML',
@@ -48,16 +42,16 @@ class ElementListSignup extends ElementContent
             if (!CRMList::get()->Count()) {
                 $listsLink = CRMAdmin::create()->getLinkForModelTab(CRMList::class);
                 $fields->addFieldToTab(
-                    'Root.Main', 
+                    'Root.Main',
                     LiteralField::create(
-                        'ListsNotice', 
-                        'Lists', 
-                        "<p>You MUST define at least one mailing list: <a href='$listsLink'>Mailing Lists</a></p>"
+                        'ListsNotice',
+                        'Lists',
+                        "<p>You MUST define at least one mailing list: <a href='{$listsLink}'>Mailing Lists</a></p>"
                     )
                 );
             } else {
                 $fields->addFieldToTab(
-                    'Root.Main', 
+                    'Root.Main',
                     CheckboxSetField::create('Lists', 'Allow signup for these lists', CRMList::get())
                         ->setDescription('You must choose at least one list')
                 );
@@ -67,12 +61,21 @@ class ElementListSignup extends ElementContent
         return $fields;
     }
 
+    public function getListSignupSuccess(): bool
+    {
+        $controller = Controller::curr();
+        $session = $controller->getRequest()->getSession();
+        $success = $session->get('ListSignupSuccess') ?? false;
+        $session->clear('ListSignupSuccess');
+        return $success;
+    }
+
     public function getType()
     {
         return _t(__CLASS__ . '.BlockType', 'List Signup');
     }
 
-    public function SignupForm(): Form 
+    public function SignupForm(): Form
     {
         /** @var Form $form */
         $form = singleton(CRMController::class)->SignupForm();
@@ -103,15 +106,5 @@ class ElementListSignup extends ElementContent
         }
 
         return $result;
-    }
-
-
-    public function getListSignupSuccess(): bool 
-    {
-        $controller = Controller::curr();
-        $session = $controller->getRequest()->getSession();
-        $success = $session->get('ListSignupSuccess') ?? false;
-        $session->clear('ListSignupSuccess');
-        return $success;
     }
 }
