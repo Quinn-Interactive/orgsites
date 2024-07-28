@@ -30,6 +30,7 @@ class CRMContact extends DataObject
         'Email',
         'Phone',
         'Verified',
+        'AccessToken',
     ];
     private static $table_name = 'CRMContact';
 
@@ -42,7 +43,20 @@ class CRMContact extends DataObject
             $fields->removeByName('Lists');
             $fields->addFieldToTab('Root.Main', CheckboxSetField::create('Lists', 'Lists', CRMList::get()));
         }
+
+        $accessToken = $fields->dataFieldByName('AccessToken');
+        if ($accessToken) {
+            $fields->replaceField('AccessToken', $accessToken->performReadonlyTransformation());
+        }
         return $fields;
+    }
+
+    public function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+        if (!$this->AccessToken) {
+            $this->AccessToken = self::create_short_uuid();
+        }
     }
 
     public function validate()
