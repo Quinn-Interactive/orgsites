@@ -4,6 +4,7 @@ namespace QuinnInteractive\Orgsite\Element;
 
 use DNADesign\Elemental\Models\ElementContent;
 use Page;
+use QuinnInteractive\Orgsite\Admin\CRMAdmin;
 use QuinnInteractive\Orgsite\Controller\CRMController;
 use QuinnInteractive\Orgsite\Extension\VideoExtension;
 use QuinnInteractive\Orgsite\Model\CRMList;
@@ -14,6 +15,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\HiddenField;
+use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\TextField;
 
 class ElementListSignup extends ElementContent
@@ -43,7 +45,23 @@ class ElementListSignup extends ElementContent
         $lists = $fields->dataFieldByName('Lists');
         if ($lists) {
             $fields->removeByName('Lists');
-            $fields->addFieldToTab('Root.Main', CheckboxSetField::create('Lists', 'Allow signup for these lists', CRMList::get()));
+            if (!CRMList::get()->Count()) {
+                $listsLink = CRMAdmin::create()->getLinkForModelTab(CRMList::class);
+                $fields->addFieldToTab(
+                    'Root.Main', 
+                    LiteralField::create(
+                        'ListsNotice', 
+                        'Lists', 
+                        "<p>You MUST define at least one mailing list: <a href='$listsLink'>Mailing Lists</a></p>"
+                    )
+                );
+            } else {
+                $fields->addFieldToTab(
+                    'Root.Main', 
+                    CheckboxSetField::create('Lists', 'Allow signup for these lists', CRMList::get())
+                        ->setDescription('You must choose at least one list')
+                );
+            }
         }
 
         return $fields;
@@ -54,16 +72,39 @@ class ElementListSignup extends ElementContent
         return _t(__CLASS__ . '.BlockType', 'List Signup');
     }
 
-    public function SignupForm(): Form {
+    public function SignupForm(): Form 
+    {
+        /** @var Form $form */
         $form = singleton(CRMController::class)->SignupForm();
         $fields = $form->Fields();
-        /** @var CheckboxSetField */
-        $lists = $fields->dataFieldByName('Lists');
         $backUrl = Controller::join_links($this->getPage()->Link(), '#' . $this->getAnchor());
         $fields->push(HiddenField::create('BackURL', 'BackURL', $backUrl));
-        $lists->setSource($this->Lists());
+
+        /** @var CheckboxSetField */
+        $lists = $fields->dataFieldByName('Lists');
+        if ($this->Lists()->Count() == 1) {
+            $fields->replaceField('Lists', HiddenField::create('Lists', 'Lists', $this->Lists()->first()->ID));
+        } else {
+            $lists->setSource($this->Lists()->map());
+            $lists->setValue($this->Lists()->column());
+        }
+        if ($this->Lists()->Count() <= 1) {
+
+        }
         return $form;
     }
+
+    public function validate()
+    {
+        $result = parent::validate();
+
+        if (CRMList::get()->Count() && !$this->Lists()->Count()) {
+            $result->addFieldError('Lists', 'You must select at least one mailing list');
+        }
+
+        return $result;
+    }
+
 
     public function getListSignupSuccess(): bool 
     {
