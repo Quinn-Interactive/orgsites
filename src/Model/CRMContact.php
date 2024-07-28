@@ -2,18 +2,20 @@
 
 namespace QuinnInteractive\Orgsite\Model;
 
+use PascalDeVink\ShortUuid\ShortUuid;
+use Ramsey\Uuid\Uuid;
 use SilverStripe\Forms\CheckboxSetField;
 use SilverStripe\Forms\EmailField;
-use SilverStripe\Forms\ListboxField;
 use SilverStripe\ORM\DataObject;
 
 class CRMContact extends DataObject
 {
     private static $db = [
-        'Name'     => 'Varchar(128)',
-        'Email'    => 'Varchar(255)',
-        'Phone'    => 'Varchar(16)',
-        'Verified' => 'Boolean',
+        'Name'        => 'Varchar(128)',
+        'Email'       => 'Varchar(255)',
+        'Phone'       => 'Varchar(16)',
+        'Verified'    => 'Boolean',
+        'AccessToken' => 'Varchar(22)',
     ];
     private static $indexes = [
         'Email' => true,
@@ -57,4 +59,12 @@ class CRMContact extends DataObject
 
         return $result;
     }
+
+    public static function create_short_uuid()
+    {
+        $longUuid = Uuid::uuid4();
+        $uuid = new ShortUuid();
+        return $uuid->encode($longUuid);
+    }
+
 }

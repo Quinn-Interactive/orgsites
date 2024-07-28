@@ -31,7 +31,8 @@
         "symbiote/silverstripe-gridfieldextensions": "^4.0",
         "tractorcow/silverstripe-colorpicker": "^4.2",
         "tractorcow/silverstripe-fluent": "^7.0",
-        "chillerlan/php-qrcode": "^5.0"
+        "chillerlan/php-qrcode": "^5.0",
+        "pascaldevink/shortuuid": "^4.0"
     },
     "require-dev": {
         "oddnoc/silverstripe-artefactcleaner": "^4.0",
