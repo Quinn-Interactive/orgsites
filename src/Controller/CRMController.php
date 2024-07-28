@@ -4,8 +4,6 @@ namespace QuinnInteractive\Orgsite\Controller;
 
 use QuinnInteractive\Orgsite\Model\CRMList;
 use SilverStripe\Control\Controller;
-use SilverStripe\Control\Session;
-use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\CheckboxSetField;
 use SilverStripe\Forms\EmailField;
 use SilverStripe\Forms\FieldList;
@@ -25,7 +23,18 @@ class CRMController extends Controller
     ];
     private static $url_segment = 'crm';
 
-    public function SignupForm(): Form {
+    public function signup($data, Form $form)
+    {
+        $session = $this->getRequest()->getSession();
+        $session->set('ListSignupSuccess', true);
+        if (isset($data['BackURL'])) {
+            return $this->redirect($data['BackURL']);
+        }
+        return $this->redirectBack();
+    }
+
+    public function SignupForm(): Form
+    {
         $fields = FieldList::create();
         $fields->push(TextField::create('Name'));
         $fields->push(EmailField::create('Email'));
@@ -37,14 +46,5 @@ class CRMController extends Controller
         $required = ['Name', 'Email', 'Lists'];
         $form->setValidator(new RequiredFields($required));
         return $form;
-    }
-
-    public function signup($data, Form $form) {
-        $session = $this->getRequest()->getSession();
-        $session->set('ListSignupSuccess', true);
-        if (isset($data['BackURL'])) {
-            return $this->redirect($data['BackURL']);
-        }
-        return $this->redirectBack();
     }
 }
