@@ -10,14 +10,14 @@ class CRMList extends DataObject
         'Contacts' => CRMContact::class,
     ];
     private static $db = [
-        'Name' => 'Varchar(128)',
+        'Title' => 'Varchar(128)',
         'Sort' => 'Int',
     ];
     private static $default_sort = 'Sort';
     private static $plural_name = 'Lists';
     private static $singular_name = 'List';
     private static $summary_fields = [
-        'Name',
+        'Title',
         'Contacts.Count' => 'Contacts',
     ];
     private static $table_name = 'CRMList';

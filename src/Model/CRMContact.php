@@ -11,7 +11,7 @@ use SilverStripe\ORM\DataObject;
 class CRMContact extends DataObject
 {
     private static $db = [
-        'Name'        => 'Varchar(128)',
+        'Title'        => 'Varchar(128)',
         'Email'       => 'Varchar(255)',
         'Phone'       => 'Varchar(16)',
         'Verified'    => 'Boolean',
@@ -26,7 +26,7 @@ class CRMContact extends DataObject
     private static $plural_name = 'Contacts';
     private static $singular_name = 'Contact';
     private static $summary_fields = [
-        'Name',
+        'Title' => 'Name',
         'Email',
         'Phone',
         'Verified',
