@@ -53,6 +53,9 @@ class BaseElementColorsExtension extends DataExtension
 
             $bgPattern = ColorHelpers::pattern_field('BackgroundPattern', 'Background Pattern');
             $fields->addFieldToTab('Root.Settings', FieldGroup::create($colorField, $bgPattern)->setTitle('Background'), 'ExtraClass');
+
+            // Pattern Palette
+            $fields->addFieldToTab('Root.Settings', ColorHelpers::pattern_palette(), 'ExtraClass');
         }
 
         $description = <<<EOT

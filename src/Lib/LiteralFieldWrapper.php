@@ -6,14 +6,15 @@ use SilverStripe\Forms\LiteralField;
 
 class LiteralFieldWrapper
 {
-    public static function create($name, $title = false, $message = false)
+    public static function create($name, $title = false, $message = false, $stacked = false)
     {
-        return LiteralField::create($name, self::wrap("<p>{$message}</p>", $title));
+        return LiteralField::create($name, self::wrap("<p>{$message}</p>", $title, $stacked));
     }
-    public static function wrap($html, $label = false)
+    public static function wrap($html, $label = false, $stacked = false)
     {
         $label = $label ? "<label class=\"form__field-label\">{$label}</label>" : '';
-        $result = "<div class='form-group field'>{$label}<div class='form__field-holder'>{$html}</div></div>";
+        $extraClass = $stacked ? 'stacked' : '';
+        $result = "<div class='form-group field $extraClass'>{$label}<div class='form__field-holder'>{$html}</div></div>";
         return $result;
     }
 }

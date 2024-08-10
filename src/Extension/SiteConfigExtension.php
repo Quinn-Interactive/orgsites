@@ -21,6 +21,7 @@ use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\SSViewer;
@@ -406,6 +407,9 @@ class SiteConfigExtension extends FluentExtension
         $footerBg->setDescription('Accessibility contrast rating: ' . $this->owner->getFooterTextColor()->Rating);
         $footerBgPattern = ColorHelpers::pattern_field('FooterBgPattern', 'Footer Bkgnd Pattern');
         $fields->addFieldToTab('Root.Theme.Colors', FieldGroup::create($footerBg, $footerBgPattern)->setTitle('Footer Background'));
+
+        // Pattern Palette
+        $fields->addFieldToTab('Root.Theme.Colors', ColorHelpers::pattern_palette());
 
         // Type
         $fields->addFieldToTab('Root.Theme.Type', HeaderField::create('TypeHeader', 'Typography'));

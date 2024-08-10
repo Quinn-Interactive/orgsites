@@ -4,9 +4,11 @@ namespace QuinnInteractive\Orgsite\Lib;
 
 use Jawira\CaseConverter\Convert;
 use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\ORM\FieldType\DBField;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\View\ArrayData;
+use SilverStripe\View\Requirements;
 use Spatie\Color\Contrast;
 use Spatie\Color\Hex;
 use TractorCow\Colorpicker\Color;
@@ -224,5 +226,24 @@ class ColorHelpers
         $field = DropdownField::create($name, $title, $patternOptions);
         $field->setEmptyString('- None -');
         return $field;
+    }
+
+    public static function pattern_palette(): ToggleCompositeField
+    {
+        $patterns = SiteConfig::config()->get('patterns');
+        $patternTiles = [];
+        foreach ($patterns as $pattern) {
+            /** @var string $pattern */
+            $convert = new Convert($pattern);
+            $label = $convert->fromKebab()->toTitle();
+            $patternTiles[] = "<div class=\"pattern-{$pattern} m-1 border align-top text-center d-inline-flex justify-content-center align-items-center\" style=\"width: 10em; height: 4em;\" >$label</div>";
+        }
+        Requirements::css('/_resources/vendor/quinninteractive/orgsite/themes/orgsite/dist/css/pattern.css');
+        $html = '<div>' . join('', $patternTiles) . '</div>';
+        return ToggleCompositeField::create(
+            'PatternToggle', 
+            'Pattern Palette', 
+            LiteralFieldWrapper::create('PatternPalette', 'Pattern Palette', $html, true)
+        );
     }
 }
