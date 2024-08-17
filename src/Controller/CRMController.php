@@ -13,6 +13,7 @@ use SilverStripe\Control\HTTPResponse_Exception;
 use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\CheckboxSetField;
 use SilverStripe\Forms\EmailField;
+use SilverStripe\Forms\FieldGroup;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FormAction;
@@ -100,8 +101,10 @@ class CRMController extends Controller
     public function SignupForm(): Form
     {
         $fields = FieldList::create();
-        $fields->push(TextField::create('Title', 'Name'));
-        $fields->push(EmailField::create('Email'));
+        $fields->push(FieldGroup::create(
+            TextField::create('Title', 'Name'),
+            EmailField::create('Email')
+        ));
         $fields->push(CheckboxSetField::create('Lists', 'Lists', CRMList::get()));
         $actions = FieldList::create(
             FormAction::create('signup', 'Signup')->setUseButtonTag(true)

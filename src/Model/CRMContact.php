@@ -13,7 +13,7 @@ class CRMContact extends DataObject
     private static $db = [
         'Title'        => 'Varchar(128)',
         'Email'       => 'Varchar(255)',
-        'Phone'       => 'Varchar(16)',
+        // 'Phone'       => 'Varchar(16)',
         'Verified'    => 'Boolean',
         'AccessToken' => 'Varchar(22)',
     ];
@@ -57,6 +57,12 @@ class CRMContact extends DataObject
         if (!$this->AccessToken) {
             $this->AccessToken = self::create_short_uuid();
         }
+    }
+
+    public function setVerified(bool $verified = true): void
+    {
+        $this->Verified = $verified;
+        $this->write();
     }
 
     public function validate()

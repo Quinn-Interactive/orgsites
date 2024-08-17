@@ -46,14 +46,14 @@ class ElementListSignup extends ElementContent
                     LiteralField::create(
                         'ListsNotice',
                         'Lists',
-                        "<p>You MUST define at least one mailing list: <a href='{$listsLink}'>Mailing Lists</a></p>"
+                        "<p>No mailing lists defined. You should define at least one mailing list: <a href='{$listsLink}'>Mailing Lists</a></p>"
                     )
                 );
             } else {
                 $fields->addFieldToTab(
                     'Root.Main',
                     CheckboxSetField::create('Lists', 'Allow signup for these lists', CRMList::get())
-                        ->setDescription('You must choose at least one list')
+                        ->setDescription('You should choose at least one list')
                 );
             }
         }
@@ -95,16 +95,5 @@ class ElementListSignup extends ElementContent
 
         }
         return $form;
-    }
-
-    public function validate()
-    {
-        $result = parent::validate();
-
-        if (CRMList::get()->Count() && !$this->Lists()->Count()) {
-            $result->addFieldError('Lists', 'You must select at least one mailing list');
-        }
-
-        return $result;
     }
 }
