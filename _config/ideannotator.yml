@@ -1,9 +1,0 @@
----
-Only:
-    environment: 'dev'
-    envvarset: 'IDEANNOTATE'
----
-SilverLeague\IDEAnnotator\DataObjectAnnotator:
-    enabled: true
-    enabled_modules:
-      - QuinnInteractive\Orgsite
