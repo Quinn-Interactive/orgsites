@@ -24,7 +24,7 @@
         "silverstripe/display-logic": "^3.0",
         "silverstripe/login-forms": "^5.0",
         "silverstripe/lumberjack": "^3.0",
-        "silverstripe/recipe-cms": "^5.0",
+        "silverstripe/recipe-cms": "^5.2",
         "silverstripe/userforms": "^6.1",
         "spatie/color": "^1.5",
         "spatie/icalendar-generator": "^2.6.1",

@@ -33,7 +33,7 @@ class CRMContact extends DataObject
         'AccessToken',
     ];
     private static $table_name = 'CRMContact';
-
+    
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
