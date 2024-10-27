@@ -55,10 +55,11 @@ class CRMController extends Controller
         if ($siteName) {
             $subject = "$siteName: $subject";
         }
-        $email->setSubject('Verify your account and mailing list settings');
+        $email->setSubject($subject);
         $email
             ->setHTMLTemplate('QuinnInteractive\\Orgsite\\Email\CRMVerificationEmail')
             ->setData([
+                'Title' => $subject,
                 'Contact' => $contact,
                 'Link'    => $link,
             ]);
@@ -105,7 +106,10 @@ class CRMController extends Controller
             TextField::create('Title', 'Name'),
             EmailField::create('Email')
         ));
-        $fields->push(CheckboxSetField::create('Lists', 'Lists', CRMList::get()));
+        $fields->push(
+            CheckboxSetField::create('Lists', 'Lists', CRMList::get())
+                ->setDescription('I want to receive emails from the checked lists above.')
+        );
         $actions = FieldList::create(
             FormAction::create('signup', 'Signup')->setUseButtonTag(true)
         );
@@ -182,7 +186,8 @@ class CRMController extends Controller
     {
         $fields = $this->SignupForm()->Fields();
         $fields->push(HiddenField::create('AccessToken', 'AccessToken'));
-        $fields->replaceField('Email', ReadonlyField::create('Email'));
+        // $fields->replaceField('Email', ReadonlyField::create('Email'));
+        $fields->dataFieldByName('Email')->setReadonly(true)->setDisabled(true);
         $actions = FieldList::create(
             FormAction::create('verifyConfirm', 'Verify')->setUseButtonTag(true)
         );

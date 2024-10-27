@@ -8,6 +8,7 @@ use SilverStripe\Forms\CheckboxSetField;
 use SilverStripe\Forms\EmailField;
 use SilverStripe\ORM\DataObject;
 
+#[\AllowDynamicProperties]
 class CRMContact extends DataObject
 {
     private static $db = [
