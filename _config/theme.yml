@@ -3,6 +3,7 @@ Name: mytheme
 ---
 SilverStripe\View\SSViewer:
   themes:
+    - main
     - quinninteractive/orgsite:orgsite
     - '$default'
 SilverStripe\i18n\i18n:
@@ -16,5 +17,6 @@ Before:
 ---
 SilverStripe\LoginForms\EnablerExtension:
   login_themes:
+    - main
     - '$default'
     - quinninteractive/orgsite:orgsite
