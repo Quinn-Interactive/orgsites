@@ -34,3 +34,18 @@ button.carousel-control-prev,
 button.carousel-control-next {
     background: none !important;
 }
+
+.optionset-btns {
+    li {
+        padding-left: 0 !important;
+    }
+
+    input.checkbox {
+        @extend .btn-check;
+
+        + label {
+            @extend .btn-primary;
+            @extend .btn;
+        }
+    }
+}

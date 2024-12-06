@@ -184,7 +184,11 @@ color-scheme: dark;
 --bs-dark: $ColorHex(Dark);
 --%>
 
-.btn-primary, button, input[type=button], input[type=submit] {
+.btn-primary, 
+button, 
+input[type=button], 
+input[type=submit], 
+.optionset-btns input.checkbox + label {
     --bs-btn-color: #fff;
     --bs-btn-bg: $ColorHex(Primary);
     --bs-btn-border-color: $ColorHex(Primary);
