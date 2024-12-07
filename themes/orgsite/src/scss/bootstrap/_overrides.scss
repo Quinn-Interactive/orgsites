@@ -44,8 +44,19 @@ button.carousel-control-next {
         @extend .btn-check;
 
         + label {
-            @extend .btn-primary;
             @extend .btn;
+
+            &::before {
+                content: '\F584'; 
+                display: inline-block;
+                font-family: 'bootstrap-icons';
+                margin-right: 0.25em;
+                vertical-align: top;
+            }
+        }
+
+        &:checked + label::before {
+            content: '\F271';
         }
     }
 }
