@@ -12,11 +12,11 @@ use Throwable;
 
 class QRCodeLinkExtension extends Extension
 {
-    public function generateQRCode($link = null): ?string
+    public function getQRCode($link = null): ?string
     {
 
         // QR Code
-        $link = $link ?? $this->owner->AbsoluteLink() ?? Director::absoluteURL($this->owner->Link());
+        $link = $link ?? Director::absoluteURL($this->owner->Link());
         if (!$link) {
             return null;
         }
@@ -30,7 +30,7 @@ class QRCodeLinkExtension extends Extension
     }
 
     public function updateCMSFields(&$fields) {
-        $src = $this->owner->generateQRCode();
+        $src = $this->owner->getQRCode();
         if ($src) {
             $filter = URLSegmentFilter::create();
             $name = $this->owner->URLSegment ?? $filter->filter($this->owner->Title);
