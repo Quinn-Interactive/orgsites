@@ -2,7 +2,10 @@
 
 namespace {
 
+    use chillerlan\QRCode\QRCode;
+    use QuinnInteractive\Orgsite\Extension\QRCodeLinkExtension;
     use QuinnInteractive\Orgsite\Lib\Helpers;
+    use QuinnInteractive\Orgsite\Lib\LiteralFieldWrapper;
     use QuinnInteractive\Orgsite\Model\Alert;
     use SilverStripe\AssetAdmin\Forms\UploadField;
     use SilverStripe\Assets\Image;
@@ -13,12 +16,10 @@ namespace {
     use SilverStripe\Forms\GridField\GridField;
     use SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor;
     use SilverStripe\Forms\TextareaField;
+    use SilverStripe\Forms\ToggleCompositeField;
     use SilverStripe\ORM\DataList;
     use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
     use TractorCow\Fluent\Forms\VisibleLocalesColumn;
-    use chillerlan\QRCode\QRCode;
-    use QuinnInteractive\Orgsite\Lib\LiteralFieldWrapper;
-    use SilverStripe\Forms\ToggleCompositeField;
 
     /**
      * Class \Page
@@ -36,6 +37,9 @@ namespace {
         ];
         private static $defaults = [
             'ShowBreadcrumbs' => true,
+        ];
+        private static $extensions = [
+            QRCodeLinkExtension::class
         ];
         private static $has_one = [
             'CardImage' => Image::class,
@@ -88,29 +92,28 @@ namespace {
         {
             $fields = parent::getCMSFields();
 
-            // QR Code
-            $link = $this->AbsoluteLink();
-            try {
-                $src = (new QRCode)->render($link);
-            
-                $code = <<<EOT
-                <div class="text-center">
-                    <img src="$src" alt="QR Code" width="300" height="300" style="max-width: 100%; height: auto;" />
-                    <p><a class="btn btn-primary" href="$src" download="{$this->URLSegment}.svg">Download</a></p>
-                </div>
-                EOT;
-                $fields->insertAfter(
-                    'Metadata', 
-                    ToggleCompositeField::create(
-                        'QRCodeToggle', 
-                        'QR Code', 
-                        LiteralFieldWrapper::create('QRCode', 'QR Code', $code)
-                ));
-            }
-            catch(Throwable $e){
-                // oopsies!
-            }
-            
+            // // QR Code
+            // $link = $this->AbsoluteLink();
+            // try {
+            //     $src = (new QRCode)->render($link);
+
+            //     $code = <<<EOT
+            //     <div class="text-center">
+            //         <img src="$src" alt="QR Code" width="300" height="300" style="max-width: 100%; height: auto;" />
+            //         <p><a class="btn btn-primary" href="$src" download="{$this->URLSegment}.svg">Download</a></p>
+            //     </div>
+            //     EOT;
+            //     $fields->insertAfter(
+            //         'Metadata',
+            //         ToggleCompositeField::create(
+            //             'QRCodeToggle',
+            //             'QR Code',
+            //             LiteralFieldWrapper::create('QRCode', 'QR Code', $code)
+            //     ));
+            // }
+            // catch(Throwable $e){
+            //     // oopsies!
+            // }
 
             if ($this->ClassName !== RedirectorPage::class) {
                 // CardSumary
