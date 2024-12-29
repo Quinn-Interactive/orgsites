@@ -8,9 +8,9 @@ input[type='password'] {
     @extend .form-control;
 }
 
-input[type='button'],
-input[type='submit'],
-button {
+input[type='button']:not(.-unstyled),
+input[type='submit']:not(.-unstyled),
+button:not(.-unstyled) {
     @extend .btn;
     @extend .btn-primary;
 
