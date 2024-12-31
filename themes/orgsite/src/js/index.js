@@ -15,6 +15,11 @@ if (document.querySelector('[data-focus-x]')) {
     import(/* webpackChunkName: "focuspoint-helper" */ './focuspoint-helper').then();
 }
 
+// are-you-sure
+if (document.querySelector('[data-are-you-sure]')) {
+    import(/* webpackChunkName: "are-you-sure" */ './are-you-sure').then();
+}
+
 // video-modal.js
 if (document.querySelector('[data-video-modal]')) {
     import(/* webpackChunkName: "video-modal" */ './video-modal').then();
