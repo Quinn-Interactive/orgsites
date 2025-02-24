@@ -39,8 +39,8 @@ const scrollSlides = (wrapper, x) => {
 sliders.forEach((slider) => {
     const slidesWrapper = slider.querySelector('[data-slider-slides]');
     slidesWrapper.dataset.sliderSlides = 0; //  index of currrent slide
-    const prev = htmlToElement('<button class="slider__arrow -prev" data-slider-prev title="Previous"></button>');
-    const next = htmlToElement('<button class="slider__arrow -next" data-slider-next title="Next"></button>');
+    const prev = htmlToElement('<button class="slider__arrow -prev -unstyled" data-slider-prev title="Previous"></button>');
+    const next = htmlToElement('<button class="slider__arrow -next -unstyled" data-slider-next title="Next"></button>');
     slider.prepend(prev);
     slider.prepend(next);
 

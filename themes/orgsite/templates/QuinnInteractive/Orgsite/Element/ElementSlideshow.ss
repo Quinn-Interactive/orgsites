@@ -12,7 +12,7 @@
     <div id="carousel-$ID" class="carousel slide carousel-fade" <% if $Autoplay %>data-bs-ride="carousel"<% end_if %>>
         <div class="carousel-indicators">
             <% loop $Slides %>
-                <button type="button" data-bs-target="#carousel-$Up.ID" data-bs-slide-to="$Pos(0)" <% if $Pos == 1 %> class="active" aria-current="true"<% end_if %> aria-label="Slide $Pos"></button>
+                <button type="button" data-bs-target="#carousel-$Up.ID" data-bs-slide-to="$Pos(0)" <% if $Pos == 1 %> class="active -unstyled" aria-current="true"<% end_if %> class="-unstyled" aria-label="Slide $Pos"></button>
             <% end_loop %>
         </div>
         <div class="carousel-inner">
@@ -75,11 +75,11 @@
             <% end_loop %>
         </div>
         <% if $ShowArrows %>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-$ID" data-bs-slide="prev">
+            <button class="carousel-control-prev -unstyled" type="button" data-bs-target="#carousel-$ID" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-$ID" data-bs-slide="next">
+            <button class="carousel-control-next -unstyled" type="button" data-bs-target="#carousel-$ID" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
