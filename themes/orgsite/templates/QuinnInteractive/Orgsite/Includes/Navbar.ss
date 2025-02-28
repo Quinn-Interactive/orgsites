@@ -8,14 +8,14 @@
         <a class="navbar-brand d-block $SiteConfig.NavbarTextColor.CssClass position-relative" href="/$CurrentLocaleObject.URLSegment" title="$SiteConfig.Title.ATT">
             <% include QuinnInteractive/Orgsite/Brand %>
         </a>
-        <button class="navbar-toggler $SiteConfig.NavbarTextColor.CssClass" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarSupportedContent"
+        <button class="-unstyled navbar-toggler $SiteConfig.NavbarTextColor.CssClass" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div  id="navbarSupportedContent" class="offcanvas offcanvas-end" tabindex="-1" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header $SiteConfig.NavbarTextColor.CssClass bg-$SiteConfig.NavbarBg">
                 <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><% include QuinnInteractive/Orgsite/Brand %></h5>
-                <button type="button" class="btn-close $SiteConfig.NavbarTextColor.BtnCloseClass" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <button type="button" class="-unstyled btn-close $SiteConfig.NavbarTextColor.BtnCloseClass" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body bg-$SiteConfig.NavbarBg">
                 <ul class="navbar-nav $SiteConfig.NavbarTextColor.CssClass ms-auto">
