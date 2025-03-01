@@ -1,4 +1,4 @@
-import 'bootstrap'; // needed for bootstrap interactions
+import  'bootstrap'; // needed for bootstrap interactions
 
 // scroll-hide
 if (document.querySelector('[data-scroll-hide]')) {
@@ -8,6 +8,11 @@ if (document.querySelector('[data-scroll-hide]')) {
 // alert
 if (document.querySelector('[data-alert]')) {
     import(/* webpackChunkName: "alert" */ './alert').then();
+}
+
+// clipboard
+if (document.querySelector('[data-clipboard]')) {
+    import(/* webpackChunkName: "clipboard" */ './clipboard').then();
 }
 
 // focus-point.js
