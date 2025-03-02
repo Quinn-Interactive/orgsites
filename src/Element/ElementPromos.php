@@ -175,7 +175,7 @@ class ElementPromos extends BaseElement
                     $promo->Content = $page->DescriptionOrSummary();
                 }
                 $link = Link::create([
-                    'Title'      => 'More',
+                    'Title'      => _t('Page.READ_MORE', 'Read More'),
                     'SiteTreeID' => $page->ID,
                     'Type'       => 'SiteTree',
                     'URL'        => $page->Link(),
