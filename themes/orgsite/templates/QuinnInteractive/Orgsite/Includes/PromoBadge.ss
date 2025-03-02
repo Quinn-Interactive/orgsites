@@ -23,21 +23,24 @@
                 <a 
                     href="$Link.LinkURL" 
                     class="
-                        <% if not $ButtonStyle == 'whole card' && not $HideText %>text-nowrap<% end_if %>
+                        <% if $ButtonStyle != 'whole card' && not $HideText %>text-center d-block<% end_if %>
                         <% if $ButtonStyle != 'button' %> stretched-link<% end_if %>
                     "
                     title="$Title.ATT"
                     $Link.TargetAttr
-                ><% if not $ButtonStyle == 'whole card' && not $HideText %>$Link.Title <i class="bi bi-arrow-right-short"></i><% end_if %></a>
+                ><% if $ButtonStyle != 'whole card' && not $HideText %>
+                    <% if $Link.Title %>$Link.Title<% else %><%t Page.READ_MORE "Read More" %><% end_if %>
+                    <i class="bi bi-arrow-right-short"></i>
+                <% end_if %></a>
             <% else %>
                 <a 
                     href="$Link" 
                     class="
-                        <% if not $ButtonStyle == 'whole card' && not $HideText %>text-nowrap<% end_if %>
+                        <% if $ButtonStyle != 'whole card' && not $HideText %>text-center d-block<% end_if %>
                         <% if $ButtonStyle != 'button' %> stretched-link<% end_if %>
                     "
                     title="<%t SilverStripe\\Blog\\Model\\Blog.ReadMoreAbout "Read more about '{title}'..." title=$Title %>"
-                ><% if not $ButtonStyle == 'whole card' && not $HideText %><%t Page.READ_MORE "Read More" %> <i class="bi bi-arrow-right-short"></i><% end_if %></a>
+                ><% if $ButtonStyle != 'whole card' && not $HideText %><%t Page.READ_MORE "Read More" %> <i class="bi bi-arrow-right-short"></i><% end_if %></a>
             <% end_if %>
         <% end_if %>
     </div>
