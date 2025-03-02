@@ -1,4 +1,4 @@
-<div class="d-md-flex mb-3 <% if not $Last %>border-bottom pb-3<% end_if %>" lang="$SourceLocale.Locale">
+<div class="d-md-flex mb-3 <% if not $Last %>border-bottom border-primary pb-3<% end_if %>" lang="$SourceLocale.Locale">
     <% if not $HideImages %>
         <% if $CardImage || $FeaturedImage || $Image %>
             <div class="w-md-50 flex-shrink-0 ms-md-4 mb-3 mb-md-0 order-2">
@@ -25,20 +25,23 @@
                     <a 
                         href="$Link.LinkURL" 
                         class="
-                        <% if not $ButtonStyle == 'whole card' && not $Parent.HideText %>text-nowrap<% end_if %>
+                        <% if $ButtonStyle != 'whole card' && not $Parent.HideText %>text-nowrap<% end_if %>
                         <% if $ButtonStyle != 'button' %> stretched-link<% end_if %>
                         "
                         title="$Title.ATT"
-                    ><% if not $ButtonStyle == 'whole card' && not $Parent.HideText %>$Link.Title <i class="bi bi-arrow-right-short"></i><% end_if %></a>
+                    ><% if $ButtonStyle != 'whole card' && not $Parent.HideText %>
+                        <% if $Link.Title %>$Link.Title<% else %><%t Page.READ_MORE "Read More" %><% end_if %>
+                        <i class="bi bi-arrow-right-short"></i>
+                    <% end_if %></a>
                 <% else %>
                     <a 
                         href="$Link" 
                         class="
-                        <% if not $ButtonStyle == 'whole card' && not $Parent.HideText %>text-nowrap<% end_if %>
+                        <% if $ButtonStyle != 'whole card' && not $Parent.HideText %>text-nowrap<% end_if %>
                         <% if $ButtonStyle != 'button' %> stretched-link<% end_if %>
                         "
                         title="<%t SilverStripe\\Blog\\Model\\Blog.ReadMoreAbout "Read more about '{title}'..." title=$Title %>"
-                    ><% if not $ButtonStyle == 'whole card' && not $Parent.HideText %><%t Page.READ_MORE "Read More" %> <i class="bi bi-arrow-right-short"></i><% end_if %></a>
+                    ><% if $ButtonStyle != 'whole card' && not $Parent.HideText %><%t Page.READ_MORE "Read More" %> <i class="bi bi-arrow-right-short"></i><% end_if %></a>
                 <% end_if %>
             <% end_if %>
         </p>
