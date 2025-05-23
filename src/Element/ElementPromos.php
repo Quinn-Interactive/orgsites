@@ -157,7 +157,7 @@ class ElementPromos extends BaseElement
         }
         $list = null;
         if ($index->hasMethod('Promos')) {
-            return $index->Promos()->Sort('Sort');
+            return $index->Promos();
         } else {
             /** @var DataList $pages */
             $pages = $index->AllChildren();
