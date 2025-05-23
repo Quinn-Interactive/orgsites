@@ -63,7 +63,7 @@ class ElementPromos extends BaseElement
     public function CombinedPromos(): ArrayList|DataList
     {
         /** @var ArrayList|DataList $list */
-        $list = $this->IndexPromos() ?? $this->Promos();
+        $list = $this->IndexPromos() ?? $this->Promos()->Sort('Sort');
         if ($this->MaxItems) {
             $list = $list->Limit($this->MaxItems);
         }
@@ -157,7 +157,7 @@ class ElementPromos extends BaseElement
         }
         $list = null;
         if ($index->hasMethod('Promos')) {
-            return $index->Promos();
+            return $index->Promos()->Sort('Sort');
         } else {
             /** @var DataList $pages */
             $pages = $index->AllChildren();
